@@ -1,0 +1,72 @@
+{
+  "app": { "nombre": "Pictosfera" },
+  "nav": {
+    "inicio": "Inici",
+    "juegos": "Jocs",
+    "pictogramas": "Pictogrames",
+    "ajustes": "Configuració"
+  },
+  "inicio": {
+    "bienvenida": "Hola! Benvingut a Pictosfera",
+    "intro": "Tria \"Jocs\" per començar a jugar.",
+    "ir_juegos": "Veure jocs"
+  },
+  "juegos": {
+    "titulo": "Jocs",
+    "vacio": "Encara no hi ha jocs en aquest prestatge.",
+    "cargando": "Carregant jocs…",
+    "volver": "Tornar als jocs"
+  },
+  "pin": {
+    "titulo": "Zona de l'adult",
+    "subtitulo": "Introdueix el PIN per continuar",
+    "crear_subtitulo": "Crea un PIN per a aquesta zona",
+    "error": "PIN incorrecte, torna-ho a provar",
+    "borrar": "Esborrar",
+    "cancelar": "Cancel·lar"
+  },
+  "pictogramas": {
+    "titulo": "Pictogrames",
+    "buscar_placeholder": "Cerca un pictograma…",
+    "buscar_boton": "Cercar",
+    "buscando": "Cercant…",
+    "anadir": "Afegir al pou",
+    "anadido": "Afegit",
+    "mi_biblioteca": "La meva biblioteca",
+    "biblioteca_vacia": "Encara no has afegit cap pictograma ni foto.",
+    "todas": "Totes"
+  },
+  "ajustes": {
+    "titulo": "Configuració",
+    "idioma": "Idioma",
+    "idioma_ayuda": "Canvia l'idioma de tota l'app: textos, pictogrames i veu.",
+    "guardar": "Desar"
+  },
+  "recompensa": {
+    "mensaje_1": "Molt bé!",
+    "mensaje_2": "Ho has aconseguit!",
+    "mensaje_3": "Genial!",
+    "continuar": "Seguir jugant",
+    "salir": "Tornar als jocs"
+  },
+  "comunes": {
+    "cerrar": "Tancar",
+    "aceptar": "D'acord",
+    "cancelar": "Cancel·lar",
+    "volver": "Tornar",
+    "cargando": "Carregant…",
+    "error_generico": "Alguna cosa no ha funcionat. Torna-ho a provar."
+  },
+  "estantes": {
+    "ANIMALES": "Animals",
+    "LECTURA": "Lectura",
+    "NUMEROS": "Nombres",
+    "ESCRITURA": "Escriptura"
+  },
+  "memoria": {
+    "nombre": "Memòria",
+    "instrucciones": "Toca dues targetes per trobar la parella.",
+    "intentos": "Intents: {n}",
+    "parejas": "Parelles trobades: {n} de {total}"
+  }
+}

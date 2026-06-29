@@ -1,0 +1,271 @@
+[
+  {
+    "id": "memoria-animales",
+    "mecanica": "memoria",
+    "modulo": "apps/memoria/memoria.js",
+    "nombre": "Memoria",
+    "nombreClave": "juegos_nombres.memoria_animales",
+    "icono": "🐾",
+    "estante": "ANIMALES",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
+    "id": "arrastra-palabra-animales",
+    "mecanica": "arrastra-palabra",
+    "modulo": "apps/arrastra-palabra/arrastraPalabra.js",
+    "nombre": "Arrastra la palabra",
+    "nombreClave": "juegos_nombres.arrastra_palabra_animales",
+    "icono": "🔤",
+    "estante": "LECTURA",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
+    "id": "teclea-palabra-animales",
+    "mecanica": "teclea-palabra",
+    "modulo": "apps/teclea-palabra/tecleaPalabra.js",
+    "nombre": "Teclea la palabra",
+    "nombreClave": "juegos_nombres.teclea_palabra_animales",
+    "icono": "⌨️",
+    "estante": "ESCRITURA",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
+    "id": "ordena-secuencia-rutinas",
+    "mecanica": "ordena-secuencia",
+    "modulo": "apps/ordena-secuencia/ordenaSecuencia.js",
+    "nombre": "Ordena la secuencia",
+    "nombreClave": "juegos_nombres.ordena_secuencia_rutinas",
+    "icono": "🪥",
+    "estante": "RUTINAS"
+  },
+  {
+    "id": "escribe-letra-animales",
+    "mecanica": "escribe-letra",
+    "modulo": "apps/escribe-letra/escribeLetra.js",
+    "nombre": "Escribe la letra",
+    "nombreClave": "juegos_nombres.escribe_letra_animales",
+    "icono": "✍️",
+    "estante": "ESCRITURA",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
+    "id": "bingo-lectura-animales",
+    "mecanica": "bingo-lectura",
+    "modulo": "apps/bingo-lectura/bingoLectura.js",
+    "nombre": "Bingo de lectura",
+    "nombreClave": "juegos_nombres.bingo_lectura_animales",
+    "icono": "🅱️",
+    "estante": "LECTURA",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "minimo": 9
+    }
+  },
+  {
+    "id": "ruleta-letras-animales",
+    "mecanica": "ruleta-letras",
+    "modulo": "apps/ruleta-letras/ruletaLetras.js",
+    "nombre": "Ruleta de letras",
+    "nombreClave": "juegos_nombres.ruleta_letras_animales",
+    "icono": "🎡",
+    "estante": "ESCRITURA",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
+    "id": "rosco-pictogramas-animales",
+    "mecanica": "rosco-pictogramas",
+    "modulo": "apps/rosco-pictogramas/roscoPictogramas.js",
+    "nombre": "Rosco de pictogramas",
+    "nombreClave": "juegos_nombres.rosco_pictogramas_animales",
+    "icono": "🔠",
+    "estante": "LECTURA",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "minimo": 12
+    }
+  },
+  {
+    "id": "arrastra-numero-animales",
+    "mecanica": "arrastra-numero",
+    "modulo": "apps/arrastra-numero/arrastraNumero.js",
+    "nombre": "Cuenta y arrastra el número",
+    "nombreClave": "juegos_nombres.arrastra_numero_animales",
+    "icono": "🔢",
+    "estante": "NUMEROS",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
+    "id": "escribe-numero-animales",
+    "mecanica": "escribe-numero",
+    "modulo": "apps/escribe-numero/escribeNumero.js",
+    "nombre": "Cuenta y escribe el número",
+    "nombreClave": "juegos_nombres.escribe_numero_animales",
+    "icono": "✏️",
+    "estante": "NUMEROS",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
+    "id": "suma-resultado-animales",
+    "mecanica": "suma-resultado",
+    "modulo": "apps/suma-resultado/sumaResultado.js",
+    "nombre": "Suma pictogramas y elige el resultado",
+    "nombreClave": "juegos_nombres.suma_resultado_animales",
+    "icono": "➕",
+    "estante": "NUMEROS",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
+    "id": "dedos-pictogramas-animales",
+    "mecanica": "dedos-pictogramas",
+    "modulo": "apps/dedos-pictogramas/dedosPictogramas.js",
+    "nombre": "Relaciona los dedos con los pictogramas",
+    "nombreClave": "juegos_nombres.dedos_pictogramas_animales",
+    "icono": "✋",
+    "estante": "NUMEROS",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
+    "id": "dedos-numero",
+    "mecanica": "dedos-numero",
+    "modulo": "apps/dedos-numero/dedosNumero.js",
+    "nombre": "Relaciona los dedos con el número",
+    "nombreClave": "juegos_nombres.dedos_numero",
+    "icono": "🖐️",
+    "estante": "NUMEROS"
+  },
+  {
+    "id": "completa-suma-animales",
+    "mecanica": "completa-suma",
+    "modulo": "apps/completa-suma/completaSuma.js",
+    "nombre": "Escribe los números de la suma",
+    "nombreClave": "juegos_nombres.completa_suma_animales",
+    "icono": "🧮",
+    "estante": "NUMEROS",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
+    "id": "arrastra-suma-animales",
+    "mecanica": "arrastra-suma",
+    "modulo": "apps/arrastra-suma/arrastraSuma.js",
+    "nombre": "Arrastra los números de la suma",
+    "nombreClave": "juegos_nombres.arrastra_suma_animales",
+    "icono": "🧩",
+    "estante": "NUMEROS",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
+    "id": "clasifica-categorias",
+    "mecanica": "clasifica-categorias",
+    "modulo": "apps/clasifica-categorias/clasificaCategorias.js",
+    "nombre": "Clasifica los pictogramas en dos categorías",
+    "nombreClave": "juegos_nombres.clasifica_categorias",
+    "icono": "🗂️",
+    "estante": "CONCEPTOS"
+  },
+  {
+    "id": "puzzle-pictograma-palabra-animales",
+    "mecanica": "puzzle-pictograma-palabra",
+    "modulo": "apps/puzzle-pictograma-palabra/puzzlePictogramaPalabra.js",
+    "nombre": "Puzzle de pictograma y palabra",
+    "nombreClave": "juegos_nombres.puzzle_pictograma_palabra_animales",
+    "icono": "🖼️",
+    "estante": "LECTURA",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
+    "id": "me-gusta-no-me-gusta-comidas",
+    "mecanica": "me-gusta-no-me-gusta",
+    "modulo": "apps/me-gusta-no-me-gusta/meGustaNoMeGusta.js",
+    "nombre": "Me gusta / no me gusta",
+    "nombreClave": "juegos_nombres.me_gusta_no_me_gusta_comidas",
+    "icono": "🍽️",
+    "estante": "CONCEPTOS",
+    "material": {
+      "etiqueta": "comida",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["manzana", "plátano", "pan", "leche", "queso", "huevo", "zanahoria", "galleta", "naranja", "tomate", "arroz", "pollo"],
+      "minimo": 12,
+      "fijos": { "plato": 2532, "basura": 2724 }
+    }
+  },
+  {
+    "id": "lista-compra-comidas",
+    "mecanica": "lista-compra",
+    "modulo": "apps/lista-compra/listaCompra.js",
+    "nombre": "Lista de la compra",
+    "nombreClave": "juegos_nombres.lista_compra_comidas",
+    "icono": "🛒",
+    "estante": "RUTINAS",
+    "material": {
+      "etiqueta": "comida",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["manzana", "plátano", "pan", "leche", "queso", "huevo", "zanahoria", "galleta", "naranja", "tomate", "arroz", "pollo"],
+      "minimo": 12,
+      "fijos": { "carrito": 5948 }
+    }
+  },
+  {
+    "id": "reconoce-emociones",
+    "mecanica": "reconoce-emociones",
+    "modulo": "apps/reconoce-emociones/reconoceEmociones.js",
+    "nombre": "Reconoce emociones",
+    "nombreClave": "juegos_nombres.reconoce_emociones",
+    "icono": "🙂",
+    "estante": "CONCEPTOS",
+    "material": {
+      "fijos": { "contento": 35547, "triste": 35545, "enfadado": 35539, "asustado": 35535 }
+    }
+  }
+]

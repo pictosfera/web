@@ -1,0 +1,143 @@
+/* Pictosfera — app "Cuenta y arrastra el número". Estilos propios, con
+   prefijo "arrastranum-" para no interferir con el núcleo ni con otras
+   apps. */
+
+.arrastranum-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.arrastranum-cabecera h1{
+  margin: 0 0 var(--space-xs);
+  color: var(--color-primary-dark);
+}
+
+.arrastranum-cabecera p{
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.arrastranum-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.arrastranum-zona{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.arrastranum-serie{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 640px;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.arrastranum-serie-img{
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.arrastranum-objetivo{
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  background: var(--color-bg-soft);
+  border: 3px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
+}
+
+.arrastranum-objetivo-resaltado{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-bg-soft);
+  transform: scale(1.05);
+}
+
+.arrastranum-objetivo-correcto{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-success);
+  color: var(--color-text-on-primary);
+}
+
+.arrastranum-objetivo-fallo{
+  border-color: var(--color-error);
+  animation: arrastranum-temblor 320ms ease;
+}
+
+.arrastranum-numeros{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 640px;
+}
+
+.arrastranum-numero{
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm);
+  background: var(--color-surface);
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.arrastranum-numero:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.arrastranum-numero-activo{
+  z-index: 5;
+  cursor: grabbing;
+  box-shadow: var(--shadow-md);
+}
+
+.arrastranum-numero-correcto{
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: var(--color-text-on-primary);
+}
+
+.arrastranum-numero-fallo{
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: var(--color-text-on-primary);
+  animation: arrastranum-temblor 320ms ease;
+}
+
+@keyframes arrastranum-temblor{
+  0%, 100%{ transform: translate(0, 0); }
+  25%{ transform: translate(-6px, 0); }
+  75%{ transform: translate(6px, 0); }
+}

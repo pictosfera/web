@@ -1,0 +1,208 @@
+/* Pictosfera — app "Bingo de lectura". Estilos propios, con prefijo
+   "bingo-" para no interferir con el núcleo ni con otras apps. */
+
+.bingo-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.bingo-cabecera h1{
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--space-xs);
+}
+
+.bingo-cabecera p{
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.bingo-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.bingo-zona{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+/* --- El bombo y la bola que sale de él --- */
+
+.bingo-bombo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.bingo-bola{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 220px;
+  min-height: 180px;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 4px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
+}
+
+.bingo-bola-img{
+  width: 65%;
+  max-width: 130px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.bingo-bola-pista{
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+@keyframes bingo-bola-pop{
+  0%{ transform: scale(0.4); opacity: 0; }
+  100%{ transform: scale(1); opacity: 1; }
+}
+
+.bingo-bola-aparece{
+  animation: bingo-bola-pop 320ms ease;
+}
+
+/* Ajuste "pulsador TTS": igual idea que en el resto de mecánicas. */
+.bingo-pulsador{
+  width: 110px;
+  height: 110px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  color: var(--color-text-on-primary);
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  animation: bingo-pulso 1.6s ease-in-out infinite;
+}
+
+.bingo-pulsador-escuchado{
+  animation: none;
+  background: var(--color-success);
+}
+
+@keyframes bingo-pulso{
+  0%, 100%{ transform: scale(1); }
+  50%{ transform: scale(1.08); }
+}
+
+/* --- El cartón: cuadrícula de casillas tocables --- */
+
+.bingo-carton{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 420px;
+}
+
+.bingo-casilla{
+  position: relative;
+  min-height: var(--touch-target);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  background: var(--color-surface);
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.bingo-casilla:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.bingo-casilla-img{
+  width: 100%;
+  max-width: 64px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.bingo-casilla-nombre{
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.02em;
+}
+
+.bingo-casilla-marcada{
+  border-color: var(--color-success);
+  background: rgba(76, 175, 109, 0.12);
+}
+
+.bingo-casilla-sello{
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: var(--font-size-md);
+  color: var(--color-success);
+}
+
+.bingo-casilla-fallo{
+  animation: bingo-temblor 320ms ease;
+}
+
+@keyframes bingo-temblor{
+  0%, 100%{ transform: translate(0, 0); }
+  25%{ transform: translate(-6px, 0); }
+  75%{ transform: translate(6px, 0); }
+}
+
+.bingo-casilla-ayuda{
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 4px rgba(242, 163, 61, 0.35);
+}
+
+/* Validación de seguridad: con el "pulsador TTS" activo, hasta que no
+   se haya pulsado el botón y escuchado la bola, el cartón no se puede
+   tocar. */
+.bingo-carton-bloqueada .bingo-casilla{
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* La orientación del dispositivo manda, no el ancho: en horizontal el
+   bombo queda a un lado y el cartón al otro; en vertical (un móvil,
+   por ejemplo) el bombo queda arriba y el cartón debajo. */
+@media (orientation: landscape){
+  .bingo-zona{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bingo-bombo{
+    width: auto;
+  }
+}

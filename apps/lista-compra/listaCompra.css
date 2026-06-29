@@ -1,0 +1,255 @@
+/* Pictosfera — app "Lista de la compra". Estilos propios, con prefijo
+   "lista-" para no interferir con el núcleo ni con otras apps. */
+
+.lista-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.lista-cabecera h1{
+  margin: 0 0 var(--space-xs);
+  color: var(--color-primary-dark);
+}
+
+.lista-cabecera p{
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.lista-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.lista-juego{
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+/* --- Columna de la lista (5 pictogramas a conseguir) --- */
+
+.lista-columna-lista{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.lista-titulo-lista,
+.lista-titulo-estante{
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.lista-lista-items{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista-lista-item{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-bg-soft);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-base), border-color var(--transition-base), opacity var(--transition-base);
+}
+
+.lista-lista-img{
+  width: 48px;
+  height: 48px;
+  aspect-ratio: 1;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.lista-lista-texto{
+  flex: 1;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.lista-lista-marca{
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-success);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.lista-lista-item-conseguido{
+  background: var(--color-success);
+  border-color: var(--color-success);
+  opacity: 0.7;
+}
+
+.lista-lista-item-conseguido .lista-lista-texto{
+  text-decoration: line-through;
+}
+
+.lista-lista-item-conseguido .lista-lista-marca{
+  opacity: 1;
+  color: var(--color-text-on-primary);
+}
+
+/* --- Columna del estante (10 pictogramas, 5 señuelos) --- */
+
+.lista-columna-estante{
+  flex: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.lista-estante-items{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-sm);
+}
+
+.lista-estante-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  background: var(--color-bg-soft);
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  transition: box-shadow var(--transition-base);
+}
+
+.lista-estante-item:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.lista-estante-item-activo{
+  z-index: 5;
+  cursor: grabbing;
+  box-shadow: var(--shadow-md);
+}
+
+.lista-estante-img{
+  width: 64px;
+  height: 64px;
+  aspect-ratio: 1;
+  object-fit: contain;
+  -webkit-user-drag: none;
+}
+
+.lista-estante-caption{
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.lista-estante-item-fallo{
+  animation: lista-temblor 0.4s;
+  border-color: var(--color-error);
+}
+
+@keyframes lista-temblor{
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* --- Carrito (zona fija, destino único del arrastre) --- */
+
+.lista-carrito{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  align-self: center;
+  background: var(--color-surface);
+  border: 3px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
+}
+
+.lista-carrito-resaltada{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-bg-soft);
+  transform: scale(1.04);
+}
+
+.lista-carrito-fallo{
+  border-color: var(--color-error);
+  background: var(--color-error);
+  animation: lista-temblor 0.4s;
+}
+
+.lista-carrito-fijo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+}
+
+.lista-carrito-img{
+  width: 70px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.lista-carrito-emoji{
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.lista-carrito-etiqueta{
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+/* En vertical, la lista y el estante se apilan en vez de ir lado a
+   lado, igual que en el resto de mecánicas de dos zonas. */
+@media (orientation: portrait){
+  .lista-juego{
+    flex-direction: column;
+  }
+
+  .lista-estante-items{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

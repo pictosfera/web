@@ -1,0 +1,97 @@
+/* Pictosfera — app "Cuenta y escribe el número". Estilos propios, con
+   prefijo "escribenum-" para no interferir con el núcleo ni con otras
+   apps. Estructura visual inspirada en "Escribe la letra". */
+
+.escribenum-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.escribenum-cabecera h1{
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.escribenum-cabecera p{
+  color: var(--color-text-soft);
+  margin: 0;
+}
+
+.escribenum-marcador{
+  font-size: var(--font-size-md);
+  font-weight: bold;
+  color: var(--color-primary-dark);
+}
+
+.escribenum-zona{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.escribenum-serie{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 640px;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.escribenum-serie-img{
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.escribenum-casilla{
+  position: relative;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+  line-height: 0;
+}
+
+.escribenum-casilla-lienzo{
+  display: block;
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-soft);
+}
+
+.escribenum-casilla-correcta .escribenum-casilla-lienzo{
+  border-color: var(--color-success);
+  background: rgba(76, 175, 109, 0.12);
+}
+
+.escribenum-casilla-fallo{
+  animation: escribenum-fallo 0.4s ease;
+}
+
+@keyframes escribenum-fallo{
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+@media (orientation: landscape) {
+  .escribenum-app{
+    max-width: 920px;
+  }
+
+  .escribenum-zona{
+    flex-direction: row;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "pictosfera",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Portal Pictosfera: juegos con pictogramas, gratis y sin servidor. Este package.json existe solo para poder ejecutar las pruebas automaticas (node --test); el portal en si no necesita ningun paso de instalacion ni de compilacion.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/**/*.test.mjs"
+  }
+}

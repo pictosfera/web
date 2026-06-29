@@ -1,0 +1,72 @@
+{
+  "app": { "nombre": "Pictosfera" },
+  "nav": {
+    "inicio": "Inicio",
+    "juegos": "Xogos",
+    "pictogramas": "Pictogramas",
+    "ajustes": "Configuración"
+  },
+  "inicio": {
+    "bienvenida": "Ola! Benvido a Pictosfera",
+    "intro": "Escolle \"Xogos\" para comezar a xogar.",
+    "ir_juegos": "Ver xogos"
+  },
+  "juegos": {
+    "titulo": "Xogos",
+    "vacio": "Aínda non hai xogos neste andel.",
+    "cargando": "Cargando xogos…",
+    "volver": "Volver aos xogos"
+  },
+  "pin": {
+    "titulo": "Zona do adulto",
+    "subtitulo": "Introduce o PIN para continuar",
+    "crear_subtitulo": "Crea un PIN para esta zona",
+    "error": "PIN incorrecto, próbao de novo",
+    "borrar": "Borrar",
+    "cancelar": "Cancelar"
+  },
+  "pictogramas": {
+    "titulo": "Pictogramas",
+    "buscar_placeholder": "Buscar un pictograma…",
+    "buscar_boton": "Buscar",
+    "buscando": "Buscando…",
+    "anadir": "Engadir á biblioteca",
+    "anadido": "Engadido",
+    "mi_biblioteca": "A miña biblioteca",
+    "biblioteca_vacia": "Aínda non engadiches ningún pictograma nin foto.",
+    "todas": "Todas"
+  },
+  "ajustes": {
+    "titulo": "Configuración",
+    "idioma": "Idioma",
+    "idioma_ayuda": "Cambia o idioma de toda a app: textos, pictogramas e voz.",
+    "guardar": "Gardar"
+  },
+  "recompensa": {
+    "mensaje_1": "Moi ben!",
+    "mensaje_2": "Conseguíchelo!",
+    "mensaje_3": "Xenial!",
+    "continuar": "Seguir xogando",
+    "salir": "Volver aos xogos"
+  },
+  "comunes": {
+    "cerrar": "Pechar",
+    "aceptar": "Aceptar",
+    "cancelar": "Cancelar",
+    "volver": "Volver",
+    "cargando": "Cargando…",
+    "error_generico": "Algo non funcionou. Téntao de novo."
+  },
+  "estantes": {
+    "ANIMALES": "Animais",
+    "LECTURA": "Lectura",
+    "NUMEROS": "Números",
+    "ESCRITURA": "Escritura"
+  },
+  "memoria": {
+    "nombre": "Memoria",
+    "instrucciones": "Toca dúas cartas para atopar a parella.",
+    "intentos": "Intentos: {n}",
+    "parejas": "Parellas atopadas: {n} de {total}"
+  }
+}

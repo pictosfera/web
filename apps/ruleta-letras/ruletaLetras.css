@@ -1,0 +1,266 @@
+/* Pictosfera — app "Ruleta de letras". Estilos propios, con prefijo
+   "ruleta-" para no interferir con el núcleo ni con otras apps. */
+
+.ruleta-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.ruleta-cabecera h1{
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--space-xs);
+}
+
+.ruleta-cabecera p{
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.ruleta-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.ruleta-zona{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+
+/* --- Pictograma oculto bajo la retícula de 3x3 --- */
+
+.ruleta-pictograma{
+  position: relative;
+  width: 220px;
+  height: 220px;
+  flex-shrink: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.ruleta-pictograma-img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--color-surface);
+  display: block;
+}
+
+.ruleta-reticula{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.ruleta-celda{
+  background: var(--color-secondary-dark);
+  border: 1px solid var(--color-surface);
+  transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.ruleta-celda-revelada{
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.85);
+}
+
+/* --- Columna central: panel de casillas, rueda, mensaje y abecedario --- */
+
+.ruleta-centro{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  flex: 1;
+  min-width: 260px;
+}
+
+.ruleta-panel{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-xs);
+}
+
+.ruleta-casilla{
+  width: 44px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition-base), transform var(--transition-fast);
+}
+
+.ruleta-casilla-letra{
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-on-primary);
+}
+
+.ruleta-casilla-temporal{
+  background: var(--color-secondary);
+  transform: scale(1.08);
+}
+
+.ruleta-casilla-temporal .ruleta-casilla-letra{
+  color: var(--color-text-on-primary);
+}
+
+.ruleta-casilla-revelada{
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 2px var(--color-border);
+}
+
+.ruleta-casilla-revelada .ruleta-casilla-letra{
+  color: var(--color-text);
+}
+
+/* --- La ruleta visual --- */
+
+.ruleta-rueda-zona{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.ruleta-rueda-cont{
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.ruleta-puntero{
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  z-index: 2;
+}
+
+.ruleta-rueda{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: var(--shadow-md);
+  background: conic-gradient(
+    var(--color-primary) 0deg 90deg,
+    var(--color-secondary) 90deg 180deg,
+    var(--color-success) 180deg 270deg,
+    var(--color-adult) 270deg 360deg
+  );
+  transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.ruleta-rueda-etiqueta{
+  position: absolute;
+  font-size: var(--font-size-lg);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+}
+
+/* Centros de cada uno de los 4 sectores (90º cada uno), en un círculo
+   de radio ~58px alrededor del centro de la rueda (90x90). */
+.ruleta-rueda-etiqueta-0{ top: 32px; left: 90px; }   /* letra: arriba */
+.ruleta-rueda-etiqueta-1{ top: 90px; left: 148px; }  /* pista: derecha */
+.ruleta-rueda-etiqueta-2{ top: 148px; left: 90px; }  /* vocal: abajo */
+.ruleta-rueda-etiqueta-3{ top: 90px; left: 32px; }   /* consonante: izquierda */
+
+.ruleta-girar{
+  min-height: var(--touch-target);
+  padding: var(--space-sm) var(--space-lg);
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.ruleta-girar:disabled{
+  opacity: 0.6;
+  cursor: default;
+}
+
+.ruleta-mensaje{
+  min-height: 1.4em;
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+/* --- Abecedario seleccionable --- */
+
+.ruleta-abecedario-ayuda{
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-soft);
+  text-align: center;
+}
+
+.ruleta-abecedario{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-xs);
+  transition: opacity var(--transition-base);
+}
+
+.ruleta-abecedario-bloqueado{
+  opacity: 0.5;
+}
+
+.ruleta-tecla{
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.ruleta-tecla:disabled{
+  cursor: default;
+}
+
+.ruleta-tecla-usada{
+  background: var(--color-bg-soft);
+  color: var(--color-text-soft);
+  opacity: 0.6;
+}
+
+/* --- Orientación horizontal: pictograma y centro lado a lado, más
+   ancho disponible para la rueda y el abecedario --- */
+@media (orientation: landscape){
+  .ruleta-zona{
+    align-items: center;
+  }
+}

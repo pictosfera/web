@@ -1,0 +1,855 @@
+/*
+  Pictosfera — zona del adulto (Pictogramas / Ajustes) y modales
+  (PIN, recompensa). Usa el morado (--color-adult) para distinguirse
+  claramente de la zona de juego.
+*/
+
+.zona-adulto{
+  border-top: 6px solid var(--color-adult);
+}
+
+.zona-adulto h1, .zona-adulto h2{
+  color: var(--color-adult);
+}
+
+.aviso{
+  background: var(--color-bg-soft);
+  border-left: 4px solid var(--color-secondary);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-soft);
+}
+
+.aviso strong{ color: var(--color-text); }
+
+.aviso-atencion{
+  border-left-color: var(--color-error);
+}
+
+.mensaje-ok{
+  color: var(--color-success);
+  font-weight: 700;
+  min-height: 1.2em;
+}
+
+.aviso-atencion > div{
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.ayuda{
+  color: var(--color-text-soft);
+  font-size: var(--font-size-sm);
+  margin: var(--space-xs) 0 var(--space-md);
+}
+
+.campo-checkbox{
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.campo-checkbox input{ width: 22px; height: 22px; }
+
+.campo{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.campo label{
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+}
+
+.campo input[type="text"],
+.campo input[type="password"],
+.campo input[type="search"],
+.campo select{
+  min-height: var(--touch-target);
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.campo input:focus, .campo select:focus{
+  outline: 3px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+.checkbox-line{
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.checkbox-line input{ width: 22px; height: 22px; margin-top: 2px; }
+
+/* --- Categorías colapsables de Ajustes (evitan saturar la pantalla) --- */
+.ajustes-categoria{
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+  overflow: hidden;
+}
+
+.ajustes-categoria > summary{
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: var(--touch-target);
+  padding: var(--space-sm) var(--space-md);
+  font-weight: 700;
+  font-size: var(--font-size-md);
+  color: var(--color-adult);
+  background: var(--color-bg-soft);
+}
+
+.ajustes-categoria > summary::-webkit-details-marker{
+  display: none;
+}
+
+.ajustes-categoria > summary::after{
+  content: '▾';
+  margin-left: auto;
+  transition: transform var(--transition-fast);
+}
+
+.ajustes-categoria[open] > summary::after{
+  transform: rotate(180deg);
+}
+
+.ajustes-categoria > summary:focus-visible{
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.ajustes-categoria-contenido{
+  padding: var(--space-md);
+}
+
+.ajustes-categoria-contenido section + section{
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 2px solid var(--color-border);
+}
+
+/* --- Modal genérico (PIN, recompensa, confirmaciones) --- */
+.modal-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(43,43,40,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  z-index: 100;
+}
+
+.modal-box{
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-lg);
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+.modal-box h2{ margin-top: 0; }
+
+.pin-dots{
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin: var(--space-md) 0;
+}
+
+.pin-dot{
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--color-adult);
+  background: transparent;
+}
+
+.pin-dot.lleno{ background: var(--color-adult); }
+
+.pin-pad{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.pin-pad button{
+  min-height: var(--touch-target);
+  font-size: var(--font-size-lg);
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-soft);
+  cursor: pointer;
+}
+
+.pin-pad button:active{ background: var(--color-border); }
+
+.pin-error{
+  color: var(--color-error);
+  font-weight: 700;
+  min-height: 1.2em;
+}
+
+/* --- Recompensa --- */
+.recompensa{
+  text-align: center;
+}
+
+.recompensa .recompensa-emoji{
+  font-size: 4rem;
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+/* --- Tabla / lista de medios del pozo --- */
+.medios-lista{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.medio-card{
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-sm);
+  text-align: center;
+  position: relative;
+}
+
+.medio-card img{
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-soft);
+}
+
+.medio-card .medio-nombre{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  margin-top: var(--space-xs);
+  word-break: break-word;
+}
+
+.medio-card .medio-nombre-texto{
+  word-break: break-word;
+}
+
+.medio-card .medio-editar-nombre{
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.medio-card .medio-nombre-input{
+  width: 100%;
+  min-height: var(--touch-target);
+  padding: 2px var(--space-xs);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-align: center;
+}
+
+.medio-card .medio-origen{
+  font-size: 0.7rem;
+  color: var(--color-text-soft);
+}
+
+.medio-card .medio-borrar{
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--color-error);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.etiquetas-lista{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin: var(--space-sm) 0;
+}
+
+.etiqueta-chip{
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-soft);
+  border: 2px solid var(--color-border);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.etiqueta-chip.activa{
+  background: var(--color-adult);
+  border-color: var(--color-adult);
+  color: white;
+}
+
+.resultados-busqueda{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  max-height: 360px;
+  overflow-y: auto;
+  padding: var(--space-xs);
+}
+
+.resultado-card{
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-xs);
+  text-align: center;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+}
+
+.resultado-card img{ aspect-ratio: 1; object-fit: contain; }
+
+.resultado-card.ya-anadido{
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* --- Secuencias (rutinas ordenadas de pictogramas) --- */
+.secuencia-pasos{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.secuencia-paso{
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.secuencia-paso-orden{
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-adult);
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secuencia-paso-img{
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-soft);
+}
+
+.secuencia-paso-nombre{
+  flex: 1;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.secuencia-paso-botones{
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.secuencia-paso-mover,
+.secuencia-paso-quitar{
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-soft);
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.secuencia-paso-quitar{
+  background: var(--color-error);
+  color: white;
+}
+
+.secuencia-paso-mover:disabled{
+  opacity: 0.35;
+  cursor: default;
+}
+
+.secuencias-lista{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.secuencia-card{
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.secuencia-card-cabecera{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.secuencia-card-nombre{
+  font-weight: 700;
+  font-size: var(--font-size-md);
+}
+
+.secuencia-card-aviso{
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.secuencia-preview{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  overflow-x: auto;
+  padding: var(--space-xs) 0;
+}
+
+.secuencia-preview-img{
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-soft);
+  flex-shrink: 0;
+}
+
+.secuencia-preview-roto{
+  font-size: 1.2rem;
+}
+
+.secuencia-preview-flecha{
+  color: var(--color-text-soft);
+  flex-shrink: 0;
+}
+
+.secuencia-card-acciones{
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+
+.secuencia-card-editar,
+.secuencia-card-borrar{
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.secuencia-card-editar{ background: var(--color-bg-soft); }
+
+.secuencia-card-borrar{
+  background: var(--color-error);
+  color: white;
+}
+
+/* --- Categorías dicotómicas (parejas para "Clasifica los
+   pictogramas en dos categorías") --- */
+.categoria-bloques{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md);
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.categoria-bloque{
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.categoria-cabecera-preview{
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: 56px;
+  margin-bottom: var(--space-xs);
+}
+
+.categoria-cabecera-img{
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-soft);
+  flex-shrink: 0;
+}
+
+.categoria-pool{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin: var(--space-xs) 0;
+  min-height: 40px;
+}
+
+.categoria-pool-chip{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--color-bg-soft);
+  border-radius: var(--radius-sm);
+  padding: 4px var(--space-xs);
+  font-size: var(--font-size-sm);
+}
+
+.categoria-pool-chip-img{
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.categoria-pool-chip-roto{
+  color: var(--color-error);
+}
+
+.categoria-pool-chip button{
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-error);
+  color: white;
+  cursor: pointer;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+.categoria-selector{
+  background: var(--color-bg-soft);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.resultado-card-seleccionada{
+  border-color: var(--color-success, #2e7d32);
+  box-shadow: 0 0 0 2px var(--color-success, #2e7d32);
+}
+
+.categorias-lista{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.categoria-card{
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.categoria-card-cabecera{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.categoria-card-nombre{
+  font-weight: 700;
+  font-size: var(--font-size-md);
+}
+
+.categoria-card-aviso{
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.categoria-card-preview{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding: var(--space-xs) 0;
+}
+
+.categoria-card-preview-bloque{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-sm);
+}
+
+.categoria-card-preview-img{
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-soft);
+  flex-shrink: 0;
+}
+
+.categoria-card-preview-roto{
+  font-size: 1.2rem;
+}
+
+.categoria-card-preview-contra{
+  color: var(--color-text-soft);
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.categoria-card-acciones{
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+
+.categoria-card-editar,
+.categoria-card-borrar{
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.categoria-card-editar{ background: var(--color-bg-soft); }
+
+.categoria-card-borrar{
+  background: var(--color-error);
+  color: white;
+}
+
+/* --- Rutas de aprendizaje (itinerarios guiados de juegos) --- */
+.rutas-lista{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.ruta-card{
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.ruta-card-cabecera{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.ruta-card-nombre{
+  font-weight: 700;
+  font-size: var(--font-size-md);
+}
+
+.ruta-card-pasos{
+  color: var(--color-text-soft);
+  font-size: var(--font-size-sm);
+}
+
+.ruta-card-acciones{
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+
+.ruta-card-editar,
+.ruta-card-borrar{
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.ruta-card-editar{ background: var(--color-bg-soft); }
+
+.ruta-card-borrar{
+  background: var(--color-error);
+  color: white;
+}
+
+/* --- Editor de pasos de una ruta (crear/editar, ver rutasCrear.js) --- */
+.ruta-pasos{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.ruta-paso{
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.ruta-paso-orden{
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-adult);
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ruta-paso-icono{
+  flex-shrink: 0;
+  font-size: 1.6rem;
+}
+
+.ruta-paso-nombre{
+  flex: 1;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.ruta-paso-botones{
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.ruta-paso-mover,
+.ruta-paso-editar,
+.ruta-paso-quitar{
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-soft);
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.ruta-paso-quitar{
+  background: var(--color-error);
+  color: white;
+}
+
+.ruta-paso-mover:disabled,
+.ruta-paso-editar:disabled{
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* --- Tarjeta de juego en el selector de "añadir a la ruta" --- */
+.ruta-juego-card{
+  cursor: default;
+}
+
+.ruta-juego-card:hover{ transform: none; }
+
+.btn-anadir-juego{
+  background: var(--color-success);
+  min-height: auto;
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--font-size-sm);
+}
+
+/* --- Modal de configuración de una instancia de juego dentro de una
+   ruta (mismos ajustes que "Ajustes de juegos", pero guardados solo
+   para ese paso): un poco más ancho que el modal genérico porque el
+   panel de ajustes puede traer varios campos. --- */
+.modal-config-ruta{
+  max-width: 520px;
+  text-align: left;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-config-ruta h2{ text-align: center; }
+
+.modal-botones{
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* --- Interruptor de acceso libre a Juegos (ver views/juegos.js) --- */
+.juegos-interruptor{
+  margin-top: var(--space-sm);
+}
+
+.juegos-interruptor .nav-lock{
+  font-size: 0.85rem;
+}

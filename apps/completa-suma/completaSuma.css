@@ -1,0 +1,108 @@
+/* Pictosfera — app "Escribe los números de la suma". Estilos propios,
+   con prefijo "completasuma-" para no interferir con el núcleo ni con
+   otras apps. Estructura visual: tres "partes" (pictogramas arriba,
+   recuadro de escritura debajo), separadas por los signos + y =. */
+
+.completasuma-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.completasuma-cabecera h1{
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.completasuma-cabecera p{
+  color: var(--color-text-soft);
+  margin: 0;
+}
+
+.completasuma-marcador{
+  font-size: var(--font-size-md);
+  font-weight: bold;
+  color: var(--color-primary-dark);
+}
+
+.completasuma-zona{
+  display: flex;
+  justify-content: center;
+}
+
+.completasuma-operacion{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.completasuma-parte{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.completasuma-grupo{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 150px;
+  min-height: 64px;
+  padding: var(--space-xs);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.completasuma-grupo-img{
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.completasuma-signo{
+  font-size: var(--font-size-xl, 2rem);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  align-self: center;
+  margin-top: 32px;
+}
+
+.completasuma-casilla{
+  position: relative;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+  line-height: 0;
+}
+
+.completasuma-casilla-lienzo{
+  display: block;
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-soft);
+}
+
+.completasuma-casilla-correcta .completasuma-casilla-lienzo{
+  border-color: var(--color-success);
+  background: rgba(76, 175, 109, 0.12);
+}
+
+.completasuma-casilla-fallo{
+  animation: completasuma-fallo 0.4s ease;
+}
+
+@keyframes completasuma-fallo{
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}

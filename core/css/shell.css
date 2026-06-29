@@ -1,0 +1,317 @@
+/*
+  Pictosfera — esqueleto de navegación (igual en todas las apps).
+  Mobile-first: por defecto se ve la barra de pestañas arriba (móvil).
+  A partir de 768px aparece la barra lateral (tablet/escritorio) y
+  se oculta la barra de pestañas.
+*/
+
+.topbar{
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.topbar-brand{
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.topbar-logo{
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+}
+
+.topbar-title{
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  white-space: nowrap;
+}
+
+.tabbar{
+  display: flex;
+  flex: 1;
+  gap: var(--space-xs);
+  overflow-x: auto;
+}
+
+.layout{
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.sidebar{
+  display: none;
+}
+
+.view{
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-md);
+  outline: none;
+}
+
+/* --- Botones de navegación (compartidos por tabbar y sidebar) --- */
+.nav-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  min-height: var(--touch-target);
+  padding: var(--space-sm) var(--space-md);
+  border: none;
+  background: transparent;
+  color: var(--color-text-soft);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-btn .nav-icon{
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.nav-btn:hover{
+  background: var(--color-bg-soft);
+}
+
+.nav-btn[aria-current="page"]{
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+.nav-btn.nav-btn-adult[aria-current="page"]{
+  background: var(--color-adult);
+}
+
+.nav-btn .nav-lock{
+  font-size: 0.85rem;
+  margin-left: 2px;
+}
+
+/* --- Tablet / escritorio: barra lateral --- */
+@media (min-width: 768px){
+  .tabbar{
+    display: none;
+  }
+
+  .sidebar{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    width: 180px;
+    flex-shrink: 0;
+    padding: var(--space-md) var(--space-sm);
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+  }
+
+  .sidebar .nav-btn{
+    flex-direction: row;
+    justify-content: flex-start;
+    font-size: var(--font-size-md);
+  }
+
+  .view{
+    padding: var(--space-lg);
+  }
+}
+
+/* --- Tarjetas genéricas de contenido --- */
+.card{
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-lg);
+}
+
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  min-height: var(--touch-target);
+  padding: var(--space-sm) var(--space-lg);
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.btn:hover{ transform: translateY(-1px); }
+.btn:active{ transform: translateY(0); }
+
+.btn-secondary{ background: var(--color-secondary); }
+.btn-ghost{
+  background: transparent;
+  color: var(--color-primary-dark);
+  box-shadow: none;
+  border: 2px solid var(--color-border);
+}
+
+.btn-danger{ background: var(--color-error); }
+
+.btn:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* --- Rejilla de apps (estantes) --- */
+.estante{
+  margin-bottom: var(--space-xl);
+}
+
+.estante-titulo{
+  font-size: var(--font-size-lg);
+  color: var(--color-primary-dark);
+  margin: 0 0 var(--space-md);
+}
+
+.app-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-md);
+}
+
+.app-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  text-align: center;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-text);
+  min-height: var(--touch-target);
+  transition: transform var(--transition-fast);
+}
+
+.app-card:hover{ transform: translateY(-2px); }
+
+.app-card .app-icon{
+  font-size: 2.4rem;
+}
+
+.vacio{
+  color: var(--color-text-soft);
+  font-style: italic;
+}
+
+/* --- Tarjeta de juego bloqueada por el interruptor de acceso libre
+   (ver core/js/views/juegos.js y core/js/rutas.js): se ve igual que
+   una app-card normal pero apagada, y al tocarla se vuelve a Inicio
+   en vez de abrir el juego. --- */
+.app-card-bloqueado{
+  opacity: 0.45;
+  filter: grayscale(0.6);
+}
+
+.app-card-bloqueado:hover{ transform: none; }
+
+/* --- Lista de pasos al jugar una ruta de aprendizaje (cara del niño,
+   ver core/js/views/rutaJugar.js). Cada paso es desbloqueado, en
+   curso o ya superado; los bloqueados se ven en gris y no se pueden
+   tocar hasta lograr una partida perfecta en el paso anterior. --- */
+.ruta-jugar-lista{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  max-width: 560px;
+  margin: var(--space-md) auto 0;
+}
+
+/* El atributo "hidden" no basta por sí solo: esta regla con "display:
+   flex" tiene la misma especificidad que el [hidden] del navegador y,
+   al ser una regla de autor, gana siempre. Sin esta excepción, al
+   lanzar un juego de la ruta (rutaJugar.js pone hidden=true en la
+   lista) la lista de pasos seguía viéndose por encima/debajo del
+   juego en marcha. */
+.ruta-jugar-lista[hidden]{
+  display: none;
+}
+
+.ruta-jugar-paso{
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  min-height: var(--touch-target);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.ruta-jugar-paso:hover{ transform: translateY(-1px); }
+
+.ruta-jugar-paso-bloqueado{
+  opacity: 0.55;
+  filter: grayscale(0.5);
+  cursor: default;
+}
+
+.ruta-jugar-paso-bloqueado:hover{ transform: none; }
+
+.ruta-jugar-paso-completado{
+  border-color: var(--color-success);
+}
+
+.ruta-jugar-paso-orden{
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ruta-jugar-paso-icono{
+  flex-shrink: 0;
+  font-size: 1.6rem;
+}
+
+.ruta-jugar-paso-nombre{
+  flex: 1;
+  word-break: break-word;
+}
+
+.ruta-jugar-paso-check{
+  flex-shrink: 0;
+  font-size: 1.2rem;
+}

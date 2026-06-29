@@ -1,0 +1,282 @@
+/* Pictosfera — app "Teclea la palabra". Estilos propios, con prefijo
+   "teclea-" para no interferir con el núcleo ni con otras apps. */
+
+.teclea-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.teclea-cabecera h1{
+  margin: 0 0 var(--space-xs);
+  color: var(--color-primary-dark);
+}
+
+.teclea-cabecera p{
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.teclea-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+/* El orden es siempre vertical y fijo: pictograma, pista (dentro de
+   .teclea-objetivo), caja de escritura y teclado. No cambia con la
+   orientación del dispositivo: ver la nota junto al @media de abajo. */
+.teclea-zona{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.teclea-objetivo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 320px;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 3px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.teclea-objetivo-img{
+  width: 55%;
+  max-width: 140px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.teclea-pista{
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+/* Ajuste "pulsador TTS": botón animado que sustituye al pictograma y
+   su pista. Al pulsarlo se escucha la palabra; sigue siendo pulsable
+   para volver a escuchar, pero deja de "llamar la atención". */
+.teclea-pulsador{
+  width: 100px;
+  height: 100px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  color: var(--color-text-on-primary);
+  font-size: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  animation: teclea-pulso 1.6s ease-in-out infinite;
+}
+
+.teclea-pulsador:hover{
+  transform: scale(1.05);
+}
+
+.teclea-pulsador-escuchado{
+  animation: none;
+  background: var(--color-success);
+}
+
+@keyframes teclea-pulso{
+  0%, 100%{ transform: scale(1); }
+  50%{ transform: scale(1.08); }
+}
+
+/* Caja de escritura: donde van apareciendo las letras tecleadas. Se
+   ajusta al ancho de la palabra (no a un ancho fijo) y solo pasa a
+   varias líneas si el espacio disponible no llega para mostrarla
+   entera en una sola fila. */
+.teclea-escritura{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  width: fit-content;
+  min-width: 200px;
+  max-width: min(100%, 640px);
+  min-height: calc(var(--touch-target) + var(--space-sm));
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface-alt);
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.teclea-letra{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+  padding: 0 var(--space-xs);
+  background: var(--color-surface);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.teclea-letra-espacio{
+  min-width: var(--space-lg);
+  border-style: dashed;
+  box-shadow: none;
+}
+
+.teclea-letra-correcta{
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: var(--color-text-on-primary);
+}
+
+.teclea-letra-cae{
+  animation: teclea-caida 650ms ease-in forwards;
+  animation-delay: calc(var(--orden, 0) * 60ms);
+}
+
+@keyframes teclea-caida{
+  0%{ transform: translateY(0) rotate(0deg); opacity: 1; }
+  100%{ transform: translateY(60px) rotate(25deg); opacity: 0; }
+}
+
+/* Teclado en pantalla. */
+.teclea-teclado{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 100%;
+  max-width: 520px;
+  transition: opacity var(--transition-base);
+}
+
+.teclea-teclado-bloqueado{
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.teclea-fila{
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xs);
+  width: 100%;
+}
+
+.teclea-tecla{
+  flex: 1;
+  min-width: 0;
+  max-width: 48px;
+  height: var(--touch-target);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.teclea-tecla:active{
+  transform: scale(0.94);
+}
+
+.teclea-tecla:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.teclea-tecla-resaltada{
+  background: color-mix(in srgb, var(--color-success) 30%, white);
+  border-color: var(--color-success);
+}
+
+.teclea-tecla-espacio{
+  flex: 4;
+  max-width: 220px;
+}
+
+/* Fila de acciones: Mayúscula, acceso a Símbolos/Números y espacio.
+   Solo aparece cuando la palabra actual de verdad la necesita. */
+.teclea-fila-acciones{
+  margin-top: var(--space-xs);
+}
+
+.teclea-tecla-accion{
+  flex: 2;
+  max-width: 96px;
+  font-size: var(--font-size-sm);
+  background: var(--color-surface-alt);
+}
+
+.teclea-tecla-mayus,
+.teclea-tecla-capa,
+.teclea-tecla-volver{
+  flex: 2;
+  max-width: 96px;
+}
+
+.teclea-tecla-borrar{
+  flex: 2;
+  max-width: 96px;
+  background: color-mix(in srgb, var(--color-error) 18%, var(--color-surface-alt));
+}
+
+/* Letra normal que esconde un subset con su variante con tilde (ver
+   crearTeclaLetra() en tecleaPalabra.js). El puntito indica que al
+   pulsarla aparecen opciones, igual que un teclado físico con teclas
+   de acento. */
+.teclea-tecla-con-subset{
+  position: relative;
+}
+
+.teclea-tecla-con-subset::after{
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-secondary);
+}
+
+.teclea-tecla-activa{
+  background: var(--color-primary);
+  border-color: var(--color-primary-dark);
+  color: var(--color-text-on-primary);
+}
+
+/* En pantallas en horizontal (incluidos los ordenadores, que son
+   horizontales por definición) el orden sigue siendo siempre el
+   mismo de arriba a abajo: pictograma, pista, escritura y teclado.
+   Solo se reduce el tamaño del pictograma para dejar más alto
+   disponible al teclado cuando hay poca altura. */
+@media (orientation: landscape){
+  .teclea-objetivo{
+    max-width: 220px;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .teclea-objetivo-img{
+    max-width: 100px;
+  }
+}

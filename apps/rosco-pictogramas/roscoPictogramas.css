@@ -1,0 +1,164 @@
+/* Pictosfera — app "Rosco de pictogramas". Estilos propios, con
+   prefijo "rosco-" para no interferir con el núcleo ni con otras
+   apps. */
+
+.rosco-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.rosco-cabecera h1{
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--space-xs);
+}
+
+.rosco-cabecera p{
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.rosco-progreso{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.rosco-zona{
+  display: flex;
+  justify-content: center;
+}
+
+/* --- El anillo con las 26 letras y, en el centro, la consigna y los
+   cuatro pictogramas --- */
+
+.rosco-anillo-cont{
+  position: relative;
+  width: clamp(280px, 92vw, 380px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+}
+
+.rosco-anillo{
+  position: absolute;
+  inset: 0;
+}
+
+.rosco-letra{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  color: var(--color-text-soft);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition-base), color var(--transition-base), transform var(--transition-base);
+}
+
+.rosco-letra-activa{
+  background: var(--color-secondary);
+  color: var(--color-text-on-primary);
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow: var(--shadow-md);
+}
+
+.rosco-letra-resuelta{
+  background: var(--color-success);
+  color: var(--color-text-on-primary);
+}
+
+.rosco-centro{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.rosco-consigna{
+  margin: 0;
+  min-height: 2.6em;
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.rosco-pictogramas{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+.rosco-pictograma{
+  width: 64px;
+  height: 64px;
+  padding: 4px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  overflow: hidden;
+  transition: background var(--transition-base), box-shadow var(--transition-base);
+}
+
+.rosco-pictograma-img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.rosco-pictograma-correcto{
+  background: var(--color-success);
+  box-shadow: inset 0 0 0 3px var(--color-success);
+  cursor: default;
+}
+
+.rosco-pictograma-incorrecto{
+  background: var(--color-error);
+  opacity: 0.55;
+  cursor: default;
+  animation: rosco-temblor 320ms ease;
+}
+
+.rosco-pictograma:disabled{
+  cursor: default;
+}
+
+@keyframes rosco-temblor{
+  0%, 100%{ transform: translate(0, 0); }
+  25%{ transform: translate(-6px, 0); }
+  75%{ transform: translate(6px, 0); }
+}
+
+/* --- Pantallas pequeñas: anillo y pictogramas algo más ajustados --- */
+@media (max-width: 380px){
+  .rosco-centro{
+    width: 150px;
+  }
+  .rosco-pictograma{
+    width: 56px;
+    height: 56px;
+  }
+}

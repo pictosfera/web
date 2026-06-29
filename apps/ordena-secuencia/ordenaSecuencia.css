@@ -1,0 +1,168 @@
+/* Pictosfera — app "Ordena la secuencia". Estilos propios, con
+   prefijo "ordena-" para no interferir con el núcleo ni con otras
+   apps. A diferencia de "Arrastra la palabra", aquí el layout es
+   SIEMPRE huecos arriba / piezas abajo, en cualquier orientación: es
+   parte del propio diseño del minijuego (reconstruir un orden), no
+   solo una cuestión de aprovechar el espacio. */
+
+.ordena-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ordena-cabecera h1{
+  margin: 0 0 var(--space-xs);
+  color: var(--color-primary-dark);
+}
+
+.ordena-cabecera p{
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.ordena-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.ordena-zona{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.ordena-casillas{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.ordena-casilla{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100px;
+  min-height: 100px;
+  padding: var(--space-xs);
+  background: var(--color-surface);
+  border: 3px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
+}
+
+.ordena-casilla:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.ordena-casilla-numero{
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text-soft);
+}
+
+.ordena-casilla-resaltada{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-bg-soft);
+  transform: scale(1.04);
+}
+
+.ordena-casilla-llena{
+  border-style: solid;
+  border-color: var(--color-success);
+  cursor: default;
+}
+
+.ordena-casilla-img{
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.ordena-casilla-nombre{
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-primary-dark);
+  word-break: break-word;
+}
+
+.ordena-piezas{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 2px dashed var(--color-border);
+}
+
+.ordena-pieza{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 96px;
+  min-height: 96px;
+  padding: var(--space-xs);
+  background: var(--color-surface);
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.ordena-pieza:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.ordena-pieza-img{
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.ordena-pieza-nombre{
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-primary-dark);
+  word-break: break-word;
+}
+
+.ordena-pieza-activa{
+  z-index: 5;
+  cursor: grabbing;
+  box-shadow: var(--shadow-md);
+}
+
+.ordena-pieza-seleccionada{
+  border-color: var(--color-secondary);
+  background: var(--color-bg-soft);
+  box-shadow: var(--shadow-md);
+}
+
+.ordena-pieza-fallo{
+  background: var(--color-error);
+  border-color: var(--color-error);
+  animation: ordena-temblor 320ms ease;
+}
+
+.ordena-pieza-fallo .ordena-pieza-nombre{
+  color: var(--color-text-on-primary);
+}
+
+@keyframes ordena-temblor{
+  0%, 100%{ transform: translate(0, 0); }
+  25%{ transform: translate(-6px, 0); }
+  75%{ transform: translate(6px, 0); }
+}

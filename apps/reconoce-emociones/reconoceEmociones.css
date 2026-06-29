@@ -1,0 +1,149 @@
+/* Pictosfera — app "Reconoce emociones". Estilos propios, con
+   prefijo "emociones-" para no interferir con el núcleo ni con otras
+   apps (mismo criterio que el resto de mecánicas: ver
+   puzzlePictogramaPalabra.css). La cara la dibuja core/js/cabezas.js
+   como un <svg viewBox="0 0 500 500">; aquí solo se decide el tamaño
+   en el que se ve (el viewBox se encarga de que escale sin recortes
+   ni distorsión). */
+
+.emociones-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.emociones-cabecera h1{
+  margin: 0 0 var(--space-xs);
+  color: var(--color-primary-dark);
+}
+
+.emociones-cabecera p{
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.emociones-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.emociones-zona{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.emociones-cara{
+  width: 220px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.emociones-cara svg{
+  width: 100%;
+  height: 100%;
+}
+
+.emociones-pregunta{
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.emociones-opciones{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.emociones-opcion{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 130px;
+  padding: var(--space-sm);
+  background: var(--color-surface);
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
+}
+
+.emociones-opcion:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.emociones-opcion:hover{
+  transform: scale(1.03);
+}
+
+.emociones-opcion-imagen-caja{
+  width: 80px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emociones-opcion-imagen{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.emociones-opcion-emoji{
+  font-size: 48px;
+  line-height: 1;
+}
+
+.emociones-opcion-etiqueta{
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.emociones-opcion-correcta{
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.emociones-opcion-correcta .emociones-opcion-etiqueta{
+  color: var(--color-text-on-primary);
+}
+
+.emociones-opcion-fallo{
+  background: var(--color-error);
+  border-color: var(--color-error);
+  animation: emociones-temblor 320ms ease;
+}
+
+.emociones-opcion-fallo .emociones-opcion-etiqueta{
+  color: var(--color-text-on-primary);
+}
+
+@keyframes emociones-temblor{
+  0%, 100%{ transform: translate(0, 0); }
+  25%{ transform: translate(-6px, 0); }
+  75%{ transform: translate(6px, 0); }
+}
+
+@media (orientation: portrait){
+  .emociones-cara{
+    width: 170px;
+  }
+  .emociones-opcion{
+    width: 110px;
+  }
+  .emociones-opcion-imagen-caja{
+    width: 64px;
+  }
+}

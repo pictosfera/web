@@ -1,0 +1,155 @@
+/* Pictosfera — mecánica "Escribe la letra" (escritura guiada letra a letra). */
+
+.escribe-app {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.escribe-cabecera h1 {
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.escribe-cabecera p {
+  color: var(--color-text-soft);
+  margin: 0;
+}
+
+.escribe-marcador {
+  font-size: var(--font-size-md);
+  font-weight: bold;
+  color: var(--color-primary-dark);
+}
+
+.escribe-zona {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.escribe-objetivo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-lg);
+  width: 100%;
+}
+
+.escribe-objetivo-img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+}
+
+.escribe-pista {
+  font-size: var(--font-size-xl);
+  font-weight: bold;
+  color: var(--color-text);
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-align: center;
+}
+
+/* Botón de escuchar (modo "pulsador TTS"): igual idea que en las demás
+   mecánicas, late suavemente para invitar a pulsarlo. */
+.escribe-pulsador {
+  font-size: var(--font-size-xl);
+  width: var(--touch-target);
+  height: var(--touch-target);
+  min-width: 96px;
+  min-height: 96px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-secondary);
+  color: var(--color-text-on-primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  animation: escribe-pulso 1.6s ease-in-out infinite;
+  transition: transform var(--transition-fast);
+}
+
+.escribe-pulsador:hover {
+  transform: scale(1.05);
+}
+
+.escribe-pulsador-escuchado {
+  animation: none;
+  background: var(--color-secondary-dark);
+}
+
+@keyframes escribe-pulso {
+  0%, 100% { box-shadow: var(--shadow-md); }
+  50% { box-shadow: 0 0 0 12px rgba(242, 163, 61, 0.25); }
+}
+
+.escribe-casillas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.escribe-casilla {
+  position: relative;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+  line-height: 0; /* evita espacio extra bajo el <canvas> */
+}
+
+.escribe-casilla-lienzo {
+  display: block;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-soft);
+}
+
+.escribe-casilla-activa .escribe-casilla-lienzo {
+  border-color: var(--color-primary);
+  border-width: 3px;
+}
+
+.escribe-casilla-correcta .escribe-casilla-lienzo {
+  border-color: var(--color-success);
+  background: rgba(76, 175, 109, 0.12);
+}
+
+.escribe-casilla-bloqueada {
+  opacity: 0.45;
+}
+
+.escribe-casilla-bloqueada .escribe-casilla-lienzo {
+  pointer-events: none;
+}
+
+.escribe-casilla-fallo {
+  animation: escribe-fallo 0.4s ease;
+}
+
+@keyframes escribe-fallo {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+@media (orientation: landscape) {
+  .escribe-app {
+    max-width: 920px;
+  }
+
+  .escribe-objetivo {
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
+  }
+}

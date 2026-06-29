@@ -1,0 +1,188 @@
+/* Pictosfera — app "Arrastra la palabra". Estilos propios, con
+   prefijo "arrastra-" para no interferir con el núcleo ni con otras
+   apps. */
+
+.arrastra-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.arrastra-cabecera h1{
+  margin: 0 0 var(--space-xs);
+  color: var(--color-primary-dark);
+}
+
+.arrastra-cabecera p{
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.arrastra-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.arrastra-zona{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.arrastra-objetivo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 320px;
+  min-height: 220px;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 3px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
+}
+
+.arrastra-objetivo-resaltado{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-bg-soft);
+  transform: scale(1.02);
+}
+
+.arrastra-objetivo-img{
+  width: 65%;
+  max-width: 160px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.arrastra-pista{
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.arrastra-opciones{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 320px;
+}
+
+.arrastra-opcion{
+  position: relative;
+  min-height: var(--touch-target);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface);
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  text-align: center;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.arrastra-opcion:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.arrastra-opcion-activa{
+  z-index: 5;
+  cursor: grabbing;
+  box-shadow: var(--shadow-md);
+}
+
+.arrastra-opcion-correcta{
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: var(--color-text-on-primary);
+}
+
+.arrastra-opcion-fallo{
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: var(--color-text-on-primary);
+  animation: arrastra-temblor 320ms ease;
+}
+
+@keyframes arrastra-temblor{
+  0%, 100%{ transform: translate(0, 0); }
+  25%{ transform: translate(-6px, 0); }
+  75%{ transform: translate(6px, 0); }
+}
+
+/* Ajuste "pulsador TTS": botón animado que sustituye al pictograma y
+   su pista. Al pulsarlo se escucha la palabra y deja de pulsar
+   (animación), pero sigue siendo pulsable para volver a escuchar. */
+.arrastra-pulsador{
+  width: 110px;
+  height: 110px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  color: var(--color-text-on-primary);
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  animation: arrastra-pulso 1.6s ease-in-out infinite;
+}
+
+.arrastra-pulsador:hover{
+  transform: scale(1.05);
+}
+
+.arrastra-pulsador-escuchado{
+  animation: none;
+  background: var(--color-success);
+}
+
+@keyframes arrastra-pulso{
+  0%, 100%{ transform: scale(1); }
+  50%{ transform: scale(1.08); }
+}
+
+/* Validación de seguridad: con el "pulsador TTS" activo, hasta que no
+   se haya pulsado el botón y escuchado la palabra, las cajas no se
+   pueden arrastrar ni activar por teclado. */
+.arrastra-opciones-bloqueada .arrastra-opcion{
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* La orientación del dispositivo manda, no el ancho: en horizontal el
+   pictograma queda a la izquierda y las palabras a la derecha; en
+   vertical (un móvil, por ejemplo) el pictograma queda arriba y las
+   palabras debajo. Una pantalla de ordenador es "horizontal" por
+   definición, así que este criterio también cubre ese caso. */
+@media (orientation: landscape){
+  .arrastra-zona{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arrastra-objetivo,
+  .arrastra-opciones{
+    max-width: 280px;
+  }
+}

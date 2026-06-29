@@ -1,0 +1,177 @@
+/* Pictosfera — app "Arrastra los números de la suma". Estilos propios,
+   con prefijo "arrastrasuma-" para no interferir con el núcleo ni con
+   otras apps. Combina el layout de operación de "Escribe los números
+   de la suma" (grupos de pictogramas + signos) con el banco de
+   números arrastrables de "Cuenta y arrastra el número". */
+
+.arrastrasuma-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.arrastrasuma-cabecera h1{
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--space-xs) 0;
+  color: var(--color-primary-dark);
+}
+
+.arrastrasuma-cabecera p{
+  color: var(--color-text-soft);
+  margin: 0;
+}
+
+.arrastrasuma-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.arrastrasuma-zona{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.arrastrasuma-operacion{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.arrastrasuma-parte{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.arrastrasuma-grupo{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 150px;
+  min-height: 64px;
+  padding: var(--space-xs);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.arrastrasuma-grupo-img{
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.arrastrasuma-signo{
+  font-size: var(--font-size-xl, 2rem);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  align-self: center;
+  margin-top: 32px;
+}
+
+.arrastrasuma-objetivo{
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  background: var(--color-bg-soft);
+  border: 3px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
+}
+
+.arrastrasuma-objetivo-resaltado{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-bg-soft);
+  transform: scale(1.05);
+}
+
+.arrastrasuma-objetivo-correcto{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-success);
+  color: var(--color-text-on-primary);
+}
+
+.arrastrasuma-objetivo-fallo{
+  border-color: var(--color-error);
+  animation: arrastrasuma-temblor 320ms ease;
+}
+
+.arrastrasuma-numeros{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 640px;
+}
+
+.arrastrasuma-numero{
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm);
+  background: var(--color-surface);
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.arrastrasuma-numero:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.arrastrasuma-numero-activo{
+  z-index: 5;
+  cursor: grabbing;
+  box-shadow: var(--shadow-md);
+}
+
+/* A diferencia de "Cuenta y arrastra el número", aquí el número del
+   banco NO se queda marcado como "correcto" de forma permanente: sigue
+   disponible para volver a arrastrarlo (puede hacer falta dos veces en
+   el mismo nivel, p. ej. si los dos sumandos son iguales). El acierto
+   solo se confirma con un pulso breve. */
+.arrastrasuma-numero-acierto{
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: var(--color-text-on-primary);
+}
+
+.arrastrasuma-numero-fallo{
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: var(--color-text-on-primary);
+  animation: arrastrasuma-temblor 320ms ease;
+}
+
+@keyframes arrastrasuma-temblor{
+  0%, 100%{ transform: translate(0, 0); }
+  25%{ transform: translate(-6px, 0); }
+  75%{ transform: translate(6px, 0); }
+}

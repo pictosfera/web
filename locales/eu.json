@@ -1,0 +1,72 @@
+{
+  "app": { "nombre": "Pictosfera" },
+  "nav": {
+    "inicio": "Hasiera",
+    "juegos": "Jokoak",
+    "pictogramas": "Piktogramak",
+    "ajustes": "Ezarpenak"
+  },
+  "inicio": {
+    "bienvenida": "Kaixo! Ongi etorri Pictosfera-ra",
+    "intro": "Aukeratu \"Jokoak\" jolasten hasteko.",
+    "ir_juegos": "Jokoak ikusi"
+  },
+  "juegos": {
+    "titulo": "Jokoak",
+    "vacio": "Apal honetan ez dago jokorik oraindik.",
+    "cargando": "Jokoak kargatzen…",
+    "volver": "Jokoetara itzuli"
+  },
+  "pin": {
+    "titulo": "Helduen eremua",
+    "subtitulo": "Sartu PINa jarraitzeko",
+    "crear_subtitulo": "Sortu PIN bat eremu honetarako",
+    "error": "PIN okerra, saiatu berriro",
+    "borrar": "Ezabatu",
+    "cancelar": "Utzi"
+  },
+  "pictogramas": {
+    "titulo": "Piktogramak",
+    "buscar_placeholder": "Bilatu piktograma bat…",
+    "buscar_boton": "Bilatu",
+    "buscando": "Bilatzen…",
+    "anadir": "Gehitu liburutegira",
+    "anadido": "Gehituta",
+    "mi_biblioteca": "Nire liburutegia",
+    "biblioteca_vacia": "Oraindik ez duzu piktogramarik edo argazkirik gehitu.",
+    "todas": "Guztiak"
+  },
+  "ajustes": {
+    "titulo": "Ezarpenak",
+    "idioma": "Hizkuntza",
+    "idioma_ayuda": "Aplikazio osoaren hizkuntza aldatzen du: testuak, piktogramak eta ahotsa.",
+    "guardar": "Gorde"
+  },
+  "recompensa": {
+    "mensaje_1": "Oso ondo!",
+    "mensaje_2": "Lortu duzu!",
+    "mensaje_3": "Bikain!",
+    "continuar": "Jokatzen jarraitu",
+    "salir": "Jokoetara itzuli"
+  },
+  "comunes": {
+    "cerrar": "Itxi",
+    "aceptar": "Ados",
+    "cancelar": "Utzi",
+    "volver": "Atzera",
+    "cargando": "Kargatzen…",
+    "error_generico": "Zerbait ez da ondo atera. Saiatu berriro."
+  },
+  "estantes": {
+    "ANIMALES": "Animaliak",
+    "LECTURA": "Irakurketa",
+    "NUMEROS": "Zenbakiak",
+    "ESCRITURA": "Idazketa"
+  },
+  "memoria": {
+    "nombre": "Memoria",
+    "instrucciones": "Sakatu bi karta bikotea aurkitzeko.",
+    "intentos": "Saiakerak: {n}",
+    "parejas": "Aurkitutako bikoteak: {n} / {total}"
+  }
+}

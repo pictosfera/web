@@ -1,0 +1,189 @@
+/* Pictosfera — app "Me gusta / no me gusta con comidas". Estilos
+   propios, con prefijo "megusta-" para no interferir con el núcleo ni
+   con otras apps. */
+
+.megusta-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.megusta-cabecera h1{
+  margin: 0 0 var(--space-xs);
+  color: var(--color-primary-dark);
+}
+
+.megusta-cabecera p{
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.megusta-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.megusta-zonas{
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.megusta-zona{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: 200px;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 3px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
+}
+
+.megusta-zona:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.megusta-zona-resaltada{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-bg-soft);
+  transform: scale(1.02);
+}
+
+.megusta-zona-elegida{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-success);
+}
+
+.megusta-fijo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+}
+
+.megusta-fijo-img{
+  width: 90px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.megusta-fijo-emoji{
+  font-size: 3.4rem;
+  line-height: 1;
+}
+
+.megusta-zona-etiqueta{
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.megusta-zona-colocados{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+  gap: var(--space-xs);
+  width: 100%;
+  min-height: 48px;
+}
+
+.megusta-colocado{
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-soft);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.megusta-colocado-img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  -webkit-user-drag: none;
+}
+
+.megusta-colocado-texto{
+  width: auto;
+  min-width: 44px;
+  padding: 0 var(--space-xs);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.megusta-item-zona{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+}
+
+.megusta-item{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.megusta-item-activo{
+  z-index: 5;
+  cursor: grabbing;
+  box-shadow: var(--shadow-md);
+}
+
+.megusta-item-colocado{
+  visibility: hidden;
+}
+
+.megusta-comida-img{
+  width: 120px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  -webkit-user-drag: none;
+}
+
+.megusta-comida-pista{
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+/* En vertical las dos zonas se apilan en vez de ir lado a lado, igual
+   que en "Clasifica los pictogramas en dos categorías". */
+@media (orientation: portrait){
+  .megusta-zonas{
+    flex-direction: column;
+  }
+}
