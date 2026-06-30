@@ -86,6 +86,53 @@
   color: var(--color-primary-dark);
 }
 
+/* --- Puerta de entrada (ver core/js/puerta.js): pantalla previa a
+   todo lo demás, incluido el paseo de bienvenida. Su único objetivo
+   es captar el primer toque real para poder pedir pantalla completa
+   (core/js/fullscreen.js), así que va por encima de TODO lo demás,
+   incluido el modal-overlay (PIN, recompensa, bienvenida). --- */
+.puerta-overlay{
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  z-index: 200;
+}
+
+.puerta-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  max-width: 360px;
+  text-align: center;
+}
+
+.puerta-logo{
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.puerta-box h2{
+  margin: 0;
+  color: var(--color-primary-dark);
+}
+
+.puerta-box p{
+  color: var(--color-text-soft);
+}
+
+.puerta-btn{
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-lg);
+  padding: var(--space-md) var(--space-xl);
+}
+
 /* --- Botones de navegación (compartidos por tabbar y sidebar) --- */
 .nav-btn{
   display: flex;

@@ -236,6 +236,10 @@
     "texto_3": "De vez en cuando, guarda una copia desde \"Ajustes\". Así no pierdes el trabajo si cambias de dispositivo o borras los datos del navegador. La copia no incluye las fotos salvo que tú lo decidas.",
     "empezar": "Empezar"
   },
+  "puerta": {
+    "titulo": "¡Vamos a jugar!",
+    "texto": "Toca el botón para abrir Pictosfera a pantalla completa."
+  },
   "estantes": {
     "ANIMALES": "Animales",
     "LECTURA": "Lectura",

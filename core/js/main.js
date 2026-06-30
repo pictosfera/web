@@ -10,6 +10,7 @@ import { registerRoute, startRouter, navigate } from './router.js';
 import { initShell } from './shell.js';
 import { initFooter } from './footer.js';
 import { maybeShowWelcome } from './welcome.js';
+import { mostrarPuerta } from './puerta.js';
 
 import { render as renderInicio } from './views/inicio.js';
 import { render as renderJuegos } from './views/juegos.js';
@@ -44,7 +45,13 @@ async function arrancar() {
   initShell();
   initFooter();
   startRouter();
-  maybeShowWelcome();
+
+  // La puerta se ve siempre, antes que nada (incluso antes del paseo
+  // de bienvenida): existe para captar el primer toque y así poder
+  // pedir pantalla completa (ver core/js/puerta.js y fullscreen.js).
+  mostrarPuerta(() => {
+    maybeShowWelcome();
+  });
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch((err) => {

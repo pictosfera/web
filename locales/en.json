@@ -236,6 +236,10 @@
     "texto_3": "From time to time, save a backup from \"Settings\". That way you won't lose your work if you change devices or clear your browser data. The backup does not include photos unless you choose to.",
     "empezar": "Get started"
   },
+  "puerta": {
+    "titulo": "Let's play!",
+    "texto": "Tap the button to open Pictosfera in full screen."
+  },
   "estantes": {
     "ANIMALES": "Animals",
     "LECTURA": "Reading",
