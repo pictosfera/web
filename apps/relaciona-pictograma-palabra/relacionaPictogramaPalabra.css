@@ -1,0 +1,207 @@
+/* Pictosfera — app "Relaciona el pictograma con su palabra". Estilos
+   propios, con prefijo "relaciona-" para no interferir con el núcleo ni
+   con otras apps. */
+
+.relaciona-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.relaciona-cabecera h1{
+  margin: 0 0 var(--space-xs);
+  color: var(--color-primary-dark);
+}
+
+.relaciona-cabecera p{
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.relaciona-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.relaciona-columnas{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: var(--space-xl);
+  width: 100%;
+}
+
+.relaciona-col-izq,
+.relaciona-col-der{
+  flex: 1;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.relaciona-item{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  min-height: var(--touch-target);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface);
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.relaciona-item:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.relaciona-item-activo{
+  z-index: 5;
+  cursor: grabbing;
+  box-shadow: var(--shadow-md);
+}
+
+.relaciona-item-seleccionado{
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+.relaciona-item-fallo{
+  border-color: var(--color-error);
+  animation: relaciona-temblor 320ms ease;
+}
+
+.relaciona-item-colocado{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-bg-soft);
+  cursor: default;
+}
+
+@keyframes relaciona-temblor{
+  0%, 100%{ transform: translate(0, 0); }
+  25%{ transform: translate(-6px, 0); }
+  75%{ transform: translate(6px, 0); }
+}
+
+.relaciona-img{
+  width: 70px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  -webkit-user-drag: none;
+}
+
+.relaciona-pista{
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.relaciona-casilla{
+  width: 100%;
+  min-height: var(--touch-target);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  background: var(--color-surface);
+  border: 3px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
+}
+
+.relaciona-casilla:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.relaciona-casilla-resaltada{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-bg-soft);
+  transform: scale(1.03);
+}
+
+.relaciona-casilla-resuelta{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-success);
+  color: var(--color-text-on-primary);
+  cursor: default;
+}
+
+.relaciona-casilla-fallo{
+  border-color: var(--color-error);
+  background: var(--color-error);
+  color: var(--color-text-on-primary);
+  animation: relaciona-temblor 320ms ease;
+}
+
+/* Ajuste "pulsador TTS": mismo botón animado que en el resto de
+   mecánicas de arrastrar (sustituye al pictograma hasta que se
+   escucha). */
+.relaciona-pulsador{
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  color: var(--color-text-on-primary);
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  animation: relaciona-pulso 1.6s ease-in-out infinite;
+}
+
+.relaciona-pulsador:hover{
+  transform: scale(1.05);
+}
+
+.relaciona-pulsador-escuchado{
+  animation: none;
+  background: var(--color-success);
+}
+
+@keyframes relaciona-pulso{
+  0%, 100%{ transform: scale(1); }
+  50%{ transform: scale(1.08); }
+}
+
+/* Validación de seguridad: con el "pulsador TTS" activo, hasta que no
+   se haya pulsado y escuchado el nombre, ESE pictograma en concreto no
+   se puede arrastrar ni seleccionar por teclado. */
+.relaciona-item-bloqueado{
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* En vertical (un móvil, por ejemplo) las dos columnas se apilan en vez
+   de ir lado a lado, para que cada una mantenga un ancho cómodo. Una
+   pantalla de ordenador es "horizontal" por definición, así que el
+   layout en fila de más arriba ya cubre ese caso. */
+@media (orientation: portrait){
+  .relaciona-columnas{
+    flex-direction: column;
+    align-items: center;
+  }
+  .relaciona-col-izq,
+  .relaciona-col-der{
+    width: 100%;
+  }
+}

@@ -39,6 +39,7 @@ export const CAMPOS_POR_MECANICA = {
   'arrastra-suma': [],
   'clasifica-categorias': ['mostrar', 'mayuscula', 'soloTexto', 'pulsadorTts'],
   'puzzle-pictograma-palabra': ['mayuscula'],
+  'relaciona-pictograma-palabra': ['mostrar', 'mayuscula', 'soloTexto', 'pulsadorTts'],
   'me-gusta-no-me-gusta': ['mostrar', 'mayuscula', 'soloTexto'],
   'lista-compra': ['mayuscula', 'listaSoloTexto', 'estanteSoloImagen'],
   'reconoce-emociones': ['mayuscula', 'soloTexto']

@@ -364,6 +364,12 @@
     "casilla_completa": "Hueco {n} completado",
     "pieza": "Pieza para el hueco {n}"
   },
+  "relacionaPictogramaPalabra": {
+    "instrucciones": "Arrastra cada pictograma hasta el texto que le corresponde.",
+    "ronda": "Ronda {n} de {total}",
+    "casilla": "Casilla: {nombre}",
+    "resuelto": "Emparejado correctamente con {nombre}"
+  },
   "meGusta": {
     "instrucciones": "Mira cada comida y arrástrala hasta el plato si te gusta, o hasta el cubo de basura si no te gusta.",
     "ronda": "Comida {n} de {total}",
@@ -427,6 +433,7 @@
     "arrastra_suma_animales": "Arrastra los números de la suma",
     "clasifica_categorias": "Clasifica los pictogramas en dos categorías",
     "puzzle_pictograma_palabra_animales": "Puzzle de pictograma y palabra",
+    "relaciona_pictograma_palabra_animales": "Relaciona el pictograma con su palabra",
     "me_gusta_no_me_gusta_comidas": "Me gusta / no me gusta",
     "lista_compra_comidas": "Lista de la compra",
     "reconoce_emociones": "Reconoce emociones"

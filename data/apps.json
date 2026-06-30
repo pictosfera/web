@@ -225,6 +225,20 @@
     }
   },
   {
+    "id": "relaciona-pictograma-palabra-animales",
+    "mecanica": "relaciona-pictograma-palabra",
+    "modulo": "apps/relaciona-pictograma-palabra/relacionaPictogramaPalabra.js",
+    "nombre": "Relaciona el pictograma con su palabra",
+    "nombreClave": "juegos_nombres.relaciona_pictograma_palabra_animales",
+    "icono": "🔗",
+    "estante": "LECTURA",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+    }
+  },
+  {
     "id": "me-gusta-no-me-gusta-comidas",
     "mecanica": "me-gusta-no-me-gusta",
     "modulo": "apps/me-gusta-no-me-gusta/meGustaNoMeGusta.js",

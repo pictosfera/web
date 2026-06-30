@@ -364,6 +364,12 @@
     "casilla_completa": "Slot {n} completed",
     "pieza": "Piece for slot {n}"
   },
+  "relacionaPictogramaPalabra": {
+    "instrucciones": "Drag each picture to the text it matches.",
+    "ronda": "Round {n} of {total}",
+    "casilla": "Box: {nombre}",
+    "resuelto": "Correctly matched with {nombre}"
+  },
   "meGusta": {
     "instrucciones": "Look at each food and drag it onto the plate if you like it, or onto the bin if you don't.",
     "ronda": "Food {n} of {total}",
@@ -427,6 +433,7 @@
     "arrastra_suma_animales": "Drag the numbers of the addition",
     "clasifica_categorias": "Sort the pictograms into two categories",
     "puzzle_pictograma_palabra_animales": "Picture puzzle and word",
+    "relaciona_pictograma_palabra_animales": "Match the picture to its word",
     "me_gusta_no_me_gusta_comidas": "I like it / I don't like it",
     "lista_compra_comidas": "Shopping list",
     "reconoce_emociones": "Recognise feelings"
