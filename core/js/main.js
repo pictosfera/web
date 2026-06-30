@@ -8,6 +8,7 @@
 import { initI18n } from './i18n.js';
 import { registerRoute, startRouter, navigate } from './router.js';
 import { initShell } from './shell.js';
+import { initFooter } from './footer.js';
 import { maybeShowWelcome } from './welcome.js';
 
 import { render as renderInicio } from './views/inicio.js';
@@ -41,6 +42,7 @@ async function arrancar() {
   registerRoute('/ajustes', renderAjustes);
 
   initShell();
+  initFooter();
   startRouter();
   maybeShowWelcome();
 

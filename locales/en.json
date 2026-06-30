@@ -426,5 +426,12 @@
     "me_gusta_no_me_gusta_comidas": "I like it / I don't like it",
     "lista_compra_comidas": "Shopping list",
     "reconoce_emociones": "Recognise feelings"
+  },
+  "footer": {
+    "autor": "Pictosfera — developed by Roberto Corral Retuerta.",
+    "licencia": "Free distribution and use of this site is authorised provided the author is always credited (Creative Commons Attribution 4.0 license — CC BY 4.0).",
+    "licencia_enlace": "View the CC BY 4.0 license",
+    "arasaac": "The pictographic symbols used are the property of the Government of Aragón and were created by Sergio Palao for ARASAAC, which distributes them under a Creative Commons license (BY-NC-SA).",
+    "arasaac_enlace": "Visit ARASAAC"
   }
 }

@@ -61,6 +61,31 @@
   outline: none;
 }
 
+/* --- Pie de página: créditos y licencias (ver core/js/footer.js).
+   Vive fuera de #view, así que aparece en todas las secciones. --- */
+.app-footer{
+  flex-shrink: 0;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface-alt);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.app-footer-linea{
+  margin: 2px 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-soft);
+}
+
+.app-footer a{
+  color: var(--color-text-soft);
+  text-decoration: underline;
+}
+
+.app-footer a:hover{
+  color: var(--color-primary-dark);
+}
+
 /* --- Botones de navegación (compartidos por tabbar y sidebar) --- */
 .nav-btn{
   display: flex;
