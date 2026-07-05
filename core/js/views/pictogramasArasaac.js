@@ -55,16 +55,85 @@ export async function render() {
   btnBuscar.className = 'btn';
   btnBuscar.textContent = t('pictogramas.buscar_boton');
 
+  // --- Panel de selección de categoría ---
+  // Aparece al hacer clic en un resultado de ARASAAC: el adulto elige
+  // a qué categoría pertenece el pictograma antes de añadirlo al pozo.
+  // Así el pictograma queda etiquetado y los minijuegos pueden encontrarlo
+  // (los que filtran por "animales", "comida", etc.) y la barra de filtros
+  // de "Mi biblioteca" muestra la categoría correspondiente.
+  const panelAnadir = document.createElement('div');
+  panelAnadir.className = 'panel-anadir';
+  panelAnadir.hidden = true;
+
   const resultados = document.createElement('div');
   resultados.className = 'resultados-busqueda';
 
-  seccionBuscar.append(campoBuscar, btnBuscar, resultados);
+  // Muestra el panel de categoría para un resultado concreto.
+  // `card` es el botón del resultado para poder marcarlo como "ya añadido".
+  function mostrarPanelAnadir(medio, card) {
+    panelAnadir.innerHTML = '';
+    panelAnadir.hidden = false;
+
+    const fila = document.createElement('div');
+    fila.className = 'panel-anadir-fila';
+
+    const previewImg = document.createElement('img');
+    previewImg.src = medio.imagen;
+    previewImg.alt = medio.nombre;
+    previewImg.className = 'panel-anadir-img';
+
+    const info = document.createElement('div');
+    info.className = 'panel-anadir-info';
+    const nombreEl = document.createElement('strong');
+    nombreEl.textContent = medio.nombre;
+    const labelCat = document.createElement('p');
+    labelCat.className = 'ayuda';
+    labelCat.textContent = t('pictogramas.foto_etiqueta');
+    info.append(nombreEl, labelCat);
+
+    fila.append(previewImg, info);
+
+    const chipsCateg = document.createElement('div');
+    chipsCateg.className = 'etiquetas-lista';
+    CATEGORIAS_CURADAS.forEach((clave) => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'etiqueta-chip';
+      chip.textContent = t(`categorias.${clave}`);
+      chip.addEventListener('click', async () => {
+        sounds.click();
+        // Guardamos el pictograma con la etiqueta elegida por el adulto.
+        // Esto es lo que permite que el juego lo encuentre al filtrar por
+        // esa categoría, y que el chip de filtro de "Mi biblioteca" aparezca.
+        await mediaLibrary.addArasaacMedio({ ...medio, etiquetas: [clave] });
+        card.classList.add('ya-anadido');
+        card.disabled = true;
+        panelAnadir.hidden = true;
+        refrescarBiblioteca();
+      });
+      chipsCateg.appendChild(chip);
+    });
+
+    const btnCancelar = document.createElement('button');
+    btnCancelar.type = 'button';
+    btnCancelar.className = 'btn btn-ghost';
+    btnCancelar.textContent = t('comunes.cancelar');
+    btnCancelar.addEventListener('click', () => { panelAnadir.hidden = true; });
+
+    panelAnadir.append(fila, chipsCateg, btnCancelar);
+
+    // Desplazarse al panel para que el adulto vea la pregunta de categoría
+    panelAnadir.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  seccionBuscar.append(campoBuscar, btnBuscar, panelAnadir, resultados);
 
   async function buscar() {
     const texto = inputBuscar.value.trim();
     if (!texto) return;
     if (controladorBusqueda) controladorBusqueda.abort();
     controladorBusqueda = new AbortController();
+    panelAnadir.hidden = true;
     resultados.innerHTML = `<p class="vacio">${t('pictogramas.buscando')}</p>`;
     try {
       const lista = await searchPictograms(texto, getLanguage(), { signal: controladorBusqueda.signal });
@@ -78,11 +147,14 @@ export async function render() {
 
   function pintarResultados(lista) {
     resultados.innerHTML = '';
+    panelAnadir.hidden = true;
     if (!lista.length) {
       resultados.innerHTML = `<p class="vacio">${t('pictogramas.sin_resultados')}</p>`;
       return;
     }
-    lista.slice(0, 30).forEach((medio) => {
+    // Se muestran TODOS los resultados que ARASAAC devuelve, sin límite
+    // artificial: la API no pagina, así que lo que llega es lo que hay.
+    lista.forEach((medio) => {
       const card = document.createElement('button');
       card.type = 'button';
       card.className = 'resultado-card';
@@ -93,12 +165,10 @@ export async function render() {
       const nombre = document.createElement('div');
       nombre.textContent = medio.nombre;
       card.append(img, nombre);
-      card.addEventListener('click', async () => {
+      card.addEventListener('click', () => {
+        if (card.disabled) return;
         sounds.click();
-        await mediaLibrary.addArasaacMedio(medio);
-        card.classList.add('ya-anadido');
-        card.disabled = true;
-        refrescarBiblioteca();
+        mostrarPanelAnadir(medio, card);
       });
       resultados.appendChild(card);
     });

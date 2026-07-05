@@ -1,0 +1,114 @@
+GESTOR DE SUBIDAS WEB — PICTOSFERA
+===================================
+
+¿Qué es esto?
+--------------
+Una pequeña aplicación con ventana propia (no es una página web ni
+necesitas instalar Node, Python ni nada parecido) que:
+
+  1. Comprueba si hay cambios en la carpeta de tu proyecto web.
+  2. Te avisa de qué archivos han cambiado.
+  3. Con un clic, sube esos cambios a GitHub (al repositorio que
+     publica tu página de GitHub Pages).
+
+Para abrirla, haz doble clic en:
+    Iniciar Gestor de Subidas.bat
+
+(Puedes crear un acceso directo a ese archivo en tu Escritorio si
+quieres tenerlo más a mano: clic derecho sobre el archivo → "Crear
+acceso directo" o "Enviar a > Escritorio").
+
+
+PASO 1 — Instalar Git (solo la primera vez)
+--------------------------------------------
+Esta aplicación necesita un programa llamado "Git" para poder hablar
+con GitHub. Es gratuito y es el programa estándar que usa todo el
+mundo para esto. Si no lo tienes instalado:
+
+  1. Ve a: https://git-scm.com/download/win
+  2. La descarga empieza sola (o pulsa el enlace de 64-bit).
+  3. Abre el instalador y pulsa "Next" en todas las pantallas,
+     dejando las opciones tal cual vienen por defecto.
+  4. Al terminar, reinicia el Gestor de Subidas si lo tenías abierto.
+
+Si ya tienes Git instalado, no necesitas hacer nada en este paso.
+
+
+PASO 2 — Crear un "token" de GitHub (solo la primera vez)
+-----------------------------------------------------------
+GitHub ya no permite usar tu contraseña normal para subir cambios
+(la quitaron por seguridad en 2021). En su lugar, hace falta un
+"token de acceso personal", que funciona como una contraseña especial
+solo para esto.
+
+Cómo conseguirlo:
+
+  1. Abre la aplicación y pulsa "Configuración".
+  2. Pulsa el enlace "¿Cómo consigo un token? (abre GitHub)".
+     Se abrirá GitHub ya con la opción correcta marcada ("repo").
+  3. Si no has iniciado sesión en GitHub, inicia sesión con tu cuenta
+     (la misma con la que entras normalmente, usuario/correo y
+     contraseña, o como la tengas configurada).
+  4. Baja hasta el final de la página y pulsa el botón verde
+     "Generate token".
+  5. GitHub te mostrará el token UNA SOLA VEZ. Cópialo (botón de
+     copiar al lado del texto largo de letras y números).
+  6. Vuelve a la aplicación y pégalo en el campo "Token de acceso
+     (PAT)".
+
+Si cierras esa página sin copiarlo, no pasa nada: simplemente
+generas otro token nuevo repitiendo estos pasos.
+
+
+PASO 3 — Configurar la aplicación (solo la primera vez)
+----------------------------------------------------------
+En la ventana de "Configuración", rellena:
+
+  - Usuario de GitHub: tu nombre de usuario en GitHub (no el correo).
+  - Token de acceso (PAT): el que copiaste en el Paso 2.
+  - URL del repositorio: la dirección de tu repositorio de GitHub,
+    por ejemplo:  https://github.com/tuusuario/turepositorio.git
+  - Correo para los commits: puedes dejarlo en blanco.
+  - Carpeta del proyecto: ya viene rellenada con la carpeta de tu
+    proyecto web. Solo cámbiala si la has movido a otro sitio.
+
+Pulsa "Guardar". La aplicación recordará estos datos cifrados en
+este ordenador (no hace falta volver a escribirlos cada vez).
+
+
+USO DIARIO
+-----------
+A partir de aquí, simplemente:
+
+  1. Abre la aplicación (doble clic en "Iniciar Gestor de Subidas.bat").
+  2. Si hay cambios en tu proyecto, te avisará automáticamente y
+     te mostrará la lista de archivos.
+  3. Escribe (si quieres) una breve descripción del cambio, o déjalo
+     en blanco y la app pondrá la fecha y hora automáticamente.
+  4. Pulsa "Subir cambios a GitHub".
+
+Si quieres comprobar manualmente sin esperar al aviso automático,
+usa el botón "Buscar cambios" en cualquier momento.
+
+
+PREGUNTAS FRECUENTES
+----------------------
+- "¿Es seguro guardar aquí mi token?"
+  Se guarda cifrado con el propio sistema de seguridad de Windows
+  (ligado a tu usuario de Windows). Nadie puede abrir ese archivo y
+  leer el token directamente, ni siquiera copiándolo a otro PC.
+
+- "GitHub me dice que el token o usuario están mal"
+  El token puede haber caducado (al crearlo, GitHub te deja elegir
+  cuánto dura) o haberlo escrito mal. Repite el Paso 2 para crear uno
+  nuevo y el Paso 3 para guardarlo de nuevo.
+
+- "Dice que el repositorio ya tiene contenido y no puede subir"
+  Significa que en GitHub ya había algo distinto a lo de tu carpeta
+  (por ejemplo, si el repositorio se creó con un README desde la web
+  de GitHub). La app no borra nada por su cuenta: te pregunta si
+  quieres forzar la subida (lo de tu carpeta manda) antes de hacerlo.
+
+- "¿Necesito tener internet?"
+  Sí, solo en el momento de pulsar "Subir cambios" (para hablar con
+  GitHub). El resto de la aplicación funciona sin conexión.

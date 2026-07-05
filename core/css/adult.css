@@ -853,3 +853,40 @@
 .juegos-interruptor .nav-lock{
   font-size: 0.85rem;
 }
+
+/* --- Panel de selección de categoría al añadir un pictograma ARASAAC ---
+   Aparece entre el buscador y la cuadrícula de resultados cuando el
+   adulto hace clic en un resultado. Le pide que elija a qué categoría
+   pertenece el pictograma antes de añadirlo al pozo, de modo que los
+   minijuegos y los filtros de "Mi biblioteca" lo encuentren después. */
+.panel-anadir{
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.panel-anadir-fila{
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.panel-anadir-img{
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-soft);
+  flex-shrink: 0;
+}
+
+.panel-anadir-info{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
