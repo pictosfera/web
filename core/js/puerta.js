@@ -12,6 +12,7 @@
 
 import { t } from './i18n.js';
 import { activarPantallaCompleta, vigilarPantallaCompleta } from './fullscreen.js';
+import { puedeInstalar, esIOS, estaInstalada, instalar } from './pwa.js';
 
 const LOGO_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233D8BD4'/%3E%3Ccircle cx='50' cy='40' r='18' fill='white'/%3E%3Crect x='25' y='62' width='50' height='28' rx='10' fill='white'/%3E%3C/svg%3E";
 
@@ -61,6 +62,55 @@ export function mostrarPuerta(continuar) {
   });
 
   box.append(logo, titulo, texto, btn);
+
+  // --- Banner de instalación PWA ---
+  // Solo se muestra si:
+  //  1. El adulto aún no ha instalado la app.
+  //  2. No ha descartado el aviso antes (se recuerda con localStorage).
+  //  3. El navegador soporta la instalación directa (Chrome/Android)
+  //     o estamos en iOS (instrucciones manuales).
+  const CLAVE_DESCARTADO = 'pwa-banner-descartado';
+  const yaDescartado = localStorage.getItem(CLAVE_DESCARTADO) === '1';
+
+  if (!estaInstalada() && !yaDescartado && (puedeInstalar() || esIOS())) {
+    const banner = document.createElement('div');
+    banner.className = 'pwa-banner';
+
+    const textoBanner = document.createElement('p');
+    textoBanner.className = 'pwa-banner-texto';
+    textoBanner.textContent = esIOS()
+      ? t('pwa.sugerencia_ios')
+      : t('pwa.sugerencia');
+
+    const botonesB = document.createElement('div');
+    botonesB.className = 'pwa-banner-botones';
+
+    if (!esIOS()) {
+      const btnInstalar = document.createElement('button');
+      btnInstalar.type = 'button';
+      btnInstalar.className = 'btn pwa-btn-instalar';
+      btnInstalar.textContent = t('pwa.instalar');
+      btnInstalar.addEventListener('click', async () => {
+        const aceptado = await instalar();
+        if (aceptado) banner.remove();
+      });
+      botonesB.appendChild(btnInstalar);
+    }
+
+    const btnDescartar = document.createElement('button');
+    btnDescartar.type = 'button';
+    btnDescartar.className = 'btn btn-ghost pwa-btn-descartar';
+    btnDescartar.textContent = t('pwa.ahora_no');
+    btnDescartar.addEventListener('click', () => {
+      localStorage.setItem(CLAVE_DESCARTADO, '1');
+      banner.remove();
+    });
+
+    botonesB.appendChild(btnDescartar);
+    banner.append(textoBanner, botonesB);
+    box.appendChild(banner);
+  }
+
   overlay.appendChild(box);
   root.appendChild(overlay);
   btn.focus();

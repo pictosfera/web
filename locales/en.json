@@ -118,6 +118,7 @@
     "cat_juegos": "Game settings",
     "cat_seguridad": "Security and PIN",
     "cat_copia": "Import and export",
+    "cat_instalar": "Install app",
     "cat_privacidad": "Privacy",
     "idioma": "Language",
     "idioma_ayuda": "Changes the language for the whole app: text, pictograms and voice.",
@@ -176,6 +177,18 @@
     "pistas_estante_solo_imagen": "On the shelf, show only the pictogram, without the text below",
     "privacidad_titulo": "Privacy",
     "privacidad_texto": "Pictosfera has no server or database of its own. Everything you add lives only on this device, in this browser. If you clear your browser data, everything will be lost unless you have an exported backup; photos are only recovered if you included them in that backup."
+  },
+  "pwa": {
+    "sugerencia": "Install Pictosfera as an app to always have pictograms at hand, even without internet.",
+    "sugerencia_ios": "Install Pictosfera: tap the Share button (⎙) and then «Add to Home Screen».",
+    "instalar": "Install app",
+    "ahora_no": "Not now",
+    "seccion_titulo": "Install app",
+    "seccion_texto": "If you install Pictosfera as an app, the browser won't delete pictograms or settings even when it clears the cache. You'll also be able to open it without internet.",
+    "ya_instalada": "Pictosfera is already installed as an app on this device.",
+    "explicacion_boton": "Tap the button to install. The browser will ask for confirmation.",
+    "instrucciones_ios": "In Safari, tap the Share button (⎙) and then «Add to Home Screen». This installs Pictosfera as an app and keeps your data safe.",
+    "no_disponible": "Your browser doesn't support installing Pictosfera as an app. Try Chrome or Edge on Android."
   },
   "rutas": {
     "titulo": "Learning routes",
@@ -429,6 +442,7 @@
     "suma_resultado_animales": "Add pictograms and choose the result",
     "dedos_pictogramas_animales": "Match fingers to pictograms",
     "dedos_numero": "Match fingers to the number",
+    "completa_suma_animales": "Write the numbers of the addition",
     "completa_suma_animales": "Write the numbers of the addition",
     "arrastra_suma_animales": "Drag the numbers of the addition",
     "clasifica_categorias": "Sort the pictograms into two categories",

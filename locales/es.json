@@ -118,6 +118,7 @@
     "cat_juegos": "Ajustes de juegos",
     "cat_seguridad": "Seguridad y PIN",
     "cat_copia": "Importar y exportar",
+    "cat_instalar": "Instalar app",
     "cat_privacidad": "Privacidad",
     "idioma": "Idioma",
     "idioma_ayuda": "Cambia el idioma de toda la app: textos, pictogramas y voz.",
@@ -176,6 +177,18 @@
     "pistas_estante_solo_imagen": "En el estante, mostrar solo el pictograma, sin el texto debajo",
     "privacidad_titulo": "Privacidad",
     "privacidad_texto": "Pictosfera no tiene servidor ni base de datos propios. Todo lo que añades vive solo en este dispositivo y en este navegador. Si borras los datos del navegador, se perderá todo salvo que tengas una copia de seguridad exportada; las fotos solo se recuperan si las incluiste en esa copia."
+  },
+  "pwa": {
+    "sugerencia": "Instala Pictosfera como app para tener los pictogramas siempre a mano, incluso sin internet.",
+    "sugerencia_ios": "Instala Pictosfera: toca el botón Compartir (⎙) y luego «Añadir a la pantalla de inicio».",
+    "instalar": "Instalar app",
+    "ahora_no": "Ahora no",
+    "seccion_titulo": "Instalar app",
+    "seccion_texto": "Si instalas Pictosfera como app, el navegador no borrará los pictogramas ni la configuración aunque limpie la caché. También podrás abrirla sin internet.",
+    "ya_instalada": "Pictosfera ya está instalada como app en este dispositivo.",
+    "explicacion_boton": "Toca el botón para instalar. El navegador te pedirá confirmación.",
+    "instrucciones_ios": "En Safari, toca el botón Compartir (⎙) y luego «Añadir a la pantalla de inicio». Así Pictosfera se instala como app y los datos quedan protegidos.",
+    "no_disponible": "Tu navegador no permite instalar Pictosfera como app. Prueba con Chrome o Edge en Android."
   },
   "rutas": {
     "titulo": "Rutas de aprendizaje",

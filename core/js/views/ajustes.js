@@ -5,6 +5,7 @@
 // i18n, tts, pin y backup.
 
 import { t, getLanguage, setLanguage, SUPPORTED_LANGS } from '../i18n.js';
+import { puedeInstalar, esIOS, estaInstalada, instalar } from '../pwa.js';
 import { navigate } from '../router.js';
 import * as tts from '../tts.js';
 import * as pin from '../pin.js';
@@ -329,6 +330,51 @@ export async function render() {
     inputImportar
   );
 
+  // --- Instalar app (PWA) ---
+  const seccionInstalar = document.createElement('section');
+  const tituloInstalar = document.createElement('h2');
+  tituloInstalar.textContent = t('pwa.seccion_titulo');
+  const textoInstalar = document.createElement('p');
+  textoInstalar.textContent = t('pwa.seccion_texto');
+
+  if (estaInstalada()) {
+    // Ya instalada: solo mensaje informativo.
+    const msgInstalada = document.createElement('p');
+    msgInstalada.className = 'mensaje-ok';
+    msgInstalada.textContent = t('pwa.ya_instalada');
+    seccionInstalar.append(tituloInstalar, textoInstalar, msgInstalada);
+  } else if (esIOS()) {
+    // iOS: instrucciones manuales.
+    const instrIOS = document.createElement('p');
+    instrIOS.className = 'ayuda';
+    instrIOS.textContent = t('pwa.instrucciones_ios');
+    seccionInstalar.append(tituloInstalar, textoInstalar, instrIOS);
+  } else if (puedeInstalar()) {
+    // Chrome/Android: botón nativo.
+    const msgPwa = document.createElement('p');
+    msgPwa.className = 'ayuda';
+    msgPwa.textContent = t('pwa.explicacion_boton');
+    const btnInstalarAjustes = document.createElement('button');
+    btnInstalarAjustes.type = 'button';
+    btnInstalarAjustes.className = 'btn';
+    btnInstalarAjustes.textContent = t('pwa.instalar');
+    btnInstalarAjustes.addEventListener('click', async () => {
+      sounds.click();
+      const aceptado = await instalar();
+      if (aceptado) {
+        // Redibujar la sección tras la instalación.
+        navigate('/ajustes');
+      }
+    });
+    seccionInstalar.append(tituloInstalar, textoInstalar, msgPwa, btnInstalarAjustes);
+  } else {
+    // Navegador no soportado (Firefox, escritorio sin criterios PWA...).
+    const msgNoDisp = document.createElement('p');
+    msgNoDisp.className = 'ayuda';
+    msgNoDisp.textContent = t('pwa.no_disponible');
+    seccionInstalar.append(tituloInstalar, textoInstalar, msgNoDisp);
+  }
+
   // --- Privacidad ---
   const seccionPrivacidad = document.createElement('section');
   const tituloPrivacidad = document.createElement('h2');
@@ -358,6 +404,7 @@ export async function render() {
     crearCategoria('ajustes.cat_juegos', seccionPistas),
     crearCategoria('ajustes.cat_seguridad', seccionPin),
     crearCategoria('ajustes.cat_copia', seccionCopia),
+    crearCategoria('ajustes.cat_instalar', seccionInstalar),
     crearCategoria('ajustes.cat_privacidad', seccionPrivacidad)
   );
   view.appendChild(raiz);

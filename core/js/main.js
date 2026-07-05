@@ -5,6 +5,11 @@
 // el paseo de bienvenida. No contiene lógica propia de ninguna
 // pantalla: eso vive en core/js/views/ y en las apps.
 
+// Importar pwa.js lo antes posible: el listener beforeinstallprompt
+// debe registrarse antes de que el navegador lo descarte (ocurre muy
+// pronto en el ciclo de carga de la página).
+import './pwa.js';
+
 import { initI18n } from './i18n.js';
 import { registerRoute, startRouter, navigate } from './router.js';
 import { initShell } from './shell.js';
