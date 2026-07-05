@@ -65,15 +65,15 @@
    Vive fuera de #view, así que aparece en todas las secciones. --- */
 .app-footer{
   flex-shrink: 0;
-  padding: var(--space-sm) var(--space-md);
+  padding: 3px var(--space-md);
   background: var(--color-surface-alt);
   border-top: 1px solid var(--color-border);
   text-align: center;
 }
 
 .app-footer-linea{
-  margin: 2px 0;
-  font-size: var(--font-size-sm);
+  margin: 1px 0;
+  font-size: 0.72rem;
   color: var(--color-text-soft);
 }
 

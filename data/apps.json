@@ -219,7 +219,7 @@
     "icono": "🖼️",
     "estante": "LECTURA",
     "material": {
-      "etiqueta": "animales",
+      "semillaTag": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
     }

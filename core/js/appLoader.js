@@ -82,6 +82,24 @@ export async function getAppsGroupedByEstante() {
 async function resolverMaterial(descriptor) {
   const material = descriptor.material || {};
   const etiqueta = material.etiqueta;
+
+  // Si el descriptor declara `semillaTag` sin `etiqueta`: se siembra desde
+  // ARASAAC usando ese tag de arranque pero se devuelve TODA la biblioteca
+  // sin filtrar por etiqueta. Así mecánicas como el puzzle tienen material
+  // de fábrica (la siembra) pero también aceptan fotos propias del usuario
+  // con cualquier categoría, ya que el puzzle solo exige que el item tenga
+  // un `nombre` (ver hayMaterialSuficiente en la mecánica).
+  if (!etiqueta && material.semillaTag && Array.isArray(material.semillaArasaac) && material.semillaArasaac.length) {
+    await mediaLibrary.ensureSeedFromArasaac({
+      tag: material.semillaTag,
+      terms: material.semillaArasaac,
+      lang: material.semillaArasaacLang || getLanguage(),
+      displayLang: getLanguage(),
+      min: material.minimo || 6
+    });
+    return mediaLibrary.listAll();
+  }
+
   if (!etiqueta) return mediaLibrary.listAll();
 
   if (Array.isArray(material.semillaArasaac) && material.semillaArasaac.length) {

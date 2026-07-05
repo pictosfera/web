@@ -413,7 +413,12 @@ function pintarRonda() {
   estado.piezas.forEach((pieza) => zonaPiezas.appendChild(crearElementoPieza(pieza)));
 
   raiz.querySelector('.puzzle-zona-puzzle').hidden = false;
-  raiz.querySelector('.puzzle-zona-palabra').hidden = true;
+  // Ocultar la zona de palabras Y vaciarla: aunque el CSS [hidden]
+  // corrija la visibilidad, limpiar el innerHTML es un seguro adicional
+  // para que los botones de la ronda anterior no queden en el DOM.
+  const zonaPalabraEl = raiz.querySelector('.puzzle-zona-palabra');
+  zonaPalabraEl.hidden = true;
+  zonaPalabraEl.innerHTML = '';
 }
 
 function siguienteRonda() {
