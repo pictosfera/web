@@ -213,7 +213,7 @@ function manejarColocacion(pieza, indice, elementoPieza, casillaEl) {
       estado.timeoutId = setTimeout(() => {
         if (!estado) return;
         estado.bloqueado = false;
-        mostrarSeleccionPalabra();
+        habilitarSeleccionPalabra();
       }, 600);
     }
   } else {
@@ -355,11 +355,14 @@ function manejarRespuestaPalabra(opcion, boton) {
   }
 }
 
-function mostrarSeleccionPalabra() {
+/** Renderiza la zona de selección de palabra con los botones deshabilitados.
+ *  Se llama desde pintarRonda() al inicio de cada ronda, para que la imagen
+ *  del pictograma sea visible SIEMPRE (incluso mientras el niño elige la
+ *  palabra). Los botones se activan en habilitarSeleccionPalabra() cuando
+ *  las 4 piezas ya están colocadas correctamente. */
+function renderizarSeleccionPalabra() {
   const { raiz, plataforma } = estado;
-  raiz.querySelector('.puzzle-zona-puzzle').hidden = true;
   const zonaPalabra = raiz.querySelector('.puzzle-zona-palabra');
-  zonaPalabra.hidden = false;
   zonaPalabra.innerHTML = '';
 
   const pregunta = document.createElement('p');
@@ -373,12 +376,22 @@ function mostrarSeleccionPalabra() {
   opciones.forEach((opcion) => {
     const boton = document.createElement('button');
     boton.type = 'button';
-    boton.className = 'puzzle-opcion';
+    boton.className = 'puzzle-opcion puzzle-opcion-pendiente';
+    boton.disabled = true;
     boton.textContent = formatearTexto(opcion.texto, estado.ajustesPista.mayuscula);
     boton.addEventListener('click', () => manejarRespuestaPalabra(opcion, boton));
     opcionesEl.appendChild(boton);
   });
   zonaPalabra.appendChild(opcionesEl);
+}
+
+/** Activa los botones de palabra tras completar el puzzle. */
+function habilitarSeleccionPalabra() {
+  if (!estado) return;
+  estado.raiz.querySelectorAll('.puzzle-opcion-pendiente').forEach((btn) => {
+    btn.disabled = false;
+    btn.classList.remove('puzzle-opcion-pendiente');
+  });
 }
 
 function pintarRonda() {
@@ -412,13 +425,9 @@ function pintarRonda() {
   estado.piezas = generarPiezas();
   estado.piezas.forEach((pieza) => zonaPiezas.appendChild(crearElementoPieza(pieza)));
 
-  raiz.querySelector('.puzzle-zona-puzzle').hidden = false;
-  // Ocultar la zona de palabras Y vaciarla: aunque el CSS [hidden]
-  // corrija la visibilidad, limpiar el innerHTML es un seguro adicional
-  // para que los botones de la ronda anterior no queden en el DOM.
-  const zonaPalabraEl = raiz.querySelector('.puzzle-zona-palabra');
-  zonaPalabraEl.hidden = true;
-  zonaPalabraEl.innerHTML = '';
+  // Renderizar la zona de palabras con botones deshabilitados; se
+  // activan en habilitarSeleccionPalabra() al completar el puzzle.
+  renderizarSeleccionPalabra();
 }
 
 function siguienteRonda() {
@@ -481,7 +490,6 @@ function montar(contenedor, plataforma) {
 
   const zonaPalabra = document.createElement('div');
   zonaPalabra.className = 'puzzle-zona-palabra';
-  zonaPalabra.hidden = true;
   zonaPalabra.setAttribute('aria-live', 'polite');
 
   raiz.append(cabecera, marcador, zonaPuzzle, zonaPalabra);
@@ -516,10 +524,10 @@ function desmontar() {
 }
 
 export default {
-  id: 'puzzle-pictograma-palabra',
-  nombre: 'Puzzle de pictograma y palabra',
-  icono: '🖼️',
-  estante: 'LECTURA',
+  id: "puzzle-pictograma-palabra",
+  nombre: "Puzzle de pictograma y palabra",
+  icono: "🖼️",
+  estante: "LECTURA",
   montar,
   desmontar
 };

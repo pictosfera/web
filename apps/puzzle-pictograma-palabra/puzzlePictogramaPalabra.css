@@ -27,16 +27,6 @@
   color: var(--color-primary-dark);
 }
 
-/* Estas dos reglas DEBEN preceder a las reglas display:flex de las zonas.
-   El atributo HTML [hidden] activa display:none en la hoja de estilos del
-   navegador, pero cualquier regla display:flex definida en el autor la
-   anularía (misma especificidad, gana la que viene después). Declarando
-   explícitamente display:none con especificidad [clase+atributo] > [clase]
-   nos aseguramos de que hidden funcione en todo el puzzle sin usar !important. */
-.puzzle-zona-puzzle[hidden],
-.puzzle-zona-palabra[hidden] {
-  display: none;
-}
 
 .puzzle-zona-puzzle{
   display: flex;
@@ -202,6 +192,15 @@
 
 .puzzle-opcion:hover{
   transform: scale(1.03);
+}
+
+/* Botones de palabra mientras el puzzle aún no está completado:
+   visibles pero no interactuables, para que el niño vea lo que
+   le espera sin poder hacer trampas. */
+.puzzle-opcion-pendiente{
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
 }
 
 .puzzle-opcion-correcta{
