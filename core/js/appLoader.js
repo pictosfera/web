@@ -72,46 +72,38 @@ export async function getAppsGroupedByEstante() {
   return orden.map((estante) => ({ estante, apps: grupos.get(estante) }));
 }
 
-/** Resuelve el material de una app: usa lo que ya haya en el pozo con
- *  esa etiqueta y, si no hay suficiente, lo siembra desde ARASAAC. Si
- *  el descriptor no trae ninguna etiqueta (p.ej. mecánicas que, como
- *  "Clasifica los pictogramas en dos categorías" u "Ordena la
- *  secuencia", resuelven su propio material aparte: ver
- *  `resolverCategorias`/`resolverSecuencias`), se devuelve toda la
- *  biblioteca sin filtrar; esas mecánicas simplemente la ignoran. */
+/** Resuelve el material de una app.
+ *
+ *  La etiqueta de siembra (`material.etiqueta` o `material.semillaTag`)
+ *  controla únicamente qué se puebla de fábrica la primera vez que se
+ *  juega, para que el juego tenga contenido aunque el adulto no haya
+ *  añadido nada todavía. NO actúa como filtro en tiempo de juego:
+ *  siempre se devuelve TODA la biblioteca, sea cual sea la categoría de
+ *  cada pictograma.
+ *
+ *  Así, un niño que tenga en su biblioteca animales, fotos de su familia
+ *  y pictogramas de comida los verá todos en cualquier juego, sin que el
+ *  autor del juego tenga que predecir qué categorías habrá añadido el
+ *  adulto. Las mecánicas que gestionan su propio material (secuencias,
+ *  categorías dicotómicas) reciben `listAll()` y lo ignoran; usan
+ *  `plataforma.secuencias` / `plataforma.categorias` en su lugar. */
 async function resolverMaterial(descriptor) {
   const material = descriptor.material || {};
-  const etiqueta = material.etiqueta;
+  // Ambos campos actúan solo como etiqueta de siembra, nunca de filtrado.
+  const tagSiembra = material.etiqueta || material.semillaTag;
 
-  // Si el descriptor declara `semillaTag` sin `etiqueta`: se siembra desde
-  // ARASAAC usando ese tag de arranque pero se devuelve TODA la biblioteca
-  // sin filtrar por etiqueta. Así mecánicas como el puzzle tienen material
-  // de fábrica (la siembra) pero también aceptan fotos propias del usuario
-  // con cualquier categoría, ya que el puzzle solo exige que el item tenga
-  // un `nombre` (ver hayMaterialSuficiente en la mecánica).
-  if (!etiqueta && material.semillaTag && Array.isArray(material.semillaArasaac) && material.semillaArasaac.length) {
+  if (tagSiembra && Array.isArray(material.semillaArasaac) && material.semillaArasaac.length) {
     await mediaLibrary.ensureSeedFromArasaac({
-      tag: material.semillaTag,
-      terms: material.semillaArasaac,
-      lang: material.semillaArasaacLang || getLanguage(),
-      displayLang: getLanguage(),
-      min: material.minimo || 6
-    });
-    return mediaLibrary.listAll();
-  }
-
-  if (!etiqueta) return mediaLibrary.listAll();
-
-  if (Array.isArray(material.semillaArasaac) && material.semillaArasaac.length) {
-    await mediaLibrary.ensureSeedFromArasaac({
-      tag: etiqueta,
+      tag: tagSiembra,
       terms: material.semillaArasaac,
       lang: material.semillaArasaacLang || getLanguage(),
       displayLang: getLanguage(),
       min: material.minimo || 6
     });
   }
-  return mediaLibrary.listByTags([etiqueta]);
+
+  // Toda la biblioteca, sin filtrar por etiqueta.
+  return mediaLibrary.listAll();
 }
 
 /** Elige al azar una pareja de categorías del banco guardado por el
