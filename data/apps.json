@@ -260,6 +260,7 @@
     "estante": "CONCEPTOS",
     "material": {
       "etiqueta": "comida",
+      "filtrar": true,
       "semillaArasaacLang": "es",
       "semillaArasaac": ["manzana", "plátano", "pan", "leche", "queso", "huevo", "zanahoria", "galleta", "naranja", "tomate", "arroz", "pollo"],
       "minimo": 12,
@@ -276,6 +277,7 @@
     "estante": "RUTINAS",
     "material": {
       "etiqueta": "comida",
+      "filtrar": true,
       "semillaArasaacLang": "es",
       "semillaArasaac": ["manzana", "plátano", "pan", "leche", "queso", "huevo", "zanahoria", "galleta", "naranja", "tomate", "arroz", "pollo"],
       "minimo": 12,

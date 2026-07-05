@@ -31,6 +31,65 @@ export function imageUrlCandidates(arasaacId) {
   return IMAGE_SIZES.map((size) => imageUrl(arasaacId, size));
 }
 
+/** Mapa de categorías inglesas de ARASAAC → categorías curadas en español.
+ *  ARASAAC devuelve `categories` siempre en inglés; aquí las convertimos
+ *  a las categorías que usa Pictosfera internamente, sin mostrarlas al usuario
+ *  tal cual. Si la categoría inglesa no está en el mapa, se ignora (no se
+ *  inventa una etiqueta). El mapa es conservador a propósito: solo se incluyen
+ *  correspondencias fiables y sin ambigüedad. */
+const MAPA_CATEGORIAS_ARASAAC = {
+  // Comida
+  food: 'comida', foods: 'comida', meal: 'comida', meals: 'comida',
+  drink: 'comida', drinks: 'comida', beverage: 'comida', beverages: 'comida',
+  fruit: 'comida', fruits: 'comida', vegetable: 'comida', vegetables: 'comida',
+  cooking: 'comida', bakery: 'comida', dairy: 'comida', grocery: 'comida',
+  // Animales
+  animal: 'animales', animals: 'animales',
+  mammal: 'animales', mammals: 'animales',
+  bird: 'animales', birds: 'animales',
+  fish: 'animales', insect: 'animales', insects: 'animales',
+  reptile: 'animales', reptiles: 'animales', amphibian: 'animales',
+  // Ropa
+  clothing: 'ropa', clothes: 'ropa', cloth: 'ropa', garment: 'ropa', fashion: 'ropa',
+  // Colores
+  color: 'colores', colour: 'colores', colors: 'colores', colours: 'colores',
+  // Familia
+  family: 'familia',
+  // Cuerpo
+  body: 'cuerpo', anatomy: 'cuerpo',
+  // Escuela
+  school: 'escuela', education: 'escuela', stationery: 'escuela',
+  // Juguetes
+  toy: 'juguetes', toys: 'juguetes',
+  // Naturaleza
+  nature: 'naturaleza', plant: 'naturaleza', plants: 'naturaleza',
+  tree: 'naturaleza', trees: 'naturaleza', flower: 'naturaleza', flowers: 'naturaleza',
+  weather: 'naturaleza', environment: 'naturaleza',
+  // Emociones
+  emotion: 'emociones', emotions: 'emociones', feeling: 'emociones', feelings: 'emociones',
+  // Números
+  number: 'numeros', numbers: 'numeros', numeral: 'numeros', mathematics: 'numeros', math: 'numeros',
+  // Acciones
+  action: 'acciones', actions: 'acciones', verb: 'acciones', verbs: 'acciones',
+  activity: 'acciones', activities: 'acciones'
+};
+
+/** Convierte el array `categories` de ARASAAC (en inglés) en etiquetas
+ *  curadas en español, sin duplicados. Devuelve [] si no hay match. */
+function etiquetasDesdeArasaac(picto) {
+  const cats = Array.isArray(picto.categories) ? picto.categories : [];
+  const vistas = new Set();
+  const resultado = [];
+  cats.forEach((cat) => {
+    const tag = MAPA_CATEGORIAS_ARASAAC[(cat || '').toLowerCase().trim()];
+    if (tag && !vistas.has(tag)) {
+      vistas.add(tag);
+      resultado.push(tag);
+    }
+  });
+  return resultado;
+}
+
 function bestKeyword(picto) {
   const kws = Array.isArray(picto.keywords) ? picto.keywords : [];
   const withWord = kws.find((k) => k && k.keyword);
@@ -60,7 +119,10 @@ export function toMedium(picto) {
     imagen: imageUrl(picto._id),
     imagenCandidatos: imageUrlCandidates(picto._id),
     nombre: bestKeyword(picto),
-    etiquetas: [],
+    // Mapear las categorías inglesas de ARASAAC a las curadas en español.
+    // Si ninguna coincide con el mapa, etiquetas queda [] y el adulto
+    // verá el panel de selección manual al añadirlo desde "Pictogramas".
+    etiquetas: etiquetasDesdeArasaac(picto),
     origen: 'arasaac'
   };
 }

@@ -102,7 +102,12 @@ async function resolverMaterial(descriptor) {
     });
   }
 
-  // Toda la biblioteca, sin filtrar por etiqueta.
+  // Si el descriptor declara filtro explícito (solo me-gusta y lista-compra),
+  // devolver únicamente los ítems de esa etiqueta. En todos los demás juegos
+  // la etiqueta es solo semilla, nunca filtro: se devuelve toda la biblioteca.
+  if (material.filtrar && tagSiembra) {
+    return mediaLibrary.listByTags([tagSiembra]);
+  }
   return mediaLibrary.listAll();
 }
 

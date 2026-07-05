@@ -165,10 +165,20 @@ export async function render() {
       const nombre = document.createElement('div');
       nombre.textContent = medio.nombre;
       card.append(img, nombre);
-      card.addEventListener('click', () => {
+      card.addEventListener('click', async () => {
         if (card.disabled) return;
         sounds.click();
-        mostrarPanelAnadir(medio, card);
+        if (medio.etiquetas && medio.etiquetas.length > 0) {
+          // La categoría se detectó automáticamente desde los datos de ARASAAC:
+          // guardar directamente sin molestar al adulto con un panel.
+          await mediaLibrary.addArasaacMedio(medio);
+          card.classList.add('ya-anadido');
+          card.disabled = true;
+          refrescarBiblioteca();
+        } else {
+          // No se pudo detectar categoría: pedir al adulto que elija una.
+          mostrarPanelAnadir(medio, card);
+        }
       });
       resultados.appendChild(card);
     });
