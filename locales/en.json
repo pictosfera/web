@@ -364,6 +364,22 @@
     "casilla_vacia": "Empty box, no number yet",
     "casilla_correcta": "Number already placed correctly"
   },
+  "restaResultado": {
+    "instrucciones": "Count the pictograms in the big group, discount the crossed-out ones, and tap the correct result.",
+    "nivel": "Level {n} of {total}"
+  },
+  "completaResta": {
+    "instrucciones": "Look at the subtraction shown with pictograms and write the matching number in each box.",
+    "nivel": "Exercise {n} of {total}",
+    "casilla_vacia": "Empty box, no number yet",
+    "casilla_correcta": "Number already written correctly"
+  },
+  "arrastraResta": {
+    "instrucciones": "Look at the subtraction shown with pictograms and drag, onto each box, the number that matches it.",
+    "nivel": "Exercise {n} of {total}",
+    "casilla_vacia": "Empty box, no number yet",
+    "casilla_correcta": "Number already placed correctly"
+  },
   "clasificaCategorias": {
     "instrucciones": "Drag each pictogram to the category it belongs to.",
     "nivel": "Pictogram {n} of {total}",
@@ -443,8 +459,10 @@
     "dedos_pictogramas_animales": "Match fingers to pictograms",
     "dedos_numero": "Match fingers to the number",
     "completa_suma_animales": "Write the numbers of the addition",
-    "completa_suma_animales": "Write the numbers of the addition",
     "arrastra_suma_animales": "Drag the numbers of the addition",
+    "resta_resultado_animales": "Subtract pictograms and choose the result",
+    "completa_resta_animales": "Write the numbers of the subtraction",
+    "arrastra_resta_animales": "Drag the numbers of the subtraction",
     "clasifica_categorias": "Sort the pictograms into two categories",
     "puzzle_pictograma_palabra_animales": "Picture puzzle and word",
     "relaciona_pictograma_palabra_animales": "Match the picture to its word",

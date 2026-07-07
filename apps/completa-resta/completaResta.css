@@ -1,0 +1,145 @@
+/* Pictosfera — app "Escribe los números de la resta". Estilos propios,
+   con prefijo "completaresta-" para no interferir con el núcleo ni con
+   otras apps. Idéntico en estructura a completaSuma.css, con los estilos
+   adicionales del pictograma tachado (envoltura relativa + X roja). */
+
+.completaresta-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.completaresta-cabecera h1{
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.completaresta-cabecera p{
+  color: var(--color-text-soft);
+  margin: 0;
+}
+
+.completaresta-marcador{
+  font-size: var(--font-size-md);
+  font-weight: bold;
+  color: var(--color-primary-dark);
+}
+
+.completaresta-zona{
+  display: flex;
+  justify-content: center;
+}
+
+.completaresta-operacion{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.completaresta-parte{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.completaresta-grupo{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 150px;
+  min-height: 64px;
+  padding: var(--space-xs);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Pictograma normal */
+.completaresta-grupo-img{
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Pictograma tachado: envoltura relativa con imagen opaca + X roja */
+.completaresta-tachado{
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.completaresta-tachado .completaresta-grupo-img{
+  opacity: 0.35;
+  filter: grayscale(0.4);
+}
+
+.completaresta-x{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom right,
+      transparent calc(50% - 2px),
+      var(--color-error) calc(50% - 2px),
+      var(--color-error) calc(50% + 2px),
+      transparent calc(50% + 2px)
+    ),
+    linear-gradient(
+      to bottom left,
+      transparent calc(50% - 2px),
+      var(--color-error) calc(50% - 2px),
+      var(--color-error) calc(50% + 2px),
+      transparent calc(50% + 2px)
+    );
+}
+
+.completaresta-signo{
+  font-size: var(--font-size-xl, 2rem);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  align-self: center;
+  margin-top: 32px;
+}
+
+.completaresta-casilla{
+  position: relative;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+  line-height: 0;
+}
+
+.completaresta-casilla-lienzo{
+  display: block;
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-soft);
+}
+
+.completaresta-casilla-correcta .completaresta-casilla-lienzo{
+  border-color: var(--color-success);
+  background: rgba(76, 175, 109, 0.12);
+}
+
+.completaresta-casilla-fallo{
+  animation: completaresta-fallo 0.4s ease;
+}
+
+@keyframes completaresta-fallo{
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}

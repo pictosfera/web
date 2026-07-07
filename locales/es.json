@@ -364,6 +364,22 @@
     "casilla_vacia": "Casilla vacía, todavía sin número",
     "casilla_correcta": "Número ya colocado correctamente"
   },
+  "restaResultado": {
+    "instrucciones": "Cuenta los pictogramas del grupo grande, descuenta los tachados y toca el resultado correcto.",
+    "nivel": "Nivel {n} de {total}"
+  },
+  "completaResta": {
+    "instrucciones": "Mira la resta representada con pictogramas y escribe, en cada recuadro, el número que le corresponde.",
+    "nivel": "Ejercicio {n} de {total}",
+    "casilla_vacia": "Recuadro vacío, todavía sin número",
+    "casilla_correcta": "Número ya escrito correctamente"
+  },
+  "arrastraResta": {
+    "instrucciones": "Mira la resta representada con pictogramas y arrastra, hasta cada casilla, el número que le corresponde.",
+    "nivel": "Ejercicio {n} de {total}",
+    "casilla_vacia": "Casilla vacía, todavía sin número",
+    "casilla_correcta": "Número ya colocado correctamente"
+  },
   "clasificaCategorias": {
     "instrucciones": "Arrastra cada pictograma hasta la categoría a la que pertenece.",
     "nivel": "Pictograma {n} de {total}",
@@ -444,6 +460,9 @@
     "dedos_numero": "Relaciona los dedos con el número",
     "completa_suma_animales": "Escribe los números de la suma",
     "arrastra_suma_animales": "Arrastra los números de la suma",
+    "resta_resultado_animales": "Resta pictogramas y elige el resultado",
+    "completa_resta_animales": "Escribe los números de la resta",
+    "arrastra_resta_animales": "Arrastra los números de la resta",
     "clasifica_categorias": "Clasifica los pictogramas en dos categorías",
     "puzzle_pictograma_palabra_animales": "Puzzle de pictograma y palabra",
     "relaciona_pictograma_palabra_animales": "Relaciona el pictograma con su palabra",

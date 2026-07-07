@@ -1,0 +1,157 @@
+/* Pictosfera — app "Resta pictogramas y elige el resultado". Estilos
+   propios, con prefijo "restares-" para no interferir con el núcleo ni
+   con otras apps. Idéntico en estructura a sumaResultado.css, con los
+   estilos adicionales del pictograma tachado (envoltura relativa + X
+   roja por doble gradiente lineal). */
+
+.restares-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.restares-cabecera h1{
+  margin: 0 0 var(--space-xs);
+  color: var(--color-primary-dark);
+}
+
+.restares-cabecera p{
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.restares-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.restares-zona{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.restares-operacion{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 640px;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.restares-grupo{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+}
+
+/* Pictograma normal */
+.restares-grupo-img{
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Pictograma tachado: envoltura relativa con imagen opaca + X roja */
+.restares-tachado{
+  position: relative;
+  display: inline-block;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.restares-tachado .restares-grupo-img{
+  opacity: 0.35;
+  filter: grayscale(0.4);
+}
+
+.restares-x{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom right,
+      transparent calc(50% - 3px),
+      var(--color-error) calc(50% - 3px),
+      var(--color-error) calc(50% + 3px),
+      transparent calc(50% + 3px)
+    ),
+    linear-gradient(
+      to bottom left,
+      transparent calc(50% - 3px),
+      var(--color-error) calc(50% - 3px),
+      var(--color-error) calc(50% + 3px),
+      transparent calc(50% + 3px)
+    );
+}
+
+.restares-signo{
+  font-size: var(--font-size-xl, 2rem);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  padding: 0 var(--space-xs);
+}
+
+.restares-interrogante{
+  color: var(--color-secondary);
+}
+
+.restares-opciones{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.restares-opcion{
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface);
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.restares-opcion:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.restares-opcion-correcta{
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: var(--color-text-on-primary);
+}
+
+.restares-opcion-fallo{
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: var(--color-text-on-primary);
+  animation: restares-temblor 320ms ease;
+}
+
+@keyframes restares-temblor{
+  0%, 100%{ transform: translate(0, 0); }
+  25%{ transform: translate(-6px, 0); }
+  75%{ transform: translate(6px, 0); }
+}

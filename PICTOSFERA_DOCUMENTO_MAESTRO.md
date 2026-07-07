@@ -1,6 +1,6 @@
 # PICTOSFERA — DOCUMENTO MAESTRO DE RECONSTRUCCIÓN
 
-> Generado el 30 de junio de 2026. Este documento existe para un único propósito: si se pierde todo el código del proyecto **y** todo el historial de esta conversación con Claude, este archivo por sí solo debe permitir reconstruir Pictosfera desde cero, con el mismo comportamiento, las mismas convenciones y sin reintroducir los bugs que ya se detectaron y corrigieron. Está escrito para que lo pueda usar tanto una IA (Claude u otra) como una persona con paciencia pero sin conocimientos previos del proyecto.
+> Generado el 30 de junio de 2026. Actualizado el 5 de julio de 2026. Este documento existe para un único propósito: si se pierde todo el código del proyecto **y** todo el historial de esta conversación con Claude, este archivo por sí solo debe permitir reconstruir Pictosfera desde cero, con el mismo comportamiento, las mismas convenciones y sin reintroducir los bugs que ya se detectaron y corrigieron. Está escrito para que lo pueda usar tanto una IA (Claude u otra) como una persona con paciencia pero sin conocimientos previos del proyecto.
 
 ## 0. Cómo usar este documento
 
@@ -69,6 +69,7 @@ core/
     footer.js                  Pie de página global con autoría y atribución ARASAAC
     personajes.js             Generador de personajes SVG "papercraft" (cuerpo completo)
     cabezas.js                 Generador de cabezas SVG con expresión facial (reutiliza personajes.js)
+    pwa.js                     Módulo de instalación PWA: captura beforeinstallprompt, detecta iOS, expone instalar()
     views/                      13 archivos, una vista por pantalla: inicio.js, juegos.js, juego.js,
                                  pictogramas.js, pictogramasArasaac.js, fotos.js, secuencias.js (admin),
                                  categoriasAdmin.js, ajustes.js, rutas.js, rutasCrear.js, rutaJugar.js,
@@ -265,7 +266,88 @@ Formato exacto del archivo exportado:
 
 Convención de alcance: los tests cubren exclusivamente lógica pura (mezclar, validar, calcular, formatear) — nunca DOM, nunca arrastre con puntero, nunca toque ni teclado real. Esa parte de cada mecánica se considera "no testeable sin navegador real" y se verifica a mano (ver sección 8).
 
-### 3.16 Zero-build, recordatorio final
+### 3.16 Bug histórico (corregido): panel manual de categoría al añadir pictograma ARASAAC cuando las categorías ya existen
+
+En la vista `pictogramasArasaac.js`, al hacer clic en un resultado de búsqueda para añadirlo a "el pozo", se mostraba siempre el panel manual de selección de categoría aunque la API de ARASAAC ya hubiera devuelto categorías detectadas automáticamente en el campo `etiquetas` del objeto `medio`.
+
+**Causa:** el handler de click no comprobaba si el medio ya tenía etiquetas.
+
+**Corrección aplicada:** el handler ahora bifurca:
+```js
+card.addEventListener('click', async () => {
+  if (card.disabled) return;
+  sounds.click();
+  if (medio.etiquetas && medio.etiquetas.length > 0) {
+    // Ya hay categorías auto-detectadas desde ARASAAC — guardar directamente
+    await mediaLibrary.addArasaacMedio(medio);
+    card.classList.add('ya-anadido');
+    card.disabled = true;
+    refrescarBiblioteca();
+  } else {
+    // Sin categorías: mostrar el panel manual para que el adulto las elija
+    mostrarPanelAnadir(medio, card);
+  }
+});
+```
+La función `etiquetasDesdeArasaac(picto)` en `arasaac.js` convierte las categorías inglesas de ARASAAC a etiquetas curadas en español usando el mapa `MAPA_CATEGORIAS_ARASAAC`. Si la categoría no tiene mapeo, devuelve la propia categoría inglesa como fallback (en minúsculas). El campo `etiquetas` del objeto `medio` ya viene relleno por `toMedium()` cuando ARASAAC devuelve categorías.
+
+### 3.17 Mapeo de categorías ARASAAC a etiquetas en español (`arasaac.js`)
+
+La API de ARASAAC devuelve las categorías del pictograma siempre en inglés (campo `categories`). `arasaac.js` tiene un mapa (`MAPA_CATEGORIAS_ARASAAC`) que convierte esas categorías inglesas a etiquetas curadas en español antes de guardarlas en el medio. Ejemplos: `"Food & Drink"` → `"comida"`, `"Animals"` → `"animales"`, `"Daily life"` → `"vida cotidiana"`.
+
+La función `etiquetasDesdeArasaac(picto)` aplica este mapa: si la categoría inglesa tiene entrada en el mapa, usa el valor español; si no tiene mapeo, usa la categoría en inglés en minúsculas (comportamiento de fallback seguro — no falla, solo puede quedar en inglés ese caso raro). `toMedium()` llama a `etiquetasDesdeArasaac()` para rellenar el campo `etiquetas`, de modo que al añadir un pictograma ARASAAC ya llega con categorías en castellano sin intervención del adulto.
+
+**Relación con la regla 3.9:** el vacío `etiquetas: []` de la regla 3.9 se aplicaba en el arranque inicial del proyecto para evitar que las categorías inglesas contaminaran el store. Con el mapeo de la regla 3.17, `toMedium()` puede rellenar `etiquetas` directamente con valores ya traducidos — el store ya no recibe etiquetas en inglés por esta vía.
+
+### 3.18 Cambio a `resolverMaterial`: filtrado por etiqueta solo en juegos que lo necesitan
+
+Hasta la tarea #258, `resolverMaterial()` en `appLoader.js` filtraba la biblioteca de medios por la etiqueta indicada en `material.etiqueta` para TODOS los juegos. Esto excluía medios sin esa etiqueta aunque fueran perfectamente válidos para juegos como `me-gusta-no-me-gusta` o `lista-compra`, que solo necesitan cualquier pictograma disponible, no uno de una categoría concreta.
+
+**Corrección:** `resolverMaterial()` aplica el filtro por etiqueta únicamente cuando el descriptor de la app lo necesita explícitamente. Los juegos `me-gusta-no-me-gusta` y `lista-compra` ya no tienen `material.etiqueta` restrictivo en `apps.json`, así que reciben la biblioteca completa y funcionan con cualquier pictograma que el adulto haya añadido.
+
+### 3.19 `pwa.js` — módulo de instalación PWA
+
+`core/js/pwa.js` es un módulo de efecto secundario que debe importarse como la **primera** importación de `main.js` (antes que cualquier otra cosa). El motivo: el navegador dispara el evento `beforeinstallprompt` muy temprano en la carga de la página y lo descarta si no hay un listener ya registrado. El módulo escucha ese evento en cuanto carga y guarda la referencia al prompt.
+
+API pública del módulo:
+- `puedeInstalar()` — `true` si se capturó el `beforeinstallprompt` (Chrome/Android, escritorio Chromium). `false` en Safari/iOS.
+- `esIOS()` — `true` en iPad/iPhone/iPod (detecta `navigator.userAgent`).
+- `estaInstalada()` — `true` si el portal se está ejecutando en `display-mode: standalone` (ya instalado como PWA).
+- `instalar()` — lanza el diálogo nativo de instalación del navegador; devuelve `true` si el usuario acepta, `false` si cancela. Solo funciona si `puedeInstalar()` es `true`.
+
+En iOS el flujo es distinto: no hay `beforeinstallprompt`, la instalación se hace manualmente desde el menú de compartir de Safari → "Añadir a pantalla de inicio". El módulo no intenta emular esto — solo detecta que estamos en iOS con `esIOS()` y la UI muestra instrucciones de texto en lugar de un botón de instalación.
+
+El banner de bienvenida en `puerta.js` se muestra si:
+1. El portal no está ya instalado (`!estaInstalada()`), Y
+2. El usuario no ha descartado el banner antes (`localStorage.getItem('pwa-banner-descartado') !== '1'`), Y
+3. Hay alguna opción disponible (`puedeInstalar() || esIOS()`).
+
+La sección "Instalar app" en `ajustes.js` siempre aparece (independientemente de si ya está instalado), y muestra uno de cuatro estados: ya instalada / instrucciones iOS / botón de instalar / no disponible en este navegador.
+
+**CacheStorage vs. IndexedDB — no confundir:** el service worker gestiona `CacheStorage` (archivos estáticos del portal: HTML, JS, CSS). Los datos del usuario (pictogramas, rutas, ajustes, PIN) viven en IndexedDB y `localStorage` — el service worker NUNCA los toca. Actualizar el `CACHE_NAME` del service worker fuerza que los clientes descarguen los archivos estáticos nuevos, pero no borra ni modifica los datos del niño.
+
+### 3.20 GestorSubidasWeb — actualización automática del `CACHE_NAME` en `sw.js`
+
+El `CACHE_NAME` en `sw.js` controla la caché de los archivos estáticos del portal. Si este nombre no cambia entre deploys, los clientes que ya tienen el service worker activo seguirán sirviendo los archivos viejos de la caché aunque GitHub Pages ya tenga los nuevos.
+
+**Solución implementada:** `GestorSubidasWeb.ps1` tiene una función `Update-ServiceWorkerCache` que se ejecuta automáticamente al principio de `Publish-Cambios`, antes del `git add -A`. Hace exactamente esto:
+
+```powershell
+function Update-ServiceWorkerCache {
+    $swPath = Join-Path $script:Config.Carpeta 'sw.js'
+    if (-not (Test-Path $swPath)) { return }
+    $version = (Get-Date).ToString('yyyyMMddHHmm')
+    $contenido = Get-Content -Path $swPath -Raw -Encoding UTF8
+    $nuevo = $contenido -replace "CACHE_NAME\s*=\s*'pictosfera-v[\w-]*'", "CACHE_NAME = 'pictosfera-v$version'"
+    if ($nuevo -ne $contenido) {
+        [System.IO.File]::WriteAllText($swPath, $nuevo, [System.Text.Encoding]::UTF8)
+    }
+}
+```
+
+El resultado: cada publicación genera un `CACHE_NAME` distinto (p.ej. `pictosfera-v202507051230`). El service worker detecta que su nombre de caché ya no coincide con el activo en el cliente, descarta la caché vieja y descarga los archivos nuevos en la siguiente apertura del portal. Los datos de usuario permanecen intactos.
+
+### 3.22 Zero-build, recordatorio final
 
 `package.json` completo:
 
@@ -293,10 +375,10 @@ He leído los 38 archivos completos. Ahora compongo el informe final exhaustivo 
 
 Ruta base analizada: `C:\Users\cogni\Desktop\NO BORRAR WEB PICTOSFERA\core\js`
 
-Total de archivos `.js` encontrados y leídos: **38** (23 en `core/js/` y 15 en `core/js/views/`).
+Total de archivos `.js` encontrados y leídos: **39** (24 en `core/js/` y 15 en `core/js/views/`).
 
 Listado completo verificado con Glob:
-- `core/js/i18n.js`, `tts.js`, `sounds.js`, `router.js`, `pin.js`, `welcome.js`, `secuencias.js`, `arasaac.js`, `categoriasPictogramas.js`, `shell.js`, `reward.js`, `rutas.js`, `db.js`, `categorias.js`, `appLoader.js`, `ajustesJuego.js`, `backup.js`, `mediaLibrary.js`, `cabezas.js`, `personajes.js`, `footer.js`, `fullscreen.js`, `puerta.js`, `main.js`, `ajustesCatalogo.js`
+- `core/js/i18n.js`, `tts.js`, `sounds.js`, `router.js`, `pin.js`, `welcome.js`, `secuencias.js`, `arasaac.js`, `categoriasPictogramas.js`, `shell.js`, `reward.js`, `rutas.js`, `db.js`, `categorias.js`, `appLoader.js`, `ajustesJuego.js`, `backup.js`, `mediaLibrary.js`, `cabezas.js`, `personajes.js`, `footer.js`, `fullscreen.js`, `puerta.js`, `main.js`, `ajustesCatalogo.js`, `pwa.js`
 - `core/js/views/juego.js`, `pictogramasSecuencias.js`, `medioCard.js`, `pictogramasArasaac.js`, `pictogramasFotos.js`, `ajustes.js`, `rutas.js`, `rutasCrear.js`, `rutaJugar.js`, `inicio.js`, `juegos.js`, `pictogramasCategorias.js`, `pictogramas.js`
 
 ---
@@ -978,6 +1060,8 @@ Para fotos propias dentro de `medios`: si `incluirFotos=true`, cada foto incluye
 
 **Propósito:** Único archivo que `index.html` carga directamente. Solo "enchufa" las piezas (i18n, rutas, navegación, paseo de bienvenida); no contiene lógica propia de ninguna pantalla.
 
+**Import de efecto secundario crítico:** la primera línea de `main.js` debe ser `import './pwa.js';` — sin ninguna importación anterior. Esto garantiza que el listener de `beforeinstallprompt` se registra antes de que el navegador pueda descartarlo. Si este import se mueve a una posición posterior o se elimina, la instalación PWA dejará de funcionar en Chrome/Android (ver sección 3.19).
+
 **Función interna:** `arrancar()` — async, secuencia de arranque:
 1. `await initI18n()`.
 2. Registra 13 rutas (ver lista exacta abajo).
@@ -1005,6 +1089,31 @@ Para fotos propias dentro de `medios`: si `incluirFotos=true`, cada foto incluye
 **Manejo de errores de arranque:** si `arrancar()` rechaza, se loggea con `console.error` y se muestra `<p class="vacio">No se ha podido cargar Pictosfera...</p>` en `#view`.
 
 **Variable global de depuración:** `window.pictosfera = { navigate }` — solo para consola del navegador, explícitamente documentado como herramienta de debug.
+
+---
+
+## 25b. `core/js/pwa.js` *(añadido en actualización de julio 2026)*
+
+**Propósito:** Módulo de efecto secundario que captura el evento `beforeinstallprompt` del navegador (Chrome/Android/Chromium de escritorio) y expone una API limpia para preguntar si se puede instalar, si ya está instalada y para lanzar el diálogo nativo de instalación. NO tiene interfaz de usuario propia — eso vive en `puerta.js` (banner de primera visita) y `ajustes.js` (sección persistente).
+
+**Dependencias:** ninguna (solo navegador). Se importa con `import './pwa.js'` como efecto secundario.
+
+**Variables de módulo (privadas):**
+- `_deferred` — referencia al evento `BeforeInstallPromptEvent` capturado (o `null` si no se capturó todavía / el navegador no lo soporta).
+
+**Listener interno:** al cargarse el módulo, registra `window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); _deferred = e; })`. El `preventDefault()` impide que el navegador muestre su propio mini-banner nativo, dando control a la app sobre cuándo y cómo mostrar la propuesta de instalación.
+
+**Funciones exportadas:**
+- `puedeInstalar()` → `boolean`. `true` si `_deferred !== null`. Solo es `true` en Chrome/Android y Chromium de escritorio; nunca en Safari/iOS.
+- `esIOS()` → `boolean`. Detecta iPad/iPhone/iPod por `navigator.userAgent`. Útil para mostrar instrucciones de texto cuando `puedeInstalar()` es `false` pero el usuario podría añadir la app manualmente desde Safari.
+- `estaInstalada()` → `boolean`. `true` si `window.matchMedia('(display-mode: standalone)').matches`. Indica que el portal ya se abrió como PWA instalada (no en pestaña de navegador).
+- `instalar()` → `Promise<boolean>`. Llama a `_deferred.prompt()`, espera `_deferred.userChoice`, devuelve `true` si `outcome === 'accepted'`, `false` si canceló. Tras llamarse, `_deferred` queda consumido y `puedeInstalar()` vuelve a ser `false` (el navegador solo permite usar el prompt una vez por ciclo de vida de la página).
+
+**Claves i18n relacionadas (namespace `pwa`):** `sugerencia`, `sugerencia_ios`, `instalar`, `ahora_no`, `seccion_titulo`, `seccion_texto`, `ya_instalada`, `explicacion_boton`, `instrucciones_ios`, `no_disponible`.
+
+**Clave localStorage:** `pwa-banner-descartado` — se pone a `'1'` cuando el usuario pulsa "Ahora no" en el banner de `puerta.js`. No hay clave para `ajustes.js` (la sección de ajustes siempre se muestra, independientemente de si el banner fue descartado).
+
+**CSS relacionado (en `shell.css`):** `.pwa-banner`, `.pwa-banner-texto`, `.pwa-banner-botones`, `.pwa-btn-instalar`, `.pwa-btn-descartar`.
 
 ---
 
@@ -2337,15 +2446,35 @@ El último minijuego implementado. La mecánica: 3 pictogramas en la columna izq
 ### 7.9 Fase 9 — Herramienta de publicación `GestorSubidasWeb.ps1` (tareas ~#221–#225)
 
 Para hacer la publicación en GitHub Pages accesible a una persona no técnica, se creó `GestorSubidasWeb.ps1` en una carpeta hermana. Implementación: Windows Forms (PowerShell), con un campo de mensaje de commit, un botón "Publicar", un log en tiempo real, y el PAT de GitHub guardado con DPAPI (cifrado en el perfil de Windows del usuario — nunca en texto plano en ningún archivo). El flujo completo es: `git add -A` → `git commit -m <mensaje>` → `git push`. Va acompañada de un `.bat` de lanzamiento (oculta la consola de PowerShell, abre solo la ventana de Windows Forms) y un `LEEME` en lenguaje no técnico.
+
+### 7.10 Fase 10 — Correcciones post-lanzamiento y PWA (tareas #250–#265, julio 2026)
+
+Esta fase abarcó cuatro líneas de trabajo independientes:
+
+**Bug: panel de categoría innecesario al añadir pictograma ARASAAC (tareas #250–#253).** Al buscar un pictograma en ARASAAC y hacer clic para añadirlo, aparecía siempre el panel manual de selección de categoría aunque la API ya hubiera devuelto categorías válidas. Causa: el handler de clic no comprobaba si `medio.etiquetas.length > 0`. Corrección: bifurcar — si hay etiquetas, guardar directo; si no hay, mostrar el panel manual. Adicionalmente, `arasaac.js` recibió el mapa `MAPA_CATEGORIAS_ARASAAC` y la función `etiquetasDesdeArasaac()` para traducir las categorías inglesas de la API a etiquetas curadas en español antes de guardarlas. De este modo los medios ya llegan al store con categorías en castellano sin intervención del adulto.
+
+**Corrección de `resolverMaterial` (tarea #258).** El filtrado de la biblioteca de medios por `material.etiqueta` se aplicaba incorrectamente a juegos como `me-gusta-no-me-gusta` y `lista-compra`, que no necesitan una categoría específica sino cualquier pictograma disponible. Se eliminó `material.etiqueta` de esas entradas de `apps.json` para que `resolverMaterial` les devuelva la biblioteca completa.
+
+**Bug en `puzzle-pictograma-palabra` (tareas #254–#255).** Dos bugs detectados en el minijuego: la zona de texto de la palabra se ocultaba incorrectamente entre rondas por no limpiar el `innerHTML`, y las palabras podían seleccionarse antes de completar el arrastre del puzzle. Correcciones: limpiar `innerHTML` al iniciar cada ronda y deshabilitar los botones de palabra hasta que el puzzle esté completo.
+
+**Feature: instalación PWA (tareas #261–#265).** Se añadió la posibilidad de instalar Pictosfera como aplicación nativa desde el portal web:
+- `core/js/pwa.js` — módulo nuevo que captura `beforeinstallprompt` y expone `puedeInstalar()`, `esIOS()`, `estaInstalada()`, `instalar()`. Se importa como primera importación de `main.js` (efecto secundario, sin alias).
+- `core/js/puerta.js` — muestra un banner de instalación en la primera visita si el usuario no está en standalone y no descartó el banner antes.
+- `core/js/views/ajustes.js` — nueva categoría "Instalar app" con 4 estados distintos según la plataforma.
+- `core/css/shell.css` — estilos `.pwa-banner` y relacionados.
+- `locales/es.json` y `locales/en.json` — bloque `pwa` con 10 claves y clave `ajustes.cat_instalar`.
+
+**Fix: actualización automática del service worker (posterior a tarea #265).** El `CACHE_NAME` en `sw.js` era `'pictosfera-v1'` hardcoded desde el inicio. Esto provocaba que los clientes que ya tenían el service worker activo siguieran sirviendo archivos viejos incluso después de un nuevo deploy en GitHub Pages. Corrección: `GestorSubidasWeb.ps1` recibió la función `Update-ServiceWorkerCache` que, antes de cada `git add -A`, reemplaza el `CACHE_NAME` por `pictosfera-v{yyyyMMddHHmm}` (timestamp del momento del commit). Así, cada publicación tiene un nombre de caché distinto y los clientes siempre reciben los archivos nuevos en la próxima apertura.
+
 ## 8. Estado de las pruebas automáticas, pendientes reales y obsolescencias de README
 
 ### 8.1 Estado de los tests automáticos
 
 **Comando:** `npm test` (alias de `node --test tests/**/*.test.mjs`)
 
-**Resultado actual:** 567 tests en total. 562 pasan. 5 fallan.
+**Resultado actual:** 567 tests en total. **567 pasan. 0 fallan.** *(Actualizado julio 2026 — los 5 falsos positivos de entorno que reportaba la sesión anterior fueron corregidos reparando los archivos truncados en el mount del sandbox.)*
 
-Los 5 fallos son falsos positivos del entorno — no reflejan ningún bug en el código real. Ocurren porque la copia montada de los archivos del proyecto que ve el sandbox de bash puede quedarse estancada (un síntoma documentado y recurrente a lo largo del desarrollo). Los mismos 5 tests pasan cuando se ejecutan en un entorno con acceso real al sistema de archivos. La manera de distinguir un fallo real de uno de entorno: si el test falla con un error de parsing/lectura de un archivo de datos (JSON malformado, archivo no encontrado), es staleness del sandbox. Si falla con un assertion de lógica ("expected X, got Y"), es un bug real.
+La manera de distinguir un fallo real de uno de entorno en sesiones futuras: si el test falla con un error de parsing/lectura de un archivo de datos (JSON malformado, archivo no encontrado), es staleness del sandbox de bash — usar el Read tool para leer el archivo desde Windows y reparar con Python bash append si hace falta. Si falla con un assertion de lógica ("expected X, got Y"), es un bug real en el código.
 
 Cobertura de los 33 módulos testados: únicamente lógica pura (funciones exportadas sin efectos de DOM). No hay tests de interacción de puntero/teclado, no hay tests de renderizado DOM, no hay tests de la capa `core/js/views/`. Esto es deliberado — esos aspectos se validan manualmente.
 
@@ -2404,7 +2533,7 @@ El `README.md` actual (149 líneas) contiene al menos tres afirmaciones desactua
 
 **Desactualización 1:** "2 juegos disponibles (Memoria, Arrastra la palabra)". El proyecto tiene **21 mecánicas** implementadas y testeadas. Esta línea del README corresponde al estado del primer prototipo.
 
-**Desactualización 2:** "52 comprobaciones automáticas". El proyecto tiene **567 tests** (562 pasan, 5 son falsos positivos de entorno).
+**Desactualización 2:** "52 comprobaciones automáticas". El proyecto tiene **567 tests** (todos pasan desde julio 2026).
 
 **Desactualización 3:** "Herramienta de publicación de escritorio — Decisión tomada: queda para más adelante". `GestorSubidasWeb.ps1` ya existe, está completa y funciona. Esta línea del README quedó obsoleta cuando se completaron las tareas #221–#225.
 
@@ -2473,7 +2602,9 @@ Implementa en este orden (cada módulo solo depende de los anteriores o de módu
 
 19. `core/js/welcome.js` — tour de bienvenida de 3 tarjetas (solo la primera vez).
 
-20. `core/js/puerta.js` — pantalla de entrada en cada visita (captura el gesto de usuario para fullscreen). Ver sección 3.13.
+20. `core/js/puerta.js` — pantalla de entrada en cada visita (captura el gesto de usuario para fullscreen). Ver sección 3.13. Tras el botón "Empezar", muestra opcionalmente el banner PWA si no está instalada y no fue descartado.
+
+21. `core/js/pwa.js` — módulo de instalación PWA. Sin interfaz propia. Ver sección 3.19 para el contrato exacto. Importante: no contiene lógica específica de ninguna vista — solo captura eventos de navegador y expone una API.
 
 ### Paso 6 — Vistas (`core/js/views/`)
 
@@ -2483,11 +2614,11 @@ Implementa en este orden (cada módulo solo depende de los anteriores o de módu
 
 ### Paso 7 — Router y punto de entrada
 
-21. `core/js/router.js` — hash-router: `hashchange` + `renderizar()` por ruta.
+22. `core/js/router.js` — hash-router: `hashchange` + `renderizar()` por ruta.
 
-22. `core/js/shell.js` — topbar, tabbar, sidebar, navegación.
+23. `core/js/shell.js` — topbar, tabbar, sidebar, navegación.
 
-23. `core/js/main.js` — punto de entrada: `puerta → welcome → shell → router`.
+24. `core/js/main.js` — punto de entrada: `puerta → welcome → shell → router`. **La primera línea debe ser `import './pwa.js';`** (ver sección 3.19).
 
 En este punto el portal debería funcionar en su totalidad excepto los minijuegos.
 
@@ -2526,12 +2657,14 @@ Crea `tests/helpers/shims.mjs` (contenido íntegro en sección 6.7). Luego un `t
 
 En una carpeta hermana al portal, crea `GestorSubidasWeb.ps1` (Windows Forms + PowerShell), un `.bat` de lanzamiento y un `LEEME`. Ver sección 7.9 para la descripción funcional. Esta herramienta es independiente del código del portal y puede omitirse si el flujo de publicación se hace directamente desde git.
 
+**Crítico:** la función `Publish-Cambios` debe incluir la llamada a `Update-ServiceWorkerCache` como su primera instrucción, antes del `git add -A`. Sin esto, el `CACHE_NAME` de `sw.js` nunca cambiará y los clientes con el service worker ya activo no recibirán nunca los archivos nuevos del portal. Ver sección 3.20 para el código exacto de esa función.
+
 ### Paso 11 — Verificación final
 
 ```bash
 npm test
-# Debe pasar ≥562/567 tests
-# Los 5 fallos, si los hay, deben ser de parsing/lectura de archivos (staleness de sandbox)
+# Debe pasar 567/567 tests
+# Si hay fallos de parsing/lectura de archivos: staleness del sandbox de bash (ver sección 8.1)
 # Si hay fallos de assertion (lógica), hay un bug real que corregir
 
 # Verificar que las 21 mecánicas aparecen en Juegos

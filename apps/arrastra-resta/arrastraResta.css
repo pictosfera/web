@@ -1,0 +1,208 @@
+/* Pictosfera — app "Arrastra los números de la resta". Estilos propios,
+   con prefijo "arrastrares-" para no interferir con el núcleo ni con
+   otras apps. Idéntico en estructura a arrastraSuma.css, con los estilos
+   adicionales del pictograma tachado (envoltura relativa + X roja). */
+
+.arrastrares-app{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.arrastrares-cabecera h1{
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--space-xs) 0;
+  color: var(--color-primary-dark);
+}
+
+.arrastrares-cabecera p{
+  color: var(--color-text-soft);
+  margin: 0;
+}
+
+.arrastrares-marcador{
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.arrastrares-zona{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.arrastrares-operacion{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.arrastrares-parte{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.arrastrares-grupo{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 150px;
+  min-height: 64px;
+  padding: var(--space-xs);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Pictograma normal */
+.arrastrares-grupo-img{
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Pictograma tachado: envoltura relativa con imagen opaca + X roja */
+.arrastrares-tachado{
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.arrastrares-tachado .arrastrares-grupo-img{
+  opacity: 0.35;
+  filter: grayscale(0.4);
+}
+
+.arrastrares-x{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom right,
+      transparent calc(50% - 2px),
+      var(--color-error) calc(50% - 2px),
+      var(--color-error) calc(50% + 2px),
+      transparent calc(50% + 2px)
+    ),
+    linear-gradient(
+      to bottom left,
+      transparent calc(50% - 2px),
+      var(--color-error) calc(50% - 2px),
+      var(--color-error) calc(50% + 2px),
+      transparent calc(50% + 2px)
+    );
+}
+
+.arrastrares-signo{
+  font-size: var(--font-size-xl, 2rem);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  align-self: center;
+  margin-top: 32px;
+}
+
+.arrastrares-objetivo{
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  background: var(--color-bg-soft);
+  border: 3px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
+}
+
+.arrastrares-objetivo-resaltado{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-bg-soft);
+  transform: scale(1.05);
+}
+
+.arrastrares-objetivo-correcto{
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-success);
+  color: var(--color-text-on-primary);
+}
+
+.arrastrares-objetivo-fallo{
+  border-color: var(--color-error);
+  animation: arrastrares-temblor 320ms ease;
+}
+
+.arrastrares-numeros{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 640px;
+}
+
+.arrastrares-numero{
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm);
+  background: var(--color-surface);
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.arrastrares-numero:focus-visible{
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.arrastrares-numero-activo{
+  z-index: 5;
+  cursor: grabbing;
+  box-shadow: var(--shadow-md);
+}
+
+.arrastrares-numero-acierto{
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: var(--color-text-on-primary);
+}
+
+.arrastrares-numero-fallo{
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: var(--color-text-on-primary);
+  animation: arrastrares-temblor 320ms ease;
+}
+
+@keyframes arrastrares-temblor{
+  0%, 100%{ transform: translate(0, 0); }
+  25%{ transform: translate(-6px, 0); }
+  75%{ transform: translate(6px, 0); }
+}

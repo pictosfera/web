@@ -213,6 +213,51 @@
     }
   },
   {
+    "id": "resta-resultado-animales",
+    "mecanica": "resta-resultado",
+    "modulo": "apps/resta-resultado/restaResultado.js",
+    "nombre": "Resta pictogramas y elige el resultado",
+    "nombreClave": "juegos_nombres.resta_resultado_animales",
+    "icono": "➖",
+    "estante": "NUMEROS",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "minimo": 12
+    }
+  },
+  {
+    "id": "completa-resta-animales",
+    "mecanica": "completa-resta",
+    "modulo": "apps/completa-resta/completaResta.js",
+    "nombre": "Escribe los números de la resta",
+    "nombreClave": "juegos_nombres.completa_resta_animales",
+    "icono": "✏️",
+    "estante": "NUMEROS",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "minimo": 12
+    }
+  },
+  {
+    "id": "arrastra-resta-animales",
+    "mecanica": "arrastra-resta",
+    "modulo": "apps/arrastra-resta/arrastraResta.js",
+    "nombre": "Arrastra los números de la resta",
+    "nombreClave": "juegos_nombres.arrastra_resta_animales",
+    "icono": "🔢",
+    "estante": "NUMEROS",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "minimo": 12
+    }
+  },
+  {
     "id": "clasifica-categorias",
     "mecanica": "clasifica-categorias",
     "modulo": "apps/clasifica-categorias/clasificaCategorias.js",
