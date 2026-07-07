@@ -1,20 +1,16 @@
 // Pictosfera — mecánica reutilizable: "resta pictogramas y elige el
 // resultado".
 //
-// En pantalla aparecen dos grupos del mismo pictograma:
-// «minuendo» copias (normales) − «sustraendo» copias (tachadas con una
-// X roja). El niño cuenta el grupo grande, descuenta visualmente los
-// tachados y elige el resultado entre tres números. No hay límite de
-// fallos: puede volver a intentarlo. 10 niveles.
+// Visual del modelo "quitar": minuendo normal − sustraendo normal =
+// resultado (que muestra minuendo total: resultado sin tachar + sustraendo
+// tachado con X roja). El niño cuenta los pictogramas claros en el lado
+// del resultado. 10 niveles.
 //
 // El minuendo está entre 2 y 10; el sustraendo entre 1 y (minuendo − 1),
-// por lo que el resultado es siempre ≥ 1. El visual de "tachado" se
-// obtiene superponiendo una X roja (dos gradientes lineales en un <div>
-// absoluto) sobre el pictograma con opacidad reducida.
+// por lo que el resultado es siempre >= 1.
 //
 // Es "código de confianza del autor": JavaScript nativo, módulo ES, sin
-// framework. No importa nada del núcleo directamente: todo lo que
-// necesita le llega a través de `plataforma` en montar().
+// framework.
 
 const ESTILOS_ID = 'resta-resultado-estilos';
 const MIN_MATERIAL = 1;
@@ -26,8 +22,6 @@ const OPCION_MIN = 0;
 const OPCION_MAX = 9;
 
 let estado = null;
-// { plataforma, contenedor, raiz, nivelActual, usados, medioActual,
-//   minuendo, sustraendo, resultado, opciones, bloqueado, timeoutId }
 
 function mezclar(lista) {
   const copia = [...lista];
@@ -38,10 +32,6 @@ function mezclar(lista) {
   return copia;
 }
 
-// --- Lógica pura: qué medio, qué resta y qué opciones toca este nivel ---
-
-/** Elige el siguiente pictograma a repetir, evitando repetir el del
- *  nivel anterior si hay más de un medio disponible. */
 export function elegirSiguienteMedio(medios, { evitarIds = [] } = {}) {
   if (!Array.isArray(medios) || !medios.length) return null;
   const evitar = new Set(evitarIds);
@@ -51,19 +41,12 @@ export function elegirSiguienteMedio(medios, { evitarIds = [] } = {}) {
   return candidatos[Math.floor(Math.random() * candidatos.length)];
 }
 
-/**
- * Genera minuendo (minMin–minMax) y sustraendo (1..minuendo-1) al azar,
- * garantizando que el resultado es siempre ≥ 1.
- */
 export function operandosAleatorios(minMin = MINUENDO_MIN, minMax = MINUENDO_MAX) {
   const minuendo = minMin + Math.floor(Math.random() * (minMax - minMin + 1));
   const sustraendo = 1 + Math.floor(Math.random() * (minuendo - 1));
   return { minuendo, sustraendo, resultado: minuendo - sustraendo };
 }
 
-/** Tres opciones (por defecto) para elegir: el resultado correcto más
- *  distractores distintos entre sí y del resultado, dentro del rango
- *  dado, en orden aleatorio. Lógica pura: solo aritmética y mezcla. */
 export function generarOpciones(resultado, { cantidad = NUM_OPCIONES, min = OPCION_MIN, max = OPCION_MAX } = {}) {
   const candidatos = [];
   for (let n = min; n <= max; n++) {
@@ -73,11 +56,6 @@ export function generarOpciones(resultado, { cantidad = NUM_OPCIONES, min = OPCI
   return mezclar([resultado, ...distractores]);
 }
 
-/**
- * Genera un nivel: un medio, los operandos de la resta y las opciones
- * ya barajadas. Lógica pura: no toca el DOM. Devuelve null si no hay
- * material suficiente.
- */
 export function generarNivel(medios, { evitarIds = [] } = {}) {
   const medio = elegirSiguienteMedio(medios, { evitarIds });
   if (!medio) return null;
@@ -86,7 +64,6 @@ export function generarNivel(medios, { evitarIds = [] } = {}) {
   return { medio, minuendo, sustraendo, resultado, opciones };
 }
 
-/** ¿Esta opción pulsada es el resultado correcto? */
 export function esRespuestaCorrecta(opcion, resultado) {
   return Number(opcion) === Number(resultado);
 }
@@ -110,13 +87,11 @@ function mostrarSinMaterial(zona, plataforma) {
 
 function manejarRespuesta(opcion, elementoOpcion) {
   if (!estado || estado.bloqueado) return;
-
   if (esRespuestaCorrecta(opcion, estado.resultado)) {
     estado.bloqueado = true;
     estado.plataforma.sounds.acierto();
     estado.plataforma.tts.speak(String(estado.resultado));
     elementoOpcion.classList.add('restares-opcion-correcta');
-
     if (estado.nivelActual >= NIVELES_TOTAL) {
       estado.timeoutId = setTimeout(() => {
         if (!estado) return;
@@ -132,13 +107,10 @@ function manejarRespuesta(opcion, elementoOpcion) {
   } else {
     estado.plataforma.sounds.fallo();
     elementoOpcion.classList.add('restares-opcion-fallo');
-    setTimeout(() => {
-      elementoOpcion.classList.remove('restares-opcion-fallo');
-    }, 400);
+    setTimeout(() => { elementoOpcion.classList.remove('restares-opcion-fallo'); }, 400);
   }
 }
 
-/** Grupo de pictogramas NORMALES (minuendo o resultado). */
 function crearGrupoPictogramas(medio, cantidad, plataforma) {
   const grupo = document.createElement('div');
   grupo.className = 'restares-grupo';
@@ -152,11 +124,17 @@ function crearGrupoPictogramas(medio, cantidad, plataforma) {
   return grupo;
 }
 
-/** Grupo de pictogramas TACHADOS con X roja (sustraendo). */
-function crearGrupoPictogramasTachados(medio, cantidad, plataforma) {
+function crearGrupoResultado(medio, resultado, sustraendo, plataforma) {
   const grupo = document.createElement('div');
   grupo.className = 'restares-grupo';
-  for (let i = 0; i < cantidad; i++) {
+  for (let i = 0; i < resultado; i++) {
+    const img = document.createElement('img');
+    img.className = 'restares-grupo-img';
+    img.src = plataforma.getDisplayUrl(medio);
+    img.alt = medio.nombre;
+    grupo.appendChild(img);
+  }
+  for (let i = 0; i < sustraendo; i++) {
     const envoltorio = document.createElement('div');
     envoltorio.className = 'restares-tachado';
     const img = document.createElement('img');
@@ -173,40 +151,26 @@ function crearGrupoPictogramasTachados(medio, cantidad, plataforma) {
 }
 
 function pintarNivel() {
-  const { raiz, plataforma, medioActual, minuendo, sustraendo, opciones } = estado;
-
+  const { raiz, plataforma, medioActual, minuendo, sustraendo, resultado, opciones } = estado;
   raiz.querySelector('.restares-nivel').textContent = plataforma.t('restaResultado.nivel', {
-    n: estado.nivelActual,
-    total: NIVELES_TOTAL
+    n: estado.nivelActual, total: NIVELES_TOTAL
   });
-
   const zona = raiz.querySelector('.restares-zona');
   zona.innerHTML = '';
-
   const operacion = document.createElement('div');
   operacion.className = 'restares-operacion';
-
   operacion.appendChild(crearGrupoPictogramas(medioActual, minuendo, plataforma));
-
   const menos = document.createElement('span');
   menos.className = 'restares-signo';
   menos.textContent = '−';
   operacion.appendChild(menos);
-
-  operacion.appendChild(crearGrupoPictogramasTachados(medioActual, sustraendo, plataforma));
-
+  operacion.appendChild(crearGrupoPictogramas(medioActual, sustraendo, plataforma));
   const igual = document.createElement('span');
   igual.className = 'restares-signo';
   igual.textContent = '=';
   operacion.appendChild(igual);
-
-  const interrogante = document.createElement('span');
-  interrogante.className = 'restares-signo restares-interrogante';
-  interrogante.textContent = '?';
-  operacion.appendChild(interrogante);
-
+  operacion.appendChild(crearGrupoResultado(medioActual, resultado, sustraendo, plataforma));
   zona.appendChild(operacion);
-
   const listaOpciones = document.createElement('div');
   listaOpciones.className = 'restares-opciones';
   opciones.forEach((opcion) => {
@@ -251,10 +215,8 @@ function iniciarPartida() {
 function montar(contenedor, plataforma) {
   inyectarEstilosUnaVez();
   contenedor.innerHTML = '';
-
   const raiz = document.createElement('div');
   raiz.className = 'restares-app';
-
   const cabecera = document.createElement('header');
   cabecera.className = 'restares-cabecera';
   const titulo = document.createElement('h1');
@@ -262,39 +224,25 @@ function montar(contenedor, plataforma) {
   const instrucciones = document.createElement('p');
   instrucciones.textContent = plataforma.t('restaResultado.instrucciones');
   cabecera.append(titulo, instrucciones);
-
   const marcador = document.createElement('div');
   marcador.className = 'restares-marcador';
   const nivelEl = document.createElement('span');
   nivelEl.className = 'restares-nivel';
   marcador.appendChild(nivelEl);
-
   const zona = document.createElement('div');
   zona.className = 'restares-zona';
-
   raiz.append(cabecera, marcador, zona);
   contenedor.appendChild(raiz);
-
   estado = {
-    contenedor,
-    plataforma,
-    raiz,
-    nivelActual: 0,
-    usados: [],
-    medioActual: null,
-    minuendo: 0,
-    sustraendo: 0,
-    resultado: 0,
-    opciones: [],
-    bloqueado: false,
-    timeoutId: null
+    contenedor, plataforma, raiz,
+    nivelActual: 0, usados: [], medioActual: null,
+    minuendo: 0, sustraendo: 0, resultado: 0, opciones: [],
+    bloqueado: false, timeoutId: null
   };
-
   if (!plataforma.medios || plataforma.medios.length < MIN_MATERIAL) {
     mostrarSinMaterial(zona, plataforma);
     return;
   }
-
   iniciarPartida();
 }
 

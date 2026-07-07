@@ -1,5 +1,7 @@
 {
-  "app": { "nombre": "Pictosfera" },
+  "app": {
+    "nombre": "Pictosfera"
+  },
   "nav": {
     "inicio": "Inicio",
     "juegos": "Juegos",
@@ -254,12 +256,13 @@
     "texto": "Toca el botón para abrir Pictosfera a pantalla completa."
   },
   "estantes": {
-    "ANIMALES": "Animales",
     "LECTURA": "Lectura",
-    "NUMEROS": "Números",
     "ESCRITURA": "Escritura",
     "RUTINAS": "Rutinas",
-    "CONCEPTOS": "Conceptos"
+    "CONCEPTOS": "Conceptos",
+    "SUMAR": "Sumar",
+    "RESTAR": "Restar",
+    "CONTAR": "Contar"
   },
   "memoria": {
     "nombre": "Memoria",
@@ -403,7 +406,10 @@
     "instrucciones": "Mira cada comida y arrástrala hasta el plato si te gusta, o hasta el cubo de basura si no te gusta.",
     "ronda": "Comida {n} de {total}",
     "zona_me_gusta": "Me gusta",
-    "zona_no_me_gusta": "No me gusta"
+    "zona_no_me_gusta": "No me gusta",
+    "te_gusta": "¿Te gusta?",
+    "si_me_gusta": "¡Sí! Me gusta",
+    "no_me_gusta": "No me gusta"
   },
   "listaCompra": {
     "instrucciones": "Mira la lista de la compra y toca o arrastra hasta el carrito solo los pictogramas que están en la lista.",

@@ -6,7 +6,7 @@
     "nombre": "Memoria",
     "nombreClave": "juegos_nombres.memoria_animales",
     "icono": "🐾",
-    "estante": "ANIMALES",
+    "estante": "LECTURA",
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
@@ -120,7 +120,7 @@
     "nombre": "Cuenta y arrastra el número",
     "nombreClave": "juegos_nombres.arrastra_numero_animales",
     "icono": "🔢",
-    "estante": "NUMEROS",
+    "estante": "CONTAR",
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
@@ -135,7 +135,7 @@
     "nombre": "Cuenta y escribe el número",
     "nombreClave": "juegos_nombres.escribe_numero_animales",
     "icono": "✏️",
-    "estante": "NUMEROS",
+    "estante": "CONTAR",
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
@@ -150,7 +150,7 @@
     "nombre": "Suma pictogramas y elige el resultado",
     "nombreClave": "juegos_nombres.suma_resultado_animales",
     "icono": "➕",
-    "estante": "NUMEROS",
+    "estante": "SUMAR",
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
@@ -165,7 +165,7 @@
     "nombre": "Relaciona los dedos con los pictogramas",
     "nombreClave": "juegos_nombres.dedos_pictogramas_animales",
     "icono": "✋",
-    "estante": "NUMEROS",
+    "estante": "CONTAR",
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
@@ -180,7 +180,7 @@
     "nombre": "Relaciona los dedos con el número",
     "nombreClave": "juegos_nombres.dedos_numero",
     "icono": "🖐️",
-    "estante": "NUMEROS"
+    "estante": "CONTAR"
   },
   {
     "id": "completa-suma-animales",
@@ -189,7 +189,7 @@
     "nombre": "Escribe los números de la suma",
     "nombreClave": "juegos_nombres.completa_suma_animales",
     "icono": "🧮",
-    "estante": "NUMEROS",
+    "estante": "SUMAR",
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
@@ -204,7 +204,7 @@
     "nombre": "Arrastra los números de la suma",
     "nombreClave": "juegos_nombres.arrastra_suma_animales",
     "icono": "🧩",
-    "estante": "NUMEROS",
+    "estante": "SUMAR",
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
@@ -219,7 +219,7 @@
     "nombre": "Resta pictogramas y elige el resultado",
     "nombreClave": "juegos_nombres.resta_resultado_animales",
     "icono": "➖",
-    "estante": "NUMEROS",
+    "estante": "RESTAR",
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
@@ -234,7 +234,7 @@
     "nombre": "Escribe los números de la resta",
     "nombreClave": "juegos_nombres.completa_resta_animales",
     "icono": "✏️",
-    "estante": "NUMEROS",
+    "estante": "RESTAR",
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
@@ -249,7 +249,7 @@
     "nombre": "Arrastra los números de la resta",
     "nombreClave": "juegos_nombres.arrastra_resta_animales",
     "icono": "🔢",
-    "estante": "NUMEROS",
+    "estante": "RESTAR",
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
@@ -319,7 +319,7 @@
     "nombre": "Lista de la compra",
     "nombreClave": "juegos_nombres.lista_compra_comidas",
     "icono": "🛒",
-    "estante": "RUTINAS",
+    "estante": "LECTURA",
     "material": {
       "etiqueta": "comida",
       "filtrar": true,

@@ -12,8 +12,12 @@
 // AQUÍ NO HAY acierto ni fallo — es una actividad de preferencia
 // personal, no de clasificación correcta. Cualquiera de las dos zonas
 // es siempre una respuesta válida: el niño elige. Tras decidir, sonido
-// de confirmación + se dice su nombre en voz alta + aparece la
-// siguiente comida. Termina tras pasar por 10 comidas.
+// de confirmación + TTS de la respuesta + aparece la siguiente comida.
+// Termina tras pasar por 10 comidas.
+//
+// TTS: al mostrar cada comida se dice "[nombre]. ¿Te gusta?" (adaptado
+// al idioma). Al soltar en el plato: "¡Sí! Me gusta". Al soltar en el
+// cubo: "No me gusta".
 //
 // El plato y el cubo son "chrome" fijo de la pantalla: no llevan pista
 // de texto editable por el adulto, siempre se ven igual (con su
@@ -109,9 +113,7 @@ function pintarFijo(contenedorImg, medioFijo, emojiReserva, plataforma) {
 
 /** Pinta la comida de la ronda actual, respetando los ajustes de pista
  *  del portal (mostrar/ocultar texto, mayúscula/minúscula, solo texto
- *  sin imagen) igual que el resto de mecánicas de arrastrar. A
- *  diferencia de "Clasifica los pictogramas en dos categorías", aquí no
- *  hay pulsador TTS propio (no forma parte de esta mecánica). */
+ *  sin imagen) igual que el resto de mecánicas de arrastrar. */
 function pintarComida(contenedor, medio, ajustesPista, plataforma) {
   contenedor.innerHTML = '';
 
@@ -120,7 +122,6 @@ function pintarComida(contenedor, medio, ajustesPista, plataforma) {
     img.className = 'megusta-comida-img';
     img.src = plataforma.getDisplayUrl(medio);
     img.alt = medio.nombre;
-    // Crítico para el arrastre: ver la misma nota en clasificaCategorias.js.
     img.draggable = false;
     contenedor.appendChild(img);
   }
@@ -154,15 +155,16 @@ function agregarColocado(zonaId, medio) {
 }
 
 /** Registra la decisión del niño. No hay acierto/fallo: cualquiera de
- *  las dos zonas es siempre válida, así que esto solo confirma la
- *  elección (sonido + voz) y avanza a la siguiente comida. */
+ *  las dos zonas es siempre válida. Reproduce el TTS de la respuesta
+ *  ("¡Sí! Me gusta" o "No me gusta") y avanza a la siguiente comida. */
 function manejarEleccion(medio, elementoItem, zona) {
   if (!estado || estado.bloqueado) return;
   if (!esZonaValida(zona.id)) return;
 
   estado.bloqueado = true;
   estado.plataforma.sounds.acierto();
-  estado.plataforma.tts.speak(medio.nombre);
+  const claveRespuesta = zona.id === 'plato' ? 'meGusta.si_me_gusta' : 'meGusta.no_me_gusta';
+  estado.plataforma.tts.speak(estado.plataforma.t(claveRespuesta));
   zona.el.classList.add('megusta-zona-elegida');
   agregarColocado(zona.id, medio);
   if (elementoItem) elementoItem.classList.add('megusta-item-colocado');
@@ -263,8 +265,8 @@ function activarArrastre(elementoItem, medio, zonas) {
 function construirZonas(contenedorZonas, fijos, plataforma) {
   contenedorZonas.innerHTML = '';
   const definiciones = [
-    { id: 'plato', medioFijo: fijos.plato, emoji: '🍽️', etiquetaClave: 'meGusta.zona_me_gusta' },
-    { id: 'basura', medioFijo: fijos.basura, emoji: '🗑️', etiquetaClave: 'meGusta.zona_no_me_gusta' }
+    { id: 'plato', medioFijo: fijos.plato, emoji: '\u{1F37D}️', etiquetaClave: 'meGusta.zona_me_gusta' },
+    { id: 'basura', medioFijo: fijos.basura, emoji: '\u{1F5D1}️', etiquetaClave: 'meGusta.zona_no_me_gusta' }
   ];
   const zonas = [];
   const bandejas = {};
@@ -321,6 +323,7 @@ function pintarRonda() {
 
   zonaItem.appendChild(item);
   estado.itemElementoActual = item;
+  plataforma.tts.speak(estado.medioActual.nombre + '. ' + plataforma.t('meGusta.te_gusta'));
 }
 
 function siguienteRonda() {
@@ -415,7 +418,7 @@ function desmontar() {
 export default {
   id: 'me-gusta-no-me-gusta',
   nombre: 'Me gusta / no me gusta',
-  icono: '🍽️',
+  icono: '\u{1F37D}️',
   estante: 'CONCEPTOS',
   montar,
   desmontar

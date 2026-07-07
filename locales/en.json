@@ -1,5 +1,7 @@
 {
-  "app": { "nombre": "Pictosfera" },
+  "app": {
+    "nombre": "Pictosfera"
+  },
   "nav": {
     "inicio": "Home",
     "juegos": "Games",
@@ -180,14 +182,14 @@
   },
   "pwa": {
     "sugerencia": "Install Pictosfera as an app to always have pictograms at hand, even without internet.",
-    "sugerencia_ios": "Install Pictosfera: tap the Share button (⎙) and then «Add to Home Screen».",
+    "sugerencia_ios": "Install Pictosfera: tap the Share button (⎏) and then «Add to Home Screen».",
     "instalar": "Install app",
     "ahora_no": "Not now",
     "seccion_titulo": "Install app",
     "seccion_texto": "If you install Pictosfera as an app, the browser won't delete pictograms or settings even when it clears the cache. You'll also be able to open it without internet.",
     "ya_instalada": "Pictosfera is already installed as an app on this device.",
     "explicacion_boton": "Tap the button to install. The browser will ask for confirmation.",
-    "instrucciones_ios": "In Safari, tap the Share button (⎙) and then «Add to Home Screen». This installs Pictosfera as an app and keeps your data safe.",
+    "instrucciones_ios": "In Safari, tap the Share button (⎏) and then «Add to Home Screen». This installs Pictosfera as an app and keeps your data safe.",
     "no_disponible": "Your browser doesn't support installing Pictosfera as an app. Try Chrome or Edge on Android."
   },
   "rutas": {
@@ -254,12 +256,13 @@
     "texto": "Tap the button to open Pictosfera in full screen."
   },
   "estantes": {
-    "ANIMALES": "Animals",
     "LECTURA": "Reading",
-    "NUMEROS": "Numbers",
     "ESCRITURA": "Writing",
     "RUTINAS": "Routines",
-    "CONCEPTOS": "Concepts"
+    "CONCEPTOS": "Concepts",
+    "SUMAR": "Adding",
+    "RESTAR": "Subtracting",
+    "CONTAR": "Counting"
   },
   "memoria": {
     "nombre": "Memory",
@@ -403,7 +406,10 @@
     "instrucciones": "Look at each food and drag it onto the plate if you like it, or onto the bin if you don't.",
     "ronda": "Food {n} of {total}",
     "zona_me_gusta": "I like it",
-    "zona_no_me_gusta": "I don't like it"
+    "zona_no_me_gusta": "I don't like it",
+    "te_gusta": "Do you like it?",
+    "si_me_gusta": "Yes! I like it",
+    "no_me_gusta": "I don't like it"
   },
   "listaCompra": {
     "instrucciones": "Look at the shopping list and tap or drag onto the cart only the pictograms that are on the list.",
@@ -474,7 +480,7 @@
     "autor": "Pictosfera — developed by Roberto Corral Retuerta.",
     "licencia": "Free distribution and use of this site is authorised provided the author is always credited (Creative Commons Attribution 4.0 license — CC BY 4.0).",
     "licencia_enlace": "View the CC BY 4.0 license",
-    "arasaac": "The pictographic symbols used are the property of the Government of Aragón and were created by Sergio Palao for ARASAAC, which distributes them under a Creative Commons license (BY-NC-SA).",
+    "arasaac": "The pictographic symbols used are the property of the Government of Aragón and were created by Sergio Palao for ARASAAC, distributed under Creative Commons license (BY-NC-SA).",
     "arasaac_enlace": "Visit ARASAAC"
   }
 }

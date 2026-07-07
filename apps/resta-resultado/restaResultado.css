@@ -104,10 +104,6 @@
   padding: 0 var(--space-xs);
 }
 
-.restares-interrogante{
-  color: var(--color-secondary);
-}
-
 .restares-opciones{
   display: flex;
   flex-wrap: wrap;
