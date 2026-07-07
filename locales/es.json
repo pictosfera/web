@@ -262,7 +262,8 @@
     "CONCEPTOS": "Conceptos",
     "SUMAR": "Sumar",
     "RESTAR": "Restar",
-    "CONTAR": "Contar"
+    "CONTAR": "Contar",
+    "MULTIPLICAR": "Multiplicar"
   },
   "memoria": {
     "nombre": "Memoria",
@@ -474,7 +475,8 @@
     "relaciona_pictograma_palabra_animales": "Relaciona el pictograma con su palabra",
     "me_gusta_no_me_gusta_comidas": "Me gusta / no me gusta",
     "lista_compra_comidas": "Lista de la compra",
-    "reconoce_emociones": "Reconoce emociones"
+    "reconoce_emociones": "Reconoce emociones",
+    "cuadricula_multiplicacion": "Cuadrícula de multiplicación"
   },
   "footer": {
     "autor": "Pictosfera — desarrollado por Roberto Corral Retuerta.",
@@ -482,5 +484,13 @@
     "licencia_enlace": "Ver la licencia CC BY 4.0",
     "arasaac": "Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC, que los distribuye bajo licencia Creative Commons (BY-NC-SA).",
     "arasaac_enlace": "Visitar ARASAAC"
+  },
+  "cuadriculaMultiplicacion": {
+    "instrucciones": "Selecciona en la cuadrícula el área que representa la multiplicación y pulsa '?' para comprobarlo.",
+    "nivel": "Ejercicio {n} de {total}",
+    "validar_aria": "Comprobar respuesta",
+    "tts_enunciado": "dibuja {a} por {b}",
+    "tts_correcto": "{a} por {b} es {resultado}",
+    "tts_incorrecto": "Inténtalo otra vez"
   }
 }

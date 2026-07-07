@@ -262,7 +262,8 @@
     "CONCEPTOS": "Concepts",
     "SUMAR": "Adding",
     "RESTAR": "Subtracting",
-    "CONTAR": "Counting"
+    "CONTAR": "Counting",
+    "MULTIPLICAR": "Multiply"
   },
   "memoria": {
     "nombre": "Memory",
@@ -474,7 +475,8 @@
     "relaciona_pictograma_palabra_animales": "Match the picture to its word",
     "me_gusta_no_me_gusta_comidas": "I like it / I don't like it",
     "lista_compra_comidas": "Shopping list",
-    "reconoce_emociones": "Recognise feelings"
+    "reconoce_emociones": "Recognise feelings",
+    "cuadricula_multiplicacion": "Multiplication grid"
   },
   "footer": {
     "autor": "Pictosfera — developed by Roberto Corral Retuerta.",
@@ -482,5 +484,13 @@
     "licencia_enlace": "View the CC BY 4.0 license",
     "arasaac": "The pictographic symbols used are the property of the Government of Aragón and were created by Sergio Palao for ARASAAC, distributed under Creative Commons license (BY-NC-SA).",
     "arasaac_enlace": "Visit ARASAAC"
+  },
+  "cuadriculaMultiplicacion": {
+    "instrucciones": "Select the grid area that represents the multiplication and press '?' to check.",
+    "nivel": "Exercise {n} of {total}",
+    "validar_aria": "Check answer",
+    "tts_enunciado": "draw {a} times {b}",
+    "tts_correcto": "{a} times {b} is {resultado}",
+    "tts_incorrecto": "Try again"
   }
 }

@@ -10,7 +10,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -25,7 +38,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -40,7 +66,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -64,7 +103,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -79,7 +131,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -94,7 +159,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -109,7 +187,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -124,7 +215,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -139,7 +243,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -154,7 +271,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -169,7 +299,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -193,7 +336,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -208,7 +364,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -223,7 +392,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -238,7 +420,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -253,7 +448,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -277,7 +485,20 @@
     "material": {
       "semillaTag": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"]
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ]
     }
   },
   {
@@ -291,7 +512,20 @@
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["perro", "gato", "vaca", "pájaro", "conejo", "pez", "caballo", "oveja", "pato", "rana", "león", "elefante"],
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
       "minimo": 12
     }
   },
@@ -307,9 +541,25 @@
       "etiqueta": "comida",
       "filtrar": true,
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["manzana", "plátano", "pan", "leche", "queso", "huevo", "zanahoria", "galleta", "naranja", "tomate", "arroz", "pollo"],
+      "semillaArasaac": [
+        "manzana",
+        "plátano",
+        "pan",
+        "leche",
+        "queso",
+        "huevo",
+        "zanahoria",
+        "galleta",
+        "naranja",
+        "tomate",
+        "arroz",
+        "pollo"
+      ],
       "minimo": 12,
-      "fijos": { "plato": 2532, "basura": 2724 }
+      "fijos": {
+        "plato": 2532,
+        "basura": 2724
+      }
     }
   },
   {
@@ -324,9 +574,24 @@
       "etiqueta": "comida",
       "filtrar": true,
       "semillaArasaacLang": "es",
-      "semillaArasaac": ["manzana", "plátano", "pan", "leche", "queso", "huevo", "zanahoria", "galleta", "naranja", "tomate", "arroz", "pollo"],
+      "semillaArasaac": [
+        "manzana",
+        "plátano",
+        "pan",
+        "leche",
+        "queso",
+        "huevo",
+        "zanahoria",
+        "galleta",
+        "naranja",
+        "tomate",
+        "arroz",
+        "pollo"
+      ],
       "minimo": 12,
-      "fijos": { "carrito": 5948 }
+      "fijos": {
+        "carrito": 5948
+      }
     }
   },
   {
@@ -338,7 +603,21 @@
     "icono": "🙂",
     "estante": "CONCEPTOS",
     "material": {
-      "fijos": { "contento": 35547, "triste": 35545, "enfadado": 35539, "asustado": 35535 }
+      "fijos": {
+        "contento": 35547,
+        "triste": 35545,
+        "enfadado": 35539,
+        "asustado": 35535
+      }
     }
+  },
+  {
+    "id": "cuadricula-multiplicacion",
+    "mecanica": "cuadricula-multiplicacion",
+    "modulo": "apps/cuadricula-multiplicacion/cuadriculaMultiplicacion.js",
+    "nombre": "Cuadrícula de multiplicación",
+    "nombreClave": "juegos_nombres.cuadricula_multiplicacion",
+    "icono": "✖️",
+    "estante": "MULTIPLICAR"
   }
 ]
