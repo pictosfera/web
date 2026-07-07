@@ -323,7 +323,7 @@ function pintarRonda() {
 
   zonaItem.appendChild(item);
   estado.itemElementoActual = item;
-  plataforma.tts.speak(estado.medioActual.nombre + '. ' + plataforma.t('meGusta.te_gusta'));
+  plataforma.tts.speakConPausa(estado.medioActual.nombre, 800, plataforma.t('meGusta.te_gusta'));
 }
 
 function siguienteRonda() {

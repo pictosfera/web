@@ -85,6 +85,47 @@ export async function speak(text) {
   }
 }
 
+
+/**
+ * Lee texto1, espera pausaMs milisegundos al terminar y luego lee texto2.
+ * Útil para insertar una pausa controlada entre dos fragmentos TTS (p.ej.
+ * el nombre de un pictograma y una pregunta posterior).
+ */
+export async function speakConPausa(texto1, pausaMs, texto2) {
+  if (!isSupported() || !texto1) return;
+  const info = getLanguageInfo();
+  let voice = await findVoice(info.speechLang);
+  let lang = info.speechLang;
+  if (!voice && info.speechFallback) {
+    voice = await findVoice(info.speechFallback);
+    lang = info.speechFallback;
+  }
+  try {
+    speechSynthesis.cancel();
+    const u1 = new SpeechSynthesisUtterance(texto1);
+    u1.lang = lang;
+    if (voice) u1.voice = voice;
+    u1.rate = 0.95;
+    u1.onend = () => {
+      if (!texto2) return;
+      setTimeout(() => {
+        try {
+          const u2 = new SpeechSynthesisUtterance(texto2);
+          u2.lang = lang;
+          if (voice) u2.voice = voice;
+          u2.rate = 0.95;
+          speechSynthesis.speak(u2);
+        } catch (err) {
+          console.warn('[tts] speakConPausa — segundo fragmento fallido:', err);
+        }
+      }, pausaMs);
+    };
+    speechSynthesis.speak(u1);
+  } catch (err) {
+    console.warn('[tts] speakConPausa fallido:', err);
+  }
+}
+
 export function stop() {
   if (isSupported()) speechSynthesis.cancel();
 }
