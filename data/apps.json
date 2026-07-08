@@ -619,5 +619,14 @@
     "nombreClave": "juegos_nombres.cuadricula_multiplicacion",
     "icono": "✖️",
     "estante": "MULTIPLICAR"
+  },
+  {
+    "id": "arma-personaje",
+    "mecanica": "arma-personaje",
+    "modulo": "apps/arma-personaje/armaPersonaje.js",
+    "nombre": "Arma la cara",
+    "nombreClave": "juegos_nombres.arma_personaje",
+    "icono": "🧩",
+    "estante": "CONCEPTOS"
   }
 ]

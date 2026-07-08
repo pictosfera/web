@@ -476,7 +476,8 @@
     "me_gusta_no_me_gusta_comidas": "I like it / I don't like it",
     "lista_compra_comidas": "Shopping list",
     "reconoce_emociones": "Recognise feelings",
-    "cuadricula_multiplicacion": "Multiplication grid"
+    "cuadricula_multiplicacion": "Multiplication grid",
+    "arma_personaje": "Build a face"
   },
   "footer": {
     "autor": "Pictosfera — developed by Roberto Corral Retuerta.",
@@ -484,6 +485,23 @@
     "licencia_enlace": "View the CC BY 4.0 license",
     "arasaac": "The pictographic symbols used are the property of the Government of Aragón and were created by Sergio Palao for ARASAAC, distributed under Creative Commons license (BY-NC-SA).",
     "arasaac_enlace": "Visit ARASAAC"
+  },
+  "armaPersonaje": {
+    "instrucciones": "Choose the right pieces to copy the model face.",
+    "nivel": "Character {n} of {total}",
+    "etiqueta_modelo": "Model",
+    "etiqueta_tu_cara": "Your face",
+    "siguiente": "Next →",
+    "tts_enunciado": "build the face",
+    "tts_correcto": "well done!",
+    "tts_incorrecto": "try again",
+    "zona_ojos": "eyes",
+    "zona_nariz": "nose",
+    "zona_boca": "mouth",
+    "zona_pelo": "hair",
+    "zona_barba": "beard",
+    "zona_sombrero": "hat",
+    "zona_gafas": "glasses"
   },
   "cuadriculaMultiplicacion": {
     "instrucciones": "Select the grid area that represents the multiplication and press '?' to check.",

@@ -46,7 +46,8 @@ export const CAMPOS_POR_MECANICA = {
   'me-gusta-no-me-gusta': ['mostrar', 'mayuscula', 'soloTexto'],
   'lista-compra': ['mayuscula', 'listaSoloTexto', 'estanteSoloImagen'],
   'reconoce-emociones': ['mayuscula', 'soloTexto'],
-  'cuadricula-multiplicacion': []
+  'cuadricula-multiplicacion': [],
+  'arma-personaje': [],
 };
 
 // Catálogo de los 14 ajustes posibles: cómo se llaman sus get/set en
