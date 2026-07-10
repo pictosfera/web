@@ -3,7 +3,7 @@
 // El niño ve un fantasma modelo (izquierda) y debe reconstruir el mismo
 // en el panel de ensamblaje (derecha) eligiendo las piezas correctas.
 //
-// Generación procedural: 20 colores × 4 expresiones × 2 narices × 2 bocas.
+// Generación procedural: 20 colores × 12 expresiones × 6 narices × 6 bocas.
 // Zonas siempre presentes: ojos, nariz, boca (sin pelo ni accesorios).
 // Validación inmediata: clic en pieza → correcto / incorrecto (shake).
 // 10 fantasmas por partida; al terminar → plataforma.mostrarRecompensa().
@@ -41,9 +41,13 @@ const COLORES_FANTASMA = [
   { id: 'crema',    fill: '#FFF0D0', sombra: '#D8C090', brillo: '#FFFFF8' },
 ];
 
-const OJOS_OPTS  = ['alegre', 'triste', 'sorpresa', 'dormido'];
-const NARIZ_OPTS = ['redonda', 'respingona'];
-const BOCA_OPTS  = ['sonrisa', 'puchero'];
+const OJOS_OPTS  = [
+  'alegre', 'triste', 'sorpresa', 'dormido',
+  'enfadado', 'guino', 'llanto', 'enamorado',
+  'estrella', 'verde', 'marron', 'rojo',
+];
+const NARIZ_OPTS = ['redonda', 'respingona', 'pequena', 'grande', 'boton', 'lineas'];
+const BOCA_OPTS  = ['sonrisa', 'puchero', 'carcajada', 'sorpresa_o', 'enfadada', 'lengua'];
 
 // Recortes de viewBox para las vistas de pieza (relación 3:2)
 const VIEWBOX_ZONA = {
@@ -200,12 +204,121 @@ function svgOjosDormidos(ghostFill) {
   `;
 }
 
+function svgOjosEnfadados() {
+  return `
+    <circle cx="88"  cy="122" r="21" fill="${IRIS_COLOR}"/>
+    <circle cx="152" cy="122" r="21" fill="${IRIS_COLOR}"/>
+    <circle cx="88"  cy="122" r="12" fill="${DARK_COLOR}"/>
+    <circle cx="152" cy="122" r="12" fill="${DARK_COLOR}"/>
+    <circle cx="82"  cy="115" r="5"  fill="white"/>
+    <circle cx="146" cy="115" r="5"  fill="white"/>
+    <path d="M 54 88 Q 73 103 100 96"   fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 140 96 Q 167 103 186 88" fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+  `;
+}
+
+function svgOjosGuino(ghostFill) {
+  return `
+    <circle cx="88"  cy="120" r="21" fill="${IRIS_COLOR}"/>
+    <circle cx="88"  cy="120" r="12" fill="${DARK_COLOR}"/>
+    <circle cx="82"  cy="113" r="5"  fill="white"/>
+    <path d="M 55 95 Q 88 82 121 95"   fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 116 120 Q 152 101 188 120 L 188 88 Q 152 88 116 88 Z" fill="${ghostFill}"/>
+    <path d="M 116 120 Q 152 101 188 120" fill="none" stroke="${DARK_COLOR}" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 119 95 Q 152 82 185 95" fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+  `;
+}
+
+function svgOjosLlanto() {
+  return `
+    <circle cx="88"  cy="124" r="21" fill="${IRIS_COLOR}"/>
+    <circle cx="152" cy="124" r="21" fill="${IRIS_COLOR}"/>
+    <circle cx="88"  cy="124" r="12" fill="${DARK_COLOR}"/>
+    <circle cx="152" cy="124" r="12" fill="${DARK_COLOR}"/>
+    <circle cx="82"  cy="117" r="5"  fill="white"/>
+    <circle cx="146" cy="117" r="5"  fill="white"/>
+    <path d="M 56 96 Q 73 108 96 98"    fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 144 98 Q 167 108 184 96" fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+    <ellipse cx="88"  cy="152" rx="5" ry="9" fill="#88CCFF" opacity="0.9"/>
+    <ellipse cx="152" cy="152" rx="5" ry="9" fill="#88CCFF" opacity="0.9"/>
+  `;
+}
+
+function svgOjosEnamorados() {
+  return `
+    <path d="M 88 128 Q 70 116 70 107 Q 70 95 80 95 Q 84 95 88 103 Q 92 95 96 95 Q 106 95 106 107 Q 106 116 88 128 Z"
+          fill="#E83030"/>
+    <path d="M 152 128 Q 134 116 134 107 Q 134 95 144 95 Q 148 95 152 103 Q 156 95 160 95 Q 170 95 170 107 Q 170 116 152 128 Z"
+          fill="#E83030"/>
+    <path d="M 55 95 Q 88 82 121 95"   fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 119 95 Q 152 82 185 95" fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+  `;
+}
+
+function svgOjosEstrellas() {
+  return `
+    <path d="M 88 102 L 92 112 L 106 120 L 92 128 L 88 138 L 84 128 L 70 120 L 84 112 Z"
+          fill="#FFD700" stroke="${DARK_COLOR}" stroke-width="1.5"/>
+    <path d="M 152 102 L 156 112 L 170 120 L 156 128 L 152 138 L 148 128 L 134 120 L 148 112 Z"
+          fill="#FFD700" stroke="${DARK_COLOR}" stroke-width="1.5"/>
+    <path d="M 55 95 Q 88 82 121 95"   fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 119 95 Q 152 82 185 95" fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+  `;
+}
+
+function svgOjosVerdes() {
+  return `
+    <circle cx="88"  cy="120" r="21" fill="#28A848"/>
+    <circle cx="152" cy="120" r="21" fill="#28A848"/>
+    <circle cx="88"  cy="120" r="12" fill="${DARK_COLOR}"/>
+    <circle cx="152" cy="120" r="12" fill="${DARK_COLOR}"/>
+    <circle cx="82"  cy="113" r="5"  fill="white"/>
+    <circle cx="146" cy="113" r="5"  fill="white"/>
+    <path d="M 55 95 Q 88 82 121 95"   fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 119 95 Q 152 82 185 95" fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+  `;
+}
+
+function svgOjosMarrones() {
+  return `
+    <circle cx="88"  cy="120" r="21" fill="#8B4513"/>
+    <circle cx="152" cy="120" r="21" fill="#8B4513"/>
+    <circle cx="88"  cy="120" r="12" fill="${DARK_COLOR}"/>
+    <circle cx="152" cy="120" r="12" fill="${DARK_COLOR}"/>
+    <circle cx="82"  cy="113" r="5"  fill="white"/>
+    <circle cx="146" cy="113" r="5"  fill="white"/>
+    <path d="M 55 95 Q 88 82 121 95"   fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 119 95 Q 152 82 185 95" fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+  `;
+}
+
+function svgOjosRojos() {
+  return `
+    <circle cx="88"  cy="120" r="21" fill="#CC0000"/>
+    <circle cx="152" cy="120" r="21" fill="#CC0000"/>
+    <circle cx="88"  cy="120" r="12" fill="${DARK_COLOR}"/>
+    <circle cx="152" cy="120" r="12" fill="${DARK_COLOR}"/>
+    <circle cx="82"  cy="113" r="5"  fill="#FF6060" opacity="0.7"/>
+    <circle cx="146" cy="113" r="5"  fill="#FF6060" opacity="0.7"/>
+    <path d="M 54 88 Q 73 103 100 96"   fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 140 96 Q 167 103 186 88" fill="none" stroke="${DARK_COLOR}" stroke-width="6" stroke-linecap="round"/>
+  `;
+}
+
 function svgOjosPorTipo(tipo, ghostFill) {
   switch (tipo) {
     case 'alegre':   return svgOjosAlegres();
     case 'triste':   return svgOjosTristes();
     case 'sorpresa': return svgOjosSorpresa();
     case 'dormido':  return svgOjosDormidos(ghostFill);
+    case 'enfadado': return svgOjosEnfadados();
+    case 'guino':    return svgOjosGuino(ghostFill);
+    case 'llanto':   return svgOjosLlanto();
+    case 'enamorado': return svgOjosEnamorados();
+    case 'estrella': return svgOjosEstrellas();
+    case 'verde':    return svgOjosVerdes();
+    case 'marron':   return svgOjosMarrones();
+    case 'rojo':     return svgOjosRojos();
     default:         return svgOjosAlegres();
   }
 }
@@ -230,6 +343,52 @@ function svgNarizRespingona(c) {
   `;
 }
 
+function svgNarizPequena(c) {
+  return `
+    <circle cx="120" cy="162" r="6" fill="${c.sombra}"/>
+    <circle cx="117" cy="160" r="2" fill="${c.brillo}" opacity="0.55"/>
+  `;
+}
+
+function svgNarizGrande(c) {
+  return `
+    <ellipse cx="120" cy="165" rx="19" ry="14" fill="${c.sombra}"/>
+    <ellipse cx="113" cy="161" rx="5" ry="4" fill="${c.brillo}" opacity="0.45"/>
+    <ellipse cx="108" cy="168" rx="5" ry="4" fill="${DARK_COLOR}" opacity="0.35"/>
+    <ellipse cx="132" cy="168" rx="5" ry="4" fill="${DARK_COLOR}" opacity="0.35"/>
+  `;
+}
+
+function svgNarizBoton(c) {
+  return `
+    <circle cx="120" cy="162" r="10" fill="${c.sombra}"/>
+    <circle cx="115" cy="158" r="4"  fill="${c.brillo}" opacity="0.5"/>
+    <circle cx="111" cy="165" r="3"  fill="${DARK_COLOR}" opacity="0.4"/>
+    <circle cx="129" cy="165" r="3"  fill="${DARK_COLOR}" opacity="0.4"/>
+  `;
+}
+
+function svgNarizLineas(c) {
+  return `
+    <ellipse cx="107" cy="165" rx="7" ry="5" fill="${c.sombra}"/>
+    <ellipse cx="133" cy="165" rx="7" ry="5" fill="${c.sombra}"/>
+    <circle cx="105"  cy="164" r="1.5" fill="white" opacity="0.4"/>
+    <circle cx="131"  cy="164" r="1.5" fill="white" opacity="0.4"/>
+  `;
+}
+
+function svgNarizPorTipo(tipo, c) {
+  switch (tipo) {
+    case 'redonda':    return svgNarizRedonda(c);
+    case 'respingona': return svgNarizRespingona(c);
+    case 'pequena':    return svgNarizPequena(c);
+    case 'grande':     return svgNarizGrande(c);
+    case 'boton':      return svgNarizBoton(c);
+    case 'lineas':     return svgNarizLineas(c);
+    default:           return svgNarizRedonda(c);
+  }
+}
+
 // ── SVG: boca ─────────────────────────────────────────────────────────────────
 
 function svgBocaSonrisa(c) {
@@ -248,6 +407,58 @@ function svgBocaPuchero(c) {
   `;
 }
 
+function svgBocaCarcajada(c) {
+  // Boca muy abierta; interior oscuro con dientes blancos arriba
+  return `
+    <path d="M 78 183 Q 120 232 162 183 Q 120 200 78 183 Z"
+          fill="${DARK_COLOR}" stroke="${DARK_COLOR}" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 78 183 Q 120 200 162 183" fill="white"/>
+    <path d="M 78 183 Q 120 232 162 183" fill="none" stroke="${DARK_COLOR}" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="100" y1="183" x2="99"  y2="195" stroke="${DARK_COLOR}" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="112" y1="183" x2="111" y2="198" stroke="${DARK_COLOR}" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="128" y1="183" x2="129" y2="198" stroke="${DARK_COLOR}" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="140" y1="183" x2="141" y2="195" stroke="${DARK_COLOR}" stroke-width="1.5" stroke-linecap="round"/>
+  `;
+}
+
+function svgBocaSorpresaO(c) {
+  return `
+    <ellipse cx="120" cy="198" rx="21" ry="17" fill="${c.sombra}" stroke="${DARK_COLOR}" stroke-width="3"/>
+    <ellipse cx="120" cy="198" rx="13" ry="10" fill="${DARK_COLOR}"/>
+  `;
+}
+
+function svgBocaEnfadada(c) {
+  return `
+    <path d="M 87 200 Q 120 183 153 200"
+          fill="${c.sombra}" stroke="${DARK_COLOR}" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M 87 200 Q 120 192 153 200" fill="${c.fill}"/>
+    <path d="M 87 200 Q 104 208 120 206 Q 136 208 153 200" fill="none" stroke="${DARK_COLOR}" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  `;
+}
+
+function svgBocaLengua(c) {
+  return `
+    <path d="M 82 186 Q 120 220 158 186"
+          fill="${c.sombra}" stroke="${DARK_COLOR}" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M 82 186 Q 120 206 158 186" fill="${DARK_COLOR}"/>
+    <ellipse cx="120" cy="210" rx="15" ry="12" fill="#E8305A"/>
+    <path d="M 105 210 Q 120 222 135 210" fill="#B8103A" stroke="none"/>
+  `;
+}
+
+function svgBocaPorTipo(tipo, c) {
+  switch (tipo) {
+    case 'sonrisa':    return svgBocaSonrisa(c);
+    case 'puchero':    return svgBocaPuchero(c);
+    case 'carcajada':  return svgBocaCarcajada(c);
+    case 'sorpresa_o': return svgBocaSorpresaO(c);
+    case 'enfadada':   return svgBocaEnfadada(c);
+    case 'lengua':     return svgBocaLengua(c);
+    default:           return svgBocaSonrisa(c);
+  }
+}
+
 // ── Composición SVG ───────────────────────────────────────────────────────────
 
 /**
@@ -262,8 +473,8 @@ function svgComponerPersonaje(personaje, soloZonas) {
   let svg = svgCuerpoFantasma(c);
   svg += svgOjosBlancos();
   if (inc('ojos'))  svg += svgOjosPorTipo(personaje.ojos, c.fill);
-  if (inc('nariz')) svg += personaje.nariz === 'redonda' ? svgNarizRedonda(c) : svgNarizRespingona(c);
-  if (inc('boca'))  svg += personaje.boca  === 'sonrisa' ? svgBocaSonrisa(c) : svgBocaPuchero(c);
+  if (inc('nariz')) svg += svgNarizPorTipo(personaje.nariz, c);
+  if (inc('boca'))  svg += svgBocaPorTipo(personaje.boca, c);
 
   return `<svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">${svg}</svg>`;
 }
@@ -280,10 +491,10 @@ function svgPieza(pieza) {
       cont += svgOjosPorTipo(pieza.varOjos, c.fill);
       break;
     case 'nariz':
-      cont += pieza.varNariz === 'redonda' ? svgNarizRedonda(c) : svgNarizRespingona(c);
+      cont += svgNarizPorTipo(pieza.varNariz, c);
       break;
     case 'boca':
-      cont += pieza.varBoca === 'sonrisa' ? svgBocaSonrisa(c) : svgBocaPuchero(c);
+      cont += svgBocaPorTipo(pieza.varBoca, c);
       break;
   }
 
@@ -319,73 +530,60 @@ function construirDOM(plataforma) {
 
   // Marcador de ronda
   const marc    = document.createElement('div');
-  marc.className = 'ap-marcador';
-  const rondaEl = document.createElement('span');
-  rondaEl.className = 'ap-ronda';
-  marc.appendChild(rondaEl);
+  marc.className = 'ap-ronda';
 
-  // Arena: modelo + ensamblaje
-  const arena = document.createElement('div');
-  arena.className = 'ap-arena';
+  // Panel principal: modelo | ensamblaje
+  const panelEl = document.createElement('div');
+  panelEl.className = 'ap-panel';
 
-  const cartaModelo = document.createElement('div');
-  cartaModelo.className = 'ap-carta ap-modelo';
-  const etiqMod = document.createElement('div');
-  etiqMod.className = 'ap-etiqueta';
-  etiqMod.textContent = plataforma.t('armaPersonaje.etiqueta_modelo');
-  const svgMod = document.createElement('div');
-  svgMod.className = 'ap-cara-svg';
-  cartaModelo.append(etiqMod, svgMod);
+  // Modelo
+  const modeloEl  = document.createElement('div');
+  modeloEl.className = 'ap-modelo ap-cara';
+  const modeloLbl = document.createElement('span');
+  modeloLbl.className = 'ap-cara-label';
+  modeloLbl.textContent = plataforma.t('armaPersonaje.etiqueta_modelo');
+  const modeloSvg = document.createElement('div');
+  modeloSvg.className = 'ap-cara-svg';
+  modeloEl.append(modeloLbl, modeloSvg);
 
-  const cartaEnsam = document.createElement('div');
-  cartaEnsam.className = 'ap-carta ap-ensamblaje';
-  const etiqEns = document.createElement('div');
-  etiqEns.className = 'ap-etiqueta';
-  etiqEns.textContent = plataforma.t('armaPersonaje.etiqueta_tu_cara');
-  const svgEns = document.createElement('div');
-  svgEns.className = 'ap-cara-svg ap-cara-ensam';
-  cartaEnsam.append(etiqEns, svgEns);
+  // Ensamblaje
+  const ensamEl  = document.createElement('div');
+  ensamEl.className = 'ap-ensam ap-cara';
+  const ensamLbl = document.createElement('span');
+  ensamLbl.className = 'ap-cara-label';
+  ensamLbl.textContent = plataforma.t('armaPersonaje.etiqueta_tu_cara');
+  const ensamSvg = document.createElement('div');
+  ensamSvg.className = 'ap-cara-svg';
+  ensamEl.append(ensamLbl, ensamSvg);
 
-  arena.append(cartaModelo, cartaEnsam);
+  panelEl.append(modeloEl, ensamEl);
 
-  // Banco de piezas
-  const banco = document.createElement('div');
-  banco.className = 'ap-banco';
+  // Banco de piezas (se rellena dinámicamente)
+  const bancoEl = document.createElement('div');
+  bancoEl.className = 'ap-banco';
 
-  // Overlay de celebración
-  const overlay = document.createElement('div');
-  overlay.className = 'ap-celebracion ap-oculto';
-  const ovCont = document.createElement('div');
-  ovCont.className = 'ap-celeb-contenido';
-  const ovText = document.createElement('p');
-  ovText.textContent = '⭐';
-  const ovBtn = document.createElement('button');
-  ovBtn.className = 'ap-btn-siguiente';
-  ovBtn.textContent = plataforma.t('armaPersonaje.siguiente');
-  ovBtn.addEventListener('click', siguienteRonda);
-  ovCont.append(ovText, ovBtn);
-  overlay.appendChild(ovCont);
+  // Celebración (oculta hasta que acierte)
+  const celEl  = document.createElement('div');
+  celEl.className = 'ap-celebracion ap-oculto';
+  const celBtn = document.createElement('button');
+  celBtn.className = 'ap-btn-siguiente';
+  celBtn.textContent = plataforma.t('armaPersonaje.siguiente');
+  celEl.appendChild(celBtn);
 
-  raiz.append(cab, marc, arena, banco, overlay);
+  raiz.append(cab, marc, panelEl, bancoEl, celEl);
   return raiz;
 }
 
-// ── Flujo del juego ───────────────────────────────────────────────────────────
+// ── Banco y ensamblaje dinámicos ──────────────────────────────────────────────
 
-function actualizarEnsam() {
-  const { personaje, colocadas, raiz } = estado;
-  const zonaSet = new Set(
-    Object.entries(colocadas).filter(([, v]) => v).map(([k]) => k)
-  );
-  raiz.querySelector('.ap-cara-ensam').innerHTML = svgComponerPersonaje(personaje, zonaSet);
-}
+function pintarBanco(contenedor) {
+  const { raiz, personaje, colocadas, plataforma } = estado;
+  const bancoEl = raiz.querySelector('.ap-banco');
+  bancoEl.innerHTML = '';
 
-function pintarBanco() {
-  const { plataforma, banco, colocadas, raiz } = estado;
-  const contenedor = raiz.querySelector('.ap-banco');
-  contenedor.innerHTML = '';
+  const zonas = generarBancoPiezas(personaje);
 
-  banco.forEach(({ zona, piezas }) => {
+  zonas.forEach(({ zona, piezas }) => {
     const grupo = document.createElement('div');
     grupo.className = 'ap-zona-grupo';
     grupo.dataset.zona = zona;
@@ -408,8 +606,15 @@ function pintarBanco() {
     });
 
     grupo.appendChild(piezasDiv);
-    contenedor.appendChild(grupo);
+    bancoEl.appendChild(grupo);
   });
+}
+
+function actualizarEnsam() {
+  const { raiz, personaje, colocadas } = estado;
+  const ensamSvg = raiz.querySelector('.ap-ensam .ap-cara-svg');
+  const zonasPuestas = new Set(Object.keys(colocadas).filter(z => colocadas[z]));
+  ensamSvg.innerHTML = svgComponerPersonaje(personaje, zonasPuestas);
 }
 
 function pintarRonda() {
@@ -423,8 +628,6 @@ function pintarRonda() {
 
   actualizarEnsam();
   pintarBanco();
-
-  plataforma.tts.speak(plataforma.t('armaPersonaje.tts_enunciado'));
 }
 
 function manejarClic(zona, pieza, btnEl) {
@@ -466,33 +669,22 @@ function siguienteRonda() {
   if (!estado) return;
   estado.raiz.querySelector('.ap-celebracion').classList.add('ap-oculto');
   estado.rondaActual++;
-
   if (estado.rondaActual > TOTAL_RONDAS) {
-    estado.plataforma.mostrarRecompensa();
+    estado.plataforma.mostrarRecompensa({ onContinuar: () => iniciarPartida() });
     return;
   }
-
-  estado.personaje = generarPersonaje();
-  estado.banco     = generarBancoPiezas(estado.personaje);
-  estado.colocadas = {};
-  estado.bloqueado = false;
+  estado.personaje  = generarPersonaje();
+  estado.colocadas  = {};
+  estado.bloqueado  = false;
   pintarRonda();
 }
 
-function iniciarPartida() {
-  estado.rondaActual = 1;
-  estado.personaje   = generarPersonaje();
-  estado.banco       = generarBancoPiezas(estado.personaje);
-  estado.colocadas   = {};
-  estado.bloqueado   = false;
-  pintarRonda();
-}
-
-// ── Montaje / desmontaje ──────────────────────────────────────────────────────
+// ── Punto de entrada ──────────────────────────────────────────────────────────
 
 function montar(contenedor, plataforma) {
+  if (estado) desmontar();
+
   inyectarEstilosUnaVez();
-  contenedor.innerHTML = '';
 
   const raiz = construirDOM(plataforma);
   contenedor.appendChild(raiz);
@@ -500,15 +692,17 @@ function montar(contenedor, plataforma) {
   estado = {
     plataforma,
     raiz,
-    personaje:   null,
-    banco:       null,
-    colocadas:   {},
+    personaje:   generarPersonaje(),
     rondaActual: 1,
+    colocadas:   {},
     bloqueado:   false,
     timeoutId:   null,
   };
 
-  iniciarPartida();
+  // Botón "siguiente"
+  raiz.querySelector('.ap-btn-siguiente').addEventListener('click', siguienteRonda);
+
+  pintarRonda();
 }
 
 function desmontar() {
@@ -516,11 +710,14 @@ function desmontar() {
   estado = null;
 }
 
-export default {
-  id:       'arma-personaje',
-  nombre:   'Arma la cara',
-  icono:    '👻',
-  estante:  'CONCEPTOS',
-  montar,
-  desmontar,
-};
+function iniciarPartida() {
+  if (!estado) return;
+  estado.rondaActual = 1;
+  estado.personaje   = generarPersonaje();
+  estado.colocadas   = {};
+  estado.bloqueado   = false;
+  estado.raiz.querySelector('.ap-celebracion').classList.add('ap-oculto');
+  pintarRonda();
+}
+
+export default { id: 'arma-personaje', icono: '👻', montar, desmontar };

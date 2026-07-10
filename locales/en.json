@@ -264,7 +264,8 @@
     "SUMAR": "Adding",
     "RESTAR": "Subtracting",
     "CONTAR": "Counting",
-    "MULTIPLICAR": "Multiply"
+    "MULTIPLICAR": "Multiply",
+    "SERIES": "Series"
   },
   "memoria": {
     "nombre": "Memory",

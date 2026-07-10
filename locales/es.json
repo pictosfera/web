@@ -264,7 +264,8 @@
     "SUMAR": "Sumar",
     "RESTAR": "Restar",
     "CONTAR": "Contar",
-    "MULTIPLICAR": "Multiplicar"
+    "MULTIPLICAR": "Multiplicar",
+    "SERIES": "Series"
   },
   "memoria": {
     "nombre": "Memoria",

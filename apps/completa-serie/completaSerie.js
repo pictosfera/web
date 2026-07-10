@@ -244,7 +244,11 @@ function construirRonda() {
   const { raiz, serie, huecos, banco, plataforma, rondaActual } = estado;
   raiz.innerHTML = '';
 
-  // Cabecera
+  // Cabecera: título del juego + instrucciones
+  const h1 = document.createElement('h1');
+  h1.textContent = ((plataforma.icono || '') + ' ' + plataforma.nombre).trim();
+  raiz.appendChild(h1);
+
   const instrEl = document.createElement('p');
   instrEl.className   = 'cs-instrucciones';
   instrEl.textContent = plataforma.t('completaSerie.instrucciones');

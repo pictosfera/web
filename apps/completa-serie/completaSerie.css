@@ -33,9 +33,11 @@
 
 .cs-serie {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   gap: var(--space-xs);
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 .cs-celda {

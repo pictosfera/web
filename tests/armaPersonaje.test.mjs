@@ -39,25 +39,31 @@ test('generarPersonaje: color es uno de los 20 colores definidos', () => {
   }
 });
 
-test('generarPersonaje: ojos es uno de los 4 tipos', () => {
-  const VALIDOS = ['alegre','triste','sorpresa','dormido'];
+test('generarPersonaje: ojos es uno de los 12 tipos válidos', () => {
+  const VALIDOS = [
+    'alegre','triste','sorpresa','dormido',
+    'enfadado','guino','llanto','enamorado',
+    'estrella','verde','marron','rojo',
+  ];
   for (let i = 0; i < 100; i++) {
     const { ojos } = generarPersonaje();
     assert.ok(VALIDOS.includes(ojos), `ojos="${ojos}" no reconocido`);
   }
 });
 
-test('generarPersonaje: nariz es redonda o respingona', () => {
+test('generarPersonaje: nariz es una de las 6 variantes válidas', () => {
+  const VALIDOS = ['redonda','respingona','pequena','grande','boton','lineas'];
   for (let i = 0; i < 100; i++) {
     const { nariz } = generarPersonaje();
-    assert.ok(['redonda','respingona'].includes(nariz), `nariz="${nariz}" no válida`);
+    assert.ok(VALIDOS.includes(nariz), `nariz="${nariz}" no válida`);
   }
 });
 
-test('generarPersonaje: boca es sonrisa o puchero', () => {
+test('generarPersonaje: boca es una de las 6 variantes válidas', () => {
+  const VALIDOS = ['sonrisa','puchero','carcajada','sorpresa_o','enfadada','lengua'];
   for (let i = 0; i < 100; i++) {
     const { boca } = generarPersonaje();
-    assert.ok(['sonrisa','puchero'].includes(boca), `boca="${boca}" no válida`);
+    assert.ok(VALIDOS.includes(boca), `boca="${boca}" no válida`);
   }
 });
 
@@ -266,8 +272,8 @@ test('generarBancoPiezas: boca distractor usa forma diferente', () => {
     const p = generarPersonaje();
     const banco = generarBancoPiezas(p);
     const zonaB = banco.find(z => z.zona === 'boca');
-    const bocaIncorr = zonaB.piezas.find(pp => !pp.correcto);
-    assert.notStrictEqual(bocaIncorr.varBoca, p.boca,
-      'boca distractor no debe tener la misma forma que el personaje');
+    const bocaDist = zonaB.piezas.find(pp => !pp.correcto);
+    assert.notStrictEqual(bocaDist.varBoca, p.boca,
+      `boca distractor "${bocaDist.varBoca}" igual que la correcta "${p.boca}"`);
   }
 });
