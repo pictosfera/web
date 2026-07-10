@@ -30,7 +30,8 @@ const AJUSTES_POR_DEFECTO = {
   toleranciaTrazo: 'facil',
   dificultadRuleta: 'facil',
   listaSoloTexto: false,
-  estanteSoloImagen: false
+  estanteSoloImagen: false,
+  huecosLibres: false
 };
 
 test('por defecto, la pista se muestra, en mayúsculas, el teclado se resalta, la mano amiga está activada, el pictograma se ve normal (sin solo texto ni pulsador), "Escribe la letra" empieza con letra punteada y tolerancia fácil, "Ruleta de letras" empieza en dificultad fácil, y "Lista de la compra" empieza sin soloTexto/soloImagen en ninguno de sus dos lados', () => {
@@ -214,4 +215,12 @@ test('getAjustesPista(appId) devuelve la foto fija ya resuelta para ese juego en
   const propios = ajustesJuego.getAjustesPista('memoria-animales');
   assert.equal(propios.mayuscula, false);
   assert.deepEqual(ajustesJuego.getAjustesPista(), AJUSTES_POR_DEFECTO); // el global sigue de fábrica
+});
+
+test('getHuecosLibres() devuelve false por defecto; setHuecosLibres actúa igual que el resto de booleanos', () => {
+  assert.equal(ajustesJuego.getHuecosLibres(), false); // fábrica
+  ajustesJuego.setHuecosLibres(true);
+  assert.equal(ajustesJuego.getHuecosLibres(), true);
+  ajustesJuego.setHuecosLibres(false); // restaurar
+  assert.equal(ajustesJuego.getHuecosLibres(), false);
 });

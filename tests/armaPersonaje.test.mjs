@@ -12,28 +12,30 @@ import {
 
 test('generarPersonaje: tiene los campos requeridos', () => {
   const p = generarPersonaje();
-  assert.ok(typeof p.piel     === 'string', 'piel debe ser string');
-  assert.ok(typeof p.pelo     === 'string', 'pelo debe ser string');
-  assert.ok(typeof p.ojos     === 'string', 'ojos debe ser string');
-  assert.ok(typeof p.nariz    === 'string', 'nariz debe ser string');
-  assert.ok(typeof p.boca     === 'string', 'boca debe ser string');
-  assert.ok(typeof p.barba    === 'boolean','barba debe ser boolean');
-  assert.ok(typeof p.gafas    === 'boolean','gafas debe ser boolean');
+  assert.ok(typeof p.color === 'string', 'color debe ser string');
+  assert.ok(typeof p.ojos  === 'string', 'ojos debe ser string');
+  assert.ok(typeof p.nariz === 'string', 'nariz debe ser string');
+  assert.ok(typeof p.boca  === 'string', 'boca debe ser string');
 });
 
-test('generarPersonaje: piel es uno de los 5 tonos definidos', () => {
-  const TONOS_VALIDOS = ['p1','p2','p3','p4','p5'];
-  for (let i = 0; i < 100; i++) {
-    const { piel } = generarPersonaje();
-    assert.ok(TONOS_VALIDOS.includes(piel), `piel="${piel}" no reconocido`);
-  }
+test('generarPersonaje: no tiene campos de versión anterior (piel, pelo, barba, gafas)', () => {
+  const p = generarPersonaje();
+  assert.strictEqual(p.piel,     undefined, 'piel no debe existir');
+  assert.strictEqual(p.pelo,     undefined, 'pelo no debe existir');
+  assert.strictEqual(p.barba,    undefined, 'barba no debe existir');
+  assert.strictEqual(p.sombrero, undefined, 'sombrero no debe existir');
+  assert.strictEqual(p.gafas,    undefined, 'gafas no debe existir');
 });
 
-test('generarPersonaje: pelo es uno de los 7 peinados definidos', () => {
-  const PELOS_VALIDOS = ['dk-c','dk-l','lt-c','lt-l','rd-m','bl-r','gr-c'];
+test('generarPersonaje: color es uno de los 20 colores definidos', () => {
+  const COLORES_VALIDOS = [
+    'rojo','azul','amarillo','verde','naranja','morado','rosa','marron',
+    'negro','blanco','gris','celeste','turquesa','beige','lila','violeta',
+    'fucsia','dorado','plateado','crema',
+  ];
   for (let i = 0; i < 100; i++) {
-    const { pelo } = generarPersonaje();
-    assert.ok(PELOS_VALIDOS.includes(pelo), `pelo="${pelo}" no reconocido`);
+    const { color } = generarPersonaje();
+    assert.ok(COLORES_VALIDOS.includes(color), `color="${color}" no reconocido`);
   }
 });
 
@@ -45,17 +47,17 @@ test('generarPersonaje: ojos es uno de los 4 tipos', () => {
   }
 });
 
-test('generarPersonaje: nariz es ancha o fina', () => {
+test('generarPersonaje: nariz es redonda o respingona', () => {
   for (let i = 0; i < 100; i++) {
     const { nariz } = generarPersonaje();
-    assert.ok(['ancha','fina'].includes(nariz), `nariz="${nariz}" no válida`);
+    assert.ok(['redonda','respingona'].includes(nariz), `nariz="${nariz}" no válida`);
   }
 });
 
-test('generarPersonaje: boca es sonrisa o neutral', () => {
+test('generarPersonaje: boca es sonrisa o puchero', () => {
   for (let i = 0; i < 100; i++) {
     const { boca } = generarPersonaje();
-    assert.ok(['sonrisa','neutral'].includes(boca), `boca="${boca}" no válida`);
+    assert.ok(['sonrisa','puchero'].includes(boca), `boca="${boca}" no válida`);
   }
 });
 
@@ -63,204 +65,209 @@ test('generarPersonaje: produce variedad en 50 llamadas', () => {
   const vistos = new Set();
   for (let i = 0; i < 50; i++) {
     const p = generarPersonaje();
-    vistos.add(`${p.piel}-${p.pelo}-${p.ojos}-${p.nariz}-${p.boca}`);
+    vistos.add(`${p.color}-${p.ojos}-${p.nariz}-${p.boca}`);
   }
   assert.ok(vistos.size > 1, 'debe haber al menos 2 combinaciones distintas');
 });
 
-test('generarPersonaje: sombrero y gafas no coexisten', () => {
-  for (let i = 0; i < 200; i++) {
-    const p = generarPersonaje();
-    if (p.sombrero && p.gafas) {
-      assert.fail('sombrero y gafas no pueden coexistir');
-    }
-  }
-});
-
 // ── zonasRequeridas ───────────────────────────────────────────────────────────
 
-test('zonasRequeridas: siempre incluye las 4 zonas base', () => {
+test('zonasRequeridas: siempre incluye las 3 zonas base', () => {
   for (let i = 0; i < 50; i++) {
     const p = generarPersonaje();
     const z = zonasRequeridas(p);
     assert.ok(z.includes('ojos'),  'falta ojos');
     assert.ok(z.includes('nariz'), 'falta nariz');
     assert.ok(z.includes('boca'),  'falta boca');
-    assert.ok(z.includes('pelo'),  'falta pelo');
   }
 });
 
-test('zonasRequeridas: incluye barba si el personaje tiene barba', () => {
-  const p = { piel:'p1', pelo:'dk-c', ojos:'alegre', nariz:'ancha', boca:'sonrisa',
-               barba:true, sombrero:null, gafas:false };
-  const z = zonasRequeridas(p);
-  assert.ok(z.includes('barba'), 'debe incluir barba');
+test('zonasRequeridas: devuelve exactamente 3 zonas', () => {
+  for (let i = 0; i < 30; i++) {
+    const p = generarPersonaje();
+    const z = zonasRequeridas(p);
+    assert.strictEqual(z.length, 3, `debe haber exactamente 3 zonas, hay ${z.length}`);
+  }
 });
 
-test('zonasRequeridas: no incluye barba si no la tiene', () => {
-  const p = { piel:'p1', pelo:'dk-c', ojos:'alegre', nariz:'ancha', boca:'sonrisa',
-               barba:false, sombrero:null, gafas:false };
-  const z = zonasRequeridas(p);
-  assert.ok(!z.includes('barba'), 'no debe incluir barba');
-});
-
-test('zonasRequeridas: incluye sombrero si lo tiene', () => {
-  const p = { piel:'p1', pelo:'dk-c', ojos:'alegre', nariz:'ancha', boca:'sonrisa',
-               barba:false, sombrero:'#E03030', gafas:false };
-  const z = zonasRequeridas(p);
-  assert.ok(z.includes('sombrero'), 'debe incluir sombrero');
-});
-
-test('zonasRequeridas: incluye gafas si las tiene', () => {
-  const p = { piel:'p1', pelo:'dk-c', ojos:'alegre', nariz:'ancha', boca:'sonrisa',
-               barba:false, sombrero:null, gafas:true };
-  const z = zonasRequeridas(p);
-  assert.ok(z.includes('gafas'), 'debe incluir gafas');
+test('zonasRequeridas: no incluye pelo, barba, sombrero ni gafas', () => {
+  for (let i = 0; i < 30; i++) {
+    const p = generarPersonaje();
+    const z = zonasRequeridas(p);
+    assert.ok(!z.includes('pelo'),     'no debe incluir pelo');
+    assert.ok(!z.includes('barba'),    'no debe incluir barba');
+    assert.ok(!z.includes('sombrero'), 'no debe incluir sombrero');
+    assert.ok(!z.includes('gafas'),    'no debe incluir gafas');
+  }
 });
 
 // ── esZonaCorrecta ────────────────────────────────────────────────────────────
 
 test('esZonaCorrecta: devuelve true para pieza correcta', () => {
   const p = generarPersonaje();
-  assert.strictEqual(esZonaCorrecta(p, { correcto:true, zona:'ojos' }), true);
+  assert.strictEqual(esZonaCorrecta(p, { correcto: true, zona: 'ojos' }), true);
 });
 
 test('esZonaCorrecta: devuelve false para pieza incorrecta', () => {
   const p = generarPersonaje();
-  assert.strictEqual(esZonaCorrecta(p, { correcto:false, zona:'ojos' }), false);
+  assert.strictEqual(esZonaCorrecta(p, { correcto: false, zona: 'ojos' }), false);
 });
 
 // ── composicionCorrecta ───────────────────────────────────────────────────────
 
-test('composicionCorrecta: true cuando todas las zonas requeridas están colocadas', () => {
-  const p = { piel:'p1', pelo:'dk-c', ojos:'alegre', nariz:'ancha', boca:'sonrisa',
-               barba:false, sombrero:null, gafas:false };
-  const colocadas = { ojos:true, nariz:true, boca:true, pelo:true };
+test('composicionCorrecta: true cuando las 3 zonas están colocadas', () => {
+  const p = { color: 'rojo', ojos: 'alegre', nariz: 'redonda', boca: 'sonrisa' };
+  const colocadas = { ojos: true, nariz: true, boca: true };
   assert.strictEqual(composicionCorrecta(p, colocadas), true);
 });
 
-test('composicionCorrecta: false si falta alguna zona base', () => {
-  const p = { piel:'p1', pelo:'dk-c', ojos:'alegre', nariz:'ancha', boca:'sonrisa',
-               barba:false, sombrero:null, gafas:false };
-  const colocadas = { ojos:true, nariz:true, boca:true };  // falta pelo
+test('composicionCorrecta: false si falta ojos', () => {
+  const p = { color: 'azul', ojos: 'triste', nariz: 'respingona', boca: 'puchero' };
+  const colocadas = { nariz: true, boca: true };
   assert.strictEqual(composicionCorrecta(p, colocadas), false);
 });
 
-test('composicionCorrecta: false si falta zona opcional requerida (barba)', () => {
-  const p = { piel:'p1', pelo:'dk-c', ojos:'alegre', nariz:'ancha', boca:'sonrisa',
-               barba:true, sombrero:null, gafas:false };
-  const colocadas = { ojos:true, nariz:true, boca:true, pelo:true };  // falta barba
+test('composicionCorrecta: false si falta nariz', () => {
+  const p = { color: 'verde', ojos: 'sorpresa', nariz: 'redonda', boca: 'sonrisa' };
+  const colocadas = { ojos: true, boca: true };
   assert.strictEqual(composicionCorrecta(p, colocadas), false);
 });
 
-test('composicionCorrecta: true incluyendo accesorios opcionales', () => {
-  const p = { piel:'p2', pelo:'lt-l', ojos:'triste', nariz:'fina', boca:'neutral',
-               barba:true, sombrero:null, gafas:true };
-  const colocadas = { ojos:true, nariz:true, boca:true, pelo:true, barba:true, gafas:true };
-  assert.strictEqual(composicionCorrecta(p, colocadas), true);
+test('composicionCorrecta: false si falta boca', () => {
+  const p = { color: 'morado', ojos: 'dormido', nariz: 'respingona', boca: 'puchero' };
+  const colocadas = { ojos: true, nariz: true };
+  assert.strictEqual(composicionCorrecta(p, colocadas), false);
+});
+
+test('composicionCorrecta: false con objeto vacío', () => {
+  const p = generarPersonaje();
+  assert.strictEqual(composicionCorrecta(p, {}), false);
 });
 
 // ── generarBancoPiezas ────────────────────────────────────────────────────────
 
 test('generarBancoPiezas: cada zona tiene exactamente 2 piezas', () => {
   for (let i = 0; i < 30; i++) {
-    const p = generarPersonaje();
-    const banco = generarBancoPiezas(p);
-    for (const { zona, piezas } of banco) {
+    const p = generarBancoPiezas(generarPersonaje());
+    for (const { zona, piezas } of p) {
       assert.strictEqual(piezas.length, 2, `zona "${zona}" no tiene 2 piezas`);
     }
   }
 });
 
-test('generarBancoPiezas: exactamente 1 pieza correcta y 1 incorrecta por zona', () => {
+test('generarBancoPiezas: exactamente 1 correcta y 1 incorrecta por zona', () => {
   for (let i = 0; i < 30; i++) {
-    const p = generarPersonaje();
-    const banco = generarBancoPiezas(p);
-    for (const { zona, piezas } of banco) {
+    const p = generarBancoPiezas(generarPersonaje());
+    for (const { zona, piezas } of p) {
       const correctas = piezas.filter(pp => pp.correcto).length;
       assert.strictEqual(correctas, 1, `zona "${zona}" no tiene exactamente 1 correcta`);
     }
   }
 });
 
-test('generarBancoPiezas: incluye las 4 zonas base siempre', () => {
+test('generarBancoPiezas: incluye siempre las 3 zonas', () => {
   for (let i = 0; i < 30; i++) {
-    const p = generarPersonaje();
-    const banco = generarBancoPiezas(p);
+    const banco = generarBancoPiezas(generarPersonaje());
     const zonas = banco.map(z => z.zona);
     assert.ok(zonas.includes('ojos'),  'falta ojos en banco');
     assert.ok(zonas.includes('nariz'), 'falta nariz en banco');
     assert.ok(zonas.includes('boca'),  'falta boca en banco');
-    assert.ok(zonas.includes('pelo'),  'falta pelo en banco');
   }
 });
 
-test('generarBancoPiezas: incluye barba si personaje tiene barba', () => {
-  const p = { piel:'p3', pelo:'rd-m', ojos:'sorpresa', nariz:'ancha', boca:'sonrisa',
-               barba:true, sombrero:null, gafas:false };
-  const banco = generarBancoPiezas(p);
-  const zonas = banco.map(z => z.zona);
-  assert.ok(zonas.includes('barba'), 'debe haber zona barba en banco');
+test('generarBancoPiezas: no incluye pelo, barba, sombrero ni gafas', () => {
+  for (let i = 0; i < 30; i++) {
+    const banco = generarBancoPiezas(generarPersonaje());
+    const zonas = banco.map(z => z.zona);
+    assert.ok(!zonas.includes('pelo'),     'no debe haber pelo en banco');
+    assert.ok(!zonas.includes('barba'),    'no debe haber barba en banco');
+    assert.ok(!zonas.includes('sombrero'), 'no debe haber sombrero en banco');
+    assert.ok(!zonas.includes('gafas'),    'no debe haber gafas en banco');
+  }
 });
 
-test('generarBancoPiezas: no incluye barba si personaje no la tiene', () => {
-  const p = { piel:'p3', pelo:'rd-m', ojos:'sorpresa', nariz:'ancha', boca:'sonrisa',
-               barba:false, sombrero:null, gafas:false };
-  const banco = generarBancoPiezas(p);
-  const zonas = banco.map(z => z.zona);
-  assert.ok(!zonas.includes('barba'), 'no debe haber zona barba si personaje no la tiene');
+test('generarBancoPiezas: devuelve exactamente 3 grupos de zonas', () => {
+  for (let i = 0; i < 30; i++) {
+    const banco = generarBancoPiezas(generarPersonaje());
+    assert.strictEqual(banco.length, 3, `el banco debe tener 3 grupos, tiene ${banco.length}`);
+  }
 });
 
-test('generarBancoPiezas: pieza de pelo correcto coincide con personaje', () => {
+test('generarBancoPiezas: todas las piezas usan el mismo color del personaje', () => {
   for (let i = 0; i < 30; i++) {
     const p = generarPersonaje();
     const banco = generarBancoPiezas(p);
-    const zonaPelo = banco.find(z => z.zona === 'pelo');
-    const peloCorrect = zonaPelo.piezas.find(pp => pp.correcto);
-    assert.strictEqual(peloCorrect.varPelo, p.pelo,
-      `pelo correcto "${peloCorrect.varPelo}" no coincide con personaje "${p.pelo}"`);
+    for (const { piezas } of banco) {
+      for (const pieza of piezas) {
+        assert.strictEqual(pieza.color.id, p.color,
+          `pieza usa color "${pieza.color.id}" pero el personaje es "${p.color}"`);
+      }
+    }
   }
 });
 
-test('generarBancoPiezas: pieza de pelo distractor difiere del personaje', () => {
-  for (let i = 0; i < 30; i++) {
-    const p = generarPersonaje();
-    const banco = generarBancoPiezas(p);
-    const zonaPelo = banco.find(z => z.zona === 'pelo');
-    const peloIncorrecto = zonaPelo.piezas.find(pp => !pp.correcto);
-    assert.notStrictEqual(peloIncorrecto.varPelo, p.pelo,
-      'pelo distractor no debe ser igual al del personaje');
-  }
-});
-
-test('generarBancoPiezas: pieza de ojos distractor usa expresión diferente', () => {
+test('generarBancoPiezas: ojos correcto coincide con el personaje', () => {
   for (let i = 0; i < 30; i++) {
     const p = generarPersonaje();
     const banco = generarBancoPiezas(p);
     const zonaOjos = banco.find(z => z.zona === 'ojos');
-    const ojosIncorrecto = zonaOjos.piezas.find(pp => !pp.correcto);
-    assert.notStrictEqual(ojosIncorrecto.varOjos, p.ojos,
+    const ojosCorr = zonaOjos.piezas.find(pp => pp.correcto);
+    assert.strictEqual(ojosCorr.varOjos, p.ojos,
+      `ojos correcto "${ojosCorr.varOjos}" no coincide con personaje "${p.ojos}"`);
+  }
+});
+
+test('generarBancoPiezas: ojos distractor usa expresión diferente', () => {
+  for (let i = 0; i < 30; i++) {
+    const p = generarPersonaje();
+    const banco = generarBancoPiezas(p);
+    const zonaOjos = banco.find(z => z.zona === 'ojos');
+    const ojosIncorr = zonaOjos.piezas.find(pp => !pp.correcto);
+    assert.notStrictEqual(ojosIncorr.varOjos, p.ojos,
       'ojos distractor no debe tener la misma expresión que el personaje');
   }
 });
 
-test('generarBancoPiezas: nariz correcta coincide con personaje', () => {
+test('generarBancoPiezas: nariz correcta coincide con el personaje', () => {
   for (let i = 0; i < 30; i++) {
     const p = generarPersonaje();
     const banco = generarBancoPiezas(p);
     const zonaN = banco.find(z => z.zona === 'nariz');
-    const narizCorrect = zonaN.piezas.find(pp => pp.correcto);
-    assert.strictEqual(narizCorrect.varNariz, p.nariz);
+    const narizCorr = zonaN.piezas.find(pp => pp.correcto);
+    assert.strictEqual(narizCorr.varNariz, p.nariz,
+      `nariz correcta "${narizCorr.varNariz}" no coincide con "${p.nariz}"`);
   }
 });
 
-test('generarBancoPiezas: nariz distractor usa tono de piel diferente', () => {
+test('generarBancoPiezas: nariz distractor usa forma diferente', () => {
   for (let i = 0; i < 30; i++) {
     const p = generarPersonaje();
     const banco = generarBancoPiezas(p);
     const zonaN = banco.find(z => z.zona === 'nariz');
-    const narizIncorrect = zonaN.piezas.find(pp => !pp.correcto);
-    assert.notStrictEqual(narizIncorrect.piel.id, p.piel,
-      'nariz distractor debe tener tono de piel diferente');
+    const narizIncorr = zonaN.piezas.find(pp => !pp.correcto);
+    assert.notStrictEqual(narizIncorr.varNariz, p.nariz,
+      'nariz distractor no debe tener la misma forma que el personaje');
+  }
+});
+
+test('generarBancoPiezas: boca correcta coincide con el personaje', () => {
+  for (let i = 0; i < 30; i++) {
+    const p = generarPersonaje();
+    const banco = generarBancoPiezas(p);
+    const zonaB = banco.find(z => z.zona === 'boca');
+    const bocaCorr = zonaB.piezas.find(pp => pp.correcto);
+    assert.strictEqual(bocaCorr.varBoca, p.boca,
+      `boca correcta "${bocaCorr.varBoca}" no coincide con "${p.boca}"`);
+  }
+});
+
+test('generarBancoPiezas: boca distractor usa forma diferente', () => {
+  for (let i = 0; i < 30; i++) {
+    const p = generarPersonaje();
+    const banco = generarBancoPiezas(p);
+    const zonaB = banco.find(z => z.zona === 'boca');
+    const bocaIncorr = zonaB.piezas.find(pp => !pp.correcto);
+    assert.notStrictEqual(bocaIncorr.varBoca, p.boca,
+      'boca distractor no debe tener la misma forma que el personaje');
   }
 });

@@ -177,6 +177,7 @@
     "pistas_dificultad_ruleta": "Dificultad de la Ruleta de letras (longitud de la palabra, frecuencia de pistas y tamaño del abecedario)",
     "pistas_lista_solo_texto": "En la lista de la compra, mostrar solo el texto, sin la imagen del pictograma",
     "pistas_estante_solo_imagen": "En el estante, mostrar solo el pictograma, sin el texto debajo",
+    "pistas_huecos_libres": "Dificultad avanzada: los huecos pueden aparecer en cualquier posición de la serie, no solo al final",
     "privacidad_titulo": "Privacidad",
     "privacidad_texto": "Pictosfera no tiene servidor ni base de datos propios. Todo lo que añades vive solo en este dispositivo y en este navegador. Si borras los datos del navegador, se perderá todo salvo que tengas una copia de seguridad exportada; las fotos solo se recuperan si las incluiste en esa copia."
   },
@@ -477,7 +478,10 @@
     "lista_compra_comidas": "Lista de la compra",
     "reconoce_emociones": "Reconoce emociones",
     "cuadricula_multiplicacion": "Cuadrícula de multiplicación",
-    "arma_personaje": "Arma la cara"
+    "arma_personaje": "Arma la cara",
+    "series_pictogramas_animales": "Completa la serie de pictogramas",
+    "series_colores": "Completa la serie de colores",
+    "series_numeros": "Completa la serie numérica"
   },
   "footer": {
     "autor": "Pictosfera — desarrollado por Roberto Corral Retuerta.",
@@ -487,21 +491,22 @@
     "arasaac_enlace": "Visitar ARASAAC"
   },
   "armaPersonaje": {
-    "instrucciones": "Elige las piezas correctas para copiar la cara del modelo.",
-    "nivel": "Personaje {n} de {total}",
+    "instrucciones": "Elige las piezas correctas para copiar el fantasma modelo.",
+    "nivel": "Fantasma {n} de {total}",
     "etiqueta_modelo": "Modelo",
-    "etiqueta_tu_cara": "Tu cara",
+    "etiqueta_tu_cara": "Tu fantasma",
     "siguiente": "Siguiente →",
-    "tts_enunciado": "arma la cara",
+    "tts_enunciado": "arma el fantasma",
     "tts_correcto": "¡muy bien!",
     "tts_incorrecto": "inténtalo otra vez",
     "zona_ojos": "ojos",
     "zona_nariz": "nariz",
-    "zona_boca": "boca",
-    "zona_pelo": "pelo",
-    "zona_barba": "barba",
-    "zona_sombrero": "sombrero",
-    "zona_gafas": "gafas"
+    "zona_boca": "boca"
+  },
+  "completaSerie": {
+    "instrucciones": "Arrastra las piezas correctas para completar la serie.",
+    "ronda": "Ronda {n} de {total}",
+    "hueco_vacio": "Hueco vacío"
   },
   "cuadriculaMultiplicacion": {
     "instrucciones": "Selecciona en la cuadrícula el área que representa la multiplicación y pulsa '?' para comprobarlo.",

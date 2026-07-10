@@ -96,6 +96,7 @@ const CLAVE_TOLERANCIA_TRAZO = 'pictosfera.pista.toleranciaTrazo';
 const CLAVE_DIFICULTAD_RULETA = 'pictosfera.pista.dificultadRuleta';
 const CLAVE_LISTA_SOLO_TEXTO = 'pictosfera.pista.listaSoloTexto';
 const CLAVE_ESTANTE_SOLO_IMAGEN = 'pictosfera.pista.estanteSoloImagen';
+const CLAVE_HUECOS_LIBRES = 'pictosfera.pista.huecosLibres';
 const EVENTO_CAMBIO = 'pictosfera:ajustes-juego-changed';
 
 /** Únicos valores válidos para el ajuste de tolerancia de trazo. Si el
@@ -329,6 +330,19 @@ export function setEstanteSoloImagen(valor, appId) {
   guardarBooleano(CLAVE_ESTANTE_SOLO_IMAGEN, Boolean(valor), appId);
 }
 
+/** ¿Los huecos de "Completa la serie" pueden aparecer en cualquier
+ *  posición de la serie, no solo al final? (por defecto: no, para que
+ *  los huecos estén siempre al final de la serie, que es lo más
+ *  intuitivo para empezar). Si se activa, los huecos aparecen en
+ *  posiciones aleatorias, lo que hace la tarea más desafiante. */
+export function getHuecosLibres(appId) {
+  return leerBooleano(CLAVE_HUECOS_LIBRES, false, appId);
+}
+
+export function setHuecosLibres(valor, appId) {
+  guardarBooleano(CLAVE_HUECOS_LIBRES, Boolean(valor), appId);
+}
+
 /** Foto fija de todos los ajustes de pista de un juego (o de los
  *  globales, sin `appId`), cómoda para colgar de `plataforma`. */
 export function getAjustesPista(appId) {
@@ -346,7 +360,8 @@ export function getAjustesPista(appId) {
     toleranciaTrazo: getToleranciaTrazo(appId),
     dificultadRuleta: getDificultadRuleta(appId),
     listaSoloTexto: getListaSoloTexto(appId),
-    estanteSoloImagen: getEstanteSoloImagen(appId)
+    estanteSoloImagen: getEstanteSoloImagen(appId),
+    huecosLibres: getHuecosLibres(appId)
   };
 }
 

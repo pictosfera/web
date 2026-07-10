@@ -177,6 +177,7 @@
     "pistas_dificultad_ruleta": "Letter wheel difficulty (word length, hint frequency and alphabet size)",
     "pistas_lista_solo_texto": "In the shopping list, show only the text, without the pictogram image",
     "pistas_estante_solo_imagen": "On the shelf, show only the pictogram, without the text below",
+    "pistas_huecos_libres": "Advanced difficulty: blanks can appear anywhere in the sequence, not just at the end",
     "privacidad_titulo": "Privacy",
     "privacidad_texto": "Pictosfera has no server or database of its own. Everything you add lives only on this device, in this browser. If you clear your browser data, everything will be lost unless you have an exported backup; photos are only recovered if you included them in that backup."
   },
@@ -477,7 +478,10 @@
     "lista_compra_comidas": "Shopping list",
     "reconoce_emociones": "Recognise feelings",
     "cuadricula_multiplicacion": "Multiplication grid",
-    "arma_personaje": "Build a face"
+    "arma_personaje": "Build a face",
+    "series_pictogramas_animales": "Complete the pictogram sequence",
+    "series_colores": "Complete the colour sequence",
+    "series_numeros": "Complete the number sequence"
   },
   "footer": {
     "autor": "Pictosfera — developed by Roberto Corral Retuerta.",
@@ -487,21 +491,22 @@
     "arasaac_enlace": "Visit ARASAAC"
   },
   "armaPersonaje": {
-    "instrucciones": "Choose the right pieces to copy the model face.",
-    "nivel": "Character {n} of {total}",
+    "instrucciones": "Choose the right pieces to copy the model ghost.",
+    "nivel": "Ghost {n} of {total}",
     "etiqueta_modelo": "Model",
-    "etiqueta_tu_cara": "Your face",
+    "etiqueta_tu_cara": "Your ghost",
     "siguiente": "Next →",
-    "tts_enunciado": "build the face",
+    "tts_enunciado": "build the ghost",
     "tts_correcto": "well done!",
     "tts_incorrecto": "try again",
     "zona_ojos": "eyes",
     "zona_nariz": "nose",
-    "zona_boca": "mouth",
-    "zona_pelo": "hair",
-    "zona_barba": "beard",
-    "zona_sombrero": "hat",
-    "zona_gafas": "glasses"
+    "zona_boca": "mouth"
+  },
+  "completaSerie": {
+    "instrucciones": "Drag the correct pieces to complete the sequence.",
+    "ronda": "Round {n} of {total}",
+    "hueco_vacio": "Empty blank"
   },
   "cuadriculaMultiplicacion": {
     "instrucciones": "Select the grid area that represents the multiplication and press '?' to check.",

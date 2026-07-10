@@ -205,6 +205,52 @@
     }
   },
   {
+    "id": "series-pictogramas-animales",
+    "mecanica": "completa-serie",
+    "modulo": "apps/completa-serie/completaSerie.js",
+    "nombre": "Completa la serie de pictogramas",
+    "nombreClave": "juegos_nombres.series_pictogramas_animales",
+    "icono": "🔁",
+    "estante": "SERIES",
+    "material": {
+      "etiqueta": "animales",
+      "semillaArasaacLang": "es",
+      "semillaArasaac": [
+        "perro",
+        "gato",
+        "vaca",
+        "pájaro",
+        "conejo",
+        "pez",
+        "caballo",
+        "oveja",
+        "pato",
+        "rana",
+        "león",
+        "elefante"
+      ],
+      "minimo": 3
+    }
+  },
+  {
+    "id": "series-colores",
+    "mecanica": "completa-serie",
+    "modulo": "apps/completa-serie/completaSerie.js",
+    "nombre": "Completa la serie de colores",
+    "nombreClave": "juegos_nombres.series_colores",
+    "icono": "🔴",
+    "estante": "SERIES"
+  },
+  {
+    "id": "series-numeros",
+    "mecanica": "completa-serie",
+    "modulo": "apps/completa-serie/completaSerie.js",
+    "nombre": "Completa la serie numérica",
+    "nombreClave": "juegos_nombres.series_numeros",
+    "icono": "🔢",
+    "estante": "SERIES"
+  },
+  {
     "id": "arrastra-numero-animales",
     "mecanica": "arrastra-numero",
     "modulo": "apps/arrastra-numero/arrastraNumero.js",
@@ -466,6 +512,15 @@
     }
   },
   {
+    "id": "cuadricula-multiplicacion",
+    "mecanica": "cuadricula-multiplicacion",
+    "modulo": "apps/cuadricula-multiplicacion/cuadriculaMultiplicacion.js",
+    "nombre": "Cuadrícula de multiplicación",
+    "nombreClave": "juegos_nombres.cuadricula_multiplicacion",
+    "icono": "✖️",
+    "estante": "MULTIPLICAR"
+  },
+  {
     "id": "clasifica-categorias",
     "mecanica": "clasifica-categorias",
     "modulo": "apps/clasifica-categorias/clasificaCategorias.js",
@@ -610,15 +665,6 @@
         "asustado": 35535
       }
     }
-  },
-  {
-    "id": "cuadricula-multiplicacion",
-    "mecanica": "cuadricula-multiplicacion",
-    "modulo": "apps/cuadricula-multiplicacion/cuadriculaMultiplicacion.js",
-    "nombre": "Cuadrícula de multiplicación",
-    "nombreClave": "juegos_nombres.cuadricula_multiplicacion",
-    "icono": "✖️",
-    "estante": "MULTIPLICAR"
   },
   {
     "id": "arma-personaje",

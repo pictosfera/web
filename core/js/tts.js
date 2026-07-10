@@ -61,6 +61,10 @@ export async function hasVoiceForActiveLanguage() {
  * no tiene voz para ese idioma, prueba el idioma de repuesto definido
  * en i18n.js (p.ej. valenciano → catalán → castellano) antes de
  * rendirse en silencio. Nunca lanza una excepción que rompa el juego.
+ *
+ * Devuelve una Promise que se resuelve cuando el motor de voz termina
+ * de pronunciar (evento onend), o tras un máximo de 6 segundos de
+ * seguridad para evitar bloqueos en navegadores que no disparan onend.
  */
 export async function speak(text) {
   if (!isSupported() || !text) return false;
@@ -71,18 +75,25 @@ export async function speak(text) {
     voice = await findVoice(info.speechFallback);
     lang = info.speechFallback;
   }
-  try {
-    speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
-    if (voice) utterance.voice = voice;
-    utterance.rate = 0.95;
-    speechSynthesis.speak(utterance);
-    return Boolean(voice);
-  } catch (err) {
-    console.warn('[tts] No se pudo hablar:', err);
-    return false;
-  }
+  return new Promise((resolve) => {
+    try {
+      speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = lang;
+      if (voice) utterance.voice = voice;
+      utterance.rate = 0.95;
+      const ok = Boolean(voice);
+      utterance.onend   = () => resolve(ok);
+      utterance.onerror = () => resolve(false);
+      // Seguridad: algunos navegadores no disparan onend; resolvemos tras 6 s.
+      const guard = setTimeout(() => resolve(false), 6000);
+      utterance.onend = () => { clearTimeout(guard); resolve(ok); };
+      speechSynthesis.speak(utterance);
+    } catch (err) {
+      console.warn('[tts] No se pudo hablar:', err);
+      resolve(false);
+    }
+  });
 }
 
 
@@ -90,8 +101,15 @@ export async function speak(text) {
  * Lee texto1, espera pausaMs milisegundos al terminar y luego lee texto2.
  * Útil para insertar una pausa controlada entre dos fragmentos TTS (p.ej.
  * el nombre de un pictograma y una pregunta posterior).
+ *
+ * @param {string}  texto1
+ * @param {number}  pausaMs  Milisegundos de pausa entre los dos fragmentos.
+ * @param {string}  texto2
+ * @param {object}  [opts]
+ * @param {number}  [opts.pitch2=1.0]  Tono del segundo fragmento (0–2).
+ *                  Un valor de ~1.15 ayuda a imitar entonación interrogativa.
  */
-export async function speakConPausa(texto1, pausaMs, texto2) {
+export async function speakConPausa(texto1, pausaMs, texto2, opts = {}) {
   if (!isSupported() || !texto1) return;
   const info = getLanguageInfo();
   let voice = await findVoice(info.speechLang);
@@ -114,6 +132,7 @@ export async function speakConPausa(texto1, pausaMs, texto2) {
           u2.lang = lang;
           if (voice) u2.voice = voice;
           u2.rate = 0.95;
+          if (opts.pitch2 != null) u2.pitch = opts.pitch2;
           speechSynthesis.speak(u2);
         } catch (err) {
           console.warn('[tts] speakConPausa — segundo fragmento fallido:', err);

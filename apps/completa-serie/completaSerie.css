@@ -1,0 +1,197 @@
+/* Pictosfera — app "Completa la serie".
+   Estilos propios con prefijo "cs-" para no interferir con el núcleo
+   ni con otras apps. */
+
+/* ── Contenedor raíz ─────────────────────────────────────────── */
+
+.cs-raiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── Textos ───────────────────────────────────────────────────── */
+
+.cs-instrucciones {
+  font-size: 1rem;
+  color: var(--color-text-soft);
+  text-align: center;
+  margin: 0;
+}
+
+.cs-progreso {
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+  margin: 0;
+}
+
+/* ── Fila de serie ────────────────────────────────────────────── */
+
+.cs-serie {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-xs);
+}
+
+.cs-celda {
+  width: clamp(56px, 11vw, 96px);
+  height: clamp(56px, 11vw, 96px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Celda conocida (visible desde el principio) */
+.cs-conocido {
+  border-color: var(--color-border);
+}
+
+/* Hueco vacío */
+.cs-hueco {
+  border: 3px dashed var(--color-primary);
+  background: transparent;
+}
+
+/* Hueco con pieza arrastrada encima */
+.cs-hueco-resaltado {
+  border-color: var(--color-success);
+  border-style: solid;
+  background: var(--color-bg-soft);
+  transform: scale(1.05);
+  transition: transform var(--transition-base);
+}
+
+/* Hueco relleno correctamente */
+.cs-hueco-acierto {
+  border-color: var(--color-success);
+  border-style: solid;
+  animation: cs-pop 0.25s ease;
+}
+
+@keyframes cs-pop {
+  0%   { transform: scale(0.85); }
+  60%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Hueco con respuesta incorrecta (flash rojo breve) */
+.cs-hueco-error {
+  border-color: var(--color-error);
+  border-style: solid;
+  background: var(--color-bg-soft);
+}
+
+/* ── Banco de piezas ──────────────────────────────────────────── */
+
+.cs-banco {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg-soft);
+  border-radius: var(--radius-lg);
+}
+
+/* Pieza arrastrable */
+.cs-pieza {
+  width: clamp(64px, 13vw, 108px);
+  height: clamp(64px, 13vw, 108px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 2px solid var(--color-primary);
+  cursor: grab;
+  touch-action: none;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.cs-pieza:hover {
+  box-shadow: var(--shadow-md, 0 3px 10px rgba(0,0,0,0.18));
+}
+
+/* Pieza mientras se arrastra */
+.cs-pieza-activa {
+  cursor: grabbing;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  z-index: 100;
+  opacity: 0.93;
+}
+
+/* Pieza ya colocada (oculta en el banco) */
+.cs-pieza-usada {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Animación de fallo en la pieza */
+.cs-pieza-error {
+  border-color: var(--color-error);
+  animation: cs-sacudir 0.35s ease;
+}
+
+@keyframes cs-sacudir {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(-7px); }
+  60%  { transform: translateX(7px); }
+  80%  { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+/* ── Contenidos de celdas y piezas ────────────────────────────── */
+
+/* Pictograma */
+.cs-img {
+  width: 86%;
+  height: 86%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* Esfera de color */
+.cs-esfera {
+  width: 68%;
+  height: 68%;
+  border-radius: 50%;
+  box-shadow:
+    inset -4px -4px 8px rgba(0, 0, 0, 0.22),
+    inset  2px  2px 5px rgba(255, 255, 255, 0.28);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+/* Número */
+.cs-numero-txt {
+  font-size: clamp(26px, 5.5vw, 46px);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* ── Mensaje sin material ──────────────────────────────────────── */
+
+.cs-sin-material {
+  text-align: center;
+  color: var(--color-text-soft);
+  padding: var(--space-xl, 2rem) var(--space-md);
+}

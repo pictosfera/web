@@ -155,32 +155,37 @@ function agregarColocado(zonaId, medio) {
 }
 
 /** Registra la decisión del niño. No hay acierto/fallo: cualquiera de
- *  las dos zonas es siempre válida. Reproduce el TTS de la respuesta
- *  ("¡Sí! Me gusta" o "No me gusta") y avanza a la siguiente comida. */
-function manejarEleccion(medio, elementoItem, zona) {
+ *  las dos zonas es siempre válida. Espera a que el TTS termine de
+ *  pronunciar la respuesta ("¡Sí! Me gusta" / "No me gusta") antes de
+ *  mostrar el siguiente pictograma. */
+async function manejarEleccion(medio, elementoItem, zona) {
   if (!estado || estado.bloqueado) return;
   if (!esZonaValida(zona.id)) return;
 
   estado.bloqueado = true;
   estado.plataforma.sounds.acierto();
   const claveRespuesta = zona.id === 'plato' ? 'meGusta.si_me_gusta' : 'meGusta.no_me_gusta';
-  estado.plataforma.tts.speak(estado.plataforma.t(claveRespuesta));
   zona.el.classList.add('megusta-zona-elegida');
   agregarColocado(zona.id, medio);
   if (elementoItem) elementoItem.classList.add('megusta-item-colocado');
+
+  // Esperar a que el TTS termine antes de avanzar al siguiente pictograma.
+  await estado.plataforma.tts.speak(estado.plataforma.t(claveRespuesta));
+
+  if (!estado) return; // puede haberse desmontado mientras esperábamos
 
   if (estado.rondaActual >= RONDAS_TOTAL) {
     estado.timeoutId = setTimeout(() => {
       if (!estado) return;
       estado.plataforma.mostrarRecompensa({ onContinuar: iniciarPartida });
-    }, 500);
+    }, 400);
   } else {
     estado.timeoutId = setTimeout(() => {
       if (!estado) return;
       zona.el.classList.remove('megusta-zona-elegida');
       estado.bloqueado = false;
       siguienteRonda();
-    }, 700);
+    }, 400);
   }
 }
 
@@ -323,7 +328,8 @@ function pintarRonda() {
 
   zonaItem.appendChild(item);
   estado.itemElementoActual = item;
-  plataforma.tts.speakConPausa(estado.medioActual.nombre, 800, plataforma.t('meGusta.te_gusta'));
+  // pitch2: 1.15 simula entonación interrogativa en el "¿te gusta?"
+  plataforma.tts.speakConPausa(estado.medioActual.nombre, 800, plataforma.t('meGusta.te_gusta'), { pitch2: 1.15 });
 }
 
 function siguienteRonda() {

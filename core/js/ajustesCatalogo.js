@@ -48,6 +48,7 @@ export const CAMPOS_POR_MECANICA = {
   'reconoce-emociones': ['mayuscula', 'soloTexto'],
   'cuadricula-multiplicacion': [],
   'arma-personaje': [],
+  'completa-serie': ['huecosLibres'],
 };
 
 // Catálogo de los 14 ajustes posibles: cómo se llaman sus get/set en
@@ -77,7 +78,8 @@ export const DEFINICIONES_AJUSTE = [
     opciones: [['facil', 'ajustes.tolerancia_facil'], ['normal', 'ajustes.tolerancia_normal'], ['dificil', 'ajustes.tolerancia_dificil']]
   },
   { id: 'listaSoloTexto', tipo: 'checkbox', etiqueta: 'ajustes.pistas_lista_solo_texto', getter: 'getListaSoloTexto', setter: 'setListaSoloTexto', porDefecto: false },
-  { id: 'estanteSoloImagen', tipo: 'checkbox', etiqueta: 'ajustes.pistas_estante_solo_imagen', getter: 'getEstanteSoloImagen', setter: 'setEstanteSoloImagen', porDefecto: false }
+  { id: 'estanteSoloImagen', tipo: 'checkbox', etiqueta: 'ajustes.pistas_estante_solo_imagen', getter: 'getEstanteSoloImagen', setter: 'setEstanteSoloImagen', porDefecto: false },
+  { id: 'huecosLibres', tipo: 'checkbox', etiqueta: 'ajustes.pistas_huecos_libres', getter: 'getHuecosLibres', setter: 'setHuecosLibres', porDefecto: false }
 ];
 
 /** Lista de definiciones (objetos completos, no solo ids) que aplican a
