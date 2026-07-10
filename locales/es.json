@@ -265,7 +265,8 @@
     "RESTAR": "Restar",
     "CONTAR": "Contar",
     "MULTIPLICAR": "Multiplicar",
-    "SERIES": "Series"
+    "SERIES": "Series",
+    "BALANZA": "Balanza"
   },
   "memoria": {
     "nombre": "Memoria",
@@ -482,7 +483,17 @@
     "arma_personaje": "Arma la cara",
     "series_pictogramas_animales": "Completa la serie de pictogramas",
     "series_colores": "Completa la serie de colores",
-    "series_numeros": "Completa la serie numérica"
+    "series_numeros": "Completa la serie numérica",
+    "balanza_equilibra": "Equilibra la balanza",
+    "balanza_completa": "Completa la equivalencia",
+    "balanza_suma": "Resuelve la suma",
+    "balanza_descompone": "Descompón el número",
+    "balanza_copia": "Copia la balanza",
+    "balanza_falta": "Encuentra la pieza que falta",
+    "balanza_cual_pesa": "¿Qué lado pesa más?",
+    "balanza_corrige": "Corrige la balanza",
+    "balanza_limitado": "Equilibra con piezas limitadas",
+    "balanza_soluciones": "Encuentra varias soluciones"
   },
   "footer": {
     "autor": "Pictosfera — desarrollado por Roberto Corral Retuerta.",
@@ -507,14 +518,55 @@
   "completaSerie": {
     "instrucciones": "Arrastra las piezas correctas para completar la serie.",
     "ronda": "Ronda {n} de {total}",
-    "hueco_vacio": "Hueco vacío"
+    "hueco_vacio": "Hueco vac\u00edo"
   },
   "cuadriculaMultiplicacion": {
-    "instrucciones": "Selecciona en la cuadrícula el área que representa la multiplicación y pulsa '?' para comprobarlo.",
+    "instrucciones": "Selecciona en la cuadr\u00edcula el \u00e1rea que representa la multiplicaci\u00f3n y pulsa '?' para comprobarlo.",
     "nivel": "Ejercicio {n} de {total}",
     "validar_aria": "Comprobar respuesta",
     "tts_enunciado": "dibuja {a} por {b}",
     "tts_correcto": "{a} por {b} es {resultado}",
-    "tts_incorrecto": "Inténtalo otra vez"
+    "tts_incorrecto": "Int\u00e9ntalo otra vez"
+  },
+  "balanza": {
+    "nivel": "Nivel {n} de {total}",
+    "lado": {
+      "izquierda": "\u2b05\ufe0f Izquierda",
+      "derecha": "Derecha \u27a1\ufe0f",
+      "equilibrio": "\u2696\ufe0f Iguales"
+    },
+    "equilibra": {
+      "instrucciones": "Coloca monitos en el lado derecho para equilibrar la rama."
+    },
+    "completa": {
+      "instrucciones": "Elige qu\u00e9 monito falta para equilibrar la rama."
+    },
+    "suma": {
+      "instrucciones": "\u00bfEn qu\u00e9 posici\u00f3n va el monito del lado derecho para equilibrar?"
+    },
+    "descompone": {
+      "instrucciones": "Coloca monitos en el lado izquierdo para equilibrar la rama."
+    },
+    "copia": {
+      "instrucciones": "Reproduce la misma configuraci\u00f3n que el modelo.",
+      "referencia": "Modelo a copiar"
+    },
+    "falta": {
+      "instrucciones": "Elige la posici\u00f3n que falta para que la rama quede equilibrada."
+    },
+    "cual-pesa": {
+      "instrucciones": "\u00bfQu\u00e9 lado de la rama pesa m\u00e1s?"
+    },
+    "corrige": {
+      "instrucciones": "Mueve los monitos del lado derecho hasta que la rama quede equilibrada."
+    },
+    "limitado": {
+      "instrucciones": "Usa exactamente los monitos disponibles para equilibrar la rama.",
+      "piezas_restantes": "Monitos disponibles: {n}"
+    },
+    "soluciones": {
+      "instrucciones": "Encuentra varias formas distintas de equilibrar la rama.",
+      "progreso": "Soluciones encontradas: {n} de {meta}"
+    }
   }
 }

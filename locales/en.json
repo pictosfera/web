@@ -265,7 +265,8 @@
     "RESTAR": "Subtracting",
     "CONTAR": "Counting",
     "MULTIPLICAR": "Multiply",
-    "SERIES": "Series"
+    "SERIES": "Series",
+    "BALANZA": "Balance"
   },
   "memoria": {
     "nombre": "Memory",
@@ -482,7 +483,17 @@
     "arma_personaje": "Build a face",
     "series_pictogramas_animales": "Complete the pictogram sequence",
     "series_colores": "Complete the colour sequence",
-    "series_numeros": "Complete the number sequence"
+    "series_numeros": "Complete the number sequence",
+    "balanza_equilibra": "Balance the scale",
+    "balanza_completa": "Complete the equivalence",
+    "balanza_suma": "Solve the sum",
+    "balanza_descompone": "Decompose the number",
+    "balanza_copia": "Copy the scale",
+    "balanza_falta": "Find the missing piece",
+    "balanza_cual_pesa": "Which side is heavier?",
+    "balanza_corrige": "Fix the scale",
+    "balanza_limitado": "Balance with limited pieces",
+    "balanza_soluciones": "Find multiple solutions"
   },
   "footer": {
     "autor": "Pictosfera — developed by Roberto Corral Retuerta.",
@@ -505,16 +516,57 @@
     "zona_boca": "mouth"
   },
   "completaSerie": {
-    "instrucciones": "Drag the correct pieces to complete the sequence.",
+    "instrucciones": "Drag the correct pieces to complete the series.",
     "ronda": "Round {n} of {total}",
-    "hueco_vacio": "Empty blank"
+    "hueco_vacio": "Empty slot"
   },
   "cuadriculaMultiplicacion": {
-    "instrucciones": "Select the grid area that represents the multiplication and press '?' to check.",
+    "instrucciones": "Select the area in the grid that represents the multiplication and press '?' to check it.",
     "nivel": "Exercise {n} of {total}",
     "validar_aria": "Check answer",
     "tts_enunciado": "draw {a} times {b}",
     "tts_correcto": "{a} times {b} is {resultado}",
     "tts_incorrecto": "Try again"
+  },
+  "balanza": {
+    "nivel": "Level {n} of {total}",
+    "lado": {
+      "izquierda": "\u2b05\ufe0f Left",
+      "derecha": "Right \u27a1\ufe0f",
+      "equilibrio": "\u2696\ufe0f Equal"
+    },
+    "equilibra": {
+      "instrucciones": "Place monkeys on the right side to balance the branch."
+    },
+    "completa": {
+      "instrucciones": "Choose which monkey is missing to balance the branch."
+    },
+    "suma": {
+      "instrucciones": "Which position should the monkey on the right side go to balance?"
+    },
+    "descompone": {
+      "instrucciones": "Place monkeys on the left side to balance the branch."
+    },
+    "copia": {
+      "instrucciones": "Reproduce the same configuration as the model.",
+      "referencia": "Model to copy"
+    },
+    "falta": {
+      "instrucciones": "Choose the missing position so the branch is balanced."
+    },
+    "cual-pesa": {
+      "instrucciones": "Which side of the branch weighs more?"
+    },
+    "corrige": {
+      "instrucciones": "Move the monkeys on the right side until the branch is balanced."
+    },
+    "limitado": {
+      "instrucciones": "Use exactly the available monkeys to balance the branch.",
+      "piezas_restantes": "Available monkeys: {n}"
+    },
+    "soluciones": {
+      "instrucciones": "Find several different ways to balance the branch.",
+      "progreso": "Solutions found: {n} of {meta}"
+    }
   }
 }

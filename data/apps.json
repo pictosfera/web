@@ -674,5 +674,32 @@
     "nombreClave": "juegos_nombres.arma_personaje",
     "icono": "🧩",
     "estante": "CONCEPTOS"
+  },
+  {
+    "id": "balanza-equilibra",
+    "mecanica": "balanza",
+    "modulo": "apps/balanza/balanza.js",
+    "nombre": "Equilibra la balanza",
+    "nombreClave": "juegos_nombres.balanza_equilibra",
+    "icono": "⚖️",
+    "estante": "BALANZA"
+  },
+  {
+    "id": "balanza-completa",
+    "mecanica": "balanza",
+    "modulo": "apps/balanza/balanza.js",
+    "nombre": "Completa la equivalencia",
+    "nombreClave": "juegos_nombres.balanza_completa",
+    "icono": "🔍",
+    "estante": "BALANZA"
+  },
+  {
+    "id": "balanza-cual-pesa",
+    "mecanica": "balanza",
+    "modulo": "apps/balanza/balanza.js",
+    "nombre": "¿Qué lado pesa más?",
+    "nombreClave": "juegos_nombres.balanza_cual_pesa",
+    "icono": "⬅️",
+    "estante": "BALANZA"
   }
 ]

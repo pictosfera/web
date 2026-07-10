@@ -49,6 +49,7 @@ export const CAMPOS_POR_MECANICA = {
   'cuadricula-multiplicacion': [],
   'arma-personaje': [],
   'completa-serie': ['huecosLibres'],
+  'balanza': [],
 };
 
 // Catálogo de los 14 ajustes posibles: cómo se llaman sus get/set en
