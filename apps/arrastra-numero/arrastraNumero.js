@@ -189,6 +189,7 @@ function activarArrastre(elementoNumero, numero, objetivo) {
 
 function pintarNivel() {
   const { raiz, plataforma, medioActual, cantidad } = estado;
+  plataforma.tts.speak(plataforma.t('arrastraNumero.tts_instruccion'));
 
   raiz.querySelector('.arrastranum-nivel').textContent = plataforma.t('arrastraNumero.nivel', {
     n: estado.nivelActual,

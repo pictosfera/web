@@ -1,6 +1,8 @@
 /* Pictosfera — app "Relaciona el pictograma con su palabra". Estilos
    propios, con prefijo "relaciona-" para no interferir con el núcleo ni
-   con otras apps. */
+   con otras apps.
+   Diseño invertido: izquierda = pictogramas (casillas/drop-targets),
+   derecha = palabras (ítems arrastrables). */
 
 .relaciona-app{
   display: flex;
@@ -108,19 +110,28 @@
   text-align: center;
 }
 
+/* Casilla = pictograma (destino de drop, columna izquierda) */
 .relaciona-casilla{
   width: 100%;
-  min-height: var(--touch-target);
-  padding: var(--space-sm) var(--space-md);
-  font-size: var(--font-size-lg);
-  font-weight: 700;
-  color: var(--color-primary-dark);
+  min-height: 100px;
+  padding: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--color-surface);
   border: 3px dashed var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
   transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
+}
+
+.relaciona-casilla-img{
+  width: 80px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  -webkit-user-drag: none;
 }
 
 .relaciona-casilla:focus-visible{
@@ -138,8 +149,7 @@
 .relaciona-casilla-resuelta{
   border-color: var(--color-success);
   border-style: solid;
-  background: var(--color-success);
-  color: var(--color-text-on-primary);
+  background: color-mix(in srgb, var(--color-success) 20%, var(--color-surface));
   cursor: default;
 }
 
@@ -150,42 +160,8 @@
   animation: relaciona-temblor 320ms ease;
 }
 
-/* Ajuste "pulsador TTS": mismo botón animado que en el resto de
-   mecánicas de arrastrar (sustituye al pictograma hasta que se
-   escucha). */
-.relaciona-pulsador{
-  width: 56px;
-  height: 56px;
-  border: none;
-  border-radius: 50%;
-  background: var(--color-secondary);
-  color: var(--color-text-on-primary);
-  font-size: 1.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: var(--shadow-md);
-  animation: relaciona-pulso 1.6s ease-in-out infinite;
-}
-
-.relaciona-pulsador:hover{
-  transform: scale(1.05);
-}
-
-.relaciona-pulsador-escuchado{
-  animation: none;
-  background: var(--color-success);
-}
-
-@keyframes relaciona-pulso{
-  0%, 100%{ transform: scale(1); }
-  50%{ transform: scale(1.08); }
-}
-
-/* Validación de seguridad: con el "pulsador TTS" activo, hasta que no
-   se haya pulsado y escuchado el nombre, ESE pictograma en concreto no
-   se puede arrastrar ni seleccionar por teclado. */
+/* .relaciona-item-bloqueado ya no se usa tras la inversión pero se conserva
+   la clase vacía para no romper código que pudiera referenciarla. */
 .relaciona-item-bloqueado{
   opacity: 0.5;
   pointer-events: none;

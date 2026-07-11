@@ -316,6 +316,7 @@ function crearItemEstante(medio, ajustesPista, plataforma) {
 
 function pintarRonda() {
   const { raiz, plataforma, ajustesPista } = estado;
+  plataforma.tts.speak(plataforma.t('listaCompra.tts_instruccion'));
 
   raiz.querySelector('.lista-ronda').textContent = plataforma.t('listaCompra.ronda', {
     n: estado.rondaActual,

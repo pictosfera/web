@@ -326,7 +326,10 @@
     "casilla_oculta": "Hidden letter",
     "casilla_revelada": "Letter {letra}",
     "abecedario_bloqueado": "Spin the wheel: if it lands on \"Choose a letter\", you'll be able to tap the alphabet",
-    "mensaje_final": "Word completed!"
+    "mensaje_final": "Word completed!",
+    "tts_nueva_palabra": "choose a letter below then spin the wheel",
+    "tts_elige_letra": "choose a letter",
+    "tts_pista": "hint, look at the image"
   },
   "rosco": {
     "nombre": "Pictogram letter ring",
@@ -334,22 +337,27 @@
     "progreso": "Letter {n} of {total}",
     "consigna_empieza": "Starts with the letter {letra}",
     "consigna_tiene": "Contains the letter {letra}",
-    "mensaje_final": "Ring completed!"
+    "mensaje_final": "Ring completed!",
+    "tts_si": "Yes."
   },
   "arrastraNumero": {
     "instrucciones": "Count the pictograms and drag the correct number onto the box.",
     "nivel": "Level {n} of {total}",
-    "casilla_vacia": "Empty box, no number yet"
+    "casilla_vacia": "Empty box, no number yet",
+    "tts_instruccion": "how many things are in the image?"
   },
   "escribeNumero": {
     "instrucciones": "Count the pictograms and write the matching number inside the box, with your finger or a stylus.",
     "nivel": "Level {n} of {total}",
     "casilla_vacia": "Empty box, no number yet",
-    "casilla_correcta": "Number already written correctly"
+    "casilla_correcta": "Number already written correctly",
+    "tts_instruccion": "count how many things are in the image and write the number"
   },
   "sumaResultado": {
     "instrucciones": "Count both groups of pictograms, add them up, and tap the correct result.",
-    "nivel": "Level {n} of {total}"
+    "nivel": "Level {n} of {total}",
+    "tts_mas": "plus",
+    "tts_igual": "equals"
   },
   "dedosPictogramas": {
     "instrucciones": "Count the raised fingers and tap the group of pictograms with that same amount.",
@@ -357,35 +365,42 @@
   },
   "dedosNumero": {
     "instrucciones": "Count the raised fingers and tap the correct number.",
-    "nivel": "Level {n} of {total}"
+    "nivel": "Level {n} of {total}",
+    "tts_instruccion": "how many fingers are there?"
   },
   "completaSuma": {
     "instrucciones": "Look at the addition shown with pictograms and write the matching number in each box.",
     "nivel": "Exercise {n} of {total}",
     "casilla_vacia": "Empty box, no number yet",
-    "casilla_correcta": "Number already written correctly"
+    "casilla_correcta": "Number already written correctly",
+    "tts_instruccion": "count the things and write the numbers below"
   },
   "arrastraSuma": {
     "instrucciones": "Look at the addition shown with pictograms and drag, onto each box, the number that matches it.",
     "nivel": "Exercise {n} of {total}",
     "casilla_vacia": "Empty box, no number yet",
-    "casilla_correcta": "Number already placed correctly"
+    "casilla_correcta": "Number already placed correctly",
+    "tts_instruccion": "count the things and drag the numbers below"
   },
   "restaResultado": {
     "instrucciones": "Count the pictograms in the big group, discount the crossed-out ones, and tap the correct result.",
-    "nivel": "Level {n} of {total}"
+    "nivel": "Level {n} of {total}",
+    "tts_menos": "minus",
+    "tts_igual": "equals"
   },
   "completaResta": {
     "instrucciones": "Look at the subtraction shown with pictograms and write the matching number in each box.",
     "nivel": "Exercise {n} of {total}",
     "casilla_vacia": "Empty box, no number yet",
-    "casilla_correcta": "Number already written correctly"
+    "casilla_correcta": "Number already written correctly",
+    "tts_instruccion": "count the things and write the numbers below"
   },
   "arrastraResta": {
     "instrucciones": "Look at the subtraction shown with pictograms and drag, onto each box, the number that matches it.",
     "nivel": "Exercise {n} of {total}",
     "casilla_vacia": "Empty box, no number yet",
-    "casilla_correcta": "Number already placed correctly"
+    "casilla_correcta": "Number already placed correctly",
+    "tts_instruccion": "count the things and drag the numbers below"
   },
   "clasificaCategorias": {
     "instrucciones": "Drag each pictogram to the category it belongs to.",
@@ -420,7 +435,8 @@
     "ronda": "Round {n} of {total}",
     "titulo_lista": "Shopping list",
     "titulo_estante": "Shelf",
-    "zona_carrito": "Shopping cart"
+    "zona_carrito": "Shopping cart",
+    "tts_instruccion": "look at the shopping list on the left then put in the cart the items from the shelf that you need"
   },
   "reconoceEmociones": {
     "instrucciones": "Look at the face and tap the pictogram that shows how it feels.",
@@ -430,7 +446,8 @@
     "contento": "Happy",
     "triste": "Sad",
     "enfadado": "Angry",
-    "asustado": "Scared"
+    "asustado": "Scared",
+    "tts_instruccion": "how is the character feeling?"
   },
   "categorias": {
     "comida": "Food",
@@ -531,15 +548,17 @@
   "balanza": {
     "nivel": "Level {n} of {total}",
     "lado": {
-      "izquierda": "\u2b05\ufe0f Left",
-      "derecha": "Right \u27a1\ufe0f",
-      "equilibrio": "\u2696\ufe0f Equal"
+      "izquierda": "⬅️ Left",
+      "derecha": "Right ➡️",
+      "equilibrio": "⚖️ Equal"
     },
     "equilibra": {
-      "instrucciones": "Place monkeys on the right side to balance the branch."
+      "instrucciones": "Place monkeys on the right side to balance the branch.",
+      "tts": "place the monkeys on the right side so the branch stays straight"
     },
     "completa": {
-      "instrucciones": "Choose which monkey is missing to balance the branch."
+      "instrucciones": "Choose which monkey is missing to balance the branch.",
+      "tts": "how many monkeys are needed to make the branch straight?"
     },
     "suma": {
       "instrucciones": "Which position should the monkey on the right side go to balance?"
@@ -555,7 +574,8 @@
       "instrucciones": "Choose the missing position so the branch is balanced."
     },
     "cual-pesa": {
-      "instrucciones": "Which side of the branch weighs more?"
+      "instrucciones": "Which side of the branch weighs more?",
+      "tts": "which side of the branch weighs more?"
     },
     "corrige": {
       "instrucciones": "Move the monkeys on the right side until the branch is balanced."

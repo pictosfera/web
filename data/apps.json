@@ -155,7 +155,7 @@
     "nombre": "Ruleta de letras",
     "nombreClave": "juegos_nombres.ruleta_letras_animales",
     "icono": "🎡",
-    "estante": "ESCRITURA",
+    "estante": "LECTURA",
     "material": {
       "etiqueta": "animales",
       "semillaArasaacLang": "es",

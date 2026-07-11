@@ -521,7 +521,9 @@ function manejarLetraElegida(letraNormalizada, boton) {
     revelarLetrasEnPanel(indices, true);
   } else {
     estado.plataforma.sounds.fallo();
-    mostrarMensaje(estado.plataforma.t('ruleta.letra_no_esta', { letra: formatearLetra(letraNormalizada, estado.ajustesPista.mayuscula) }));
+    const msgLetra = estado.plataforma.t('ruleta.letra_no_esta', { letra: formatearLetra(letraNormalizada, estado.ajustesPista.mayuscula) });
+    mostrarMensaje(msgLetra);
+    estado.plataforma.tts.speak(msgLetra);
   }
 
   estado.fase = 'esperando-giro';
@@ -580,10 +582,12 @@ function resolverResultado(resultado) {
     estado.fase = 'elige-letra';
     actualizarBloqueoAbecedario();
     actualizarBotonGirar();
+    estado.plataforma.tts.speak(estado.plataforma.t('ruleta.tts_elige_letra'));
     return;
   }
   if (resultado === 'pista') {
     revelarCasillaPictograma(siguienteCasillaPictograma(estado.casillasVisiblesPictograma));
+    estado.plataforma.tts.speak(estado.plataforma.t('ruleta.tts_pista'));
     programarTimeout(continuarTrasTurno, RETRASO_ACIERTO_MS);
     return;
   }
@@ -635,6 +639,7 @@ function resolverPalabraCompleta() {
 
 function pintarPalabra() {
   const { raiz, plataforma } = estado;
+  plataforma.tts.speak(plataforma.t('ruleta.tts_nueva_palabra'));
   raiz.querySelector('.ruleta-palabra-contador').textContent = plataforma.t('ruleta.palabra', {
     n: estado.palabraActual,
     total: PALABRAS_TOTAL

@@ -79,6 +79,9 @@ function pintarEstadoObjetivo(objetivo) {
 
 function comprobarEjercicioCompleto() {
   if (!estado.objetivos.every((o) => o.resuelta)) return;
+  estado.plataforma.tts.speak(
+    `${estado.minuendo} ${estado.plataforma.t('restaResultado.tts_menos')} ${estado.sustraendo} ${estado.plataforma.t('restaResultado.tts_igual')} ${estado.resultado}`
+  );
   if (estado.nivelActual >= NIVELES_TOTAL) {
     estado.timeoutId = setTimeout(() => {
       if (!estado) return;
@@ -254,6 +257,7 @@ function crearParteResultado(medio, resultado, sustraendo, objetivo, plataforma)
 
 function pintarNivel() {
   const { raiz, plataforma, medioActual, minuendo, sustraendo, resultado } = estado;
+  plataforma.tts.speak(plataforma.t('arrastraResta.tts_instruccion'));
   raiz.querySelector('.arrastrares-nivel').textContent = plataforma.t('arrastraResta.nivel', {
     n: estado.nivelActual, total: NIVELES_TOTAL
   });

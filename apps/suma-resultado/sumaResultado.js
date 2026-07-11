@@ -111,7 +111,9 @@ function manejarRespuesta(opcion, elementoOpcion) {
   if (esRespuestaCorrecta(opcion, estado.resultado)) {
     estado.bloqueado = true;
     estado.plataforma.sounds.acierto();
-    estado.plataforma.tts.speak(String(estado.resultado));
+    estado.plataforma.tts.speak(
+      `${estado.sumando1} ${estado.plataforma.t('sumaResultado.tts_mas')} ${estado.sumando2} ${estado.plataforma.t('sumaResultado.tts_igual')} ${estado.resultado}`
+    );
     elementoOpcion.classList.add('sumares-opcion-correcta');
 
     if (estado.nivelActual >= NIVELES_TOTAL) {

@@ -302,6 +302,16 @@ function construirRonda() {
   estado.huecoEls  = huecoEls;
   estado.piezaEls  = piezaEls;
   estado.colocadas = {};
+
+  // TTS: leer los elementos visibles de la serie para que el niño entienda el patrón
+  const textosVisibles = serie
+    .filter((_, i) => !huecos.includes(i))
+    .map((el) => {
+      if (el.tipo === 'pictograma') return el.medio.nombre;
+      if (el.tipo === 'color')     return el.nombre;
+      return String(el.valor);
+    });
+  if (textosVisibles.length) plataforma.tts.speak(textosVisibles.join(', '));
 }
 
 // ── ARRASTRE ──────────────────────────────────────────────────────────────────

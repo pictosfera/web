@@ -181,6 +181,7 @@ let estado = null;
 
 function pintarRonda() {
   const { raiz, plataforma, ajustesPista } = estado;
+  plataforma.tts.speak(plataforma.t('reconoceEmociones.tts_instruccion'));
   raiz.querySelector('.emociones-ronda').textContent = plataforma.t('reconoceEmociones.ronda', {
     n: estado.rondaActual,
     total: RONDAS_TOTAL

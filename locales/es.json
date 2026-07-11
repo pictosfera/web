@@ -326,7 +326,10 @@
     "casilla_oculta": "Letra oculta",
     "casilla_revelada": "Letra {letra}",
     "abecedario_bloqueado": "Gira la ruleta: si sale \"Elige una letra\", podrás tocar el abecedario",
-    "mensaje_final": "¡Palabra completada!"
+    "mensaje_final": "¡Palabra completada!",
+    "tts_nueva_palabra": "elige una letra abajo y después gira la ruleta",
+    "tts_elige_letra": "elige una letra",
+    "tts_pista": "pista, mira la imagen"
   },
   "rosco": {
     "nombre": "Rosco de pictogramas",
@@ -334,22 +337,27 @@
     "progreso": "Letra {n} de {total}",
     "consigna_empieza": "Empieza por la letra {letra}",
     "consigna_tiene": "Tiene la letra {letra}",
-    "mensaje_final": "¡Rosco completado!"
+    "mensaje_final": "¡Rosco completado!",
+    "tts_si": "Sí."
   },
   "arrastraNumero": {
     "instrucciones": "Cuenta los pictogramas y arrastra el número correcto hasta la casilla.",
     "nivel": "Nivel {n} de {total}",
-    "casilla_vacia": "Casilla vacía, todavía sin número"
+    "casilla_vacia": "Casilla vacía, todavía sin número",
+    "tts_instruccion": "¿cuántas cosas hay en la imagen?"
   },
   "escribeNumero": {
     "instrucciones": "Cuenta los pictogramas y escribe el número correspondiente dentro del recuadro, con el dedo o un lápiz táctil.",
     "nivel": "Nivel {n} de {total}",
     "casilla_vacia": "Recuadro vacío, todavía sin número",
-    "casilla_correcta": "Número ya escrito correctamente"
+    "casilla_correcta": "Número ya escrito correctamente",
+    "tts_instruccion": "cuenta cuántas cosas hay en la imagen y escribe el número"
   },
   "sumaResultado": {
     "instrucciones": "Cuenta los dos grupos de pictogramas, súmalos y toca el resultado correcto.",
-    "nivel": "Nivel {n} de {total}"
+    "nivel": "Nivel {n} de {total}",
+    "tts_mas": "más",
+    "tts_igual": "es igual a"
   },
   "dedosPictogramas": {
     "instrucciones": "Cuenta los dedos levantados y toca el grupo de pictogramas con esa misma cantidad.",
@@ -357,35 +365,42 @@
   },
   "dedosNumero": {
     "instrucciones": "Cuenta los dedos levantados y toca el número correcto.",
-    "nivel": "Nivel {n} de {total}"
+    "nivel": "Nivel {n} de {total}",
+    "tts_instruccion": "¿cuántos dedos hay?"
   },
   "completaSuma": {
     "instrucciones": "Mira la suma representada con pictogramas y escribe, en cada recuadro, el número que le corresponde.",
     "nivel": "Ejercicio {n} de {total}",
     "casilla_vacia": "Recuadro vacío, todavía sin número",
-    "casilla_correcta": "Número ya escrito correctamente"
+    "casilla_correcta": "Número ya escrito correctamente",
+    "tts_instruccion": "cuenta las cosas y escribe debajo los números"
   },
   "arrastraSuma": {
     "instrucciones": "Mira la suma representada con pictogramas y arrastra, hasta cada casilla, el número que le corresponde.",
     "nivel": "Ejercicio {n} de {total}",
     "casilla_vacia": "Casilla vacía, todavía sin número",
-    "casilla_correcta": "Número ya colocado correctamente"
+    "casilla_correcta": "Número ya colocado correctamente",
+    "tts_instruccion": "cuenta las cosas y elige debajo los números"
   },
   "restaResultado": {
     "instrucciones": "Cuenta los pictogramas del grupo grande, descuenta los tachados y toca el resultado correcto.",
-    "nivel": "Nivel {n} de {total}"
+    "nivel": "Nivel {n} de {total}",
+    "tts_menos": "menos",
+    "tts_igual": "es igual a"
   },
   "completaResta": {
     "instrucciones": "Mira la resta representada con pictogramas y escribe, en cada recuadro, el número que le corresponde.",
     "nivel": "Ejercicio {n} de {total}",
     "casilla_vacia": "Recuadro vacío, todavía sin número",
-    "casilla_correcta": "Número ya escrito correctamente"
+    "casilla_correcta": "Número ya escrito correctamente",
+    "tts_instruccion": "cuenta las cosas y escribe debajo los números"
   },
   "arrastraResta": {
     "instrucciones": "Mira la resta representada con pictogramas y arrastra, hasta cada casilla, el número que le corresponde.",
     "nivel": "Ejercicio {n} de {total}",
     "casilla_vacia": "Casilla vacía, todavía sin número",
-    "casilla_correcta": "Número ya colocado correctamente"
+    "casilla_correcta": "Número ya colocado correctamente",
+    "tts_instruccion": "cuenta las cosas y elige debajo los números"
   },
   "clasificaCategorias": {
     "instrucciones": "Arrastra cada pictograma hasta la categoría a la que pertenece.",
@@ -420,7 +435,8 @@
     "ronda": "Ronda {n} de {total}",
     "titulo_lista": "Lista de la compra",
     "titulo_estante": "Estantería",
-    "zona_carrito": "Carrito de la compra"
+    "zona_carrito": "Carrito de la compra",
+    "tts_instruccion": "mira la lista de la compra de la izquierda y después guarda en el carrito de la compra las cosas de la estantería que necesitas"
   },
   "reconoceEmociones": {
     "instrucciones": "Mira la cara y toca el pictograma que representa cómo se siente.",
@@ -430,7 +446,8 @@
     "contento": "Contento",
     "triste": "Triste",
     "enfadado": "Enfadado",
-    "asustado": "Asustado"
+    "asustado": "Asustado",
+    "tts_instruccion": "¿cómo está?"
   },
   "categorias": {
     "comida": "Comida",
@@ -518,44 +535,47 @@
   "completaSerie": {
     "instrucciones": "Arrastra las piezas correctas para completar la serie.",
     "ronda": "Ronda {n} de {total}",
-    "hueco_vacio": "Hueco vac\u00edo"
+    "hueco_vacio": "Hueco vacío"
   },
   "cuadriculaMultiplicacion": {
-    "instrucciones": "Selecciona en la cuadr\u00edcula el \u00e1rea que representa la multiplicaci\u00f3n y pulsa '?' para comprobarlo.",
+    "instrucciones": "Selecciona en la cuadrícula el área que representa la multiplicación y pulsa '?' para comprobarlo.",
     "nivel": "Ejercicio {n} de {total}",
     "validar_aria": "Comprobar respuesta",
     "tts_enunciado": "dibuja {a} por {b}",
     "tts_correcto": "{a} por {b} es {resultado}",
-    "tts_incorrecto": "Int\u00e9ntalo otra vez"
+    "tts_incorrecto": "Inténtalo otra vez"
   },
   "balanza": {
     "nivel": "Nivel {n} de {total}",
     "lado": {
-      "izquierda": "\u2b05\ufe0f Izquierda",
-      "derecha": "Derecha \u27a1\ufe0f",
-      "equilibrio": "\u2696\ufe0f Iguales"
+      "izquierda": "⬅️ Izquierda",
+      "derecha": "Derecha ➡️",
+      "equilibrio": "⚖️ Iguales"
     },
     "equilibra": {
-      "instrucciones": "Coloca monitos en el lado derecho para equilibrar la rama."
+      "instrucciones": "Coloca monitos en el lado derecho para equilibrar la rama.",
+      "tts": "coloca los monitos en el lado derecho para que quede la rama recta"
     },
     "completa": {
-      "instrucciones": "Elige qu\u00e9 monito falta para equilibrar la rama."
+      "instrucciones": "Elige qué monito falta para equilibrar la rama.",
+      "tts": "¿cuántos monitos hacen falta para que la rama quede recta?"
     },
     "suma": {
-      "instrucciones": "\u00bfEn qu\u00e9 posici\u00f3n va el monito del lado derecho para equilibrar?"
+      "instrucciones": "¿En qué posición va el monito del lado derecho para equilibrar?"
     },
     "descompone": {
       "instrucciones": "Coloca monitos en el lado izquierdo para equilibrar la rama."
     },
     "copia": {
-      "instrucciones": "Reproduce la misma configuraci\u00f3n que el modelo.",
+      "instrucciones": "Reproduce la misma configuración que el modelo.",
       "referencia": "Modelo a copiar"
     },
     "falta": {
-      "instrucciones": "Elige la posici\u00f3n que falta para que la rama quede equilibrada."
+      "instrucciones": "Elige la posición que falta para que la rama quede equilibrada."
     },
     "cual-pesa": {
-      "instrucciones": "\u00bfQu\u00e9 lado de la rama pesa m\u00e1s?"
+      "instrucciones": "¿Qué lado de la rama pesa más?",
+      "tts": "¿qué lado de la rama pesa más?"
     },
     "corrige": {
       "instrucciones": "Mueve los monitos del lado derecho hasta que la rama quede equilibrada."

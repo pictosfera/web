@@ -945,6 +945,12 @@ function pintarRonda() {
   instrEl.className = 'bz-instrucciones';
   instrEl.textContent = plataforma.t(`balanza.${modo}.instrucciones`);
   cabecera.append(h1, instrEl);
+
+  // TTS de instrucción para los modos que tienen clave propia
+  const clavesTts = ['equilibra', 'completa', 'cual-pesa'];
+  if (clavesTts.includes(modo)) {
+    plataforma.tts.speak(plataforma.t(`balanza.${modo}.tts`));
+  }
   raiz.appendChild(cabecera);
 
   // ── Contador de nivel ──

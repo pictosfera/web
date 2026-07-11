@@ -210,6 +210,7 @@ function manejarColocacion(pieza, indice, elementoPieza, casillaEl) {
 
     if (piezasCompletas(estado.colocadas)) {
       estado.bloqueado = true;
+      estado.plataforma.tts.speak(estado.plataforma.t('puzzle.pregunta_palabra'));
       estado.timeoutId = setTimeout(() => {
         if (!estado) return;
         estado.bloqueado = false;

@@ -152,7 +152,6 @@ function quitarResaltado() {
 function alternarSeleccion(medio, elementoItem) {
   if (!estado || estado.bloqueado) return;
   if (estado.colocadosIds.includes(medio.id)) return;
-  if (!puedeResponderItem(estado.ajustesPista, estado.escuchadosIds, medio.id)) return;
 
   if (estado.seleccionId === medio.id) {
     estado.seleccionId = null;
@@ -171,7 +170,6 @@ function alternarSeleccion(medio, elementoItem) {
 function manejarColocacion(medio, elementoItem, casillaEl) {
   if (!estado || estado.bloqueado) return;
   if (estado.colocadosIds.includes(medio.id)) return; // ya resuelto: defensivo
-  if (!puedeResponderItem(estado.ajustesPista, estado.escuchadosIds, medio.id)) return;
 
   if (estado.seleccionId === medio.id) {
     estado.seleccionId = null;
@@ -253,7 +251,6 @@ function activarArrastre(elementoItem, medio) {
   function onPointerDown(ev) {
     if (!estado || estado.bloqueado) return;
     if (estado.colocadosIds.includes(medio.id)) return;
-    if (!puedeResponderItem(estado.ajustesPista, estado.escuchadosIds, medio.id)) return;
     activo = true;
     arrastrado = false;
     inicioX = ev.clientX;
@@ -313,71 +310,43 @@ function activarArrastre(elementoItem, medio) {
  *  de accesibilidad/configuración que el resto de mecánicas de
  *  arrastrar (solo imagen, con texto de ayuda, mostrar/ocultar texto,
  *  mayúscula/minúscula, pulsador TTS en sustitución del pictograma). */
-function crearElementoItem(medio) {
+function crearElementoItem(datosPalabra) {
+  // Tras la inversión, los ítems arrastrables son las PALABRAS (columna derecha).
+  // datosPalabra = { id, nombre } (salida de construirCasillas)
   const { plataforma, ajustesPista } = estado;
   const el = document.createElement('div');
   el.className = 'relaciona-item';
-  el.dataset.medioId = medio.id;
+  el.dataset.medioId = datosPalabra.id;
   el.setAttribute('role', 'button');
   el.tabIndex = 0;
+  el.setAttribute('aria-label', datosPalabra.nombre);
 
-  function actualizarBloqueo() {
-    el.classList.toggle('relaciona-item-bloqueado', !puedeResponderItem(ajustesPista, estado.escuchadosIds, medio.id));
-  }
+  const etiqueta = document.createElement('p');
+  etiqueta.className = 'relaciona-pista';
+  etiqueta.textContent = formatearTexto(datosPalabra.nombre, ajustesPista.mayuscula);
+  el.appendChild(etiqueta);
 
-  if (ajustesPista.pulsadorTts) {
-    el.setAttribute('aria-label', plataforma.t('comunes.escuchar'));
-    const pulsador = document.createElement('button');
-    pulsador.type = 'button';
-    pulsador.className = 'relaciona-pulsador';
-    pulsador.setAttribute('aria-label', plataforma.t('comunes.escuchar'));
-    pulsador.textContent = '🔊';
-    pulsador.addEventListener('click', (ev) => {
-      ev.stopPropagation();
-      plataforma.sounds.click();
-      plataforma.tts.speak(medio.nombre);
-      if (!estado.escuchadosIds.includes(medio.id)) estado.escuchadosIds.push(medio.id);
-      pulsador.classList.add('relaciona-pulsador-escuchado');
-      actualizarBloqueo();
-    });
-    el.appendChild(pulsador);
-  } else {
-    el.setAttribute('aria-label', medio.nombre);
-    if (!ajustesPista.soloTexto) {
-      const img = document.createElement('img');
-      img.className = 'relaciona-img';
-      img.src = plataforma.getDisplayUrl(medio);
-      img.alt = medio.nombre;
-      // Crítico para el arrastre: ver comentario equivalente en
-      // clasificaCategorias.js (sin esto, el arrastre nativo de la
-      // imagen se adelanta al arrastre por puntero y el drop nunca se
-      // registra).
-      img.draggable = false;
-      el.appendChild(img);
-    }
-
-    const pista = document.createElement('p');
-    pista.className = 'relaciona-pista';
-    pista.textContent = formatearTexto(medio.nombre, ajustesPista.mayuscula);
-    // En "solo texto" no hay imagen, así que la pista es el único
-    // contenido y se ve siempre, pase lo que pase el ajuste "mostrar".
-    pista.hidden = !ajustesPista.mostrar && !ajustesPista.soloTexto;
-    el.appendChild(pista);
-  }
-
-  activarArrastre(el, medio);
-  actualizarBloqueo();
+  activarArrastre(el, datosPalabra);
   return el;
 }
 
-function crearElementoCasilla(casillaData) {
-  const { plataforma, ajustesPista } = estado;
+function crearElementoCasilla(medio) {
+  // Tras la inversión, las casillas (destino de drop) son los PICTOGRAMAS (columna izquierda).
+  // medio puede ser un objeto completo con getDisplayUrl, o { id, nombre }.
+  const { plataforma } = estado;
   const el = document.createElement('button');
   el.type = 'button';
   el.className = 'relaciona-casilla';
-  el.dataset.medioId = casillaData.id;
-  el.textContent = formatearTexto(casillaData.nombre, ajustesPista.mayuscula);
-  el.setAttribute('aria-label', plataforma.t('relacionaPictogramaPalabra.casilla', { nombre: casillaData.nombre }));
+  el.dataset.medioId = medio.id;
+  el.setAttribute('aria-label', plataforma.t('relacionaPictogramaPalabra.casilla', { nombre: medio.nombre }));
+
+  const img = document.createElement('img');
+  img.className = 'relaciona-casilla-img';
+  img.src = plataforma.getDisplayUrl(medio);
+  img.alt = medio.nombre;
+  img.draggable = false;
+  el.appendChild(img);
+
   el.addEventListener('click', () => intentarColocarSeleccion(el));
   return el;
 }
@@ -393,14 +362,16 @@ function pintarRonda() {
     total: RONDAS_TOTAL
   });
 
+  // Izquierda: pictogramas fijos (destinos de drop)
   const colIzq = raiz.querySelector('.relaciona-col-izq');
   colIzq.innerHTML = '';
-  estado.grupoActual.forEach((medio) => colIzq.appendChild(crearElementoItem(medio)));
+  estado.grupoActual.forEach((medio) => colIzq.appendChild(crearElementoCasilla(medio)));
 
+  // Derecha: palabras arrastrables (mezcladas)
   const colDer = raiz.querySelector('.relaciona-col-der');
   colDer.innerHTML = '';
   estado.casillasActual = construirCasillas(estado.grupoActual);
-  estado.casillasActual.forEach((casillaData) => colDer.appendChild(crearElementoCasilla(casillaData)));
+  estado.casillasActual.forEach((datosPalabra) => colDer.appendChild(crearElementoItem(datosPalabra)));
 }
 
 function siguienteRonda() {

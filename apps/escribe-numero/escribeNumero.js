@@ -490,6 +490,7 @@ function crearCasilla(texto, mostrarPunteada) {
 
 function pintarNivel() {
   const { raiz, plataforma, medioActual, cantidad, ajustesPista } = estado;
+  plataforma.tts.speak(plataforma.t('escribeNumero.tts_instruccion'));
 
   raiz.querySelector('.escribenum-nivel').textContent = plataforma.t('escribeNumero.nivel', {
     n: estado.nivelActual,

@@ -73,7 +73,7 @@ const ESTILOS_ID = 'rosco-pictogramas-estilos';
 const MIN_MATERIAL = 4; // hace falta material suficiente para 1 objetivo + al menos 3 distractores
 const PICTOGRAMAS_POR_RONDA = 4;
 const DISTRACTORES_POR_RONDA = PICTOGRAMAS_POR_RONDA - 1;
-const RETRASO_ACIERTO_MS = 900;
+const RETRASO_ACIERTO_MS = 2500;
 const RETRASO_FINAL_MS = 500;
 
 export const ABECEDARIO_ROSCO = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -306,6 +306,8 @@ function manejarToquePictograma(medio, boton) {
     boton.classList.add('rosco-pictograma-correcto');
     estado.resueltas.add(estado.rondaActual.letra);
     pintarAnillo();
+    const consignaTexto = estado.plataforma.t(claveConsigna(estado.rondaActual.modo), { letra: estado.rondaActual.letra });
+    estado.plataforma.tts.speak(`${estado.plataforma.t('rosco.tts_si')} ${medio.nombre}. ${consignaTexto}`);
 
     programarTimeout(() => {
       siguienteTurno();
@@ -314,6 +316,8 @@ function manejarToquePictograma(medio, boton) {
     estado.plataforma.sounds.fallo();
     boton.disabled = true;
     boton.classList.add('rosco-pictograma-incorrecto');
+    const consignaTextoFallo = estado.plataforma.t(claveConsigna(estado.rondaActual.modo), { letra: estado.rondaActual.letra });
+    estado.plataforma.tts.speak(consignaTextoFallo);
   }
 }
 

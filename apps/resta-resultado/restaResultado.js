@@ -90,7 +90,9 @@ function manejarRespuesta(opcion, elementoOpcion) {
   if (esRespuestaCorrecta(opcion, estado.resultado)) {
     estado.bloqueado = true;
     estado.plataforma.sounds.acierto();
-    estado.plataforma.tts.speak(String(estado.resultado));
+    estado.plataforma.tts.speak(
+      `${estado.minuendo} ${estado.plataforma.t('restaResultado.tts_menos')} ${estado.sustraendo} ${estado.plataforma.t('restaResultado.tts_igual')} ${estado.resultado}`
+    );
     elementoOpcion.classList.add('restares-opcion-correcta');
     if (estado.nivelActual >= NIVELES_TOTAL) {
       estado.timeoutId = setTimeout(() => {

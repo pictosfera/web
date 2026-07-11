@@ -255,6 +255,9 @@ function pintarEstadoCasilla(casilla) {
 
 function comprobarEjercicioCompleto() {
   if (!estado.casillas.every((c) => c.resuelta)) return;
+  estado.plataforma.tts.speak(
+    `${estado.minuendo} ${estado.plataforma.t('restaResultado.tts_menos')} ${estado.sustraendo} ${estado.plataforma.t('restaResultado.tts_igual')} ${estado.resultado}`
+  );
   if (estado.nivelActual >= NIVELES_TOTAL) {
     estado.timeoutId = setTimeout(() => {
       if (!estado) return;
@@ -397,6 +400,7 @@ function crearParteResultado(medio, resultado, sustraendo, texto, ajustesPista, 
 
 function pintarNivel() {
   const { raiz, plataforma, medioActual, minuendo, sustraendo, resultado, ajustesPista } = estado;
+  plataforma.tts.speak(plataforma.t('completaResta.tts_instruccion'));
   raiz.querySelector('.completaresta-nivel').textContent = plataforma.t('completaResta.nivel', {
     n: estado.nivelActual, total: NIVELES_TOTAL
   });
