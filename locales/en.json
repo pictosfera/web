@@ -329,7 +329,8 @@
     "mensaje_final": "Word completed!",
     "tts_nueva_palabra": "choose a letter below then spin the wheel",
     "tts_elige_letra": "choose a letter",
-    "tts_pista": "hint, look at the image"
+    "tts_pista": "hint, look at the image",
+    "tts_girar": "spin the wheel"
   },
   "rosco": {
     "nombre": "Pictogram letter ring",
@@ -361,7 +362,8 @@
   },
   "dedosPictogramas": {
     "instrucciones": "Count the raised fingers and tap the group of pictograms with that same amount.",
-    "nivel": "Level {n} of {total}"
+    "nivel": "Level {n} of {total}",
+    "tts_instruccion": "choose the things that are the same number as the fingers in the image"
   },
   "dedosNumero": {
     "instrucciones": "Count the raised fingers and tap the correct number.",
@@ -436,7 +438,7 @@
     "titulo_lista": "Shopping list",
     "titulo_estante": "Shelf",
     "zona_carrito": "Shopping cart",
-    "tts_instruccion": "look at the shopping list on the left then put in the cart the items from the shelf that you need"
+    "tts_instruccion": "look at the shopping list then put in the cart the items from the shelf that you need"
   },
   "reconoceEmociones": {
     "instrucciones": "Look at the face and tap the pictogram that shows how it feels.",

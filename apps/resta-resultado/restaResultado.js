@@ -98,13 +98,13 @@ function manejarRespuesta(opcion, elementoOpcion) {
       estado.timeoutId = setTimeout(() => {
         if (!estado) return;
         estado.plataforma.mostrarRecompensa({ onContinuar: iniciarPartida });
-      }, 500);
+      }, 3000);
     } else {
       estado.timeoutId = setTimeout(() => {
         if (!estado) return;
         estado.bloqueado = false;
         siguienteNivel();
-      }, 700);
+      }, 3000);
     }
   } else {
     estado.plataforma.sounds.fallo();

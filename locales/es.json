@@ -329,7 +329,8 @@
     "mensaje_final": "¡Palabra completada!",
     "tts_nueva_palabra": "elige una letra abajo y después gira la ruleta",
     "tts_elige_letra": "elige una letra",
-    "tts_pista": "pista, mira la imagen"
+    "tts_pista": "pista, mira la imagen",
+    "tts_girar": "gira la ruleta"
   },
   "rosco": {
     "nombre": "Rosco de pictogramas",
@@ -361,7 +362,8 @@
   },
   "dedosPictogramas": {
     "instrucciones": "Cuenta los dedos levantados y toca el grupo de pictogramas con esa misma cantidad.",
-    "nivel": "Nivel {n} de {total}"
+    "nivel": "Nivel {n} de {total}",
+    "tts_instruccion": "elige las cosas que sea la misma cantidad que los dedos de la imagen"
   },
   "dedosNumero": {
     "instrucciones": "Cuenta los dedos levantados y toca el número correcto.",
@@ -436,7 +438,7 @@
     "titulo_lista": "Lista de la compra",
     "titulo_estante": "Estantería",
     "zona_carrito": "Carrito de la compra",
-    "tts_instruccion": "mira la lista de la compra de la izquierda y después guarda en el carrito de la compra las cosas de la estantería que necesitas"
+    "tts_instruccion": "mira la lista de la compra y después guarda en el carrito de la compra las cosas de la estantería que necesitas"
   },
   "reconoceEmociones": {
     "instrucciones": "Mira la cara y toca el pictograma que representa cómo se siente.",

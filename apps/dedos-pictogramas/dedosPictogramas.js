@@ -215,6 +215,7 @@ function manejarRespuesta(opcion, elementoOpcion) {
 
 function pintarNivel() {
   const { raiz, plataforma, medioActual, manos, opciones } = estado;
+  plataforma.tts.speak(plataforma.t('dedosPictogramas.tts_instruccion'));
 
   raiz.querySelector('.dedospict-nivel').textContent = plataforma.t('dedosPictogramas.nivel', {
     n: estado.nivelActual,

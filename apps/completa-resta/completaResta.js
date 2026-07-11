@@ -262,12 +262,12 @@ function comprobarEjercicioCompleto() {
     estado.timeoutId = setTimeout(() => {
       if (!estado) return;
       estado.plataforma.mostrarRecompensa({ onContinuar: iniciarPartida });
-    }, RETRASO_FINAL_MS);
+    }, 3000);
   } else {
     estado.timeoutId = setTimeout(() => {
       if (!estado) return;
       siguienteNivel();
-    }, RETRASO_ACIERTO_MS);
+    }, 3000);
   }
 }
 

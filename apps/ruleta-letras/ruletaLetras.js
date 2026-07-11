@@ -614,6 +614,7 @@ function continuarTrasTurno() {
     resolverPalabraCompleta();
   } else {
     actualizarBotonGirar();
+    estado.plataforma.tts.speak(estado.plataforma.t('ruleta.tts_girar'));
   }
 }
 
@@ -639,7 +640,7 @@ function resolverPalabraCompleta() {
 
 function pintarPalabra() {
   const { raiz, plataforma } = estado;
-  plataforma.tts.speak(plataforma.t('ruleta.tts_nueva_palabra'));
+  plataforma.tts.speak(plataforma.t('ruleta.tts_girar'));
   raiz.querySelector('.ruleta-palabra-contador').textContent = plataforma.t('ruleta.palabra', {
     n: estado.palabraActual,
     total: PALABRAS_TOTAL
