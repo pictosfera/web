@@ -218,6 +218,7 @@
     "icono": "🔁",
     "estante": "SERIES",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -264,6 +265,7 @@
     "icono": "🔢",
     "estante": "CONTAR",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -292,6 +294,7 @@
     "icono": "✏️",
     "estante": "CONTAR",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -349,6 +352,7 @@
     "icono": "✋",
     "estante": "CONTAR",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -375,7 +379,10 @@
     "nombre": "Relaciona los dedos con el número",
     "nombreClave": "juegos_nombres.dedos_numero",
     "icono": "🖐️",
-    "estante": "CONTAR"
+    "estante": "CONTAR",
+    "material": {
+      "excluirEtiquetas": ["numeros"]
+    }
   },
   {
     "id": "completa-suma-animales",

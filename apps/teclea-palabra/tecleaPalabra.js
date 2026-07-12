@@ -161,6 +161,47 @@ export function comprobarPalabra(tecleado, objetivo, opciones = {}) {
   return normalizarTexto(tecleado, opciones) === normalizarTexto(objetivo, opciones);
 }
 
+/** Reconstruye la secuencia de caracteres a mostrar en la caja de escritura,
+ *  insertando automáticamente en su posición exacta los caracteres que gestiona
+ *  la "mano amiga":
+ *    - tildes: se reemplaza la letra base tecleada por la variante con acento
+ *              que tiene el objetivo en esa posición ('i' → 'í').
+ *    - espacios y puntuación: se insertan entre los caracteres reales sin
+ *              consumir pulsación del niño.
+ *
+ *  De esta forma el niño ve en pantalla "bolígrafo rojo" aunque solo haya
+ *  pulsado "b-o-l-i-g-r-a-f-o-r-o-j-o" (sin tilde ni espacio). Se exporta
+ *  para poder probarlo con tests unitarios. */
+export function secuenciaVisual(tecleado, objetivo, ajustesPista = {}) {
+  const {
+    tildesAutomaticas    = true,
+    espaciosAutomaticos  = true,
+    puntuacionAutomatica = true
+  } = ajustesPista;
+  const resultado = [];
+  let posNorm = 0; // cuántos caracteres "reales" (no auto) hemos consumido de tecleado
+
+  for (const ch of objetivo) {
+    const esAutoEspacio = espaciosAutomaticos  && ch === ' ';
+    const esAutoPunt    = puntuacionAutomatica && esPuntuacion(ch);
+
+    if (esAutoEspacio || esAutoPunt) {
+      // Auto-carácter: se inserta solo cuando el niño ya ha tecleado al
+      // menos un carácter real anterior (posNorm > 0). No consume pulsación.
+      if (posNorm > 0) resultado.push(ch);
+    } else {
+      // Carácter real que el niño debe pulsar.
+      if (posNorm >= tecleado.length) break; // aún no ha llegado aquí
+      // Si las tildes son automáticas, mostrar el carácter original del
+      // objetivo (con su acento); si no, lo que el niño eligió teclear.
+      resultado.push(tildesAutomaticas ? ch : tecleado[posNorm]);
+      posNorm++;
+    }
+  }
+
+  return resultado;
+}
+
 /** ¿Esta palabra necesita una tecla "Mayúscula" para poder escribirse?
  *  Solo si el ajuste de mayúsculas automáticas está desactivado y la
  *  palabra de verdad mezcla mayúsculas y minúsculas (p.ej. un nombre
@@ -264,10 +305,14 @@ function mostrarSinMaterial(zona, plataforma) {
 }
 
 function pintarEscritura() {
-  const { raiz, ajustesPista, tecleado } = estado;
+  const { raiz, ajustesPista, tecleado, medioActual } = estado;
   const caja = raiz.querySelector('.teclea-escritura');
   caja.innerHTML = '';
-  tecleado.forEach((caracter, i) => {
+  // Reconstruir la secuencia visual: los caracteres auto-gestionados por la
+  // "mano amiga" (tildes, espacios, puntuación) se insertan en su posición
+  // exacta del objetivo aunque el niño no los haya pulsado.
+  const secuencia = secuenciaVisual(tecleado, medioActual ? medioActual.nombre : '', ajustesPista);
+  secuencia.forEach((caracter, i) => {
     const ficha = document.createElement('span');
     ficha.className = 'teclea-letra' + (caracter === ' ' ? ' teclea-letra-espacio' : '');
     ficha.style.setProperty('--orden', i);
