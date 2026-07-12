@@ -8,6 +8,7 @@
     "icono": "🐾",
     "estante": "LECTURA",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -64,6 +65,7 @@
     "icono": "⌨️",
     "estante": "ESCRITURA",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -101,6 +103,7 @@
     "icono": "✍️",
     "estante": "ESCRITURA",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -157,6 +160,7 @@
     "icono": "🎡",
     "estante": "LECTURA",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -185,6 +189,7 @@
     "icono": "🔠",
     "estante": "LECTURA",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -315,6 +320,7 @@
     "icono": "➕",
     "estante": "SUMAR",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -380,6 +386,7 @@
     "icono": "🧮",
     "estante": "SUMAR",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -408,6 +415,7 @@
     "icono": "🧩",
     "estante": "SUMAR",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -436,6 +444,7 @@
     "icono": "➖",
     "estante": "RESTAR",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -464,6 +473,7 @@
     "icono": "✏️",
     "estante": "RESTAR",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -492,6 +502,7 @@
     "icono": "🔢",
     "estante": "RESTAR",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "etiqueta": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [
@@ -518,7 +529,10 @@
     "nombre": "Cuadrícula de multiplicación",
     "nombreClave": "juegos_nombres.cuadricula_multiplicacion",
     "icono": "✖️",
-    "estante": "MULTIPLICAR"
+    "estante": "MULTIPLICAR",
+    "material": {
+      "excluirEtiquetas": ["numeros"]
+    }
   },
   {
     "id": "clasifica-categorias",
@@ -538,6 +552,7 @@
     "icono": "🖼️",
     "estante": "LECTURA",
     "material": {
+      "excluirEtiquetas": ["numeros"],
       "semillaTag": "animales",
       "semillaArasaacLang": "es",
       "semillaArasaac": [

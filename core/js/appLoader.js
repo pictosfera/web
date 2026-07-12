@@ -105,10 +105,30 @@ async function resolverMaterial(descriptor) {
   // Si el descriptor declara filtro explícito (solo me-gusta y lista-compra),
   // devolver únicamente los ítems de esa etiqueta. En todos los demás juegos
   // la etiqueta es solo semilla, nunca filtro: se devuelve toda la biblioteca.
+  let medios;
   if (material.filtrar && tagSiembra) {
-    return mediaLibrary.listByTags([tagSiembra]);
+    medios = await mediaLibrary.listByTags([tagSiembra]);
+  } else {
+    medios = await mediaLibrary.listAll();
   }
-  return mediaLibrary.listAll();
+
+  // Ajuste de seguridad de contenido: si el descriptor declara `excluirEtiquetas`,
+  // se descartan los medios cuyas etiquetas contengan alguna de las indicadas.
+  // Uso principal: excluir pictogramas con etiqueta "numeros" (la etiqueta interna
+  // que asigna arasaac.js a las categorías ARASAAC "number", "mathematics", etc.)
+  // en juegos de lectura, escritura y matemáticas donde el pictograma debe
+  // representar un objeto (animal, alimento…), no un dígito, para evitar que
+  // el niño confunda la respuesta numérica con un pictograma de número.
+  if (Array.isArray(material.excluirEtiquetas) && material.excluirEtiquetas.length) {
+    const excluidas = new Set(material.excluirEtiquetas.map((e) => e.toLowerCase()));
+    medios = medios.filter(
+      (m) =>
+        !Array.isArray(m.etiquetas) ||
+        !m.etiquetas.some((et) => excluidas.has(String(et).toLowerCase()))
+    );
+  }
+
+  return medios;
 }
 
 /** Elige al azar una pareja de categorías del banco guardado por el
