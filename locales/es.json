@@ -590,5 +590,13 @@
       "instrucciones": "Encuentra varias formas distintas de equilibrar la rama.",
       "progreso": "Soluciones encontradas: {n} de {meta}"
     }
+  },
+  "contentLoader": {
+    "boton": "Cargar contenido de la comunidad",
+    "cargando": "Cargando contenido…",
+    "exito": "Contenido añadido: {medios} pictogramas, {secuencias} secuencias, {categorias} categorías, {rutas} rutas.",
+    "sin_novedades": "Todo el contenido de la comunidad ya está en tu biblioteca.",
+    "error": "No se pudo cargar el contenido: {detalle}",
+    "cerrar": "Cerrar"
   }
 }

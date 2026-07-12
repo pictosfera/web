@@ -17,6 +17,7 @@
 import { t } from '../i18n.js';
 import { navigate } from '../router.js';
 import * as sounds from '../sounds.js';
+import { cargarContenidoComunidad } from '../contentLoader.js';
 
 const OPCIONES = [
   { ruta: '/pictogramas/arasaac', icono: '🖼️', clave: 'pictogramas.menu_pictogramas' },
@@ -69,6 +70,35 @@ export async function render() {
 
   seccion.appendChild(grid);
   raiz.appendChild(seccion);
+
+  // --- Botón "Cargar contenido de la comunidad" ---
+  const btnComunidad = document.createElement('button');
+  btnComunidad.type = 'button';
+  btnComunidad.className = 'btn btn-comunidad';
+  btnComunidad.textContent = t('contentLoader.boton');
+  btnComunidad.addEventListener('click', async () => {
+    btnComunidad.disabled = true;
+    const textoOriginal = btnComunidad.textContent;
+    btnComunidad.textContent = t('contentLoader.cargando');
+    const r = await cargarContenidoComunidad();
+    btnComunidad.disabled = false;
+    btnComunidad.textContent = textoOriginal;
+    const total = r.mediosNuevos + r.secuenciasNuevas + r.categoriasNuevas + r.rutasNuevas;
+    if (r.error) {
+      alert(t('contentLoader.error', { detalle: r.error }));
+    } else if (total === 0) {
+      alert(t('contentLoader.sin_novedades'));
+    } else {
+      alert(t('contentLoader.exito', {
+        medios:     r.mediosNuevos,
+        secuencias: r.secuenciasNuevas,
+        categorias: r.categoriasNuevas,
+        rutas:      r.rutasNuevas
+      }));
+    }
+  });
+  raiz.appendChild(btnComunidad);
+
   view.appendChild(raiz);
 
   return () => {};

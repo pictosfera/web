@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Content Charger — Pictosfera</title>
+  <style>
+    /* ----------------------------------------------------------------
+       Diseño y tokens visuales (alineados con Pictosfera)
+    ---------------------------------------------------------------- */
+    :root {
+      --color-primary:       #3D8BD4;
+      --color-primary-dark:  #2a6aad;
+      --color-secondary:     #f0a500;
+      --color-success:       #4caf50;
+      --color-success-light: #e8f5e9;
+      --color-error:         #e53935;
+      --color-error-light:   #ffebee;
+      --color-warning:       #ff9800;
+      --color-warning-light: #fff3e0;
+      --color-surface:       #ffffff;
+      --color-bg:            #f0f4f9;
+      --color-bg-soft:       #e8edf5;
+      --color-text:          #1a1a2e;
+      --color-text-soft:     #5a6070;
+      --color-border:        #cdd5e0;
+      --radius:              10px;
+      --radius-sm:           6px;
+      --shadow:              0 2px 10px rgba(0,0,0,.08);
+      --shadow-sm:           0 1px 4px rgba(0,0,0,.06);
+      --font:                'Segoe UI', system-ui, sans-serif;
+      --transition:          160ms ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- Cabecera ---- */
+    #cabecera {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 20px;
+      background: var(--color-primary-dark);
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .cab-left { display: flex; align-items: center; gap: 10px; }
+    .cab-left h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: .3px; }
+    .cab-left .subtitulo {
+      font-size: .75rem;
+      opacity: .75;
+      margin-top: 1px;
+    }
+    .cab-right { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+    #info-carpeta {
+      font-size: .72rem;
+      opacity: .8;
+      max-width: 220px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ---- Botones ---- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 14px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font: inherit;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: filter var(--transition), opacity var(--transition);
+    }
+    .btn:hover:not(:disabled) { filter: brightness(1.1); }
+    .btn:disabled { opacity: .45; cursor: default; }
+    .btn-primary  { background: var(--color-primary); color: #fff; }
+    .btn-success  { background: var(--color-success); color: #fff; }
+    .btn-secondary { background: var(--color-secondary); color: #fff; }
+    .btn-ghost    { background: rgba(255,255,255,.18); color: #fff; border: 1px solid rgba(255,255,255,.3); }
+    .btn-danger   { background: var(--color-error); color: #fff; }
+    .btn-neutral  { background: var(--color-bg-soft); color: var(--color-text); border: 1px solid var(--color-border); }
+    .btn-sm { padding: 4px 10px; font-size: .78rem; }
+    .btn-icon { padding: 6px 9px; }
+
+    /* ---- Pestañas ---- */
+    #tabs {
+      display: flex;
+      gap: 0;
+      background: var(--color-surface);
+      border-bottom: 2px solid var(--color-border);
+      padding: 0 20px;
+      flex-shrink: 0;
+    }
+    .tab {
+      padding: 10px 18px;
+      border: none;
+      border-bottom: 3px solid transparent;
+      background: none;
+      font: inherit;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--color-text-soft);
+      cursor: pointer;
+      transition: color var(--transition), border-color var(--transition);
+      margin-bottom: -2px;
+    }
+    .tab:hover { color: var(--color-primary); }
+    .tab.activo {
+      color: var(--color-primary-dark);
+      border-bottom-color: var(--color-primary);
+    }
+    .tab-badge {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 99px;
+      font-size: .65rem;
+      padding: 1px 6px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+
+    /* ---- Área principal ---- */
+    #contenido {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ---- Buscador ---- */
+    .buscador {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .buscador input {
+      flex: 1;
+      min-width: 180px;
+      padding: 8px 12px;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font: inherit;
+      font-size: .9rem;
+    }
+    .buscador input:focus {
+      outline: 2px solid var(--color-primary);
+      border-color: transparent;
+    }
+
+    /* ---- Resultados ARASAAC ---- */
+    .arasaac-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+    .arasaac-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 6px;
+      background: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .arasaac-card:hover {
+      border-color: var(--color-primary);
+      transform: scale(1.03);
+    }
+    .arasaac-card img { width: 70px; height: 70px; object-fit: contain; }
+    .arasaac-card span { font-size: .72rem; text-align: center; color: var(--color-text-soft); }
+
+    /* ---- Biblioteca de ítems ---- */
+    .biblioteca-cabecera {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .biblioteca-cabecera h2 { font-size: 1rem; color: var(--color-text-soft); font-weight: 600; }
+
+    .items-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .item-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+    .item-card-img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+    .item-card-img-placeholder {
+      width: 52px;
+      height: 52px;
+      background: var(--color-bg-soft);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      color: var(--color-text-soft);
+    }
+    .item-card-info { flex: 1; min-width: 0; }
+    .item-card-nombre { font-weight: 600; font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .item-card-meta { font-size: .75rem; color: var(--color-text-soft); margin-top: 2px; }
+    .item-card-acciones { display: flex; gap: 6px; flex-shrink: 0; }
+
+    /* ---- Badges de estado ---- */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: .7rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-publicado  { background: var(--color-success-light); color: #2e7d32; }
+    .badge-nuevo      { background: #e3f2fd; color: #1565c0; }
+    .badge-modificado { background: var(--color-warning-light); color: #e65100; }
+    .badge-eliminado  { background: var(--color-error-light); color: #c62828; }
+
+    /* ---- Sección vacía ---- */
+    .vacio {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--color-text-soft);
+      font-size: .95rem;
+    }
+    .vacio-icon { font-size: 2.5rem; display: block; margin-bottom: 10px; }
+
+    /* ---- Formularios en modal ---- */
+    .campo {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+    .campo label { font-size: .85rem; font-weight: 600; color: var(--color-text-soft); }
+    .campo input,
+    .campo textarea,
+    .campo select {
+      padding: 8px 12px;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font: inherit;
+      font-size: .9rem;
+      background: var(--color-surface);
+    }
+    .campo input:focus,
+    .campo textarea:focus,
+    .campo select:focus {
+      outline: 2px solid var(--color-primary);
+      border-color: transparent;
+    }
+    .campo textarea { min-height: 80px; resize: vertical; }
+
+    /* ---- Modal ---- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      z-index: 900;
+      padding: 24px 16px;
+      overflow-y: auto;
+    }
+    .modal-caja {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 32px rgba(0,0,0,.18);
+      width: 100%;
+      max-width: 620px;
+      padding: 24px;
+      position: relative;
+    }
+    .modal-titulo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: var(--color-primary-dark);
+    }
+    .modal-acciones {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* ---- Diálogo de conflicto de nombre ---- */
+    #dialogo-conflicto {
+      border: none;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 32px rgba(0,0,0,.25);
+      background: var(--color-surface);
+      padding: 24px;
+      max-width: 380px;
+      width: 90%;
+    }
+    #dialogo-conflicto::backdrop {
+      background: rgba(0,0,0,.35);
+    }
+    .conflicto-titulo {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: 10px;
+    }
+    .conflicto-descripcion {
+      font-size: .88rem;
+      color: var(--color-text-soft);
+      margin-bottom: 18px;
+      line-height: 1.45;
+    }
+    .conflicto-imagenes {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .conflicto-picto {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+    }
+    .conflicto-picto img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      border-radius: var(--radius);
+      border: 2px solid var(--color-border);
+      background: #fff;
+    }
+    .conflicto-picto-etiqueta {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--color-text-soft);
+    }
+    .conflicto-picto-nombre {
+      font-size: .85rem;
+      color: var(--color-text);
+      text-align: center;
+      word-break: break-word;
+    }
+    .conflicto-separador {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      color: var(--color-text-soft);
+      padding-bottom: 24px;
+    }
+    .conflicto-acciones {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .conflicto-acciones .btn {
+      width: 100%;
+      justify-content: center;
+      font-size: .9rem;
+    }
+
+    /* ---- Pasos de secuencia / ruta ---- */
+    .pasos-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 260px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    .paso-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+    }
+    .paso-item img { width: 36px; height: 36px; object-fit: contain; }
+    .paso-item-num {
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--color-text-soft);
+      min-width: 18px;
+    }
+    .paso-item-nombre { flex: 1; font-size: .85rem; font-weight: 500; }
+    .paso-item-orden { display: flex; flex-direction: column; gap: 2px; }
+    .paso-item-orden button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: .8rem;
+      line-height: 1;
+      padding: 0 3px;
+      color: var(--color-text-soft);
+    }
+    .paso-item-orden button:hover { color: var(--color-primary); }
+
+    /* ---- Mini picker de medios ---- */
+    .medio-picker {
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 8px;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+    .medio-picker-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 8px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .medio-picker-item:hover { background: var(--color-bg-soft); }
+    .medio-picker-item.seleccionado { background: #e3f2fd; }
+    .medio-picker-item img { width: 32px; height: 32px; object-fit: contain; }
+    .medio-picker-item span { font-size: .82rem; }
+
+    /* ---- Sección de categorías ---- */
+    .cat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .cat-col {
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+    }
+    .cat-col h4 { font-size: .85rem; margin-bottom: 8px; color: var(--color-primary-dark); }
+
+    /* ---- Spinner ---- */
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255,255,255,.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---- Toast ---- */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: .9rem;
+      color: #fff;
+      z-index: 9999;
+      transition: opacity .25s;
+      pointer-events: none;
+    }
+    #toast.ok      { background: var(--color-success); }
+    #toast.error   { background: var(--color-error); }
+    #toast.info    { background: var(--color-primary); }
+    #toast.oculto  { opacity: 0; }
+
+    /* ---- Separador de secciones eliminadas ---- */
+    .seccion-eliminados {
+      margin-top: 24px;
+      border-top: 2px dashed var(--color-error);
+      padding-top: 14px;
+    }
+    .seccion-eliminados h3 {
+      font-size: .85rem;
+      color: var(--color-error);
+      margin-bottom: 10px;
+    }
+
+    /* ---- Etiquetas ---- */
+    .etiqueta-chip {
+      display: inline-block;
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
+      border-radius: 99px;
+      padding: 2px 8px;
+      font-size: .72rem;
+      color: var(--color-text-soft);
+      margin: 2px;
+    }
+
+    /* ---- Contador de ítems ---- */
+    .resumen-estadisticas {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .stat-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 99px;
+      font-size: .78rem;
+      font-weight: 600;
+    }
+    .stat-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .dot-publicado  { background: var(--color-success); }
+    .dot-nuevo      { background: var(--color-primary); }
+    .dot-modificado { background: var(--color-warning); }
+    .dot-eliminado  { background: var(--color-error); }
+
+    hr.sep { border: none; border-top: 1px solid var(--color-border); margin: 16px 0; }
+  </style>
+</head>
+<body>
+<header id="cabecera">
+  <div class="cab-left">
+    <svg width="26" height="26" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="100" height="100" rx="20" fill="white" fill-opacity=".25"/>
+      <path d="M55 15L25 55H50L45 85L75 45H50L55 15Z" fill="white"/>
+    </svg>
+    <div>
+      <h1>Content Charger</h1>
+      <span class="subtitulo">Gestión de contenido — Pictosfera</span>
+    </div>
+  </div>
+  <div class="cab-right">
+    <span id="info-carpeta">Sin carpeta configurada</span>
+    <button id="btn-carpeta" class="btn btn-ghost btn-sm">📁 Carpeta</button>
+    <button id="btn-importar-estado" class="btn btn-ghost btn-sm" title="Importar estado publicado desde archivo">📥 Importar estado</button>
+    <button id="btn-exportar" class="btn btn-secondary" title="Generar community-content.json">💾 Exportar JSON</button>
+    <button id="btn-publicado" class="btn btn-success" title="Marcar todo el contenido actual como publicado">✓ Marcar publicado</button>
+  </div>
+</header>
+
+<nav id="tabs" role="tablist">
+  <button class="tab activo" role="tab" data-tab="pictogramas">🖼️ Pictogramas <span class="tab-badge" id="badge-pictogramas">0</span></button>
+  <button class="tab" role="tab" data-tab="secuencias">📋 Secuencias <span class="tab-badge" id="badge-secuencias">0</span></button>
+  <button class="tab" role="tab" data-tab="categorias">🗂️ Categorías <span class="tab-badge" id="badge-categorias">0</span></button>
+  <button class="tab" role="tab" data-tab="rutas">🗺️ Rutas <span class="tab-badge" id="badge-rutas">0</span></button>
+</nav>
+
+<main id="contenido" role="main">
+  <p style="color:var(--color-text-soft);font-size:.9rem">Cargando…</p>
+</main>
+
+<div id="modal-overlay" style="display:none" class="modal-overlay">
+  <div class="modal-caja">
+    <div id="modal-contenido"></div>
+  </div>
+</div>
+
+<!-- Diálogo nativo de conflicto de nombre: aparece encima del modal de búsqueda ARASAAC -->
+<dialog id="dialogo-conflicto">
+  <div class="conflicto-titulo">Nombre duplicado</div>
+  <div class="conflicto-imagenes">
+    <div class="conflicto-picto">
+      <span class="conflicto-picto-etiqueta">En biblioteca</span>
+      <img id="conflicto-img-existente" src="" alt="">
+      <span class="conflicto-picto-nombre" id="conflicto-nombre-existente"></span>
+    </div>
+    <div class="conflicto-separador">→</div>
+    <div class="conflicto-picto">
+      <span class="conflicto-picto-etiqueta">Nuevo</span>
+      <img id="conflicto-img-nuevo" src="" alt="">
+      <span class="conflicto-picto-nombre" id="conflicto-nombre-nuevo"></span>
+    </div>
+  </div>
+  <div class="conflicto-descripcion" id="conflicto-texto"></div>
+  <div class="conflicto-acciones">
+    <button class="btn btn-primary" id="conflicto-btn-sustituir">Sustituir el existente</button>
+    <button class="btn btn-neutral" id="conflicto-btn-anadir">Añadir igualmente (tener ambos)</button>
+    <button class="btn btn-neutral" id="conflicto-btn-cancelar">Cancelar</button>
+  </div>
+</dialog>
+
+<div id="toast" class="toast oculto"></div>
+
+<input type="file" id="input-importar" accept=".json" style="display:none">
+
+<script>
+/* =================================================================
+   Content Charger — Pictosfera
+   Herramienta de administración para curar contenido que se publica
+   en el portal vía community-content.json (recogido por
+   GestorSubidasWeb en el siguiente push a GitHub Pages).
+
+   Sin dependencias externas. Funciona abriendo el archivo directamente
+   en Chrome (file://).
+================================================================= */
+
+// ----------------------------------------------------------------
+// Constantes
+// ----------------------------------------------------------------
+
+const DB_NAME  = 'pictosfera-charger';
+const DB_VER   = 1;
+const API_BASE = 'https://api.arasaac.org/api';
+const STATIC   = 'https://static.arasaac.org/pictograms';
+const CONTENT_FILENAME = 'community-content.json';
+
+// Todos los appIds registrados en el portal (para el selector de rutas)
+const TODOS_APPS = [
+  { id: 'memoria-animales',                estante: 'LECTURA',     label: 'Memoria (animales)' },
+  { id: 'arrastra-palabra-animales',        estante: 'LECTURA',     label: 'Arrastra la palabra (animales)' },
+  { id: 'teclea-palabra-animales',          estante: 'ESCRITURA',   label: 'Teclea la palabra (animales)' },
+  { id: 'ordena-secuencia-rutinas',         estante: 'RUTINAS',     label: 'Ordena la secuencia (rutinas)' },
+  { id: 'escribe-letra-animales',           estante: 'ESCRITURA',   label: 'Escribe la letra (animales)' },
+  { id: 'bingo-lectura-animales',           estante: 'LECTURA',     label: 'Bingo de lectura (animales)' },
+  { id: 'ruleta-letras-animales',           estante: 'LECTURA',     label: 'Ruleta de letras (animales)' },
+  { id: 'rosco-pictogramas-animales',       estante: 'LECTURA',     label: 'Rosco de pictogramas (animales)' },
+  { id: 'series-pictogramas-animales',      estante: 'SERIES',      label: 'Series de pictogramas (animales)' },
+  { id: 'series-colores',                   estante: 'SERIES',      label: 'Series de colores' },
+  { id: 'series-numeros',                   estante: 'SERIES',      label: 'Series de números' },
+  { id: 'arrastra-numero-animales',         estante: 'CONTAR',      label: 'Arrastra el número (animales)' },
+  { id: 'escribe-numero-animales',          estante: 'CONTAR',      label: 'Escribe el número (animales)' },
+  { id: 'suma-resultado-animales',          estante: 'SUMAR',       label: 'Suma: elige el resultado (animales)' },
+  { id: 'dedos-pictogramas-animales',       estante: 'CONTAR',      label: 'Dedos y pictogramas (animales)' },
+  { id: 'dedos-numero',                     estante: 'CONTAR',      label: 'Dedos y número' },
+  { id: 'completa-suma-animales',           estante: 'SUMAR',       label: 'Completa la suma (animales)' },
+  { id: 'arrastra-suma-animales',           estante: 'SUMAR',       label: 'Arrastra la suma (animales)' },
+  { id: 'resta-resultado-animales',         estante: 'RESTAR',      label: 'Resta: elige el resultado (animales)' },
+  { id: 'completa-resta-animales',          estante: 'RESTAR',      label: 'Completa la resta (animales)' },
+  { id: 'arrastra-resta-animales',          estante: 'RESTAR',      label: 'Arrastra la resta (animales)' },
+  { id: 'cuadricula-multiplicacion',        estante: 'MULTIPLICAR', label: 'Cuadrícula de multiplicación' },
+  { id: 'clasifica-categorias',             estante: 'CONCEPTOS',   label: 'Clasifica en categorías' },
+  { id: 'puzzle-pictograma-palabra-animales', estante: 'LECTURA',   label: 'Puzzle pictograma y palabra (animales)' },
+  { id: 'relaciona-pictograma-palabra-animales', estante: 'LECTURA', label: 'Relaciona pictograma con palabra (animales)' },
+  { id: 'me-gusta-no-me-gusta-comidas',    estante: 'CONCEPTOS',   label: 'Me gusta / no me gusta (comidas)' },
+  { id: 'lista-compra-comidas',             estante: 'LECTURA',     label: 'Lista de la compra (comidas)' },
+  { id: 'reconoce-emociones',              estante: 'CONCEPTOS',   label: 'Reconoce emociones' },
+  { id: 'arma-personaje',                  estante: 'CONCEPTOS',   label: 'Arma el personaje' },
+  { id: 'balanza-equilibra',               estante: 'BALANZA',     label: 'Balanza: equilibra' },
+  { id: 'balanza-completa',                estante: 'BALANZA',     label: 'Balanza: completa' },
+  { id: 'balanza-cual-pesa',               estante: 'BALANZA',     label: 'Balanza: ¿cuál pesa más?' }
+];
+
+// ----------------------------------------------------------------
+// Capa IndexedDB
+// ----------------------------------------------------------------
+
+let _db = null;
+
+function openDb() {
+  if (_db) return Promise.resolve(_db);
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VER);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      // items: contenido actual gestionado por el administrador
+      if (!db.objectStoreNames.contains('items')) {
+        db.createObjectStore('items', { keyPath: 'id' });
+      }
+      // snapshot: copia del último estado marcado como "publicado"
+      if (!db.objectStoreNames.contains('snapshot')) {
+        db.createObjectStore('snapshot', { keyPath: 'id' });
+      }
+      // settings: configuración persitente (handle de carpeta, etc.)
+      if (!db.objectStoreNames.contains('settings')) {
+        db.createObjectStore('settings', { keyPath: 'clave' });
+      }
+    };
+    req.onsuccess = () => { _db = req.result; resolve(_db); };
+    req.onerror  = () => reject(req.error);
+  });
+}
+
+async function dbGetAll(store) {
+  const db = await openDb();
+  return new Promise((resolve, reject) => {
+    const tx  = db.transaction(store, 'readonly');
+    const req = tx.objectStore(store).getAll();
+    req.onsuccess = () => resolve(req.result || []);
+    req.onerror   = () => reject(req.error);
+  });
+}
+
+async function dbPut(store, obj) {
+  const db = await openDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readwrite');
+    tx.objectStore(store).put(obj);
+    tx.oncomplete = resolve;
+    tx.onerror    = () => reject(tx.error);
+  });
+}
+
+async function dbDelete(store, id) {
+  const db = await openDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readwrite');
+    tx.objectStore(store).delete(id);
+    tx.oncomplete = resolve;
+    tx.onerror    = () => reject(tx.error);
+  });
+}
+
+async function dbClear(store) {
+  const db = await openDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readwrite');
+    tx.objectStore(store).clear();
+    tx.oncomplete = resolve;
+    tx.onerror    = () => reject(tx.error);
+  });
+}
+
+async function getSetting(clave) {
+  const db = await openDb();
+  return new Promise((resolve, reject) => {
+    const tx  = db.transaction('settings', 'readonly');
+    const req = tx.objectStore('settings').get(clave);
+    req.onsuccess = () => resolve(req.result ? req.result.valor : null);
+    req.onerror   = () => reject(req.error);
+  });
+}
+
+async function setSetting(clave, valor) {
+  return dbPut('settings', { clave, valor });
+}
+
+// ----------------------------------------------------------------
+// ARASAAC
+// ----------------------------------------------------------------
+
+function arasaacImgUrl(id) {
+  return `${STATIC}/${id}/${id}_500.png`;
+}
+
+function arasaacImgCandidatos(id) {
+  return [300, 500, 2500].map(s => `${STATIC}/${id}/${id}_${s}.png`);
+}
+
+function uid() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+function pictoToMedio(picto) {
+  const id = picto._id;
+  const keyword = (picto.keywords || []).find(k => k.type === 1) || picto.keywords[0] || {};
+  return {
+    id:               `arasaac:${id}`,
+    arasaacId:        id,
+    imagen:           arasaacImgUrl(id),
+    imagenCandidatos: arasaacImgCandidatos(id),
+    nombre:           keyword.keyword || `picto ${id}`,
+    etiquetas:        [],
+    origen:           'arasaac',
+    creado:           new Date().toISOString()
+  };
+}
+
+// Muestra el diálogo de conflicto de nombre y devuelve una promesa con
+// la elección del usuario: 'sustituir' | 'anadir' | 'cancelar'.
+// imgExistente e imgNuevo son URLs de imagen; nombres son cadenas de texto.
+function pedirResolucionConflicto(nombreExistente, imgExistente, nombreNuevo, imgNuevo) {
+  return new Promise(resolve => {
+    const dlg  = document.getElementById('dialogo-conflicto');
+    const txt  = document.getElementById('conflicto-texto');
+    const btnS = document.getElementById('conflicto-btn-sustituir');
+    const btnA = document.getElementById('conflicto-btn-anadir');
+    const btnC = document.getElementById('conflicto-btn-cancelar');
+
+    document.getElementById('conflicto-img-existente').src    = imgExistente;
+    document.getElementById('conflicto-nombre-existente').textContent = nombreExistente;
+    document.getElementById('conflicto-img-nuevo').src        = imgNuevo;
+    document.getElementById('conflicto-nombre-nuevo').textContent     = nombreNuevo;
+    txt.textContent = `Ambos tienen el nombre "${nombreNuevo}". ¿Qué quieres hacer?`;
+
+    function cerrar(opcion) {
+      dlg.close();
+      btnS.removeEventListener('click', onSustituir);
+      btnA.removeEventListener('click', onAnadir);
+      btnC.removeEventListener('click', onCancelar);
+      resolve(opcion);
+    }
+    function onSustituir() { cerrar('sustituir'); }
+    function onAnadir()    { cerrar('anadir'); }
+    function onCancelar()  { cerrar('cancelar'); }
+
+    btnS.addEventListener('click', onSustituir);
+    btnA.addEventListener('click', onAnadir);
+    btnC.addEventListener('click', onCancelar);
+
+    dlg.showModal();
+  });
+}
+
+async function buscarArasaac(query) {
+  const url = `${API_BASE}/pictograms/es/search/${encodeURIComponent(query)}`;
+  const res  = await fetch(url);
+  if (!res.ok) throw new Error(`ARASAAC error ${res.status}`);
+  return res.json();
+}
+
+// ----------------------------------------------------------------
+// Cálculo de estado (Publicado / Nuevo / Modificado / Eliminado)
+// ----------------------------------------------------------------
+
+async function calcularEstados() {
+  const [items, snap] = await Promise.all([dbGetAll('items'), dbGetAll('snapshot')]);
+  const itemMap = new Map(items.map(i => [i.id, i]));
+  const snapMap = new Map(snap.map(s => [s.id, s]));
+
+  const estados = {};
+  for (const item of items) {
+    const s = snapMap.get(item.id);
+    if (!s) {
+      estados[item.id] = 'nuevo';
+    } else if (JSON.stringify(item.datos) === JSON.stringify(s.datos)) {
+      estados[item.id] = 'publicado';
+    } else {
+      estados[item.id] = 'modificado';
+    }
+  }
+  // ítems que estaban en snapshot pero ya no existen en items
+  for (const s of snap) {
+    if (!itemMap.has(s.id)) {
+      estados[s.id] = 'eliminado';
+    }
+  }
+  return { itemMap, snapMap, estados };
+}
+
+function badgeHtml(estado) {
+  const map = {
+    publicado:  ['badge-publicado',  'Publicado'],
+    nuevo:      ['badge-nuevo',      'Nuevo'],
+    modificado: ['badge-modificado', 'Modificado'],
+    eliminado:  ['badge-eliminado',  'Eliminado — pendiente']
+  };
+  const [cls, label] = map[estado] || ['badge-nuevo', estado];
+  return `<span class="badge ${cls}">${label}</span>`;
+}
+
+// ----------------------------------------------------------------
+// Archivo / File System Access API
+// ----------------------------------------------------------------
+
+async function getDirHandle() {
+  const stored = await getSetting('dirHandle');
+  if (!stored) return null;
+  try {
+    const perm = await stored.queryPermission({ mode: 'readwrite' });
+    if (perm === 'granted') return stored;
+    const req  = await stored.requestPermission({ mode: 'readwrite' });
+    return req === 'granted' ? stored : null;
+  } catch {
+    return null;
+  }
+}
+
+async function seleccionarCarpeta() {
+  try {
+    const handle = await window.showDirectoryPicker({
+      mode: 'readwrite',
+      startIn: 'desktop',
+      id: 'pictosfera-project'
+    });
+    await setSetting('dirHandle', handle);
+    return handle;
+  } catch (e) {
+    if (e.name !== 'AbortError') mostrarToast('No se pudo acceder a la carpeta.', 'error');
+    return null;
+  }
+}
+
+async function escribirArchivoEnCarpeta(handle, nombre, contenido) {
+  const fh  = await handle.getFileHandle(nombre, { create: true });
+  const writable = await fh.createWritable();
+  await writable.write(contenido);
+  await writable.close();
+}
+
+function descargarJson(nombre, contenido) {
+  const blob = new Blob([contenido], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = nombre;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+
+// ----------------------------------------------------------------
+// Construcción de community-content.json
+// ----------------------------------------------------------------
+
+async function buildContentJson() {
+  const items = await dbGetAll('items');
+  const medios     = items.filter(i => i.tipo === 'medio').map(i => i.datos);
+  const secuencias = items.filter(i => i.tipo === 'secuencia').map(i => i.datos);
+  const categorias = items.filter(i => i.tipo === 'categoria').map(i => i.datos);
+  const rutas      = items.filter(i => i.tipo === 'ruta').map(i => i.datos);
+  return JSON.stringify({
+    version:    1,
+    generado:   new Date().toISOString(),
+    medios,
+    secuencias,
+    categorias,
+    rutas
+  }, null, 2);
+}
+
+async function exportarJson() {
+  mostrarToast('Generando JSON…', 'info');
+  const json = await buildContentJson();
+  let guardado = false;
+
+  const dirHandle = await getDirHandle();
+  if (dirHandle) {
+    try {
+      await escribirArchivoEnCarpeta(dirHandle, CONTENT_FILENAME, json);
+      guardado = true;
+      mostrarToast(`✓ Guardado en la carpeta del proyecto como ${CONTENT_FILENAME}`, 'ok');
+    } catch (e) {
+      console.error(e);
+      mostrarToast('Error al guardar en carpeta. Se descargará.', 'error');
+    }
+  }
+
+  if (!guardado) {
+    descargarJson(CONTENT_FILENAME, json);
+    mostrarToast(`✓ Descargando ${CONTENT_FILENAME} — cópialo a la carpeta NO BORRAR WEB PICTOSFERA`, 'ok');
+  }
+  await actualizarBadgesTab();
+}
+
+// ----------------------------------------------------------------
+// Marcar como publicado
+// ----------------------------------------------------------------
+
+async function marcarComoPublicado() {
+  if (!confirm('¿Marcar todo el contenido actual como publicado?\n\nHaz esto después de ejecutar el Gestor de Subidas Web para que el estado de la biblioteca refleje lo que ya está en GitHub Pages.')) return;
+  const items = await dbGetAll('items');
+  await dbClear('snapshot');
+  for (const item of items) {
+    await dbPut('snapshot', { ...item });
+  }
+  mostrarToast('✓ Estado de publicación actualizado. Todo marcado como Publicado.', 'ok');
+  await renderTab(tabActivo);
+  await actualizarBadgesTab();
+}
+
+// ----------------------------------------------------------------
+// Importar estado publicado desde archivo JSON
+// ----------------------------------------------------------------
+
+async function importarEstadoDesdeArchivo(archivo) {
+  try {
+    const texto = await archivo.text();
+    const json  = JSON.parse(texto);
+    const ahora = new Date().toISOString();
+
+    const items = [];
+    (json.medios || []).forEach(d => items.push({ id: d.id, tipo: 'medio', datos: d, creadoEn: ahora, modificadoEn: ahora }));
+    (json.secuencias || []).forEach(d => items.push({ id: d.id, tipo: 'secuencia', datos: d, creadoEn: ahora, modificadoEn: ahora }));
+    (json.categorias || []).forEach(d => items.push({ id: d.id, tipo: 'categoria', datos: d, creadoEn: ahora, modificadoEn: ahora }));
+    (json.rutas || []).forEach(d => items.push({ id: d.id, tipo: 'ruta', datos: d, creadoEn: ahora, modificadoEn: ahora }));
+
+    // Cargar en items (solo los que no existen aún) y en snapshot
+    const existentes = await dbGetAll('items');
+    const idsExistentes = new Set(existentes.map(i => i.id));
+    for (const item of items) {
+      if (!idsExistentes.has(item.id)) await dbPut('items', item);
+      await dbPut('snapshot', { ...item });
+    }
+
+    mostrarToast(`✓ Estado importado: ${items.length} ítem(s) marcados como Publicado.`, 'ok');
+    await renderTab(tabActivo);
+    await actualizarBadgesTab();
+  } catch (e) {
+    mostrarToast('Error al importar el archivo. ¿Es un community-content.json válido?', 'error');
+    console.error(e);
+  }
+}
+
+// ----------------------------------------------------------------
+// Toast
+// ----------------------------------------------------------------
+
+let _toastTimeout = null;
+function mostrarToast(msg, tipo = 'ok') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className   = `toast ${tipo}`;
+  clearTimeout(_toastTimeout);
+  _toastTimeout  = setTimeout(() => { el.className = 'toast oculto'; }, 3800);
+}
+
+// ----------------------------------------------------------------
+// Modal
+// ----------------------------------------------------------------
+
+function abrirModal(html) {
+  document.getElementById('modal-contenido').innerHTML = html;
+  document.getElementById('modal-overlay').style.display = 'flex';
+}
+
+function cerrarModal() {
+  document.getElementById('modal-overlay').style.display = 'none';
+  document.getElementById('modal-contenido').innerHTML = '';
+}
+
+// ----------------------------------------------------------------
+// Badges de pestañas
+// ----------------------------------------------------------------
+
+async function actualizarBadgesTab() {
+  const items = await dbGetAll('items');
+  const counts = { pictogramas: 0, secuencias: 0, categorias: 0, rutas: 0 };
+  items.forEach(i => {
+    if (i.tipo === 'medio')      counts.pictogramas++;
+    if (i.tipo === 'secuencia')  counts.secuencias++;
+    if (i.tipo === 'categoria')  counts.categorias++;
+    if (i.tipo === 'ruta')       counts.rutas++;
+  });
+  document.getElementById('badge-pictogramas').textContent = counts.pictogramas;
+  document.getElementById('badge-secuencias').textContent  = counts.secuencias;
+  document.getElementById('badge-categorias').textContent  = counts.categorias;
+  document.getElementById('badge-rutas').textContent       = counts.rutas;
+}
+
+// ----------------------------------------------------------------
+// Resumen de estadísticas (encabezado de sección)
+// ----------------------------------------------------------------
+
+function htmlResumenEstados(estados, ids) {
+  const c = { publicado: 0, nuevo: 0, modificado: 0, eliminado: 0 };
+  ids.forEach(id => { const e = estados[id]; if (c[e] !== undefined) c[e]++; });
+  return `<div class="resumen-estadisticas">
+    ${c.publicado  ? `<div class="stat-chip"><span class="stat-dot dot-publicado"></span> ${c.publicado} publicados</div>`   : ''}
+    ${c.nuevo      ? `<div class="stat-chip"><span class="stat-dot dot-nuevo"></span> ${c.nuevo} nuevos</div>`               : ''}
+    ${c.modificado ? `<div class="stat-chip"><span class="stat-dot dot-modificado"></span> ${c.modificado} modificados</div>` : ''}
+    ${c.eliminado  ? `<div class="stat-chip"><span class="stat-dot dot-eliminado"></span> ${c.eliminado} eliminados</div>`   : ''}
+  </div>`;
+}
+
+// ================================================================
+// SECCIÓN: PICTOGRAMAS
+// ================================================================
+
+async function renderPictogramas() {
+  const contenido = document.getElementById('contenido');
+  const { itemMap, snapMap, estados } = await calcularEstados();
+  const medios = [...itemMap.values()].filter(i => i.tipo === 'medio');
+  const eliminados = [...snapMap.values()].filter(s => !itemMap.has(s.id) && s.tipo === 'medio');
+  const todosIds = [...medios.map(i => i.id), ...eliminados.map(s => s.id)];
+
+  let html = `
+    <div class="biblioteca-cabecera">
+      <h2>Pictogramas (${medios.length})</h2>
+      <button class="btn btn-primary btn-sm" id="btn-nuevo-picto">+ Añadir de ARASAAC</button>
+    </div>
+    ${todosIds.length ? htmlResumenEstados(estados, todosIds) : ''}
+    <div class="items-lista" id="lista-pictogramas">
+  `;
+
+  if (medios.length === 0 && eliminados.length === 0) {
+    html += `<div class="vacio"><span class="vacio-icon">🖼️</span>No hay pictogramas todavía.<br>Pulsa "+ Añadir de ARASAAC" para buscar.</div>`;
+  }
+
+  for (const item of medios.sort((a, b) => a.datos.nombre.localeCompare(b.datos.nombre))) {
+    const d = item.datos;
+    const estado = estados[item.id] || 'nuevo';
+    html += `
+      <div class="item-card" data-id="${item.id}">
+        <img class="item-card-img" src="${d.imagen}" alt="${d.nombre}" loading="lazy" onerror="this.style.display='none'">
+        <div class="item-card-info">
+          <div class="item-card-nombre">${d.nombre}</div>
+          <div class="item-card-meta">
+            ${(d.etiquetas || []).map(e => `<span class="etiqueta-chip">${e}</span>`).join('')}
+          </div>
+        </div>
+        ${badgeHtml(estado)}
+        <div class="item-card-acciones">
+          <button class="btn btn-neutral btn-sm btn-editar-picto" data-id="${item.id}">✏️</button>
+          <button class="btn btn-danger btn-sm btn-borrar-picto" data-id="${item.id}">✕</button>
+        </div>
+      </div>`;
+  }
+
+  html += '</div>';
+
+  if (eliminados.length) {
+    html += `<div class="seccion-eliminados"><h3>🗑️ Eliminados — pendientes de publicar</h3><div class="items-lista">`;
+    for (const snap of eliminados) {
+      const d = snap.datos;
+      html += `
+        <div class="item-card">
+          <img class="item-card-img" src="${d.imagen}" alt="${d.nombre}" loading="lazy">
+          <div class="item-card-info">
+            <div class="item-card-nombre">${d.nombre}</div>
+          </div>
+          ${badgeHtml('eliminado')}
+          <div class="item-card-acciones">
+            <button class="btn btn-neutral btn-sm btn-restaurar-picto" data-id="${snap.id}" title="Restaurar">↩️</button>
+          </div>
+        </div>`;
+    }
+    html += '</div></div>';
+  }
+
+  contenido.innerHTML = html;
+
+  // Eventos
+  document.getElementById('btn-nuevo-picto').addEventListener('click', abrirBuscadorArasaac);
+
+  contenido.querySelectorAll('.btn-editar-picto').forEach(btn => {
+    btn.addEventListener('click', () => editarMedio(btn.dataset.id));
+  });
+  contenido.querySelectorAll('.btn-borrar-picto').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('¿Eliminar este pictograma del Content Charger?')) return;
+      await dbDelete('items', btn.dataset.id);
+      mostrarToast('Pictograma eliminado.', 'info');
+      await renderTab('pictogramas');
+      await actualizarBadgesTab();
+    });
+  });
+  contenido.querySelectorAll('.btn-restaurar-picto').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const snap = (await dbGetAll('snapshot')).find(s => s.id === btn.dataset.id);
+      if (snap) {
+        await dbPut('items', { ...snap });
+        mostrarToast('Pictograma restaurado.', 'ok');
+        await renderTab('pictogramas');
+        await actualizarBadgesTab();
+      }
+    });
+  });
+}
+
+function abrirBuscadorArasaac() {
+  abrirModal(`
+    <div class="modal-titulo">🔍 Buscar en ARASAAC</div>
+    <div class="buscador">
+      <input id="input-buscar-arasaac" type="text" placeholder="Escribe el nombre del pictograma…" autocomplete="off">
+      <button class="btn btn-primary btn-sm" id="btn-buscar-arasaac-ok">Buscar</button>
+    </div>
+    <div id="arasaac-resultados"></div>
+    <div class="modal-acciones">
+      <button class="btn btn-neutral" id="btn-cerrar-buscador">Cerrar</button>
+    </div>
+  `);
+
+  const input = document.getElementById('input-buscar-arasaac');
+  input.focus();
+
+  async function hacerBusqueda() {
+    const q = input.value.trim();
+    if (!q) return;
+    const div = document.getElementById('arasaac-resultados');
+    div.innerHTML = '<span class="spinner"></span> Buscando…';
+    try {
+      const pictos = await buscarArasaac(q);
+      if (!pictos.length) { div.innerHTML = '<p style="color:var(--color-text-soft);font-size:.85rem;padding:10px 0">Sin resultados.</p>'; return; }
+      const existentes = new Set((await dbGetAll('items')).filter(i => i.tipo === 'medio').map(i => i.id));
+      // Sin slice: se muestran TODOS los resultados que devuelve ARASAAC
+      div.innerHTML = `<div class="arasaac-grid">${pictos.map(p => {
+        const ya = existentes.has(`arasaac:${p._id}`);
+        return `<div class="arasaac-card${ya ? ' seleccionado' : ''}" data-picto='${JSON.stringify({_id: p._id, keywords: p.keywords})}' title="${ya ? 'Ya añadido' : 'Añadir'}">
+          <img src="${arasaacImgUrl(p._id)}" loading="lazy" alt="">
+          <span>${(p.keywords && p.keywords[0]) ? p.keywords[0].keyword : p._id}</span>
+          ${ya ? '<span style="font-size:.65rem;color:var(--color-success)">✓</span>' : ''}
+        </div>`;
+      }).join('')}</div>`;
+
+      div.querySelectorAll('.arasaac-card:not(.seleccionado)').forEach(card => {
+        card.addEventListener('click', async () => {
+          // Evitar añadir dos veces: si ya tiene la clase seleccionado (otro clic previo) ignorar
+          if (card.classList.contains('seleccionado')) return;
+          const picto  = JSON.parse(card.dataset.picto);
+          const medio  = pictoToMedio(picto);
+          const ahora  = new Date().toISOString();
+
+          // Detectar conflicto de nombre con otro pictograma ya en la biblioteca
+          const todosItems = await dbGetAll('items');
+          const conflicto  = todosItems.find(i =>
+            i.tipo === 'medio' &&
+            i.id !== medio.id &&
+            i.datos.nombre.toLowerCase() === medio.nombre.toLowerCase()
+          );
+
+          if (conflicto) {
+            const opcion = await pedirResolucionConflicto(
+              conflicto.datos.nombre, conflicto.datos.imagen,
+              medio.nombre,           medio.imagen
+            );
+            if (opcion === 'cancelar') return;
+            if (opcion === 'sustituir') {
+              // Borrar el pictograma existente con ese nombre antes de insertar el nuevo
+              await dbDelete('items', conflicto.id);
+            }
+            // En 'anadir' simplemente se continúa sin borrar nada
+          }
+
+          await dbPut('items', { id: medio.id, tipo: 'medio', datos: medio, creadoEn: ahora, modificadoEn: ahora });
+          card.classList.add('seleccionado');
+          card.innerHTML += '<span style="font-size:.65rem;color:var(--color-success)">✓</span>';
+          mostrarToast(`✓ "${medio.nombre}" añadido.`, 'ok');
+          await actualizarBadgesTab();
+        });
+      });
+    } catch (e) {
+      div.innerHTML = `<p style="color:var(--color-error)">Error al buscar: ${e.message}</p>`;
+    }
+  }
+
+  document.getElementById('btn-buscar-arasaac-ok').addEventListener('click', hacerBusqueda);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') hacerBusqueda(); });
+  document.getElementById('btn-cerrar-buscador').addEventListener('click', async () => {
+    cerrarModal();
+    await renderTab('pictogramas');
+  });
+}
+
+async function editarMedio(id) {
+  const item = (await dbGetAll('items')).find(i => i.id === id);
+  if (!item) return;
+  const d = item.datos;
+
+  abrirModal(`
+    <div class="modal-titulo">✏️ Editar pictograma</div>
+    <img src="${d.imagen}" alt="" style="width:80px;height:80px;object-fit:contain;display:block;margin-bottom:12px">
+    <div class="campo">
+      <label for="edit-nombre">Nombre</label>
+      <input id="edit-nombre" type="text" value="${d.nombre}">
+    </div>
+    <div class="campo">
+      <label for="edit-etiquetas">Etiquetas (separadas por comas)</label>
+      <input id="edit-etiquetas" type="text" value="${(d.etiquetas || []).join(', ')}">
+    </div>
+    <div class="modal-acciones">
+      <button class="btn btn-neutral" id="btn-cancelar-edit">Cancelar</button>
+      <button class="btn btn-primary" id="btn-guardar-edit">Guardar</button>
+    </div>
+  `);
+
+  document.getElementById('btn-cancelar-edit').addEventListener('click', cerrarModal);
+  document.getElementById('btn-guardar-edit').addEventListener('click', async () => {
+    const nombre    = document.getElementById('edit-nombre').value.trim();
+    const etiquetas = document.getElementById('edit-etiquetas').value.split(',').map(e => e.trim()).filter(Boolean);
+    if (!nombre) { mostrarToast('El nombre no puede estar vacío.', 'error'); return; }
+    const actualizado = { ...item, modificadoEn: new Date().toISOString(), datos: { ...d, nombre, etiquetas } };
+    await dbPut('items', actualizado);
+    cerrarModal();
+    mostrarToast('✓ Pictograma actualizado.', 'ok');
+    await renderTab('pictogramas');
+  });
+}
+
+// ================================================================
+// SECCIÓN: SECUENCIAS
+// ================================================================
+
+async function renderSecuencias() {
+  const contenido = document.getElementById('contenido');
+  const { itemMap, snapMap, estados } = await calcularEstados();
+  const secs = [...itemMap.values()].filter(i => i.tipo === 'secuencia');
+  const eliminadas = [...snapMap.values()].filter(s => !itemMap.has(s.id) && s.tipo === 'secuencia');
+  const todosIds = [...secs.map(i => i.id), ...eliminadas.map(s => s.id)];
+
+  let html = `
+    <div class="biblioteca-cabecera">
+      <h2>Secuencias (${secs.length})</h2>
+      <button class="btn btn-primary btn-sm" id="btn-nueva-sec">+ Nueva secuencia</button>
+    </div>
+    ${todosIds.length ? htmlResumenEstados(estados, todosIds) : ''}
+    <div class="items-lista">
+  `;
+
+  if (secs.length === 0 && eliminadas.length === 0) {
+    html += `<div class="vacio"><span class="vacio-icon">📋</span>No hay secuencias todavía.</div>`;
+  }
+
+  const medios = [...itemMap.values()].filter(i => i.tipo === 'medio');
+  const medioMap = new Map(medios.map(i => [i.id, i.datos]));
+
+  for (const item of secs) {
+    const d = item.datos;
+    const estado = estados[item.id] || 'nuevo';
+    const pasos  = (d.pasos || []).slice(0, 5).map(midId => {
+      const m = medioMap.get(midId);
+      return m ? `<img src="${m.imagen}" title="${m.nombre}" style="width:28px;height:28px;object-fit:contain">` : `<span style="font-size:.65rem;color:var(--color-text-soft)">${midId}</span>`;
+    }).join('');
+    html += `
+      <div class="item-card">
+        <div class="item-card-img-placeholder">📋</div>
+        <div class="item-card-info">
+          <div class="item-card-nombre">${d.nombre}</div>
+          <div class="item-card-meta" style="display:flex;gap:3px;align-items:center;margin-top:4px">
+            ${pasos}
+            ${d.pasos && d.pasos.length > 5 ? `<span style="font-size:.72rem;color:var(--color-text-soft)">+${d.pasos.length - 5}</span>` : ''}
+            <span style="font-size:.72rem;margin-left:4px">${(d.pasos || []).length} pasos</span>
+          </div>
+        </div>
+        ${badgeHtml(estado)}
+        <div class="item-card-acciones">
+          <button class="btn btn-neutral btn-sm btn-editar-sec" data-id="${item.id}">✏️</button>
+          <button class="btn btn-danger btn-sm btn-borrar-sec" data-id="${item.id}">✕</button>
+        </div>
+      </div>`;
+  }
+
+  html += '</div>';
+
+  if (eliminadas.length) {
+    html += `<div class="seccion-eliminados"><h3>🗑️ Eliminadas — pendientes de publicar</h3><div class="items-lista">`;
+    for (const snap of eliminadas) {
+      html += `
+        <div class="item-card">
+          <div class="item-card-img-placeholder">📋</div>
+          <div class="item-card-info"><div class="item-card-nombre">${snap.datos.nombre}</div></div>
+          ${badgeHtml('eliminado')}
+          <div class="item-card-acciones">
+            <button class="btn btn-neutral btn-sm btn-restaurar-sec" data-id="${snap.id}">↩️</button>
+          </div>
+        </div>`;
+    }
+    html += '</div></div>';
+  }
+
+  contenido.innerHTML = html;
+
+  document.getElementById('btn-nueva-sec').addEventListener('click', () => editarSecuencia(null));
+  contenido.querySelectorAll('.btn-editar-sec').forEach(btn => btn.addEventListener('click', () => editarSecuencia(btn.dataset.id)));
+  contenido.querySelectorAll('.btn-borrar-sec').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('¿Eliminar esta secuencia?')) return;
+      await dbDelete('items', btn.dataset.id);
+      mostrarToast('Secuencia eliminada.', 'info');
+      await renderTab('secuencias');
+      await actualizarBadgesTab();
+    });
+  });
+  contenido.querySelectorAll('.btn-restaurar-sec').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const snap = (await dbGetAll('snapshot')).find(s => s.id === btn.dataset.id);
+      if (snap) { await dbPut('items', { ...snap }); mostrarToast('Secuencia restaurada.', 'ok'); await renderTab('secuencias'); await actualizarBadgesTab(); }
+    });
+  });
+}
+
+async function editarSecuencia(id) {
+  const allItems = await dbGetAll('items');
+  const medios   = allItems.filter(i => i.tipo === 'medio');
+  const medioMap = new Map(medios.map(i => [i.id, i.datos]));
+
+  let nombreActual = '';
+  let pasosActuales = [];
+
+  if (id) {
+    const item = allItems.find(i => i.id === id);
+    if (!item) return;
+    nombreActual  = item.datos.nombre;
+    pasosActuales = [...(item.datos.pasos || [])];
+  }
+
+  function renderPasosHtml() {
+    if (!pasosActuales.length) return '<p style="color:var(--color-text-soft);font-size:.82rem;padding:6px 0">Sin pasos todavía.</p>';
+    return `<div class="pasos-lista">${pasosActuales.map((mid, i) => {
+      const m = medioMap.get(mid);
+      return `<div class="paso-item" data-idx="${i}">
+        <span class="paso-item-num">${i + 1}</span>
+        ${m ? `<img src="${m.imagen}" alt="${m.nombre}">` : ''}
+        <span class="paso-item-nombre">${m ? m.nombre : mid}</span>
+        <div class="paso-item-orden">
+          ${i > 0 ? `<button class="btn-subir-paso" data-idx="${i}">▲</button>` : '<span></span>'}
+          ${i < pasosActuales.length - 1 ? `<button class="btn-bajar-paso" data-idx="${i}">▼</button>` : '<span></span>'}
+        </div>
+        <button class="btn btn-danger btn-icon btn-quitar-paso" data-idx="${i}">✕</button>
+      </div>`;
+    }).join('')}</div>`;
+  }
+
+  function renderPickerHtml() {
+    if (!medios.length) return '<p style="color:var(--color-text-soft);font-size:.82rem">Añade pictogramas primero.</p>';
+    return `<div class="medio-picker">${medios.map(m => `
+      <div class="medio-picker-item${pasosActuales.includes(m.id) ? ' seleccionado' : ''}" data-id="${m.id}">
+        <img src="${m.datos.imagen}" alt="">
+        <span>${m.datos.nombre}</span>
+      </div>`).join('')}</div>`;
+  }
+
+  function abrirEditorModal() {
+    abrirModal(`
+      <div class="modal-titulo">${id ? '✏️ Editar secuencia' : '📋 Nueva secuencia'}</div>
+      <div class="campo">
+        <label for="sec-nombre">Nombre de la secuencia</label>
+        <input id="sec-nombre" type="text" value="${nombreActual}" placeholder="p.ej. Lavarse los dientes">
+      </div>
+      <div class="campo">
+        <label>Pasos (en orden)</label>
+        <div id="sec-pasos">${renderPasosHtml()}</div>
+      </div>
+      <hr class="sep">
+      <div class="campo">
+        <label>Añadir paso (elige pictograma)</label>
+        ${renderPickerHtml()}
+      </div>
+      <div class="modal-acciones">
+        <button class="btn btn-neutral" id="btn-cancelar-sec">Cancelar</button>
+        <button class="btn btn-primary" id="btn-guardar-sec">${id ? 'Guardar' : 'Crear'}</button>
+      </div>
+    `);
+
+    const mc = document.getElementById('modal-contenido');
+
+    // Picker de medios
+    mc.querySelectorAll('.medio-picker-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const mid = el.dataset.id;
+        if (!pasosActuales.includes(mid)) {
+          pasosActuales.push(mid);
+        } else {
+          pasosActuales = pasosActuales.filter(p => p !== mid);
+        }
+        document.getElementById('sec-pasos').innerHTML = renderPasosHtml();
+        el.classList.toggle('seleccionado');
+        registrarEventosPasos();
+      });
+    });
+
+    function registrarEventosPasos() {
+      mc.querySelectorAll('.btn-quitar-paso').forEach(btn => {
+        btn.addEventListener('click', () => {
+          pasosActuales.splice(parseInt(btn.dataset.idx), 1);
+          document.getElementById('sec-pasos').innerHTML = renderPasosHtml();
+          registrarEventosPasos();
+        });
+      });
+      mc.querySelectorAll('.btn-subir-paso').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const i = parseInt(btn.dataset.idx);
+          [pasosActuales[i - 1], pasosActuales[i]] = [pasosActuales[i], pasosActuales[i - 1]];
+          document.getElementById('sec-pasos').innerHTML = renderPasosHtml();
+          registrarEventosPasos();
+        });
+      });
+      mc.querySelectorAll('.btn-bajar-paso').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const i = parseInt(btn.dataset.idx);
+          [pasosActuales[i], pasosActuales[i + 1]] = [pasosActuales[i + 1], pasosActuales[i]];
+          document.getElementById('sec-pasos').innerHTML = renderPasosHtml();
+          registrarEventosPasos();
+        });
+      });
+    }
+    registrarEventosPasos();
+
+    document.getElementById('btn-cancelar-sec').addEventListener('click', cerrarModal);
+    document.getElementById('btn-guardar-sec').addEventListener('click', async () => {
+      const nombre = document.getElementById('sec-nombre').value.trim();
+      if (!nombre) { mostrarToast('El nombre es obligatorio.', 'error'); return; }
+      if (pasosActuales.length < 2) { mostrarToast('Una secuencia necesita al menos 2 pasos.', 'error'); return; }
+      const ahora = new Date().toISOString();
+      const datos = { id: id || `seq:${uid()}`, nombre, pasos: [...pasosActuales], creado: ahora };
+      if (id) datos.id = id;
+      await dbPut('items', { id: datos.id, tipo: 'secuencia', datos, creadoEn: ahora, modificadoEn: ahora });
+      cerrarModal();
+      mostrarToast(`✓ Secuencia "${nombre}" guardada.`, 'ok');
+      await renderTab('secuencias');
+      await actualizarBadgesTab();
+    });
+  }
+
+  abrirEditorModal();
+}
+
+// ================================================================
+// SECCIÓN: CATEGORÍAS
+// ================================================================
+
+async function renderCategorias() {
+  const contenido = document.getElementById('contenido');
+  const { itemMap, snapMap, estados } = await calcularEstados();
+  const cats = [...itemMap.values()].filter(i => i.tipo === 'categoria');
+  const eliminadas = [...snapMap.values()].filter(s => !itemMap.has(s.id) && s.tipo === 'categoria');
+  const todosIds = [...cats.map(i => i.id), ...eliminadas.map(s => s.id)];
+
+  let html = `
+    <div class="biblioteca-cabecera">
+      <h2>Categorías dicotómicas (${cats.length})</h2>
+      <button class="btn btn-primary btn-sm" id="btn-nueva-cat">+ Nueva pareja</button>
+    </div>
+    ${todosIds.length ? htmlResumenEstados(estados, todosIds) : ''}
+    <div class="items-lista">
+  `;
+
+  if (cats.length === 0 && eliminadas.length === 0) {
+    html += `<div class="vacio"><span class="vacio-icon">🗂️</span>No hay parejas de categorías todavía.</div>`;
+  }
+
+  for (const item of cats) {
+    const d = item.datos;
+    const estado = estados[item.id] || 'nuevo';
+    const [catA, catB] = d.categorias || [];
+    html += `
+      <div class="item-card">
+        <div class="item-card-img-placeholder">🗂️</div>
+        <div class="item-card-info">
+          <div class="item-card-nombre">${d.nombre}</div>
+          <div class="item-card-meta">
+            ${catA ? `<strong>${catA.nombre}</strong> (${(catA.medios || []).length} medios)` : ''}
+            ${catA && catB ? ' ↔ ' : ''}
+            ${catB ? `<strong>${catB.nombre}</strong> (${(catB.medios || []).length} medios)` : ''}
+          </div>
+        </div>
+        ${badgeHtml(estado)}
+        <div class="item-card-acciones">
+          <button class="btn btn-neutral btn-sm btn-editar-cat" data-id="${item.id}">✏️</button>
+          <button class="btn btn-danger btn-sm btn-borrar-cat" data-id="${item.id}">✕</button>
+        </div>
+      </div>`;
+  }
+  html += '</div>';
+
+  if (eliminadas.length) {
+    html += `<div class="seccion-eliminados"><h3>🗑️ Eliminadas — pendientes de publicar</h3><div class="items-lista">`;
+    for (const snap of eliminadas) {
+      html += `<div class="item-card">
+        <div class="item-card-img-placeholder">🗂️</div>
+        <div class="item-card-info"><div class="item-card-nombre">${snap.datos.nombre}</div></div>
+        ${badgeHtml('eliminado')}
+        <div class="item-card-acciones"><button class="btn btn-neutral btn-sm btn-restaurar-cat" data-id="${snap.id}">↩️</button></div>
+      </div>`;
+    }
+    html += '</div></div>';
+  }
+
+  contenido.innerHTML = html;
+
+  document.getElementById('btn-nueva-cat').addEventListener('click', () => editarCategoria(null));
+  contenido.querySelectorAll('.btn-editar-cat').forEach(btn => btn.addEventListener('click', () => editarCategoria(btn.dataset.id)));
+  contenido.querySelectorAll('.btn-borrar-cat').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('¿Eliminar esta pareja de categorías?')) return;
+      await dbDelete('items', btn.dataset.id);
+      mostrarToast('Pareja eliminada.', 'info');
+      await renderTab('categorias');
+      await actualizarBadgesTab();
+    });
+  });
+  contenido.querySelectorAll('.btn-restaurar-cat').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const snap = (await dbGetAll('snapshot')).find(s => s.id === btn.dataset.id);
+      if (snap) { await dbPut('items', { ...snap }); mostrarToast('Pareja restaurada.', 'ok'); await renderTab('categorias'); await actualizarBadgesTab(); }
+    });
+  });
+}
+
+async function editarCategoria(id) {
+  const allItems = await dbGetAll('items');
+  const medios   = allItems.filter(i => i.tipo === 'medio');
+
+  let nombreActual = '';
+  let cats = [
+    { nombre: '', cabeceraId: '', medios: [] },
+    { nombre: '', cabeceraId: '', medios: [] }
+  ];
+
+  if (id) {
+    const item = allItems.find(i => i.id === id);
+    if (!item) return;
+    nombreActual = item.datos.nombre;
+    cats = (item.datos.categorias || cats).map(c => ({ ...c, medios: [...(c.medios || [])] }));
+  }
+
+  function pickerCat(idx) {
+    const cat = cats[idx];
+    return `<div class="cat-col">
+      <h4>Categoría ${idx === 0 ? 'A' : 'B'}</h4>
+      <div class="campo">
+        <label>Nombre</label>
+        <input type="text" class="cat-nombre" data-idx="${idx}" value="${cat.nombre}" placeholder="p.ej. Grande">
+      </div>
+      <div class="campo">
+        <label>Pictograma cabecera</label>
+        <select class="cat-cabecera" data-idx="${idx}">
+          <option value="">-- Elige uno --</option>
+          ${medios.map(m => `<option value="${m.id}" ${cat.cabeceraId === m.id ? 'selected' : ''}>${m.datos.nombre}</option>`).join('')}
+        </select>
+      </div>
+      <div class="campo">
+        <label>Pictogramas de la categoría</label>
+        <div class="medio-picker">
+          ${medios.map(m => `<div class="medio-picker-item cat-medio-item${cat.medios.includes(m.id) ? ' seleccionado' : ''}" data-cat="${idx}" data-id="${m.id}">
+            <img src="${m.datos.imagen}" alt="">
+            <span>${m.datos.nombre}</span>
+          </div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  abrirModal(`
+    <div class="modal-titulo">${id ? '✏️ Editar pareja de categorías' : '🗂️ Nueva pareja de categorías'}</div>
+    <div class="campo">
+      <label for="cat-par-nombre">Nombre de la pareja</label>
+      <input id="cat-par-nombre" type="text" value="${nombreActual}" placeholder="p.ej. Grande y pequeño">
+    </div>
+    <div class="cat-row">${pickerCat(0)}${pickerCat(1)}</div>
+    <div class="modal-acciones">
+      <button class="btn btn-neutral" id="btn-cancelar-cat">Cancelar</button>
+      <button class="btn btn-primary" id="btn-guardar-cat">${id ? 'Guardar' : 'Crear'}</button>
+    </div>
+  `);
+
+  const mc = document.getElementById('modal-contenido');
+
+  mc.querySelectorAll('.cat-nombre').forEach(inp => inp.addEventListener('input', () => { cats[inp.dataset.idx].nombre = inp.value; }));
+  mc.querySelectorAll('.cat-cabecera').forEach(sel => sel.addEventListener('change', () => { cats[sel.dataset.idx].cabeceraId = sel.value; }));
+  mc.querySelectorAll('.cat-medio-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const idx = parseInt(el.dataset.cat);
+      const mid = el.dataset.id;
+      const cat = cats[idx];
+      if (cat.medios.includes(mid)) {
+        cat.medios = cat.medios.filter(m => m !== mid);
+        el.classList.remove('seleccionado');
+      } else {
+        cat.medios.push(mid);
+        el.classList.add('seleccionado');
+      }
+    });
+  });
+
+  document.getElementById('btn-cancelar-cat').addEventListener('click', cerrarModal);
+  document.getElementById('btn-guardar-cat').addEventListener('click', async () => {
+    const nombre = document.getElementById('cat-par-nombre').value.trim();
+    if (!nombre) { mostrarToast('El nombre es obligatorio.', 'error'); return; }
+    // Actualizar nombres/cabeceras desde inputs antes de guardar
+    mc.querySelectorAll('.cat-nombre').forEach(inp => { cats[parseInt(inp.dataset.idx)].nombre = inp.value.trim(); });
+    mc.querySelectorAll('.cat-cabecera').forEach(sel => { cats[parseInt(sel.dataset.idx)].cabeceraId = sel.value; });
+    if (!cats[0].nombre || !cats[1].nombre) { mostrarToast('Ponle nombre a las dos categorías.', 'error'); return; }
+    if (!cats[0].cabeceraId || !cats[1].cabeceraId) { mostrarToast('Elige un pictograma cabecera para cada categoría.', 'error'); return; }
+    if (!cats[0].medios.length || !cats[1].medios.length) { mostrarToast('Añade al menos un pictograma en cada categoría.', 'error'); return; }
+    const ahora = new Date().toISOString();
+    const newId = id || `cat:${uid()}`;
+    const datos = { id: newId, nombre, categorias: cats, creado: ahora };
+    await dbPut('items', { id: newId, tipo: 'categoria', datos, creadoEn: ahora, modificadoEn: ahora });
+    cerrarModal();
+    mostrarToast(`✓ Categoría "${nombre}" guardada.`, 'ok');
+    await renderTab('categorias');
+    await actualizarBadgesTab();
+  });
+}
+
+// ================================================================
+// SECCIÓN: RUTAS
+// ================================================================
+
+async function renderRutas() {
+  const contenido = document.getElementById('contenido');
+  const { itemMap, snapMap, estados } = await calcularEstados();
+  const rutas = [...itemMap.values()].filter(i => i.tipo === 'ruta');
+  const eliminadas = [...snapMap.values()].filter(s => !itemMap.has(s.id) && s.tipo === 'ruta');
+  const todosIds = [...rutas.map(i => i.id), ...eliminadas.map(s => s.id)];
+
+  let html = `
+    <div class="biblioteca-cabecera">
+      <h2>Rutas de aprendizaje (${rutas.length})</h2>
+      <button class="btn btn-primary btn-sm" id="btn-nueva-ruta">+ Nueva ruta</button>
+    </div>
+    ${todosIds.length ? htmlResumenEstados(estados, todosIds) : ''}
+    <div class="items-lista">
+  `;
+
+  if (rutas.length === 0 && eliminadas.length === 0) {
+    html += `<div class="vacio"><span class="vacio-icon">🗺️</span>No hay rutas todavía.</div>`;
+  }
+
+  for (const item of rutas) {
+    const d = item.datos;
+    const estado = estados[item.id] || 'nuevo';
+    html += `
+      <div class="item-card">
+        <div class="item-card-img-placeholder">🗺️</div>
+        <div class="item-card-info">
+          <div class="item-card-nombre">${d.nombre}</div>
+          <div class="item-card-meta">${(d.pasos || []).length} pasos · ${(d.pasos || []).map(p => p.appId).join(', ').substring(0, 60)}</div>
+        </div>
+        ${badgeHtml(estado)}
+        <div class="item-card-acciones">
+          <button class="btn btn-neutral btn-sm btn-editar-ruta" data-id="${item.id}">✏️</button>
+          <button class="btn btn-danger btn-sm btn-borrar-ruta" data-id="${item.id}">✕</button>
+        </div>
+      </div>`;
+  }
+  html += '</div>';
+
+  if (eliminadas.length) {
+    html += `<div class="seccion-eliminados"><h3>🗑️ Eliminadas — pendientes de publicar</h3><div class="items-lista">`;
+    for (const snap of eliminadas) {
+      html += `<div class="item-card">
+        <div class="item-card-img-placeholder">🗺️</div>
+        <div class="item-card-info"><div class="item-card-nombre">${snap.datos.nombre}</div></div>
+        ${badgeHtml('eliminado')}
+        <div class="item-card-acciones"><button class="btn btn-neutral btn-sm btn-restaurar-ruta" data-id="${snap.id}">↩️</button></div>
+      </div>`;
+    }
+    html += '</div></div>';
+  }
+
+  contenido.innerHTML = html;
+
+  document.getElementById('btn-nueva-ruta').addEventListener('click', () => editarRuta(null));
+  contenido.querySelectorAll('.btn-editar-ruta').forEach(btn => btn.addEventListener('click', () => editarRuta(btn.dataset.id)));
+  contenido.querySelectorAll('.btn-borrar-ruta').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('¿Eliminar esta ruta?')) return;
+      await dbDelete('items', btn.dataset.id);
+      mostrarToast('Ruta eliminada.', 'info');
+      await renderTab('rutas');
+      await actualizarBadgesTab();
+    });
+  });
+  contenido.querySelectorAll('.btn-restaurar-ruta').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const snap = (await dbGetAll('snapshot')).find(s => s.id === btn.dataset.id);
+      if (snap) { await dbPut('items', { ...snap }); mostrarToast('Ruta restaurada.', 'ok'); await renderTab('rutas'); await actualizarBadgesTab(); }
+    });
+  });
+}
+
+async function editarRuta(id) {
+  const allItems = await dbGetAll('items');
+  let nombreActual = '';
+  let pasosActuales = [];
+
+  if (id) {
+    const item = allItems.find(i => i.id === id);
+    if (!item) return;
+    nombreActual  = item.datos.nombre;
+    pasosActuales = (item.datos.pasos || []).map(p => ({ ...p }));
+  }
+
+  function renderPasosRutaHtml() {
+    if (!pasosActuales.length) return '<p style="color:var(--color-text-soft);font-size:.82rem;padding:6px 0">Sin pasos todavía.</p>';
+    return `<div class="pasos-lista">${pasosActuales.map((p, i) => `
+      <div class="paso-item" data-idx="${i}">
+        <span class="paso-item-num">${i + 1}</span>
+        <span class="paso-item-nombre">${TODOS_APPS.find(a => a.id === p.appId)?.label || p.appId}</span>
+        <div class="paso-item-orden">
+          ${i > 0 ? `<button class="btn-subir-rpaso" data-idx="${i}">▲</button>` : '<span></span>'}
+          ${i < pasosActuales.length - 1 ? `<button class="btn-bajar-rpaso" data-idx="${i}">▼</button>` : '<span></span>'}
+        </div>
+        <button class="btn btn-danger btn-icon btn-quitar-rpaso" data-idx="${i}">✕</button>
+      </div>`).join('')}</div>`;
+  }
+
+  abrirModal(`
+    <div class="modal-titulo">${id ? '✏️ Editar ruta' : '🗺️ Nueva ruta de aprendizaje'}</div>
+    <div class="campo">
+      <label for="ruta-nombre">Nombre de la ruta</label>
+      <input id="ruta-nombre" type="text" value="${nombreActual}" placeholder="p.ej. Aprendo los animales">
+    </div>
+    <div class="campo">
+      <label>Pasos (juegos en orden)</label>
+      <div id="ruta-pasos">${renderPasosRutaHtml()}</div>
+    </div>
+    <hr class="sep">
+    <div class="campo">
+      <label for="ruta-nuevo-app">Añadir paso</label>
+      <div style="display:flex;gap:8px;align-items:center">
+        <select id="ruta-nuevo-app" style="flex:1;padding:7px 10px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font:inherit">
+          <option value="">-- Elige un juego --</option>
+          ${TODOS_APPS.map(a => `<option value="${a.id}">[${a.estante}] ${a.label}</option>`).join('')}
+        </select>
+        <button class="btn btn-primary btn-sm" id="btn-add-rpaso">+ Añadir</button>
+      </div>
+    </div>
+    <div class="campo">
+      <label for="ruta-config-json" title="Configuración JSON opcional para el paso añadido">Config del paso (JSON, opcional)</label>
+      <textarea id="ruta-config-json" placeholder='{"numMedios": 4}'></textarea>
+    </div>
+    <div class="modal-acciones">
+      <button class="btn btn-neutral" id="btn-cancelar-ruta">Cancelar</button>
+      <button class="btn btn-primary" id="btn-guardar-ruta">${id ? 'Guardar' : 'Crear'}</button>
+    </div>
+  `);
+
+  const mc = document.getElementById('modal-contenido');
+
+  function registrarEventosPasosRuta() {
+    mc.querySelectorAll('.btn-quitar-rpaso').forEach(btn => {
+      btn.addEventListener('click', () => {
+        pasosActuales.splice(parseInt(btn.dataset.idx), 1);
+        document.getElementById('ruta-pasos').innerHTML = renderPasosRutaHtml();
+        registrarEventosPasosRuta();
+      });
+    });
+    mc.querySelectorAll('.btn-subir-rpaso').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = parseInt(btn.dataset.idx);
+        [pasosActuales[i - 1], pasosActuales[i]] = [pasosActuales[i], pasosActuales[i - 1]];
+        document.getElementById('ruta-pasos').innerHTML = renderPasosRutaHtml();
+        registrarEventosPasosRuta();
+      });
+    });
+    mc.querySelectorAll('.btn-bajar-rpaso').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = parseInt(btn.dataset.idx);
+        [pasosActuales[i], pasosActuales[i + 1]] = [pasosActuales[i + 1], pasosActuales[i]];
+        document.getElementById('ruta-pasos').innerHTML = renderPasosRutaHtml();
+        registrarEventosPasosRuta();
+      });
+    });
+  }
+  registrarEventosPasosRuta();
+
+  document.getElementById('btn-add-rpaso').addEventListener('click', () => {
+    const appId = document.getElementById('ruta-nuevo-app').value;
+    if (!appId) { mostrarToast('Elige un juego primero.', 'error'); return; }
+    let config = {};
+    const jsonTxt = document.getElementById('ruta-config-json').value.trim();
+    if (jsonTxt) {
+      try { config = JSON.parse(jsonTxt); } catch { mostrarToast('El JSON de configuración no es válido.', 'error'); return; }
+    }
+    pasosActuales.push({ instanciaId: `inst:${uid()}`, appId, config });
+    document.getElementById('ruta-pasos').innerHTML = renderPasosRutaHtml();
+    registrarEventosPasosRuta();
+    document.getElementById('ruta-nuevo-app').value = '';
+    document.getElementById('ruta-config-json').value = '';
+  });
+
+  document.getElementById('btn-cancelar-ruta').addEventListener('click', cerrarModal);
+  document.getElementById('btn-guardar-ruta').addEventListener('click', async () => {
+    const nombre = document.getElementById('ruta-nombre').value.trim();
+    if (!nombre) { mostrarToast('El nombre es obligatorio.', 'error'); return; }
+    if (!pasosActuales.length) { mostrarToast('Una ruta necesita al menos un paso.', 'error'); return; }
+    const ahora = new Date().toISOString();
+    const newId = id || `ruta:${uid()}`;
+    const datos = { id: newId, nombre, pasos: pasosActuales, progreso: { desbloqueadoHasta: 0 }, creado: ahora };
+    await dbPut('items', { id: newId, tipo: 'ruta', datos, creadoEn: ahora, modificadoEn: ahora });
+    cerrarModal();
+    mostrarToast(`✓ Ruta "${nombre}" guardada.`, 'ok');
+    await renderTab('rutas');
+    await actualizarBadgesTab();
+  });
+}
+
+// ================================================================
+// NAVEGACIÓN POR PESTAÑAS
+// ================================================================
+
+let tabActivo = 'pictogramas';
+
+const RENDERERS = {
+  pictogramas: renderPictogramas,
+  secuencias:  renderSecuencias,
+  categorias:  renderCategorias,
+  rutas:       renderRutas
+};
+
+async function renderTab(nombre) {
+  tabActivo = nombre;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('activo', t.dataset.tab === nombre));
+  const fn = RENDERERS[nombre];
+  if (fn) await fn();
+}
+
+// ================================================================
+// INFO DE CARPETA CONFIGURADA
+// ================================================================
+
+async function actualizarInfoCarpeta() {
+  const handle = await getDirHandle();
+  const el = document.getElementById('info-carpeta');
+  if (handle) {
+    el.textContent = `📁 ${handle.name}`;
+    el.title = 'Carpeta del proyecto configurada';
+  } else {
+    el.textContent = 'Sin carpeta — se descargará';
+    el.title = 'Pulsa "Carpeta" para configurar dónde guardar el archivo';
+  }
+}
+
+// ================================================================
+// INICIALIZACIÓN
+// ================================================================
+
+async function init() {
+  await actualizarInfoCarpeta();
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => renderTab(tab.dataset.tab));
+  });
+
+  // Botones de cabecera
+  document.getElementById('btn-carpeta').addEventListener('click', async () => {
+    const handle = await seleccionarCarpeta();
+    if (handle) {
+      await actualizarInfoCarpeta();
+      mostrarToast(`✓ Carpeta configurada: ${handle.name}`, 'ok');
+    }
+  });
+
+  document.getElementById('btn-exportar').addEventListener('click', exportarJson);
+
+  document.getElementById('btn-publicado').addEventListener('click', marcarComoPublicado);
+
+  document.getElementById('btn-importar-estado').addEventListener('click', () => {
+    document.getElementById('input-importar').click();
+  });
+  document.getElementById('input-importar').addEventListener('change', async e => {
+    const archivo = e.target.files[0];
+    if (!archivo) return;
+    await importarEstadoDesdeArchivo(archivo);
+    e.target.value = '';
+  });
+
+  // Cerrar modal al hacer clic en el overlay (fuera de la caja)
+  document.getElementById('modal-overlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('modal-overlay')) cerrarModal();
+  });
+
+  // Renderizar pestaña inicial y badges
+  await actualizarBadgesTab();
+  await renderTab('pictogramas');
+}
+
+init();
+</script>
+</body>
+</html>

@@ -10,6 +10,7 @@ import { t } from '../i18n.js';
 import { navigate } from '../router.js';
 import * as rutas from '../rutas.js';
 import * as sounds from '../sounds.js';
+import { cargarContenidoComunidad } from '../contentLoader.js';
 
 export async function render() {
   const view = document.getElementById('view');
@@ -37,6 +38,35 @@ export async function render() {
     navigate('/rutas/crear');
   });
   raiz.appendChild(btnCrear);
+
+  // --- Botón "Cargar contenido de la comunidad" ---
+  const btnComunidad = document.createElement('button');
+  btnComunidad.type = 'button';
+  btnComunidad.className = 'btn btn-comunidad';
+  btnComunidad.textContent = t('contentLoader.boton');
+  btnComunidad.addEventListener('click', async () => {
+    btnComunidad.disabled = true;
+    const textoOriginal = btnComunidad.textContent;
+    btnComunidad.textContent = t('contentLoader.cargando');
+    const r = await cargarContenidoComunidad();
+    btnComunidad.disabled = false;
+    btnComunidad.textContent = textoOriginal;
+    const total = r.mediosNuevos + r.secuenciasNuevas + r.categoriasNuevas + r.rutasNuevas;
+    if (r.error) {
+      alert(t('contentLoader.error', { detalle: r.error }));
+    } else if (total === 0) {
+      alert(t('contentLoader.sin_novedades'));
+    } else {
+      alert(t('contentLoader.exito', {
+        medios:     r.mediosNuevos,
+        secuencias: r.secuenciasNuevas,
+        categorias: r.categoriasNuevas,
+        rutas:      r.rutasNuevas
+      }));
+      await refrescar();
+    }
+  });
+  raiz.appendChild(btnComunidad);
 
   const tituloLista = document.createElement('h3');
   tituloLista.textContent = t('rutas.mis_rutas');

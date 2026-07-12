@@ -13,6 +13,7 @@
 import { t } from './i18n.js';
 import { activarPantallaCompleta, vigilarPantallaCompleta } from './fullscreen.js';
 import { puedeInstalar, esIOS, estaInstalada, instalar } from './pwa.js';
+import { cargarContenidoComunidad } from './contentLoader.js';
 
 const LOGO_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233D8BD4'/%3E%3Ccircle cx='50' cy='40' r='18' fill='white'/%3E%3Crect x='25' y='62' width='50' height='28' rx='10' fill='white'/%3E%3C/svg%3E";
 
@@ -61,7 +62,33 @@ export function mostrarPuerta(continuar) {
     continuar();
   });
 
-  box.append(logo, titulo, texto, btn);
+  // --- Botón "Cargar contenido de la comunidad" ---
+  const btnComunidad = document.createElement('button');
+  btnComunidad.type = 'button';
+  btnComunidad.className = 'btn btn-ghost puerta-btn-comunidad';
+  btnComunidad.textContent = t('contentLoader.boton');
+  btnComunidad.addEventListener('click', async () => {
+    btnComunidad.disabled = true;
+    btnComunidad.textContent = t('contentLoader.cargando');
+    const r = await cargarContenidoComunidad();
+    btnComunidad.disabled = false;
+    btnComunidad.textContent = t('contentLoader.boton');
+    const total = r.mediosNuevos + r.secuenciasNuevas + r.categoriasNuevas + r.rutasNuevas;
+    if (r.error) {
+      alert(t('contentLoader.error', { detalle: r.error }));
+    } else if (total === 0) {
+      alert(t('contentLoader.sin_novedades'));
+    } else {
+      alert(t('contentLoader.exito', {
+        medios:    r.mediosNuevos,
+        secuencias: r.secuenciasNuevas,
+        categorias: r.categoriasNuevas,
+        rutas:     r.rutasNuevas
+      }));
+    }
+  });
+
+  box.append(logo, titulo, texto, btn, btnComunidad);
 
   // --- Banner de instalación PWA ---
   // Solo se muestra si:
