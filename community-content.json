@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generado": "2026-07-12T14:10:11.327Z",
+  "generado": "2026-07-12T14:29:19.250Z",
   "medios": [
     {
       "id": "arasaac:10224",
@@ -73,6 +73,34 @@
       "creado": "2026-07-12T13:44:32.756Z"
     },
     {
+      "id": "arasaac:11182",
+      "arasaacId": 11182,
+      "imagen": "https://static.arasaac.org/pictograms/11182/11182_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/11182/11182_300.png",
+        "https://static.arasaac.org/pictograms/11182/11182_500.png",
+        "https://static.arasaac.org/pictograms/11182/11182_2500.png"
+      ],
+      "nombre": "archivador",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:03.631Z"
+    },
+    {
+      "id": "arasaac:11274",
+      "arasaacId": 11274,
+      "imagen": "https://static.arasaac.org/pictograms/11274/11274_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/11274/11274_300.png",
+        "https://static.arasaac.org/pictograms/11274/11274_500.png",
+        "https://static.arasaac.org/pictograms/11274/11274_2500.png"
+      ],
+      "nombre": "girasol",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:22:15.559Z"
+    },
+    {
       "id": "arasaac:11298",
       "arasaacId": 11298,
       "imagen": "https://static.arasaac.org/pictograms/11298/11298_500.png",
@@ -85,6 +113,34 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:30:56.961Z"
+    },
+    {
+      "id": "arasaac:11302",
+      "arasaacId": 11302,
+      "imagen": "https://static.arasaac.org/pictograms/11302/11302_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/11302/11302_300.png",
+        "https://static.arasaac.org/pictograms/11302/11302_500.png",
+        "https://static.arasaac.org/pictograms/11302/11302_2500.png"
+      ],
+      "nombre": "mesa de colegio",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:56.176Z"
+    },
+    {
+      "id": "arasaac:11376",
+      "arasaacId": 11376,
+      "imagen": "https://static.arasaac.org/pictograms/11376/11376_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/11376/11376_300.png",
+        "https://static.arasaac.org/pictograms/11376/11376_500.png",
+        "https://static.arasaac.org/pictograms/11376/11376_2500.png"
+      ],
+      "nombre": "silla de colegio",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:57.489Z"
     },
     {
       "id": "arasaac:11403",
@@ -269,6 +325,34 @@
       "creado": "2026-07-12T13:56:19.270Z"
     },
     {
+      "id": "arasaac:16281",
+      "arasaacId": 16281,
+      "imagen": "https://static.arasaac.org/pictograms/16281/16281_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/16281/16281_300.png",
+        "https://static.arasaac.org/pictograms/16281/16281_500.png",
+        "https://static.arasaac.org/pictograms/16281/16281_2500.png"
+      ],
+      "nombre": "cómoda",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:02.494Z"
+    },
+    {
+      "id": "arasaac:16315",
+      "arasaacId": 16315,
+      "imagen": "https://static.arasaac.org/pictograms/16315/16315_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/16315/16315_300.png",
+        "https://static.arasaac.org/pictograms/16315/16315_500.png",
+        "https://static.arasaac.org/pictograms/16315/16315_2500.png"
+      ],
+      "nombre": "pasillo",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:20:10.804Z"
+    },
+    {
       "id": "arasaac:16341",
       "arasaacId": 16341,
       "imagen": "https://static.arasaac.org/pictograms/16341/16341_500.png",
@@ -435,6 +519,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:57:49.392Z"
+    },
+    {
+      "id": "arasaac:21522",
+      "arasaacId": 21522,
+      "imagen": "https://static.arasaac.org/pictograms/21522/21522_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/21522/21522_300.png",
+        "https://static.arasaac.org/pictograms/21522/21522_500.png",
+        "https://static.arasaac.org/pictograms/21522/21522_2500.png"
+      ],
+      "nombre": "casillero",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:18:50.840Z"
     },
     {
       "id": "arasaac:21545",
@@ -605,6 +703,20 @@
       "creado": "2026-07-12T14:09:14.106Z"
     },
     {
+      "id": "arasaac:2270",
+      "arasaacId": 2270,
+      "imagen": "https://static.arasaac.org/pictograms/2270/2270_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2270/2270_300.png",
+        "https://static.arasaac.org/pictograms/2270/2270_500.png",
+        "https://static.arasaac.org/pictograms/2270/2270_2500.png"
+      ],
+      "nombre": "bañador",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:13:39.369Z"
+    },
+    {
       "id": "arasaac:2273",
       "arasaacId": 2273,
       "imagen": "https://static.arasaac.org/pictograms/2273/2273_500.png",
@@ -661,6 +773,20 @@
       "creado": "2026-07-12T13:56:34.459Z"
     },
     {
+      "id": "arasaac:2289",
+      "arasaacId": 2289,
+      "imagen": "https://static.arasaac.org/pictograms/2289/2289_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2289/2289_300.png",
+        "https://static.arasaac.org/pictograms/2289/2289_500.png",
+        "https://static.arasaac.org/pictograms/2289/2289_2500.png"
+      ],
+      "nombre": "braga",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:12:15.226Z"
+    },
+    {
       "id": "arasaac:2291",
       "arasaacId": 2291,
       "imagen": "https://static.arasaac.org/pictograms/2291/2291_500.png",
@@ -689,6 +815,34 @@
       "creado": "2026-07-12T14:00:45.113Z"
     },
     {
+      "id": "arasaac:2299",
+      "arasaacId": 2299,
+      "imagen": "https://static.arasaac.org/pictograms/2299/2299_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2299/2299_300.png",
+        "https://static.arasaac.org/pictograms/2299/2299_500.png",
+        "https://static.arasaac.org/pictograms/2299/2299_2500.png"
+      ],
+      "nombre": "calle",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:21:00.537Z"
+    },
+    {
+      "id": "arasaac:2304",
+      "arasaacId": 2304,
+      "imagen": "https://static.arasaac.org/pictograms/2304/2304_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2304/2304_300.png",
+        "https://static.arasaac.org/pictograms/2304/2304_500.png",
+        "https://static.arasaac.org/pictograms/2304/2304_2500.png"
+      ],
+      "nombre": "cama",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:23.554Z"
+    },
+    {
       "id": "arasaac:2306",
       "arasaacId": 2306,
       "imagen": "https://static.arasaac.org/pictograms/2306/2306_500.png",
@@ -715,6 +869,34 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:55:49.663Z"
+    },
+    {
+      "id": "arasaac:2309",
+      "arasaacId": 2309,
+      "imagen": "https://static.arasaac.org/pictograms/2309/2309_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2309/2309_300.png",
+        "https://static.arasaac.org/pictograms/2309/2309_500.png",
+        "https://static.arasaac.org/pictograms/2309/2309_2500.png"
+      ],
+      "nombre": "camiseta",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:12:44.520Z"
+    },
+    {
+      "id": "arasaac:2310",
+      "arasaacId": 2310,
+      "imagen": "https://static.arasaac.org/pictograms/2310/2310_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2310/2310_300.png",
+        "https://static.arasaac.org/pictograms/2310/2310_500.png",
+        "https://static.arasaac.org/pictograms/2310/2310_2500.png"
+      ],
+      "nombre": "camiseta",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:12:13.646Z"
     },
     {
       "id": "arasaac:2313",
@@ -785,6 +967,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:48:45.129Z"
+    },
+    {
+      "id": "arasaac:2332",
+      "arasaacId": 2332,
+      "imagen": "https://static.arasaac.org/pictograms/2332/2332_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2332/2332_300.png",
+        "https://static.arasaac.org/pictograms/2332/2332_500.png",
+        "https://static.arasaac.org/pictograms/2332/2332_2500.png"
+      ],
+      "nombre": "chándal",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:13:43.614Z"
     },
     {
       "id": "arasaac:2335",
@@ -1011,6 +1207,20 @@
       "creado": "2026-07-12T14:08:55.065Z"
     },
     {
+      "id": "arasaac:2391",
+      "arasaacId": 2391,
+      "imagen": "https://static.arasaac.org/pictograms/2391/2391_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2391/2391_300.png",
+        "https://static.arasaac.org/pictograms/2391/2391_500.png",
+        "https://static.arasaac.org/pictograms/2391/2391_2500.png"
+      ],
+      "nombre": "falda",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:12:43.350Z"
+    },
+    {
       "id": "arasaac:23949",
       "arasaacId": 23949,
       "imagen": "https://static.arasaac.org/pictograms/23949/23949_500.png",
@@ -1137,6 +1347,20 @@
       "creado": "2026-07-12T14:05:59.317Z"
     },
     {
+      "id": "arasaac:24169",
+      "arasaacId": 24169,
+      "imagen": "https://static.arasaac.org/pictograms/24169/24169_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/24169/24169_300.png",
+        "https://static.arasaac.org/pictograms/24169/24169_500.png",
+        "https://static.arasaac.org/pictograms/24169/24169_2500.png"
+      ],
+      "nombre": "mecedora",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:16:56.226Z"
+    },
+    {
       "id": "arasaac:2419",
       "arasaacId": 2419,
       "imagen": "https://static.arasaac.org/pictograms/2419/2419_500.png",
@@ -1163,6 +1387,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:57:21.256Z"
+    },
+    {
+      "id": "arasaac:24222",
+      "arasaacId": 24222,
+      "imagen": "https://static.arasaac.org/pictograms/24222/24222_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/24222/24222_300.png",
+        "https://static.arasaac.org/pictograms/24222/24222_500.png",
+        "https://static.arasaac.org/pictograms/24222/24222_2500.png"
+      ],
+      "nombre": "pantalón",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:11:57.726Z"
     },
     {
       "id": "arasaac:24226",
@@ -1207,6 +1445,20 @@
       "creado": "2026-07-12T14:04:37.897Z"
     },
     {
+      "id": "arasaac:24276",
+      "arasaacId": 24276,
+      "imagen": "https://static.arasaac.org/pictograms/24276/24276_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/24276/24276_300.png",
+        "https://static.arasaac.org/pictograms/24276/24276_500.png",
+        "https://static.arasaac.org/pictograms/24276/24276_2500.png"
+      ],
+      "nombre": "mono",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:11:54.424Z"
+    },
+    {
       "id": "arasaac:2433",
       "arasaacId": 2433,
       "imagen": "https://static.arasaac.org/pictograms/2433/2433_500.png",
@@ -1233,6 +1485,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:44:57.443Z"
+    },
+    {
+      "id": "arasaac:2436",
+      "arasaacId": 2436,
+      "imagen": "https://static.arasaac.org/pictograms/2436/2436_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2436/2436_300.png",
+        "https://static.arasaac.org/pictograms/2436/2436_500.png",
+        "https://static.arasaac.org/pictograms/2436/2436_2500.png"
+      ],
+      "nombre": "jersey",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:12:50.945Z"
     },
     {
       "id": "arasaac:2437",
@@ -1487,6 +1753,20 @@
       "creado": "2026-07-12T14:03:33.676Z"
     },
     {
+      "id": "arasaac:24921",
+      "arasaacId": 24921,
+      "imagen": "https://static.arasaac.org/pictograms/24921/24921_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/24921/24921_300.png",
+        "https://static.arasaac.org/pictograms/24921/24921_500.png",
+        "https://static.arasaac.org/pictograms/24921/24921_2500.png"
+      ],
+      "nombre": "cajón",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:16:54.748Z"
+    },
+    {
       "id": "arasaac:2494",
       "arasaacId": 2494,
       "imagen": "https://static.arasaac.org/pictograms/2494/2494_500.png",
@@ -1543,6 +1823,20 @@
       "creado": "2026-07-12T14:04:10.893Z"
     },
     {
+      "id": "arasaac:2514",
+      "arasaacId": 2514,
+      "imagen": "https://static.arasaac.org/pictograms/2514/2514_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2514/2514_300.png",
+        "https://static.arasaac.org/pictograms/2514/2514_500.png",
+        "https://static.arasaac.org/pictograms/2514/2514_2500.png"
+      ],
+      "nombre": "pelota de tenis",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:23:07.630Z"
+    },
+    {
       "id": "arasaac:2517",
       "arasaacId": 2517,
       "imagen": "https://static.arasaac.org/pictograms/2517/2517_500.png",
@@ -1583,6 +1877,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T14:02:30.942Z"
+    },
+    {
+      "id": "arasaac:2522",
+      "arasaacId": 2522,
+      "imagen": "https://static.arasaac.org/pictograms/2522/2522_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2522/2522_300.png",
+        "https://static.arasaac.org/pictograms/2522/2522_500.png",
+        "https://static.arasaac.org/pictograms/2522/2522_2500.png"
+      ],
+      "nombre": "pijama",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:12:40.102Z"
     },
     {
       "id": "arasaac:2523",
@@ -1725,6 +2033,20 @@
       "creado": "2026-07-12T14:04:26.254Z"
     },
     {
+      "id": "arasaac:25475",
+      "arasaacId": 25475,
+      "imagen": "https://static.arasaac.org/pictograms/25475/25475_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/25475/25475_300.png",
+        "https://static.arasaac.org/pictograms/25475/25475_500.png",
+        "https://static.arasaac.org/pictograms/25475/25475_2500.png"
+      ],
+      "nombre": "sillón",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:16:53.375Z"
+    },
+    {
       "id": "arasaac:25486",
       "arasaacId": 25486,
       "imagen": "https://static.arasaac.org/pictograms/25486/25486_500.png",
@@ -1821,6 +2143,34 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T14:00:08.726Z"
+    },
+    {
+      "id": "arasaac:2571",
+      "arasaacId": 2571,
+      "imagen": "https://static.arasaac.org/pictograms/2571/2571_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2571/2571_300.png",
+        "https://static.arasaac.org/pictograms/2571/2571_500.png",
+        "https://static.arasaac.org/pictograms/2571/2571_2500.png"
+      ],
+      "nombre": "sofá",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:24.803Z"
+    },
+    {
+      "id": "arasaac:2576",
+      "arasaacId": 2576,
+      "imagen": "https://static.arasaac.org/pictograms/2576/2576_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2576/2576_300.png",
+        "https://static.arasaac.org/pictograms/2576/2576_500.png",
+        "https://static.arasaac.org/pictograms/2576/2576_2500.png"
+      ],
+      "nombre": "sujetador",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:12:36.381Z"
     },
     {
       "id": "arasaac:2579",
@@ -1989,6 +2339,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:55:40.942Z"
+    },
+    {
+      "id": "arasaac:26071",
+      "arasaacId": 26071,
+      "imagen": "https://static.arasaac.org/pictograms/26071/26071_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/26071/26071_300.png",
+        "https://static.arasaac.org/pictograms/26071/26071_500.png",
+        "https://static.arasaac.org/pictograms/26071/26071_2500.png"
+      ],
+      "nombre": "escritorio",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:18:44.568Z"
     },
     {
       "id": "arasaac:2609",
@@ -2327,6 +2691,20 @@
       "creado": "2026-07-12T14:04:45.130Z"
     },
     {
+      "id": "arasaac:26893",
+      "arasaacId": 26893,
+      "imagen": "https://static.arasaac.org/pictograms/26893/26893_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/26893/26893_300.png",
+        "https://static.arasaac.org/pictograms/26893/26893_500.png",
+        "https://static.arasaac.org/pictograms/26893/26893_2500.png"
+      ],
+      "nombre": "litera",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:18:38.082Z"
+    },
+    {
       "id": "arasaac:2701",
       "arasaacId": 2701,
       "imagen": "https://static.arasaac.org/pictograms/2701/2701_500.png",
@@ -2381,6 +2759,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T14:07:19.865Z"
+    },
+    {
+      "id": "arasaac:27274",
+      "arasaacId": 27274,
+      "imagen": "https://static.arasaac.org/pictograms/27274/27274_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/27274/27274_300.png",
+        "https://static.arasaac.org/pictograms/27274/27274_500.png",
+        "https://static.arasaac.org/pictograms/27274/27274_2500.png"
+      ],
+      "nombre": "botas de fútbol",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:15:34.633Z"
     },
     {
       "id": "arasaac:2732",
@@ -2523,6 +2915,20 @@
       "creado": "2026-07-12T14:04:19.177Z"
     },
     {
+      "id": "arasaac:2796",
+      "arasaacId": 2796,
+      "imagen": "https://static.arasaac.org/pictograms/2796/2796_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2796/2796_300.png",
+        "https://static.arasaac.org/pictograms/2796/2796_500.png",
+        "https://static.arasaac.org/pictograms/2796/2796_2500.png"
+      ],
+      "nombre": "soleado",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:25:30.459Z"
+    },
+    {
       "id": "arasaac:27968",
       "arasaacId": 27968,
       "imagen": "https://static.arasaac.org/pictograms/27968/27968_500.png",
@@ -2565,6 +2971,34 @@
       "creado": "2026-07-12T14:01:21.881Z"
     },
     {
+      "id": "arasaac:28085",
+      "arasaacId": 28085,
+      "imagen": "https://static.arasaac.org/pictograms/28085/28085_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/28085/28085_300.png",
+        "https://static.arasaac.org/pictograms/28085/28085_500.png",
+        "https://static.arasaac.org/pictograms/28085/28085_2500.png"
+      ],
+      "nombre": "silla de ruedas",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:16:58.521Z"
+    },
+    {
+      "id": "arasaac:2814",
+      "arasaacId": 2814,
+      "imagen": "https://static.arasaac.org/pictograms/2814/2814_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2814/2814_300.png",
+        "https://static.arasaac.org/pictograms/2814/2814_500.png",
+        "https://static.arasaac.org/pictograms/2814/2814_2500.png"
+      ],
+      "nombre": "tormentoso",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:25:29.456Z"
+    },
+    {
       "id": "arasaac:2815",
       "arasaacId": 2815,
       "imagen": "https://static.arasaac.org/pictograms/2815/2815_500.png",
@@ -2579,6 +3013,20 @@
       "creado": "2026-07-12T14:08:47.051Z"
     },
     {
+      "id": "arasaac:2819",
+      "arasaacId": 2819,
+      "imagen": "https://static.arasaac.org/pictograms/2819/2819_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2819/2819_300.png",
+        "https://static.arasaac.org/pictograms/2819/2819_500.png",
+        "https://static.arasaac.org/pictograms/2819/2819_2500.png"
+      ],
+      "nombre": "relámpago",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:23:35.591Z"
+    },
+    {
       "id": "arasaac:2832",
       "arasaacId": 2832,
       "imagen": "https://static.arasaac.org/pictograms/2832/2832_500.png",
@@ -2591,6 +3039,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:29:04.897Z"
+    },
+    {
+      "id": "arasaac:2833",
+      "arasaacId": 2833,
+      "imagen": "https://static.arasaac.org/pictograms/2833/2833_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2833/2833_300.png",
+        "https://static.arasaac.org/pictograms/2833/2833_500.png",
+        "https://static.arasaac.org/pictograms/2833/2833_2500.png"
+      ],
+      "nombre": "pinzas",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:13:11.445Z"
     },
     {
       "id": "arasaac:2838",
@@ -2633,6 +3095,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T14:03:50.489Z"
+    },
+    {
+      "id": "arasaac:2846",
+      "arasaacId": 2846,
+      "imagen": "https://static.arasaac.org/pictograms/2846/2846_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2846/2846_300.png",
+        "https://static.arasaac.org/pictograms/2846/2846_500.png",
+        "https://static.arasaac.org/pictograms/2846/2846_2500.png"
+      ],
+      "nombre": "percha",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:13:12.459Z"
     },
     {
       "id": "arasaac:2847",
@@ -2775,6 +3251,48 @@
       "creado": "2026-07-12T14:01:22.787Z"
     },
     {
+      "id": "arasaac:2882",
+      "arasaacId": 2882,
+      "imagen": "https://static.arasaac.org/pictograms/2882/2882_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2882/2882_300.png",
+        "https://static.arasaac.org/pictograms/2882/2882_500.png",
+        "https://static.arasaac.org/pictograms/2882/2882_2500.png"
+      ],
+      "nombre": "nublado",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:25:28.256Z"
+    },
+    {
+      "id": "arasaac:2883",
+      "arasaacId": 2883,
+      "imagen": "https://static.arasaac.org/pictograms/2883/2883_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2883/2883_300.png",
+        "https://static.arasaac.org/pictograms/2883/2883_500.png",
+        "https://static.arasaac.org/pictograms/2883/2883_2500.png"
+      ],
+      "nombre": "nube",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:23:34.276Z"
+    },
+    {
+      "id": "arasaac:2884",
+      "arasaacId": 2884,
+      "imagen": "https://static.arasaac.org/pictograms/2884/2884_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2884/2884_300.png",
+        "https://static.arasaac.org/pictograms/2884/2884_500.png",
+        "https://static.arasaac.org/pictograms/2884/2884_2500.png"
+      ],
+      "nombre": "nevada",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:25:56.511Z"
+    },
+    {
       "id": "arasaac:2903",
       "arasaacId": 2903,
       "imagen": "https://static.arasaac.org/pictograms/2903/2903_500.png",
@@ -2871,6 +3389,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T14:00:10.756Z"
+    },
+    {
+      "id": "arasaac:2936",
+      "arasaacId": 2936,
+      "imagen": "https://static.arasaac.org/pictograms/2936/2936_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2936/2936_300.png",
+        "https://static.arasaac.org/pictograms/2936/2936_500.png",
+        "https://static.arasaac.org/pictograms/2936/2936_2500.png"
+      ],
+      "nombre": "lluvioso",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:25:33.004Z"
     },
     {
       "id": "arasaac:2942",
@@ -2999,6 +3531,20 @@
       "creado": "2026-07-12T13:31:25.179Z"
     },
     {
+      "id": "arasaac:2986",
+      "arasaacId": 2986,
+      "imagen": "https://static.arasaac.org/pictograms/2986/2986_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/2986/2986_300.png",
+        "https://static.arasaac.org/pictograms/2986/2986_500.png",
+        "https://static.arasaac.org/pictograms/2986/2986_2500.png"
+      ],
+      "nombre": "arco iris",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:24:09.911Z"
+    },
+    {
       "id": "arasaac:2998",
       "arasaacId": 2998,
       "imagen": "https://static.arasaac.org/pictograms/2998/2998_500.png",
@@ -3111,6 +3657,20 @@
       "creado": "2026-07-12T13:55:39.708Z"
     },
     {
+      "id": "arasaac:3070",
+      "arasaacId": 3070,
+      "imagen": "https://static.arasaac.org/pictograms/3070/3070_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3070/3070_300.png",
+        "https://static.arasaac.org/pictograms/3070/3070_500.png",
+        "https://static.arasaac.org/pictograms/3070/3070_2500.png"
+      ],
+      "nombre": "cactus",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:21:28.407Z"
+    },
+    {
       "id": "arasaac:3081",
       "arasaacId": 3081,
       "imagen": "https://static.arasaac.org/pictograms/3081/3081_500.png",
@@ -3123,6 +3683,118 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:57:27.821Z"
+    },
+    {
+      "id": "arasaac:30964",
+      "arasaacId": 30964,
+      "imagen": "https://static.arasaac.org/pictograms/30964/30964_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/30964/30964_300.png",
+        "https://static.arasaac.org/pictograms/30964/30964_500.png",
+        "https://static.arasaac.org/pictograms/30964/30964_2500.png"
+      ],
+      "nombre": "asco",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:26:24.726Z"
+    },
+    {
+      "id": "arasaac:3102",
+      "arasaacId": 3102,
+      "imagen": "https://static.arasaac.org/pictograms/3102/3102_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3102/3102_300.png",
+        "https://static.arasaac.org/pictograms/3102/3102_500.png",
+        "https://static.arasaac.org/pictograms/3102/3102_2500.png"
+      ],
+      "nombre": "flor",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:22:07.390Z"
+    },
+    {
+      "id": "arasaac:3110",
+      "arasaacId": 3110,
+      "imagen": "https://static.arasaac.org/pictograms/3110/3110_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3110/3110_300.png",
+        "https://static.arasaac.org/pictograms/3110/3110_500.png",
+        "https://static.arasaac.org/pictograms/3110/3110_2500.png"
+      ],
+      "nombre": "granizo",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:25:07.255Z"
+    },
+    {
+      "id": "arasaac:3129",
+      "arasaacId": 3129,
+      "imagen": "https://static.arasaac.org/pictograms/3129/3129_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3129/3129_300.png",
+        "https://static.arasaac.org/pictograms/3129/3129_500.png",
+        "https://static.arasaac.org/pictograms/3129/3129_2500.png"
+      ],
+      "nombre": "mesa",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:37.288Z"
+    },
+    {
+      "id": "arasaac:3131",
+      "arasaacId": 3131,
+      "imagen": "https://static.arasaac.org/pictograms/3131/3131_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3131/3131_300.png",
+        "https://static.arasaac.org/pictograms/3131/3131_500.png",
+        "https://static.arasaac.org/pictograms/3131/3131_2500.png"
+      ],
+      "nombre": "muñeco de nieve",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:24:53.584Z"
+    },
+    {
+      "id": "arasaac:3138",
+      "arasaacId": 3138,
+      "imagen": "https://static.arasaac.org/pictograms/3138/3138_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3138/3138_300.png",
+        "https://static.arasaac.org/pictograms/3138/3138_500.png",
+        "https://static.arasaac.org/pictograms/3138/3138_2500.png"
+      ],
+      "nombre": "palmera",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:21:37.141Z"
+    },
+    {
+      "id": "arasaac:3151",
+      "arasaacId": 3151,
+      "imagen": "https://static.arasaac.org/pictograms/3151/3151_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3151/3151_300.png",
+        "https://static.arasaac.org/pictograms/3151/3151_500.png",
+        "https://static.arasaac.org/pictograms/3151/3151_2500.png"
+      ],
+      "nombre": "rosa",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:22:24.019Z"
+    },
+    {
+      "id": "arasaac:3155",
+      "arasaacId": 3155,
+      "imagen": "https://static.arasaac.org/pictograms/3155/3155_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3155/3155_300.png",
+        "https://static.arasaac.org/pictograms/3155/3155_500.png",
+        "https://static.arasaac.org/pictograms/3155/3155_2500.png"
+      ],
+      "nombre": "silla",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:35.816Z"
     },
     {
       "id": "arasaac:3157",
@@ -3181,6 +3853,20 @@
       "creado": "2026-07-12T14:06:13.395Z"
     },
     {
+      "id": "arasaac:3229",
+      "arasaacId": 3229,
+      "imagen": "https://static.arasaac.org/pictograms/3229/3229_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3229/3229_300.png",
+        "https://static.arasaac.org/pictograms/3229/3229_500.png",
+        "https://static.arasaac.org/pictograms/3229/3229_2500.png"
+      ],
+      "nombre": "bata",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:12:58.350Z"
+    },
+    {
       "id": "arasaac:3232",
       "arasaacId": 3232,
       "imagen": "https://static.arasaac.org/pictograms/3232/3232_500.png",
@@ -3207,6 +3893,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:56:43.590Z"
+    },
+    {
+      "id": "arasaac:3242",
+      "arasaacId": 3242,
+      "imagen": "https://static.arasaac.org/pictograms/3242/3242_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3242/3242_300.png",
+        "https://static.arasaac.org/pictograms/3242/3242_500.png",
+        "https://static.arasaac.org/pictograms/3242/3242_2500.png"
+      ],
+      "nombre": "percha",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:40.446Z"
     },
     {
       "id": "arasaac:3243",
@@ -3349,6 +4049,20 @@
       "creado": "2026-07-12T13:57:35.425Z"
     },
     {
+      "id": "arasaac:3279",
+      "arasaacId": 3279,
+      "imagen": "https://static.arasaac.org/pictograms/3279/3279_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3279/3279_300.png",
+        "https://static.arasaac.org/pictograms/3279/3279_500.png",
+        "https://static.arasaac.org/pictograms/3279/3279_2500.png"
+      ],
+      "nombre": "librería",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:19.118Z"
+    },
+    {
       "id": "arasaac:32798",
       "arasaacId": 32798,
       "imagen": "https://static.arasaac.org/pictograms/32798/32798_500.png",
@@ -3361,6 +4075,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:55:22.241Z"
+    },
+    {
+      "id": "arasaac:3286",
+      "arasaacId": 3286,
+      "imagen": "https://static.arasaac.org/pictograms/3286/3286_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3286/3286_300.png",
+        "https://static.arasaac.org/pictograms/3286/3286_500.png",
+        "https://static.arasaac.org/pictograms/3286/3286_2500.png"
+      ],
+      "nombre": "percha",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:46.284Z"
     },
     {
       "id": "arasaac:3290",
@@ -3389,6 +4117,48 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:52:39.349Z"
+    },
+    {
+      "id": "arasaac:3295",
+      "arasaacId": 3295,
+      "imagen": "https://static.arasaac.org/pictograms/3295/3295_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/3295/3295_300.png",
+        "https://static.arasaac.org/pictograms/3295/3295_500.png",
+        "https://static.arasaac.org/pictograms/3295/3295_2500.png"
+      ],
+      "nombre": "mesilla",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:12.990Z"
+    },
+    {
+      "id": "arasaac:33068",
+      "arasaacId": 33068,
+      "imagen": "https://static.arasaac.org/pictograms/33068/33068_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/33068/33068_300.png",
+        "https://static.arasaac.org/pictograms/33068/33068_500.png",
+        "https://static.arasaac.org/pictograms/33068/33068_2500.png"
+      ],
+      "nombre": "dormitorio",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:19:38.677Z"
+    },
+    {
+      "id": "arasaac:33070",
+      "arasaacId": 33070,
+      "imagen": "https://static.arasaac.org/pictograms/33070/33070_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/33070/33070_300.png",
+        "https://static.arasaac.org/pictograms/33070/33070_500.png",
+        "https://static.arasaac.org/pictograms/33070/33070_2500.png"
+      ],
+      "nombre": "cocina",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:19:52.319Z"
     },
     {
       "id": "arasaac:3310",
@@ -3545,6 +4315,20 @@
       "creado": "2026-07-12T13:29:42.091Z"
     },
     {
+      "id": "arasaac:33954",
+      "arasaacId": 33954,
+      "imagen": "https://static.arasaac.org/pictograms/33954/33954_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/33954/33954_300.png",
+        "https://static.arasaac.org/pictograms/33954/33954_500.png",
+        "https://static.arasaac.org/pictograms/33954/33954_2500.png"
+      ],
+      "nombre": "cuarto de baño",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:19:53.458Z"
+    },
+    {
       "id": "arasaac:3400",
       "arasaacId": 3400,
       "imagen": "https://static.arasaac.org/pictograms/3400/3400_500.png",
@@ -3643,6 +4427,118 @@
       "creado": "2026-07-12T13:55:57.927Z"
     },
     {
+      "id": "arasaac:35049",
+      "arasaacId": 35049,
+      "imagen": "https://static.arasaac.org/pictograms/35049/35049_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/35049/35049_300.png",
+        "https://static.arasaac.org/pictograms/35049/35049_500.png",
+        "https://static.arasaac.org/pictograms/35049/35049_2500.png"
+      ],
+      "nombre": "niebla",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:24:17.610Z"
+    },
+    {
+      "id": "arasaac:35107",
+      "arasaacId": 35107,
+      "imagen": "https://static.arasaac.org/pictograms/35107/35107_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/35107/35107_300.png",
+        "https://static.arasaac.org/pictograms/35107/35107_500.png",
+        "https://static.arasaac.org/pictograms/35107/35107_2500.png"
+      ],
+      "nombre": "ventoso",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:25:45.362Z"
+    },
+    {
+      "id": "arasaac:35531",
+      "arasaacId": 35531,
+      "imagen": "https://static.arasaac.org/pictograms/35531/35531_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/35531/35531_300.png",
+        "https://static.arasaac.org/pictograms/35531/35531_500.png",
+        "https://static.arasaac.org/pictograms/35531/35531_2500.png"
+      ],
+      "nombre": "aburrido",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:27:24.444Z"
+    },
+    {
+      "id": "arasaac:35535",
+      "arasaacId": 35535,
+      "imagen": "https://static.arasaac.org/pictograms/35535/35535_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/35535/35535_300.png",
+        "https://static.arasaac.org/pictograms/35535/35535_500.png",
+        "https://static.arasaac.org/pictograms/35535/35535_2500.png"
+      ],
+      "nombre": "asustado",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:27:23.316Z"
+    },
+    {
+      "id": "arasaac:35537",
+      "arasaacId": 35537,
+      "imagen": "https://static.arasaac.org/pictograms/35537/35537_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/35537/35537_300.png",
+        "https://static.arasaac.org/pictograms/35537/35537_500.png",
+        "https://static.arasaac.org/pictograms/35537/35537_2500.png"
+      ],
+      "nombre": "cansado",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:27:16.771Z"
+    },
+    {
+      "id": "arasaac:35539",
+      "arasaacId": 35539,
+      "imagen": "https://static.arasaac.org/pictograms/35539/35539_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/35539/35539_300.png",
+        "https://static.arasaac.org/pictograms/35539/35539_500.png",
+        "https://static.arasaac.org/pictograms/35539/35539_2500.png"
+      ],
+      "nombre": "enfadado",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:27:09.834Z"
+    },
+    {
+      "id": "arasaac:35545",
+      "arasaacId": 35545,
+      "imagen": "https://static.arasaac.org/pictograms/35545/35545_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/35545/35545_300.png",
+        "https://static.arasaac.org/pictograms/35545/35545_500.png",
+        "https://static.arasaac.org/pictograms/35545/35545_2500.png"
+      ],
+      "nombre": "triste",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:27:10.989Z"
+    },
+    {
+      "id": "arasaac:35547",
+      "arasaacId": 35547,
+      "imagen": "https://static.arasaac.org/pictograms/35547/35547_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/35547/35547_300.png",
+        "https://static.arasaac.org/pictograms/35547/35547_500.png",
+        "https://static.arasaac.org/pictograms/35547/35547_2500.png"
+      ],
+      "nombre": "contento",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:27:11.959Z"
+    },
+    {
       "id": "arasaac:35793",
       "arasaacId": 35793,
       "imagen": "https://static.arasaac.org/pictograms/35793/35793_500.png",
@@ -3655,6 +4551,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T14:09:29.286Z"
+    },
+    {
+      "id": "arasaac:35961",
+      "arasaacId": 35961,
+      "imagen": "https://static.arasaac.org/pictograms/35961/35961_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/35961/35961_300.png",
+        "https://static.arasaac.org/pictograms/35961/35961_500.png",
+        "https://static.arasaac.org/pictograms/35961/35961_2500.png"
+      ],
+      "nombre": "trona",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:31.020Z"
     },
     {
       "id": "arasaac:36153",
@@ -3685,6 +4595,34 @@
       "creado": "2026-07-12T13:50:16.692Z"
     },
     {
+      "id": "arasaac:36505",
+      "arasaacId": 36505,
+      "imagen": "https://static.arasaac.org/pictograms/36505/36505_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/36505/36505_300.png",
+        "https://static.arasaac.org/pictograms/36505/36505_500.png",
+        "https://static.arasaac.org/pictograms/36505/36505_2500.png"
+      ],
+      "nombre": "butaca",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:18:04.974Z"
+    },
+    {
+      "id": "arasaac:36603",
+      "arasaacId": 36603,
+      "imagen": "https://static.arasaac.org/pictograms/36603/36603_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/36603/36603_300.png",
+        "https://static.arasaac.org/pictograms/36603/36603_500.png",
+        "https://static.arasaac.org/pictograms/36603/36603_2500.png"
+      ],
+      "nombre": "toallero",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:18:40.052Z"
+    },
+    {
       "id": "arasaac:36620",
       "arasaacId": 36620,
       "imagen": "https://static.arasaac.org/pictograms/36620/36620_500.png",
@@ -3697,6 +4635,48 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T14:07:32.007Z"
+    },
+    {
+      "id": "arasaac:36680",
+      "arasaacId": 36680,
+      "imagen": "https://static.arasaac.org/pictograms/36680/36680_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/36680/36680_300.png",
+        "https://static.arasaac.org/pictograms/36680/36680_500.png",
+        "https://static.arasaac.org/pictograms/36680/36680_2500.png"
+      ],
+      "nombre": "zapatillas",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:15:24.694Z"
+    },
+    {
+      "id": "arasaac:36766",
+      "arasaacId": 36766,
+      "imagen": "https://static.arasaac.org/pictograms/36766/36766_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/36766/36766_300.png",
+        "https://static.arasaac.org/pictograms/36766/36766_500.png",
+        "https://static.arasaac.org/pictograms/36766/36766_2500.png"
+      ],
+      "nombre": "armario",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:18:30.599Z"
+    },
+    {
+      "id": "arasaac:36840",
+      "arasaacId": 36840,
+      "imagen": "https://static.arasaac.org/pictograms/36840/36840_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/36840/36840_300.png",
+        "https://static.arasaac.org/pictograms/36840/36840_500.png",
+        "https://static.arasaac.org/pictograms/36840/36840_2500.png"
+      ],
+      "nombre": "body",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:11:46.803Z"
     },
     {
       "id": "arasaac:36978",
@@ -3895,6 +4875,20 @@
       "creado": "2026-07-12T14:00:56.039Z"
     },
     {
+      "id": "arasaac:38432",
+      "arasaacId": 38432,
+      "imagen": "https://static.arasaac.org/pictograms/38432/38432_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/38432/38432_300.png",
+        "https://static.arasaac.org/pictograms/38432/38432_500.png",
+        "https://static.arasaac.org/pictograms/38432/38432_2500.png"
+      ],
+      "nombre": "recibidor",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:19:43.624Z"
+    },
+    {
       "id": "arasaac:38501",
       "arasaacId": 38501,
       "imagen": "https://static.arasaac.org/pictograms/38501/38501_500.png",
@@ -3907,6 +4901,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:47:14.770Z"
+    },
+    {
+      "id": "arasaac:38613",
+      "arasaacId": 38613,
+      "imagen": "https://static.arasaac.org/pictograms/38613/38613_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/38613/38613_300.png",
+        "https://static.arasaac.org/pictograms/38613/38613_500.png",
+        "https://static.arasaac.org/pictograms/38613/38613_2500.png"
+      ],
+      "nombre": "planta",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:21:31.958Z"
     },
     {
       "id": "arasaac:38649",
@@ -4033,6 +5041,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T14:03:28.320Z"
+    },
+    {
+      "id": "arasaac:39534",
+      "arasaacId": 39534,
+      "imagen": "https://static.arasaac.org/pictograms/39534/39534_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/39534/39534_300.png",
+        "https://static.arasaac.org/pictograms/39534/39534_500.png",
+        "https://static.arasaac.org/pictograms/39534/39534_2500.png"
+      ],
+      "nombre": "chaleco",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:11:40.301Z"
     },
     {
       "id": "arasaac:39543",
@@ -4175,6 +5197,20 @@
       "creado": "2026-07-12T13:55:33.538Z"
     },
     {
+      "id": "arasaac:4764",
+      "arasaacId": 4764,
+      "imagen": "https://static.arasaac.org/pictograms/4764/4764_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/4764/4764_300.png",
+        "https://static.arasaac.org/pictograms/4764/4764_500.png",
+        "https://static.arasaac.org/pictograms/4764/4764_2500.png"
+      ],
+      "nombre": "hamaca",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:49.365Z"
+    },
+    {
       "id": "arasaac:4768",
       "arasaacId": 4768,
       "imagen": "https://static.arasaac.org/pictograms/4768/4768_500.png",
@@ -4231,6 +5267,20 @@
       "creado": "2026-07-12T14:06:22.917Z"
     },
     {
+      "id": "arasaac:4919",
+      "arasaacId": 4919,
+      "imagen": "https://static.arasaac.org/pictograms/4919/4919_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/4919/4919_300.png",
+        "https://static.arasaac.org/pictograms/4919/4919_500.png",
+        "https://static.arasaac.org/pictograms/4919/4919_2500.png"
+      ],
+      "nombre": "banco",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:38.396Z"
+    },
+    {
       "id": "arasaac:4923",
       "arasaacId": 4923,
       "imagen": "https://static.arasaac.org/pictograms/4923/4923_500.png",
@@ -4243,6 +5293,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:55:32.631Z"
+    },
+    {
+      "id": "arasaac:4927",
+      "arasaacId": 4927,
+      "imagen": "https://static.arasaac.org/pictograms/4927/4927_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/4927/4927_300.png",
+        "https://static.arasaac.org/pictograms/4927/4927_500.png",
+        "https://static.arasaac.org/pictograms/4927/4927_2500.png"
+      ],
+      "nombre": "chubasquero",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:12:33.457Z"
     },
     {
       "id": "arasaac:4932",
@@ -4441,6 +5505,20 @@
       "creado": "2026-07-12T13:50:59.364Z"
     },
     {
+      "id": "arasaac:5598",
+      "arasaacId": 5598,
+      "imagen": "https://static.arasaac.org/pictograms/5598/5598_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/5598/5598_300.png",
+        "https://static.arasaac.org/pictograms/5598/5598_500.png",
+        "https://static.arasaac.org/pictograms/5598/5598_2500.png"
+      ],
+      "nombre": "tornado",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:25:09.319Z"
+    },
+    {
       "id": "arasaac:5892",
       "arasaacId": 5892,
       "imagen": "https://static.arasaac.org/pictograms/5892/5892_500.png",
@@ -4537,6 +5615,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:56:29.146Z"
+    },
+    {
+      "id": "arasaac:6228",
+      "arasaacId": 6228,
+      "imagen": "https://static.arasaac.org/pictograms/6228/6228_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/6228/6228_300.png",
+        "https://static.arasaac.org/pictograms/6228/6228_500.png",
+        "https://static.arasaac.org/pictograms/6228/6228_2500.png"
+      ],
+      "nombre": "tendedero",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:09.317Z"
     },
     {
       "id": "arasaac:6472",
@@ -4651,6 +5743,20 @@
       "creado": "2026-07-12T14:06:29.914Z"
     },
     {
+      "id": "arasaac:6897",
+      "arasaacId": 6897,
+      "imagen": "https://static.arasaac.org/pictograms/6897/6897_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/6897/6897_300.png",
+        "https://static.arasaac.org/pictograms/6897/6897_500.png",
+        "https://static.arasaac.org/pictograms/6897/6897_2500.png"
+      ],
+      "nombre": "amapola",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:22:18.421Z"
+    },
+    {
       "id": "arasaac:6899",
       "arasaacId": 6899,
       "imagen": "https://static.arasaac.org/pictograms/6899/6899_500.png",
@@ -4663,6 +5769,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:58:50.694Z"
+    },
+    {
+      "id": "arasaac:6909",
+      "arasaacId": 6909,
+      "imagen": "https://static.arasaac.org/pictograms/6909/6909_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/6909/6909_300.png",
+        "https://static.arasaac.org/pictograms/6909/6909_500.png",
+        "https://static.arasaac.org/pictograms/6909/6909_2500.png"
+      ],
+      "nombre": "armario",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:17:05.101Z"
     },
     {
       "id": "arasaac:6925",
@@ -4721,6 +5841,20 @@
       "creado": "2026-07-12T14:03:53.520Z"
     },
     {
+      "id": "arasaac:7104",
+      "arasaacId": 7104,
+      "imagen": "https://static.arasaac.org/pictograms/7104/7104_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/7104/7104_300.png",
+        "https://static.arasaac.org/pictograms/7104/7104_500.png",
+        "https://static.arasaac.org/pictograms/7104/7104_2500.png"
+      ],
+      "nombre": "flor",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:22:05.778Z"
+    },
+    {
       "id": "arasaac:7118",
       "arasaacId": 7118,
       "imagen": "https://static.arasaac.org/pictograms/7118/7118_500.png",
@@ -4733,6 +5867,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:40:20.929Z"
+    },
+    {
+      "id": "arasaac:7122",
+      "arasaacId": 7122,
+      "imagen": "https://static.arasaac.org/pictograms/7122/7122_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/7122/7122_300.png",
+        "https://static.arasaac.org/pictograms/7122/7122_500.png",
+        "https://static.arasaac.org/pictograms/7122/7122_2500.png"
+      ],
+      "nombre": "guantes",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:12:08.490Z"
     },
     {
       "id": "arasaac:7182",
@@ -4777,6 +5925,20 @@
       "creado": "2026-07-12T13:40:24.099Z"
     },
     {
+      "id": "arasaac:7224",
+      "arasaacId": 7224,
+      "imagen": "https://static.arasaac.org/pictograms/7224/7224_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/7224/7224_300.png",
+        "https://static.arasaac.org/pictograms/7224/7224_500.png",
+        "https://static.arasaac.org/pictograms/7224/7224_2500.png"
+      ],
+      "nombre": "rama",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:21:44.988Z"
+    },
+    {
       "id": "arasaac:7236",
       "arasaacId": 7236,
       "imagen": "https://static.arasaac.org/pictograms/7236/7236_500.png",
@@ -4791,6 +5953,20 @@
       "creado": "2026-07-12T14:01:57.411Z"
     },
     {
+      "id": "arasaac:7252",
+      "arasaacId": 7252,
+      "imagen": "https://static.arasaac.org/pictograms/7252/7252_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/7252/7252_300.png",
+        "https://static.arasaac.org/pictograms/7252/7252_500.png",
+        "https://static.arasaac.org/pictograms/7252/7252_2500.png"
+      ],
+      "nombre": "Sol",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:24:42.912Z"
+    },
+    {
       "id": "arasaac:7254",
       "arasaacId": 7254,
       "imagen": "https://static.arasaac.org/pictograms/7254/7254_500.png",
@@ -4803,6 +5979,34 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:55:28.271Z"
+    },
+    {
+      "id": "arasaac:7259",
+      "arasaacId": 7259,
+      "imagen": "https://static.arasaac.org/pictograms/7259/7259_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/7259/7259_300.png",
+        "https://static.arasaac.org/pictograms/7259/7259_500.png",
+        "https://static.arasaac.org/pictograms/7259/7259_2500.png"
+      ],
+      "nombre": "viento",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:24:08.318Z"
+    },
+    {
+      "id": "arasaac:7281",
+      "arasaacId": 7281,
+      "imagen": "https://static.arasaac.org/pictograms/7281/7281_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/7281/7281_300.png",
+        "https://static.arasaac.org/pictograms/7281/7281_500.png",
+        "https://static.arasaac.org/pictograms/7281/7281_2500.png"
+      ],
+      "nombre": "trébol",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:21:41.578Z"
     },
     {
       "id": "arasaac:7807",
@@ -4875,6 +6079,20 @@
       "creado": "2026-07-12T13:40:34.068Z"
     },
     {
+      "id": "arasaac:8047",
+      "arasaacId": 8047,
+      "imagen": "https://static.arasaac.org/pictograms/8047/8047_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/8047/8047_300.png",
+        "https://static.arasaac.org/pictograms/8047/8047_500.png",
+        "https://static.arasaac.org/pictograms/8047/8047_2500.png"
+      ],
+      "nombre": "buhardilla",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:19:55.585Z"
+    },
+    {
       "id": "arasaac:8073",
       "arasaacId": 8073,
       "imagen": "https://static.arasaac.org/pictograms/8073/8073_500.png",
@@ -4887,6 +6105,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T14:02:00.677Z"
+    },
+    {
+      "id": "arasaac:8223",
+      "arasaacId": 8223,
+      "imagen": "https://static.arasaac.org/pictograms/8223/8223_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/8223/8223_300.png",
+        "https://static.arasaac.org/pictograms/8223/8223_500.png",
+        "https://static.arasaac.org/pictograms/8223/8223_2500.png"
+      ],
+      "nombre": "sótano",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:19:50.696Z"
     },
     {
       "id": "arasaac:8303",
@@ -5013,6 +6245,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:40:43.536Z"
+    },
+    {
+      "id": "arasaac:8339",
+      "arasaacId": 8339,
+      "imagen": "https://static.arasaac.org/pictograms/8339/8339_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/8339/8339_300.png",
+        "https://static.arasaac.org/pictograms/8339/8339_500.png",
+        "https://static.arasaac.org/pictograms/8339/8339_2500.png"
+      ],
+      "nombre": "calcetín",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:12:02.319Z"
     },
     {
       "id": "arasaac:8389",
@@ -5237,6 +6483,20 @@
       "etiquetas": [],
       "origen": "arasaac",
       "creado": "2026-07-12T13:42:24.363Z"
+    },
+    {
+      "id": "arasaac:8701",
+      "arasaacId": 8701,
+      "imagen": "https://static.arasaac.org/pictograms/8701/8701_500.png",
+      "imagenCandidatos": [
+        "https://static.arasaac.org/pictograms/8701/8701_300.png",
+        "https://static.arasaac.org/pictograms/8701/8701_500.png",
+        "https://static.arasaac.org/pictograms/8701/8701_2500.png"
+      ],
+      "nombre": "sudadera",
+      "etiquetas": [],
+      "origen": "arasaac",
+      "creado": "2026-07-12T14:12:03.706Z"
     },
     {
       "id": "arasaac:8711",
